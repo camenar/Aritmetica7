@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Aritmética 7° · Sem. 9 · Multiplicación de fracciones · I.E. Merceditas Gómez Martínez</title>
+<link rel="stylesheet" href="katex/katex.min.css">
+<script src="katex/katex.min.js"></script>
+<script src="katex/auto-render.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0F2040;--blue:#1C3A6E;--blue-mid:#2E75B6;
+  --green:#2E7D32;--teal:#00695C;--amber:#C47C1A;--red:#B71C1C;
+  --green-b:#27AE60;--amber-b:#E08C20;--red-b:#C0392B;
+  --cream:#F7F6F2;--warm:#EDECEA;--border:#C0BDB4;
+  --text:#1C1C1E;--text2:#3A3A3C;--text3:#6B6B6E;
+  --fs-xs:clamp(18px,1.25vw,26px);
+  --fs-sm:clamp(22px,1.6vw,32px);
+  --fs-md:clamp(26px,2vw,40px);
+  --fs-lg:clamp(32px,2.6vw,50px);
+  --fs-xl:clamp(38px,3.2vw,62px);
+  --fs-2xl:clamp(48px,4.2vw,80px);
+  --fs-3xl:clamp(60px,5.8vw,105px);
+  --gap:clamp(14px,1.6vw,22px);
+  --pad:clamp(20px,2.8vw,40px);
+  --line-h:1.55;
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a101e;font-family:'DM Sans',system-ui,sans-serif;line-height:var(--line-h)}
+#deck{width:100vw;height:100vh;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;background:var(--cream)}
+.slide.active{opacity:1;pointer-events:all}
+.slide.enter-r{animation:inR .32s cubic-bezier(.22,.68,0,1.1) forwards}
+.slide.enter-l{animation:inL .32s cubic-bezier(.22,.68,0,1.1) forwards}
+@keyframes inR{from{transform:translateX(3.5%);opacity:0}to{transform:none;opacity:1}}
+@keyframes inL{from{transform:translateX(-3.5%);opacity:0}to{transform:none;opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+header.hdr{background:var(--navy);height:clamp(44px,5.2vh,60px);display:flex;align-items:center;padding:0 var(--pad);justify-content:space-between;flex-shrink:0}
+.hdr-b{font-size:var(--fs-xs);font-weight:500;color:#A8C4E8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-badge{background:var(--blue);color:#fff;font-size:var(--fs-xs);font-weight:800;padding:6px clamp(12px,1.8vw,22px);border-radius:6px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;margin-left:14px}
+footer.ftr{background:var(--warm);border-top:2px solid var(--border);height:clamp(36px,4vh,48px);display:flex;align-items:center;padding:0 var(--pad);justify-content:space-between;flex-shrink:0}
+.ftr span{font-size:var(--fs-xs);color:var(--text3);font-weight:500}
+main.body{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smooth;padding:clamp(16px,2.2vh,28px) var(--pad) clamp(12px,1.5vh,20px);display:flex;flex-direction:column;gap:var(--gap)}
+main.body::-webkit-scrollbar{width:6px}
+main.body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:3px}
+.s-portada{background:var(--blue)}
+.portada-inner{width:100%;max-width:1400px;margin:0 auto;padding:clamp(28px,5vh,60px) clamp(40px,6vw,80px);display:flex;flex-direction:column;gap:clamp(14px,2.4vh,26px)}
+.p-ie{font-size:var(--fs-sm);color:rgba(180,210,240,.85);text-align:center;letter-spacing:.05em}
+.p-area{font-size:var(--fs-sm);font-weight:700;color:rgba(180,210,240,.95);text-align:center;letter-spacing:.16em;text-transform:uppercase}
+.p-title{font-family:'DM Serif Display',serif;font-size:var(--fs-3xl);color:#fff;text-align:center;line-height:1.05;animation:fadeUp .9s .1s both}
+.p-sub{font-size:var(--fs-xl);color:rgba(200,228,255,.9);text-align:center;font-style:italic;animation:fadeUp .9s .25s both}
+.p-divider{height:3px;background:rgba(255,255,255,.25);border-radius:2px;margin:clamp(6px,1.2vh,12px) 0}
+.p-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.2vw,18px);animation:fadeUp .9s .4s both}
+.p-card{background:rgba(255,255,255,.09);border:2px solid rgba(255,255,255,.18);border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(12px,1.5vw,20px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.p-card-num{width:clamp(44px,4.6vw,60px);height:clamp(44px,4.6vw,60px);border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:var(--fs-lg);font-weight:700;color:#fff}
+.p-card-title{font-size:var(--fs-md);font-weight:700;color:#fff;line-height:1.15}
+.p-card-sub{font-size:var(--fs-sm);color:rgba(200,228,255,.8);font-style:italic;line-height:1.4}
+.p-docente{font-size:var(--fs-sm);color:rgba(180,210,240,.7);text-align:right;font-style:italic}
+.s-sesion{background:var(--navy)}
+.sesion-inner{display:flex;height:100%;width:100%}
+.sesion-num{width:clamp(160px,18vw,260px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;flex-shrink:0}
+.sesion-num-lbl{font-size:var(--fs-sm);color:#A8C4E8;text-transform:uppercase;letter-spacing:.16em;font-weight:700}
+.sesion-num-big{font-size:clamp(100px,14vw,200px);font-weight:800;color:#fff;line-height:1}
+.sesion-right{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,5vh,70px) clamp(32px,4vw,70px);gap:clamp(14px,2vh,24px)}
+.sesion-tag{font-size:var(--fs-sm);font-weight:800;color:rgba(168,196,232,.8);text-transform:uppercase;letter-spacing:.18em}
+.sesion-title{font-family:'DM Serif Display',serif;font-size:var(--fs-2xl);color:#fff;line-height:1.08}
+.sesion-sub{font-size:var(--fs-md);color:rgba(200,228,255,.75);font-style:italic;line-height:1.45}
+.sesion-chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.sesion-chip{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:24px;padding:8px 20px;font-size:var(--fs-xs);color:#A8C4E8;font-weight:600}
+.title-row{display:flex;align-items:flex-start;gap:16px}
+.accent-bar{width:clamp(10px,1vw,14px);border-radius:6px;flex-shrink:0;align-self:stretch;min-height:48px}
+.slide-title{font-family:'DM Serif Display',serif;font-size:var(--fs-xl);color:var(--navy);line-height:1.08}
+.slide-instr{font-size:var(--fs-md);color:var(--text2);font-style:italic;margin-top:6px;line-height:1.4}
+.badge{display:inline-flex;align-items:center;font-size:var(--fs-sm);font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:6px;margin-bottom:4px}
+.det-box{background:#FFF8ED;border:3px solid var(--amber);border-radius:14px;padding:clamp(16px,2vh,24px) clamp(18px,2.2vw,30px);display:flex;flex-direction:column;gap:clamp(10px,1.4vh,16px)}
+.det-label{font-size:var(--fs-sm);font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.det-text{font-family:'DM Serif Display',serif;font-size:var(--fs-lg);color:var(--text);line-height:1.55;font-style:italic}
+.det-q{font-size:var(--fs-xl);font-weight:800;color:var(--navy);line-height:1.35}
+.activacion-previa{background:var(--warm);border-left:5px solid var(--blue-mid);border-radius:0 10px 10px 0;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,26px);font-size:var(--fs-md);color:var(--text2);font-style:italic}
+.activacion-previa strong{color:var(--navy);font-style:normal}
+.paso-row{display:flex;align-items:center;gap:clamp(12px,1.4vw,20px);background:#fff;border:2px solid var(--border);border-radius:12px;padding:clamp(10px,1.2vh,18px) clamp(14px,1.8vw,24px);border-left:6px solid var(--blue);opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.paso-row.vis{opacity:1;transform:none}
+.paso-num{width:clamp(30px,3.2vw,46px);height:clamp(30px,3.2vw,46px);border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);font-weight:800;color:#fff;flex-shrink:0}
+.paso-lbl{font-size:var(--fs-sm);font-weight:800;color:var(--blue);flex-shrink:0;min-width:clamp(100px,11vw,150px)}
+.paso-body{font-size:var(--fs-md);color:var(--text);flex:1;line-height:1.4}
+.paso-note{font-size:var(--fs-xs);color:var(--text3);font-style:italic;text-align:right;flex-shrink:0}
+.result-bar{background:var(--navy);border-radius:12px;padding:clamp(12px,1.6vh,22px) clamp(16px,2vw,28px);display:flex;align-items:center;justify-content:center;gap:20px;font-size:var(--fs-2xl);font-weight:800;color:var(--amber-b);text-align:center;opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s}
+.result-bar.vis{opacity:1;transform:none}
+.formal-box{background:var(--warm);border:3px solid var(--green);border-radius:14px;padding:clamp(14px,1.8vh,26px) clamp(16px,2vw,30px);display:flex;flex-direction:column;gap:clamp(12px,1.6vh,20px);align-items:stretch}
+.formal-title{font-size:var(--fs-lg);font-weight:800;color:var(--green);text-align:center}
+.formal-step{background:#fff;border:2px solid var(--border);border-radius:10px;padding:clamp(10px,1.2vh,18px) clamp(14px,1.8vw,22px);display:flex;align-items:center;gap:14px;width:100%;opacity:0;transition:opacity .4s}
+.formal-step.vis{opacity:1}
+.formal-step-n{width:clamp(30px,3.2vw,44px);height:clamp(30px,3.2vw,44px);border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);font-weight:800;color:#fff;flex-shrink:0}
+.formal-step-txt{font-size:var(--fs-md);color:var(--text);line-height:1.4;flex:1}
+.conj-box{background:#E8F5E9;border:3px solid var(--green);border-radius:12px;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,22px);font-size:var(--fs-md);color:var(--green);font-style:italic;line-height:1.5}
+.espacio-respuesta{background:#fff;border:2.5px dashed var(--border);border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,20px);font-size:var(--fs-md);color:var(--text);min-height:clamp(70px,9vh,110px);margin:var(--gap) 0;font-style:italic}
+.espacio-respuesta:focus{border-color:var(--blue-mid);outline:none;box-shadow:0 0 0 4px rgba(46,117,182,.25)}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(10px,1vw,16px)}
+.ex-card{background:#fff;border-radius:14px;border:2.5px solid var(--border);border-top:6px solid transparent;padding:clamp(12px,1.6vh,20px) clamp(12px,1.6vw,20px);display:flex;flex-direction:column;gap:clamp(8px,1vh,12px);opacity:0;transform:translateY(16px);transition:opacity .45s,transform .45s}
+.ex-card.vis{opacity:1;transform:none}
+.ex-head{display:flex;align-items:center;gap:12px}
+.ex-num{width:clamp(30px,3.2vw,46px);height:clamp(30px,3.2vw,46px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--fs-md);color:#fff;flex-shrink:0}
+.ex-title{font-size:var(--fs-md);font-weight:800;color:var(--text)}
+.ex-ctx{font-size:var(--fs-sm);color:var(--text2);font-style:italic;line-height:1.4}
+.ex-task{background:var(--warm);border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,18px);font-size:var(--fs-lg);font-weight:800;color:var(--navy);text-align:center;border:2px solid var(--border)}
+.error-box{background:#FFF0F0;border:3px solid var(--red);border-radius:14px;padding:clamp(14px,1.8vh,22px) clamp(16px,2vw,26px);display:flex;flex-direction:column;gap:clamp(8px,1vh,12px)}
+.error-title{font-size:var(--fs-md);font-weight:800;color:var(--red)}
+.error-txt{font-size:var(--fs-sm);color:var(--text);line-height:1.55}
+.metodo-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.metodo-card{border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(14px,1.8vw,22px);display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.metodo-card.vis{opacity:1;transform:none}
+.metodo-card.mal{background:#FFF0F0;border:3px solid var(--red)}
+.metodo-card.bien{background:#E8F5E9;border:3px solid var(--green)}
+.metodo-lbl{font-size:var(--fs-sm);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.metodo-card.mal .metodo-lbl{color:var(--red)}
+.metodo-card.bien .metodo-lbl{color:var(--green)}
+.metodo-body{font-size:var(--fs-md);color:var(--text);line-height:1.5}
+.regleta-container{display:flex;flex-direction:column;gap:10px;width:100%}
+.regleta-row{display:flex;align-items:center;gap:14px}
+.regleta-label{font-size:var(--fs-sm);font-weight:700;color:var(--navy);min-width:clamp(90px,10vw,130px);text-align:right}
+.regleta-bar{height:clamp(36px,4.5vh,54px);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:var(--fs-sm);font-weight:800;color:#fff;transition:opacity .4s}
+.info-box{background:#EBF4FB;border-left:5px solid var(--blue-mid);border-radius:0 12px 12px 0;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,24px);font-size:var(--fs-md);color:var(--text2);line-height:1.6}
+.info-box strong{color:var(--navy);font-style:normal}
+.piar-box{background:#F3E5F5;border:2.5px solid #6A1B9A;border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,20px);font-size:var(--fs-xs);color:#4A148C;line-height:1.6;margin-top:var(--gap)}
+.piar-lbl{font-weight:800;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px}
+.meta-q{background:#E0F2F1;border:3px solid var(--teal);border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(16px,2vw,28px)}
+.meta-qlbl{font-size:var(--fs-xs);font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+.meta-qtxt{font-family:'DM Serif Display',serif;font-size:var(--fs-xl);color:var(--text);font-style:italic;line-height:1.55}
+.semaforo{display:flex;flex-direction:column;gap:clamp(10px,1.2vh,18px)}
+.sema-item{display:flex;align-items:flex-start;gap:16px;background:#fff;border-radius:12px;padding:clamp(12px,1.6vh,20px) clamp(14px,1.8vw,24px);border:2.5px solid var(--border);opacity:0;transform:translateX(16px);transition:opacity .45s,transform .45s}
+.sema-item.vis{opacity:1;transform:none}
+.sema-circle{width:clamp(46px,5vw,68px);height:clamp(46px,5vw,68px);border-radius:50%;flex-shrink:0}
+.sema-txt{font-size:var(--fs-md);color:var(--text);line-height:1.35}
+.sema-sub{display:block;font-size:var(--fs-sm);color:var(--text3);margin-top:4px;font-style:italic}
+.mcm-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.mcm-table th{background:var(--navy);color:#fff;padding:clamp(8px,1vh,14px) clamp(10px,1.2vw,18px);text-align:center}
+.mcm-table td{padding:clamp(8px,1vh,14px) clamp(10px,1.2vw,18px);border-bottom:2px solid var(--border);text-align:center;font-size:var(--fs-md);color:var(--text)}
+.mcm-table tr:nth-child(even) td{background:#fff}
+.mcm-table tr:nth-child(odd) td{background:var(--warm)}
+.mcm-table .hi{background:#FFF9C4!important;font-weight:800;color:var(--amber)}
+.btn-exportar{background:var(--green-b);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-weight:700;cursor:pointer;margin-top:12px;font-size:var(--fs-sm);display:inline-flex;align-items:center;gap:8px}
+.btn-exportar:hover{background:var(--green)}
+.feedback-msg{position:fixed;top:clamp(70px,9vh,90px);left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:12px 24px;border-radius:10px;font-size:var(--fs-sm);font-weight:600;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center}
+.feedback-msg.error{background:var(--red-b)}
+.feedback-msg.show{opacity:1}
+#fs-btn{position:fixed;top:clamp(10px,1.2vh,16px);right:clamp(76px,8.5vw,100px);z-index:200;background:rgba(15,32,64,.8);border:2px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:18px;width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#fs-btn:hover{background:var(--blue-mid)}
+#nav{position:fixed;bottom:clamp(16px,2.2vh,26px);right:clamp(20px,2.8vw,34px);display:flex;align-items:center;gap:clamp(10px,1.2vw,16px);z-index:100}
+.nbtn{width:clamp(46px,5vw,62px);height:clamp(46px,5vw,62px);border-radius:50%;background:rgba(15,32,64,.9);border:2px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:clamp(20px,2.4vw,28px);display:flex;align-items:center;justify-content:center;transition:background .2s}
+.nbtn:hover{background:var(--blue-mid)}
+#ncnt{font-size:clamp(15px,1.6vw,20px);color:rgba(255,255,255,.9);background:rgba(15,32,64,.85);padding:clamp(6px,.8vh,10px) clamp(14px,1.8vw,22px);border-radius:24px;font-family:monospace;font-weight:700}
+#pbar{position:fixed;bottom:0;left:0;height:5px;background:var(--blue-mid);transition:width .32s ease;z-index:100}
+#hint{position:fixed;bottom:clamp(16px,2.2vh,26px);left:clamp(20px,2.8vw,34px);font-size:14px;color:rgba(255,255,255,.55);background:rgba(15,32,64,.75);padding:8px 16px;border-radius:24px;font-family:monospace;transition:opacity .3s;z-index:100}
+.katex{font-size:1.15em!important}
+.katex-display{margin:0!important}
+@media(max-width:1100px) and (orientation:landscape){
+  :root{--fs-xs:clamp(16px,1.6vw,24px);--fs-sm:clamp(19px,2vw,28px);--fs-md:clamp(22px,2.4vw,34px);--fs-lg:clamp(26px,2.8vw,42px);--fs-xl:clamp(30px,3.4vw,50px);--fs-2xl:clamp(38px,4.4vw,64px)}
+  .p-card-grid{grid-template-columns:repeat(3,1fr)}
+  .metodo-grid{grid-template-columns:1fr}
+}
+@media(min-width:1920px){
+  :root{--fs-xs:26px;--fs-sm:32px;--fs-md:40px;--fs-lg:50px;--fs-xl:62px;--fs-2xl:80px;--fs-3xl:105px;--gap:22px;--pad:40px}
+}
+/* ── MODELO DE ÁREA — Semana 9 ─────────────────────── */
+.area-wrap{display:flex;gap:clamp(16px,2.6vw,40px);align-items:center;justify-content:center;flex-wrap:wrap}
+.area-stack{position:relative;width:clamp(230px,27vw,400px);aspect-ratio:1/1;border:3px solid var(--navy);border-radius:8px;overflow:hidden;background:#fff;flex-shrink:0}
+.area-layer{position:absolute;opacity:0;transition:opacity .45s}
+.area-layer.vis{opacity:1}
+.area-lines{position:absolute;inset:0;display:grid;pointer-events:none;opacity:0;transition:opacity .45s}
+.area-lines.vis{opacity:1}
+.area-lines div{border:1.5px solid rgba(15,32,64,.32)}
+.area-cap{display:flex;flex-direction:column;gap:clamp(8px,1.1vh,14px);flex:1;min-width:min(100%,260px)}
+.leg-item{display:flex;align-items:center;gap:12px;font-size:var(--fs-sm);color:var(--text);opacity:0;transition:opacity .45s;line-height:1.35}
+.leg-item.vis{opacity:1}
+.leg-sw{width:clamp(26px,2.6vw,38px);height:clamp(26px,2.6vw,38px);border-radius:6px;border:2px solid var(--border);flex-shrink:0}
+.count-grid{display:grid;grid-template-columns:repeat(4,1fr);width:clamp(200px,24vw,340px);aspect-ratio:4/3;border:3px solid var(--navy);border-radius:8px;overflow:hidden;background:#fff;flex-shrink:0}
+.count-cell{border:1.5px solid rgba(15,32,64,.3);display:flex;align-items:center;justify-content:center;font-size:var(--fs-xs);font-weight:800;color:#fff;transition:background .45s}
+.count-cell.on{background:#6C3483}
+.rv{opacity:0;transition:opacity .45s}
+.rv.vis{opacity:1}
+.pill{display:inline-block;background:var(--warm);border:2px solid var(--border);border-radius:8px;padding:4px 12px;font-size:var(--fs-sm);font-weight:700;color:var(--navy)}
+</style>
+</head>
+<body>
+<div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<div id="deck"></div>
+<button id="fs-btn" title="Pantalla completa (F)" aria-label="Alternar pantalla completa">⛶</button>
+<div id="nav" role="navigation" aria-label="Navegación de diapositivas">
+  <button class="nbtn" id="bp" aria-label="Diapositiva anterior">&#8592;</button>
+  <span id="ncnt" aria-live="polite">1 / 25</span>
+  <button class="nbtn" id="bn" aria-label="Siguiente diapositiva">&#8594;</button>
+</div>
+<div id="pbar" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
+<div id="hint">Espacio / → avanzar &nbsp;·&nbsp; ← retroceder &nbsp;·&nbsp; F pantalla completa</div>
+<div id="feedback" class="feedback-msg" role="status" aria-live="polite"></div>
+<script>
+function announceToScreenReader(msg){const r=document.getElementById('live-region');if(r){r.textContent='';setTimeout(()=>{r.textContent=msg;},100);}}
+function showFeedback(msg,isError=false){const fb=document.getElementById('feedback');if(!fb)return;fb.textContent=msg;fb.className='feedback-msg'+(isError?' error':'')+' show';setTimeout(()=>fb.classList.remove('show'),3200);}
+function saveProgress(idx,cl){try{localStorage.setItem('s9_arit7',JSON.stringify({slide:idx,clicks:cl,ts:Date.now()}));}catch(e){}}
+function loadProgress(){try{const s=localStorage.getItem('s9_arit7');if(s){const d=JSON.parse(s);if(Date.now()-d.ts<86400000)return d;}}catch(e){}return null;}
+
+const SLIDES=[
+/* ── 1 · PORTADA GENERAL ───────────────────────────── */
+{noH:true,noF:true,clicks:0,cls:'s-portada',html:`
+<div class="portada-inner">
+  <div class="p-ie">I.E. Merceditas Gómez Martínez · Medellín, Antioquia</div>
+  <div class="p-area">Aritmética · Grado 7° · Período 2 · Semana 9</div>
+  <div class="p-title">Multiplicación de fracciones</div>
+  <div class="p-sub">Tres sesiones · 55 minutos cada una</div>
+  <div class="p-divider"></div>
+  <div class="p-card-grid">
+    <div class="p-card"><div class="p-card-num">1</div><div class="p-card-title">Sesión 1</div><div class="p-card-sub">El área que se encoge — la natilla de la tienda escolar</div></div>
+    <div class="p-card"><div class="p-card-num">2</div><div class="p-card-title">Sesión 2</div><div class="p-card-sub">La fracción de la fracción — el mosaico de la fachada</div></div>
+    <div class="p-card"><div class="p-card-num">3</div><div class="p-card-title">Sesión 3</div><div class="p-card-sub">Escalar y decidir — los buñuelos de la novena</div></div>
+  </div>
+  <div class="p-docente">Docente: Carlos Alberto Mena Romaña</div>
+</div>`},
+
+/* ── 2 · PORTADA SESIÓN 1 ──────────────────────────── */
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner">
+  <div class="sesion-num" style="background:var(--blue)">
+    <div class="sesion-num-lbl">Sesión</div>
+    <div class="sesion-num-big">1</div>
+  </div>
+  <div class="sesion-right">
+    <div class="sesion-tag">Semana 9 · Aritmética 7°</div>
+    <div class="sesion-title">La receta que se encoge</div>
+    <div class="sesion-sub">¿Por qué \\(\\tfrac{2}{3} \\times \\tfrac{3}{4}\\) da MENOS que \\(\\tfrac{3}{4}\\)?<br>Construcción con dobleces de papel.</div>
+    <div class="sesion-chips">
+      <span class="sesion-chip">⏱ 55 minutos</span>
+      <span class="sesion-chip">📍 Tienda escolar</span>
+      <span class="sesion-chip">🧩 Manipulativo</span>
+      <span class="sesion-chip">GRR: Yo hago</span>
+    </div>
+  </div>
+</div>`},
+
+/* ── 3 · S1 DETONANTE ──────────────────────────────── */
+{bread:'Sem. 9 · S1 › Exploración',badge:'EXPLORACIÓN',badgeColor:'#C47C1A',clicks:0,fL:'Sesión 1 · La natilla de Doña Marleny',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--amber)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--amber);color:#fff">Situación detonante</div>
+    <div class="slide-title">La natilla de la tienda escolar</div>
+    <div class="slide-instr">Lee la situación. Escribe tu predicción en el cuaderno ANTES de calcular.</div>
+  </div>
+</div>
+<div class="det-box">
+  <div class="det-label">🍮 Situación problema</div>
+  <div class="det-text">Doña Marleny prepara natilla para la novena. Su receta rinde 12 porciones y lleva \\(\\tfrac{3}{4}\\) de libra de panela. Hoy solo tiene pedidos para 8 porciones, es decir, \\(\\tfrac{2}{3}\\) de la receta. Ella saca la cuenta en la bolsa de papel: <em>«\\(\\tfrac{2}{3}\\) por \\(\\tfrac{3}{4}\\) es \\(\\tfrac{5}{7}\\) de libra, porque sumo arriba y sumo abajo»</em>. Un cliente le dice que en la balanza le van a salir 8 onzas, media libra exacta. Doña Marleny insiste: <em>«¡Imposible! Estoy multiplicando, y multiplicar siempre da más»</em>.</div>
+  <div class="det-q">¿Cuánto es \\(\\dfrac{2}{3} \\times \\dfrac{3}{4}\\)?</div>
+</div>
+<div class="activacion-previa">
+  <strong>🧠 Antes de continuar, escribe en tu cuaderno:</strong> El resultado será <span class="pill">MAYOR</span> <span class="pill">MENOR</span> <span class="pill">IGUAL</span> a \\(\\tfrac{3}{4}\\) de libra. Escoge una y escribe tu razón en UNA sola oración. Todavía no calcules nada. <em>Dato: 1 libra = 16 onzas.</em>
+</div>`},
+
+/* ── 4 · S1 CONFLICTO COGNITIVO ────────────────────── */
+{bread:'Sem. 9 · S1 › Exploración',badge:'EXPLORACIÓN',badgeColor:'#C47C1A',clicks:3,fL:'Sesión 1 · La creencia que hay que poner a prueba',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--amber)"></div>
+  <div style="flex:1">
+    <div class="slide-title">«Multiplicar siempre da más»</div>
+    <div class="slide-instr">Clic para revelar cada idea. ¿Cuál de las tres resiste?</div>
+  </div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--gap)">
+  <div class="metodo-card mal" data-c="1">
+    <div class="metodo-lbl">❌ Idea 1 — «Sumo arriba y sumo abajo»</div>
+    <div class="metodo-body">
+      \\(\\dfrac{2}{3} \\times \\dfrac{3}{4} = \\dfrac{2+3}{3+4} = \\dfrac{5}{7}\\)
+      <br><em style="color:var(--red);font-size:var(--fs-xs)">Esta es la regla de la SUMA, y ni siquiera allí funcionaba. ¿Por qué la estamos usando aquí?</em>
+    </div>
+  </div>
+  <div class="metodo-card mal" data-c="2">
+    <div class="metodo-lbl">⚠️ Idea 2 — «Multiplicar siempre agranda»</div>
+    <div class="metodo-body">
+      Con números naturales siempre funcionó: \\(3 \\times 4 = 12\\), y 12 es mayor que 3 y que 4.
+      <br><em style="color:var(--amber);font-size:var(--fs-xs)">Te funcionó durante seis años sin fallar una sola vez. Hoy vamos a encontrar exactamente dónde deja de funcionar.</em>
+    </div>
+  </div>
+  <div class="metodo-card bien" data-c="3">
+    <div class="metodo-lbl">✔ La clave: «\\(\\times\\)» aquí significa «de»</div>
+    <div class="metodo-body">\\(\\tfrac{2}{3} \\times \\tfrac{3}{4}\\) se lee <strong>«\\(\\tfrac{2}{3}\\) DE los \\(\\tfrac{3}{4}\\)»</strong>. Si tomo una <em>parte</em> de algo, ¿el resultado puede ser más grande que ese algo? El papel va a decidir.</div>
+  </div>
+</div>`},
+
+/* ── 5 · S1 CONSTRUCCIÓN — DOBLECES ────────────────── */
+{bread:'Sem. 9 · S1 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'#1C3A6E',clicks:5,fL:'Sesión 1 · Dobleces de papel · Modelo de área',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--blue)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--blue);color:#fff">Yo hago — Modelo de área</div>
+    <div class="slide-title">La hoja es 1 libra de panela</div>
+    <div class="slide-instr">Dobla tu hoja igual que la pantalla. Cada clic = un doblez. No calcules: dobla y mira.</div>
+  </div>
+</div>
+<div class="area-wrap">
+  <div class="area-stack">
+    <div class="area-layer" data-c="2" style="left:0;top:0;width:75%;height:100%;background:rgba(183,28,28,.32)"></div>
+    <div class="area-layer" data-c="4" style="left:0;top:0;width:100%;height:66.667%;background:rgba(46,117,182,.32)"></div>
+    <div class="area-layer" data-c="5" style="left:0;top:0;width:75%;height:66.667%;background:rgba(108,52,131,.85)"></div>
+    <div class="area-lines" data-c="1" style="grid-template-columns:repeat(4,1fr)"><div></div><div></div><div></div><div></div></div>
+    <div class="area-lines" data-c="3" style="grid-template-rows:repeat(3,1fr)"><div></div><div></div><div></div></div>
+  </div>
+  <div class="area-cap">
+    <div class="leg-item" data-c="1"><div class="leg-sw" style="background:#fff"></div><div><strong>Doblez 1:</strong> parto la hoja en <strong>4</strong> partes verticales. Cada una es \\(\\tfrac{1}{4}\\) de libra.</div></div>
+    <div class="leg-item" data-c="2"><div class="leg-sw" style="background:rgba(183,28,28,.32)"></div><div><strong>Rojo:</strong> sombreo <strong>3</strong> de las 4 → los \\(\\tfrac{3}{4}\\) de libra que pide la receta completa.</div></div>
+    <div class="leg-item" data-c="3"><div class="leg-sw" style="background:#fff"></div><div><strong>Doblez 2:</strong> ahora parto la MISMA hoja en <strong>3</strong> partes horizontales.</div></div>
+    <div class="leg-item" data-c="4"><div class="leg-sw" style="background:rgba(46,117,182,.32)"></div><div><strong>Azul:</strong> sombreo <strong>2</strong> de las 3 → los \\(\\tfrac{2}{3}\\) de la receta que se va a preparar hoy.</div></div>
+    <div class="leg-item" data-c="5"><div class="leg-sw" style="background:#6C3483"></div><div><strong>Morado = la respuesta.</strong> Es la zona con DOBLE sombreado: \\(\\tfrac{2}{3}\\) <em>de</em> los \\(\\tfrac{3}{4}\\). Mírala bien: ¿es más grande o más pequeña que la zona roja?</div></div>
+  </div>
+</div>
+<div class="info-box rv" data-c="5" style="margin-top:var(--gap)">
+  <strong>Observa antes de avanzar:</strong> la zona morada está <em>dentro</em> de la roja. Tomar una parte de algo nunca puede darte más que ese algo. Doña Marleny se equivocó, y el cliente tenía razón. <em>Ahora falta ponerle número.</em>
+</div>`},
+
+/* ── 6 · S1 CONSTRUCCIÓN — EL CONTEO ───────────────── */
+{bread:'Sem. 9 · S1 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'#1C3A6E',clicks:5,fL:'Sesión 1 · ¿De dónde salen el 12 y el 6?',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--blue)"></div>
+  <div style="flex:1">
+    <div class="slide-title">Ahora contamos los cuadritos</div>
+    <div class="slide-instr">Cuenta en TU hoja antes de cada clic. Escribe el número que te dio.</div>
+  </div>
+</div>
+<div class="area-wrap" style="align-items:flex-start">
+  <div class="count-grid">
+    <div class="count-cell on">1</div><div class="count-cell on">2</div><div class="count-cell on">3</div><div class="count-cell"></div>
+    <div class="count-cell on">4</div><div class="count-cell on">5</div><div class="count-cell on">6</div><div class="count-cell"></div>
+    <div class="count-cell"></div><div class="count-cell"></div><div class="count-cell"></div><div class="count-cell"></div>
+  </div>
+  <div style="flex:1;min-width:min(100%,300px);display:flex;flex-direction:column;gap:clamp(8px,1vh,14px)">
+    <div class="paso-row" data-c="1"><div class="paso-num">1</div><div class="paso-lbl">La unidad</div><div class="paso-body">Los 2 dobleces partieron la hoja en \\(3 \\times 4 = \\mathbf{12}\\) cuadritos iguales.<br><em style="font-size:var(--fs-xs);color:var(--text3)">Ahí está el denominador. No lo inventamos: lo contamos.</em></div></div>
+    <div class="paso-row" data-c="2" style="border-left-color:#6C3483"><div class="paso-num" style="background:#6C3483">2</div><div class="paso-lbl" style="color:#6C3483">Lo morado</div><div class="paso-body">La zona de doble sombreado tiene \\(2 \\times 3 = \\mathbf{6}\\) cuadritos.<br><em style="font-size:var(--fs-xs);color:var(--text3)">Ahí está el numerador.</em></div></div>
+    <div class="paso-row" data-c="3"><div class="paso-num">3</div><div class="paso-lbl">La fracción</div><div class="paso-body">\\(\\dfrac{2}{3} \\times \\dfrac{3}{4} = \\dfrac{6}{12}\\)</div></div>
+    <div class="paso-row" data-c="4"><div class="paso-num">4</div><div class="paso-lbl">Simplifico</div><div class="paso-body">\\(\\dfrac{6}{12} = \\dfrac{1}{2}\\) &nbsp;<span style="font-size:var(--fs-xs);color:var(--text3)">(dividiendo entre 6, como en la Semana 6)</span></div></div>
+  </div>
+</div>
+<div class="result-bar" data-c="5">\\(\\dfrac{2}{3} \\times \\dfrac{3}{4} = \\dfrac{1}{2}\\) de libra = 8 onzas &nbsp;→&nbsp; el cliente tenía razón</div>`},
+
+/* ── 7 · S1 FORMALIZACIÓN ──────────────────────────── */
+{bread:'Sem. 9 · S1 › Formalización',badge:'FORMALIZACIÓN',badgeColor:'#2E7D32',clicks:5,fL:'Sesión 1 · Tu regla primero, el clic después',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--green)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--green);color:#fff">Formalización · PPT animado</div>
+    <div class="slide-title">Escribe TU regla antes del primer clic</div>
+    <div class="slide-instr">Cuando la pantalla revele la fórmula, corrige en otro color. No borres lo que escribiste.</div>
+  </div>
+</div>
+<div class="conj-box">✍️ <strong>En tu cuaderno, completa:</strong> «La regla que encontré para multiplicar dos fracciones es: ________________________». Nadie avanza hasta que los tres del trío la tengan escrita.</div>
+<div class="formal-box">
+  <div class="formal-title">La regla que contamos en el papel</div>
+  <div class="formal-step" data-c="1"><div class="formal-step-n">1</div><div class="formal-step-txt">Numerador \\(\\times\\) numerador → me dice cuántos cuadritos quedan morados.</div></div>
+  <div class="formal-step" data-c="2"><div class="formal-step-n">2</div><div class="formal-step-txt">Denominador \\(\\times\\) denominador → me dice en cuántos cuadritos quedó partida la unidad.</div></div>
+  <div class="formal-step" data-c="3"><div class="formal-step-n">3</div><div class="formal-step-txt">Simplifico el resultado hasta su forma mínima.</div></div>
+  <div class="formal-step" data-c="4"><div class="formal-step-n">4</div><div class="formal-step-txt" style="font-size:var(--fs-lg);text-align:center">\\(\\dfrac{a}{b} \\times \\dfrac{c}{d} = \\dfrac{a \\cdot c}{b \\cdot d}\\)</div></div>
+</div>
+<div class="info-box rv" data-c="5">
+  <strong>Volvamos a la frase del tablero:</strong> «multiplicar siempre da más». ¿En qué caso SÍ es cierta? Busca una multiplicación de fracciones cuyo resultado sea mayor que sus dos factores. <em>Si no la encuentras, no es que no exista: es que estás buscando en el lugar equivocado.</em>
+</div>`},
+
+/* ── 8 · S1 APLICACIÓN — TABLA ─────────────────────── */
+{bread:'Sem. 9 · S1 › Aplicación',badge:'APLICACIÓN',badgeColor:'#00695C',clicks:6,fL:'Sesión 1 · Tabla de escalado de la natilla',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--teal)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--teal);color:#fff">Tú haces — Tabla para completar</div>
+    <div class="slide-title">Escala la receta completa a \\(\\tfrac{2}{3}\\)</div>
+    <div class="slide-instr">Copia la tabla y complétala. Clic solo cuando ya tengas la fila resuelta. 1 libra = 16 onzas.</div>
+  </div>
+</div>
+<table class="mcm-table">
+  <tr><th>Ingrediente</th><th>Receta completa</th><th>Operación</th><th>Resultado</th><th>En la tienda</th></tr>
+  <tr><td style="font-weight:800">Panela</td><td>\\(\\tfrac{3}{4}\\) libra</td><td>\\(\\tfrac{2}{3} \\times \\tfrac{3}{4}\\)</td><td class="hi">\\(\\tfrac{1}{2}\\)</td><td class="hi">8 onzas</td></tr>
+  <tr><td style="font-weight:800">Leche</td><td>\\(\\tfrac{5}{2}\\) litros</td><td><span class="rv" data-c="1">\\(\\tfrac{2}{3} \\times \\tfrac{5}{2}\\)</span></td><td><span class="rv" data-c="1">\\(\\tfrac{10}{6}=\\tfrac{5}{3}\\)</span></td><td><span class="rv" data-c="1">\\(1\\tfrac{2}{3}\\) L</span></td></tr>
+  <tr><td style="font-weight:800">Maicena</td><td>\\(\\tfrac{1}{2}\\) libra</td><td><span class="rv" data-c="2">\\(\\tfrac{2}{3} \\times \\tfrac{1}{2}\\)</span></td><td><span class="rv" data-c="2">\\(\\tfrac{2}{6}=\\tfrac{1}{3}\\)</span></td><td><span class="rv" data-c="2">≈ 5 onzas</span></td></tr>
+  <tr><td style="font-weight:800">Canela</td><td>\\(\\tfrac{3}{8}\\) cucharada</td><td><span class="rv" data-c="3">\\(\\tfrac{2}{3} \\times \\tfrac{3}{8}\\)</span></td><td><span class="rv" data-c="3">\\(\\tfrac{6}{24}=\\tfrac{1}{4}\\)</span></td><td><span class="rv" data-c="3">\\(\\tfrac{1}{4}\\) cucharada</span></td></tr>
+  <tr><td style="font-weight:800">Coco</td><td>\\(\\tfrac{9}{4}\\) tazas</td><td><span class="rv" data-c="4">\\(\\tfrac{2}{3} \\times \\tfrac{9}{4}\\)</span></td><td><span class="rv" data-c="4">\\(\\tfrac{18}{12}=\\tfrac{3}{2}\\)</span></td><td><span class="rv" data-c="4">\\(1\\tfrac{1}{2}\\) tazas</span></td></tr>
+  <tr><td style="font-weight:800">Sal</td><td>\\(\\tfrac{1}{8}\\) cucharadita</td><td><span class="rv" data-c="5">\\(\\tfrac{2}{3} \\times \\tfrac{1}{8}\\)</span></td><td><span class="rv" data-c="5">\\(\\tfrac{2}{24}=\\tfrac{1}{12}\\)</span></td><td><span class="rv" data-c="5">una pizca</span></td></tr>
+</table>
+<div class="info-box rv" data-c="5" style="margin-top:var(--gap)">
+  <strong>Marca con una estrella:</strong> ¿en cuáles filas el resultado quedó MENOR que la receta completa? ¿Hubo alguna donde no pasara así? Escribe en el margen por qué.
+</div>
+<div class="piar-box rv" data-c="6">
+  <span class="piar-lbl">🧩 Apoyo diferenciado</span>
+  <strong>Eybril, Juan Pablo, Sebastián:</strong> la primera fila ya está resuelta como modelo — resuelve solo las filas de Leche y Maicena, y usa la hoja doblada para comprobar. <strong>Matías:</strong> una fila a la vez; tapa las demás con la regla. <strong>Jerónimo:</strong> puedes entregar la tabla explicada en voz alta en lugar de escrita. <strong>Jhon Alejandro:</strong> tú verificas las filas de tu trío y reportas cuál quedó distinta.
+</div>`},
+
+/* ── 9 · S1 METACOGNICIÓN ──────────────────────────── */
+{bread:'Sem. 9 · S1 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'#B71C1C',clicks:3,fL:'Sesión 1 · Cierre',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--red)"></div>
+  <div style="flex:1">
+    <div class="slide-title">¿Qué se me cayó hoy?</div>
+    <div class="slide-instr">Responde en el cuaderno. Después levanta tu ficha del semáforo.</div>
+  </div>
+</div>
+<div class="meta-q">
+  <div class="meta-qlbl">Pregunta metacognitiva de la sesión</div>
+  <div class="meta-qtxt">«Yo venía creyendo desde primaria que multiplicar siempre agranda, y durante años esa idea me funcionó sin fallar. ¿Por qué me funcionó tanto tiempo, y en qué momento exacto dejó de funcionar?»</div>
+</div>
+<div class="espacio-respuesta" contenteditable="true" role="textbox" aria-label="Escribe tu respuesta">Escribe aquí tu respuesta...</div>
+<div style="font-size:var(--fs-md);font-weight:800;color:var(--navy);margin-top:6px">Semáforo de comprensión</div>
+<div class="semaforo">
+  <div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Puedo explicar con la hoja doblada por qué \\(\\tfrac{2}{3}\\times\\tfrac{3}{4}\\) da menos que \\(\\tfrac{3}{4}\\).<span class="sema-sub">Estoy listo para la fracción de fracción del mosaico.</span></div></div>
+  <div class="sema-item" data-c="2"><div class="sema-circle" style="background:#E08C20"></div><div class="sema-txt">Aplico la regla, pero todavía me sorprende que el resultado sea más pequeño.<span class="sema-sub">Voy a rehacer dos filas de la tabla con la hoja doblada al lado.</span></div></div>
+  <div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Me pierdo al contar los cuadritos y no sé de dónde sale el denominador.<span class="sema-sub">Voy a repetir los dobleces en casa y pedir apoyo a la profesora Karol.</span></div></div>
+</div>`},
+
+/* ── 10 · PORTADA SESIÓN 2 ─────────────────────────── */
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner">
+  <div class="sesion-num" style="background:var(--teal)">
+    <div class="sesion-num-lbl">Sesión</div>
+    <div class="sesion-num-big">2</div>
+  </div>
+  <div class="sesion-right">
+    <div class="sesion-tag">Semana 9 · Aritmética 7°</div>
+    <div class="sesion-title">La fracción de la fracción</div>
+    <div class="sesion-sub">¿Cuándo SÍ agranda la multiplicación?<br>El mosaico de la fachada del colegio.</div>
+    <div class="sesion-chips">
+      <span class="sesion-chip">⏱ 55 minutos</span>
+      <span class="sesion-chip">📍 Fachada del colegio</span>
+      <span class="sesion-chip">📐 Modelo de área</span>
+      <span class="sesion-chip">GRR: Hacemos</span>
+    </div>
+  </div>
+</div>`},
+
+/* ── 11 · S2 DETONANTE ─────────────────────────────── */
+{bread:'Sem. 9 · S2 › Exploración',badge:'EXPLORACIÓN',badgeColor:'#C47C1A',clicks:0,fL:'Sesión 2 · El mosaico de la fachada',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--amber)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--amber);color:#fff">Situación detonante</div>
+    <div class="slide-title">El mosaico de la fachada</div>
+    <div class="slide-instr">Antes de calcular: dibuja la fachada en tu cuaderno y marca las dos condiciones.</div>
+  </div>
+</div>
+<div class="det-box">
+  <div class="det-label">🎨 Situación problema</div>
+  <div class="det-text">La fachada del Merceditas se va a decorar con un mosaico. Los \\(\\tfrac{3}{5}\\) de la fachada se pintarán de azul. Y de <strong>esa zona azul</strong>, los \\(\\tfrac{2}{3}\\) llevarán baldosín; el resto queda liso. El contratista dice que necesita baldosín para \\(\\tfrac{2}{3}\\) de la fachada. El rector dice que eso es demasiado.</div>
+  <div class="det-q">¿Qué fracción de la fachada COMPLETA lleva baldosín?</div>
+</div>
+<div class="activacion-previa">
+  <strong>🧠 Ojo con la trampa:</strong> los \\(\\tfrac{2}{3}\\) <u>no</u> son de la fachada. Son de la zona azul. <strong>Pregúntate siempre: ¿fracción DE QUÉ?</strong> Esa pregunta va a decidir toda la clase — y volverá en la Semana 11 con los descuentos.
+</div>`},
+
+/* ── 12 · S2 CONSTRUCCIÓN — CUADRÍCULA ─────────────── */
+{bread:'Sem. 9 · S2 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'#1C3A6E',clicks:5,fL:'Sesión 2 · La fachada en cuadrícula',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--blue)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--blue);color:#fff">Hacemos — Juntos en el tablero</div>
+    <div class="slide-title">\\(\\tfrac{2}{3}\\) DE \\(\\tfrac{3}{5}\\) de la fachada</div>
+    <div class="slide-instr">Un integrante del trío explica en voz alta cada paso ANTES del clic.</div>
+  </div>
+</div>
+<div class="area-wrap">
+  <div class="area-stack">
+    <div class="area-layer" data-c="2" style="left:0;top:0;width:60%;height:100%;background:rgba(46,117,182,.35)"></div>
+    <div class="area-layer" data-c="4" style="left:0;top:0;width:60%;height:66.667%;background:#6C3483"></div>
+    <div class="area-lines" data-c="1" style="grid-template-columns:repeat(5,1fr)"><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="area-lines" data-c="3" style="grid-template-rows:repeat(3,1fr)"><div></div><div></div><div></div></div>
+  </div>
+  <div class="area-cap">
+    <div class="leg-item" data-c="1"><div class="leg-sw" style="background:#fff"></div><div><strong>La fachada completa</strong> partida en 5 franjas verticales.</div></div>
+    <div class="leg-item" data-c="2"><div class="leg-sw" style="background:rgba(46,117,182,.35)"></div><div><strong>Azul:</strong> \\(\\tfrac{3}{5}\\) de la fachada. <em>Esta zona azul es ahora la NUEVA unidad de referencia.</em></div></div>
+    <div class="leg-item" data-c="3"><div class="leg-sw" style="background:#fff"></div><div>Parto en <strong>3</strong> franjas horizontales para tomar los tercios.</div></div>
+    <div class="leg-item" data-c="4"><div class="leg-sw" style="background:#6C3483"></div><div><strong>Morado = baldosín:</strong> \\(\\tfrac{2}{3}\\) de la zona azul. Cuenta: <strong>6</strong> cuadritos morados de <strong>15</strong> en total.</div></div>
+    <div class="leg-item" data-c="5"><div class="leg-sw" style="background:var(--amber);border-color:var(--amber)"></div><div><strong>El contratista se equivocó:</strong> pidió \\(\\tfrac{2}{3}\\) de la fachada, pero solo se necesitan \\(\\tfrac{2}{5}\\). Habría sobrado material.</div></div>
+  </div>
+</div>
+<div class="result-bar" data-c="5">\\(\\dfrac{2}{3} \\times \\dfrac{3}{5} = \\dfrac{6}{15} = \\dfrac{2}{5}\\) de la fachada &nbsp;→&nbsp; 16 m² de 40 m²</div>`},
+
+/* ── 13 · S2 ¿CUÁNDO SÍ AGRANDA? ───────────────────── */
+{bread:'Sem. 9 · S2 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'#1C3A6E',clicks:4,fL:'Sesión 2 · La contraprueba',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--blue)"></div>
+  <div style="flex:1">
+    <div class="slide-title">¿Existe una multiplicación que SÍ agrande?</div>
+    <div class="slide-instr">Búscala en tu cuaderno antes del clic. Sí existe. ¿Qué tiene de especial?</div>
+  </div>
+</div>
+<div class="metodo-grid">
+  <div class="metodo-card mal" data-c="1" style="background:#FFF8ED;border-color:var(--amber)">
+    <div class="metodo-lbl" style="color:var(--amber)">Factor MENOR que 1 → encoge</div>
+    <div class="metodo-body">
+      \\(\\dfrac{2}{3} \\times \\dfrac{3}{4} = \\dfrac{1}{2}\\)<br>
+      <em style="font-size:var(--fs-xs);color:var(--text3)">Tomo una <strong>parte</strong> de \\(\\tfrac{3}{4}\\) → me queda menos que \\(\\tfrac{3}{4}\\).</em>
+    </div>
+  </div>
+  <div class="metodo-card bien" data-c="2">
+    <div class="metodo-lbl">Factor MAYOR que 1 → agranda</div>
+    <div class="metodo-body">
+      \\(\\dfrac{5}{3} \\times \\dfrac{3}{4} = \\dfrac{15}{12} = \\dfrac{5}{4}\\)<br>
+      <em style="font-size:var(--fs-xs);color:var(--text3)">Tomo \\(\\tfrac{3}{4}\\) <strong>más de una vez</strong> → me queda más que \\(\\tfrac{3}{4}\\).</em>
+    </div>
+  </div>
+</div>
+<div class="paso-row" data-c="3" style="border-left-color:var(--teal);margin-top:var(--gap)">
+  <div class="paso-num" style="background:var(--teal)">=</div>
+  <div class="paso-lbl" style="color:var(--teal)">El caso frontera</div>
+  <div class="paso-body">\\(\\dfrac{4}{4} \\times \\dfrac{3}{4} = \\dfrac{3}{4}\\) → multiplicar por 1 no cambia nada. <strong>La unidad es la frontera exacta.</strong></div>
+</div>
+<div class="formal-box" data-c="4" style="margin-top:var(--gap);opacity:0;transition:opacity .45s">
+  <div class="formal-title">La creencia, corregida</div>
+  <div class="formal-step vis" style="opacity:1"><div class="formal-step-n">✔</div><div class="formal-step-txt" style="font-size:var(--fs-lg)">Multiplicar agranda <strong>solo</strong> cuando el factor es <strong>mayor que 1</strong>. No era mentira: era una regla a la que le faltaba la condición.</div></div>
+</div>
+<div class="info-box rv" data-c="4">
+  <strong>Guarda esto:</strong> ahora puedes <em>predecir</em> el resultado antes de calcular. Miras el segundo factor, lo comparas con 1, y ya sabes si va a crecer o a encoger. <em>La próxima semana harás exactamente lo mismo con la división.</em>
+</div>`},
+
+/* ── 14 · S2 FORMALIZACIÓN — SIMPLIFICAR ANTES ─────── */
+{bread:'Sem. 9 · S2 › Formalización',badge:'FORMALIZACIÓN',badgeColor:'#2E7D32',clicks:5,fL:'Sesión 2 · Simplificar antes de multiplicar',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--green)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--green);color:#fff">Formalización · PPT animado</div>
+    <div class="slide-title">El atajo: simplificar ANTES de multiplicar</div>
+    <div class="slide-instr">Resuelve \\(\\tfrac{8}{9} \\times \\tfrac{3}{4}\\) por el camino largo. Luego mira el atajo.</div>
+  </div>
+</div>
+<div class="conj-box">✍️ <strong>Antes del clic:</strong> resuelve \\(\\tfrac{8}{9} \\times \\tfrac{3}{4}\\) multiplicando directo y simplificando al final. Anota cuántas operaciones te tocó hacer.</div>
+<div class="formal-box">
+  <div class="formal-title">Dos caminos, un mismo resultado</div>
+  <div class="formal-step" data-c="1"><div class="formal-step-n">A</div><div class="formal-step-txt"><strong>Camino largo:</strong> \\(\\dfrac{8}{9} \\times \\dfrac{3}{4} = \\dfrac{24}{36}\\) → ahora simplifico entre 12 → \\(\\dfrac{2}{3}\\). <em style="color:var(--text3);font-size:var(--fs-xs)">Números grandes, y hay que hallar el m.c.d. de 24 y 36.</em></div></div>
+  <div class="formal-step" data-c="2"><div class="formal-step-n">B</div><div class="formal-step-txt"><strong>Camino corto:</strong> simplifico en cruz ANTES. El 8 con el 4 (entre 4) → 2 y 1. El 3 con el 9 (entre 3) → 1 y 3.</div></div>
+  <div class="formal-step" data-c="3"><div class="formal-step-n">→</div><div class="formal-step-txt" style="font-size:var(--fs-lg);text-align:center">\\(\\dfrac{\\cancel{8}^{\\,2}}{\\cancel{9}_{\\,3}} \\times \\dfrac{\\cancel{3}^{\\,1}}{\\cancel{4}_{\\,1}} = \\dfrac{2 \\cdot 1}{3 \\cdot 1} = \\dfrac{2}{3}\\)</div></div>
+  <div class="formal-step" data-c="4"><div class="formal-step-n">?</div><div class="formal-step-txt"><strong>¿Por qué es legítimo?</strong> Porque simplificar es dividir arriba y abajo por el mismo número — es lo mismo que hacías en la Semana 6 con las fracciones equivalentes. Solo que ahora lo haces antes de multiplicar, no después.</div></div>
+</div>
+<div class="error-box rv" data-c="5">
+  <div class="error-title">⚠️ Cuidado — el atajo NO sirve para sumar</div>
+  <div class="error-txt">Simplificar en cruz funciona <strong>solo</strong> en la multiplicación. En \\(\\tfrac{8}{9} + \\tfrac{3}{4}\\) no puedes tocar nada: ahí necesitas el m.c.m. de la Semana 8. <em>Cada operación tiene sus permisos. No los mezcles.</em></div>
+</div>`},
+
+/* ── 15 · S2 HACEMOS ───────────────────────────────── */
+{bread:'Sem. 9 · S2 › Hacemos',badge:'HACEMOS',badgeColor:'#00695C',clicks:6,fL:'Sesión 2 · Práctica guiada',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--teal)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--teal);color:#fff">Hacemos — Juntos</div>
+    <div class="slide-title">Resolvemos los tres juntos</div>
+    <div class="slide-instr">Antes de cada solución, PREDICE: ¿el resultado será mayor o menor que el segundo factor?</div>
+  </div>
+</div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--teal)">
+    <div class="ex-head"><div class="ex-num" style="background:var(--teal)">1</div><div class="ex-title">El agua del recreo</div></div>
+    <div class="ex-ctx">Una botella tiene \\(\\tfrac{3}{4}\\) de litro. Camila se toma \\(\\tfrac{2}{5}\\) de la botella.</div>
+    <div class="ex-task">\\(\\dfrac{2}{5} \\times \\dfrac{3}{4}\\)</div>
+    <div class="rv" data-c="2" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(=\\dfrac{6}{20}=\\dfrac{3}{10}\\) de litro<br><span style="font-size:var(--fs-xs);font-weight:400;font-style:italic">Menor: el factor \\(\\tfrac{2}{5}<1\\)</span></div>
+  </div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--teal)">
+    <div class="ex-head"><div class="ex-num" style="background:var(--teal)">2</div><div class="ex-title">La cancha</div></div>
+    <div class="ex-ctx">La cancha ocupa \\(\\tfrac{5}{8}\\) del patio. De la cancha, \\(\\tfrac{4}{5}\\) se va a repintar.</div>
+    <div class="ex-task">\\(\\dfrac{4}{5} \\times \\dfrac{5}{8}\\)</div>
+    <div class="rv" data-c="4" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(=\\dfrac{1}{2}\\) del patio<br><span style="font-size:var(--fs-xs);font-weight:400;font-style:italic">Simplificando en cruz: el 5 con el 5</span></div>
+  </div>
+  <div class="ex-card" data-c="5" style="border-top-color:var(--amber)">
+    <div class="ex-head"><div class="ex-num" style="background:var(--amber)">3</div><div class="ex-title">El pedido doble</div></div>
+    <div class="ex-ctx">La receta lleva \\(\\tfrac{2}{3}\\) de libra de queso. Hoy hay que preparar \\(\\tfrac{3}{2}\\) de la receta.</div>
+    <div class="ex-task">\\(\\dfrac{3}{2} \\times \\dfrac{2}{3}\\)</div>
+    <div class="rv" data-c="6" style="background:#FFF8ED;border:2.5px solid var(--amber);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--amber);font-weight:800">\\(=\\dfrac{6}{6}=1\\) libra exacta<br><span style="font-size:var(--fs-xs);font-weight:400;font-style:italic">¡Creció! El factor \\(\\tfrac{3}{2}>1\\)</span></div>
+  </div>
+</div>`},
+
+/* ── 16 · S2 TÚ HACES ──────────────────────────────── */
+{bread:'Sem. 9 · S2 › Aplicación',badge:'APLICACIÓN',badgeColor:'#00695C',clicks:7,fL:'Sesión 2 · Trabajo independiente',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--teal)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--teal);color:#fff">Tú haces — Sin ayuda</div>
+    <div class="slide-title">Predice, resuelve, comprueba</div>
+    <div class="slide-instr">Escribe primero «mi resultado será mayor / menor que ___». Clic solo cuando termines.</div>
+  </div>
+</div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--blue)">
+    <div class="ex-head"><div class="ex-num" style="background:var(--blue)">A</div><div class="ex-title">Parque Arví</div></div>
+    <div class="ex-ctx">El sendero mide \\(\\tfrac{7}{2}\\) km. El grupo recorrió \\(\\tfrac{4}{7}\\) del sendero.</div>
+    <div class="ex-task">\\(\\dfrac{4}{7} \\times \\dfrac{7}{2}\\)</div>
+    <div class="rv" data-c="4" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(=2\\) km</div>
+  </div>
+  <div class="ex-card" data-c="2" style="border-top-color:var(--blue)">
+    <div class="ex-head"><div class="ex-num" style="background:var(--blue)">B</div><div class="ex-title">Metro Línea A</div></div>
+    <div class="ex-ctx">El trayecto Niquía–La Estrella toma \\(\\tfrac{5}{6}\\) de hora. Sofía viaja \\(\\tfrac{3}{5}\\) del trayecto.</div>
+    <div class="ex-task">\\(\\dfrac{3}{5} \\times \\dfrac{5}{6}\\)</div>
+    <div class="rv" data-c="5" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(=\\dfrac{1}{2}\\) hora = 30 min</div>
+  </div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--amber)">
+    <div class="ex-head"><div class="ex-num" style="background:var(--amber)">C</div><div class="ex-title">Reto</div></div>
+    <div class="ex-ctx">Encuentra la fracción que multiplicada por \\(\\tfrac{3}{4}\\) da exactamente \\(\\tfrac{3}{4}\\). Y otra que dé el doble.</div>
+    <div class="ex-task">\\(\\square \\times \\dfrac{3}{4} = \\dfrac{3}{2}\\)</div>
+    <div class="rv" data-c="6" style="background:#FFF8ED;border:2.5px solid var(--amber);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--amber);font-weight:800">\\(\\square=\\dfrac{4}{4}=1\\) y \\(\\square=2\\)</div>
+  </div>
+</div>
+<div class="piar-box rv" data-c="7">
+  <span class="piar-lbl">🧩 Apoyo diferenciado</span>
+  <strong>Eybril, Juan Pablo, Sebastián:</strong> resuelve solo A y B; el ejercicio A ya tiene el 7 arriba y abajo — búscalo antes de multiplicar. <strong>Matías:</strong> una tarjeta a la vez, pausa de 40 segundos entre A y B. <strong>Jerónimo:</strong> si prefieres, explica el procedimiento de A en voz alta en vez de escribirlo. <strong>Jhon Alejandro:</strong> eres el auditor — revisa las predicciones de tu trío y di cuál falló.
+</div>`},
+
+/* ── 17 · S2 METACOGNICIÓN ─────────────────────────── */
+{bread:'Sem. 9 · S2 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'#B71C1C',clicks:3,fL:'Sesión 2 · Cierre',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--red)"></div>
+  <div style="flex:1">
+    <div class="slide-title">¿Fracción de qué?</div>
+    <div class="slide-instr">Responde en el cuaderno. Después levanta tu ficha del semáforo.</div>
+  </div>
+</div>
+<div class="meta-q">
+  <div class="meta-qlbl">Pregunta metacognitiva de la sesión</div>
+  <div class="meta-qtxt">«El contratista pidió baldosín para \\(\\tfrac{2}{3}\\) de la fachada y se equivocó por no preguntar “¿\\(\\tfrac{2}{3}\\) de qué?”. ¿En qué otra situación de mi vida he dado por obvio el “de qué” y me ha salido mal?»</div>
+</div>
+<div class="espacio-respuesta" contenteditable="true" role="textbox" aria-label="Escribe tu respuesta">Escribe aquí tu respuesta...</div>
+<div style="font-size:var(--fs-md);font-weight:800;color:var(--navy);margin-top:6px">Semáforo de comprensión</div>
+<div class="semaforo">
+  <div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Predigo si el resultado crece o encoge mirando el factor, y simplifico en cruz antes de multiplicar.<span class="sema-sub">Listo para escalar recetas con números mixtos.</span></div></div>
+  <div class="sema-item" data-c="2"><div class="sema-circle" style="background:#E08C20"></div><div class="sema-txt">Multiplico bien, pero a veces olvido preguntar «¿de qué?» y tomo la fracción sobre la unidad equivocada.<span class="sema-sub">Voy a dibujar la cuadrícula en cada ejercicio esta semana.</span></div></div>
+  <div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Me confundo entre simplificar en cruz y el m.c.m. de la suma.<span class="sema-sub">Voy a hacer una lista de «qué se puede en cada operación» con la profesora Karol.</span></div></div>
+</div>`},
+
+/* ── 18 · PORTADA SESIÓN 3 ─────────────────────────── */
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner">
+  <div class="sesion-num" style="background:var(--red)">
+    <div class="sesion-num-lbl">Sesión</div>
+    <div class="sesion-num-big">3</div>
+  </div>
+  <div class="sesion-right">
+    <div class="sesion-tag">Semana 9 · Aritmética 7°</div>
+    <div class="sesion-title">Escalar y decidir</div>
+    <div class="sesion-sub">Números mixtos, costos reales y una decisión de negocio.<br>Los buñuelos de la novena.</div>
+    <div class="sesion-chips">
+      <span class="sesion-chip">⏱ 55 minutos</span>
+      <span class="sesion-chip">📍 Galería Minorista</span>
+      <span class="sesion-chip">💰 Costos reales</span>
+      <span class="sesion-chip">GRR: Tú haces</span>
+    </div>
+  </div>
+</div>`},
+
+/* ── 19 · S3 DETONANTE ─────────────────────────────── */
+{bread:'Sem. 9 · S3 › Exploración',badge:'EXPLORACIÓN',badgeColor:'#C47C1A',clicks:0,fL:'Sesión 3 · Los buñuelos de la novena',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--amber)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--amber);color:#fff">Situación detonante</div>
+    <div class="slide-title">Los buñuelos de la novena</div>
+    <div class="slide-instr">Lee con atención. Explícale a un compañero qué hay que hacer ANTES de resolver.</div>
+  </div>
+</div>
+<div class="det-box">
+  <div class="det-label">🥯 Situación problema</div>
+  <div class="det-text">La receta de buñuelos de la tienda escolar rinde <strong>30 unidades</strong> y lleva \\(\\tfrac{7}{8}\\) de libra de queso costeño, \\(2\\tfrac{1}{4}\\) libras de almidón de yuca y \\(\\tfrac{3}{4}\\) de taza de leche. Para la novena del salón se necesitan solo <strong>20 buñuelos</strong>. En la Galería Minorista el queso costeño está a \\$14.400 la libra.</div>
+  <div class="det-q">¿Qué fracción de la receta hay que preparar, y cuánto se gasta en queso?</div>
+</div>
+<div class="activacion-previa">
+  <strong>🧠 Primer paso, sin calcular nada:</strong> ¿de dónde sale la fracción de la receta? No te la están dando. <strong>Tienes que construirla</strong> con dos datos que sí están en el texto. Escríbela en tu cuaderno y justifica de dónde la sacaste.
+</div>`},
+
+/* ── 20 · S3 CONSTRUCCIÓN — NÚMEROS MIXTOS ─────────── */
+{bread:'Sem. 9 · S3 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'#1C3A6E',clicks:5,fL:'Sesión 3 · Multiplicar con números mixtos',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--blue)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--blue);color:#fff">Yo hago — El almidón</div>
+    <div class="slide-title">¿Cómo multiplico \\(\\tfrac{2}{3} \\times 2\\tfrac{1}{4}\\)?</div>
+    <div class="slide-instr">Escribe tu intento antes del clic. Hay una trampa clásica aquí.</div>
+  </div>
+</div>
+<div class="metodo-grid">
+  <div class="metodo-card mal" data-c="1">
+    <div class="metodo-lbl">❌ La trampa — «multiplico por partes»</div>
+    <div class="metodo-body">
+      \\(\\dfrac{2}{3} \\times 2\\tfrac{1}{4} = \\left(\\dfrac{2}{3}\\times 2\\right) + \\dfrac{1}{4} = \\dfrac{4}{3}+\\dfrac{1}{4} = \\dfrac{19}{12}\\)
+      <br><em style="color:var(--red);font-size:var(--fs-xs)">El \\(\\tfrac{1}{4}\\) también hay que reducirlo. Aquí se quedó entero.</em>
+    </div>
+  </div>
+  <div class="metodo-card bien" data-c="2">
+    <div class="metodo-lbl">✔ Primero convierto a impropia</div>
+    <div class="metodo-body">
+      \\(2\\tfrac{1}{4} = \\dfrac{2 \\cdot 4 + 1}{4} = \\dfrac{9}{4}\\)
+      <br><em style="color:var(--green);font-size:var(--fs-xs)">Ahora sí es una sola fracción. Ya puedo aplicar la regla.</em>
+    </div>
+  </div>
+</div>
+<div style="display:flex;flex-direction:column;gap:clamp(8px,1vh,14px);margin-top:var(--gap)">
+  <div class="paso-row" data-c="3"><div class="paso-num">1</div><div class="paso-lbl">Simplifico</div><div class="paso-body">\\(\\dfrac{2}{3} \\times \\dfrac{9}{4}\\) → el 2 con el 4 (entre 2), el 9 con el 3 (entre 3) → \\(\\dfrac{1}{1} \\times \\dfrac{3}{2}\\)</div></div>
+  <div class="paso-row" data-c="4"><div class="paso-num">2</div><div class="paso-lbl">Multiplico</div><div class="paso-body">\\(=\\dfrac{3}{2} = 1\\tfrac{1}{2}\\) libras de almidón</div></div>
+</div>
+<div class="result-bar" data-c="5">\\(\\dfrac{2}{3} \\times 2\\tfrac{1}{4} = 1\\tfrac{1}{2}\\) libras &nbsp;·&nbsp; encogió, como debía</div>`},
+
+/* ── 21 · S3 HACEMOS — TABLA BUÑUELOS ──────────────── */
+{bread:'Sem. 9 · S3 › Hacemos',badge:'HACEMOS',badgeColor:'#00695C',clicks:5,fL:'Sesión 3 · Tabla de escalado de los buñuelos',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--teal)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--teal);color:#fff">Hacemos — Tabla para completar</div>
+    <div class="slide-title">La receta de 30 buñuelos, escalada a 20</div>
+    <div class="slide-instr">Un integrante del trío dicta cada fila en voz alta antes del clic.</div>
+  </div>
+</div>
+<div class="info-box" style="margin-bottom:var(--gap)">
+  <strong>La fracción de la receta:</strong> \\(\\dfrac{20 \\text{ buñuelos}}{30 \\text{ buñuelos}} = \\dfrac{2}{3}\\) de la receta. <em>Nadie te la dio: la construiste.</em>
+</div>
+<table class="mcm-table">
+  <tr><th>Ingrediente</th><th>Receta (30)</th><th>Operación</th><th>Para 20 buñuelos</th></tr>
+  <tr><td style="font-weight:800">Queso costeño</td><td>\\(\\tfrac{7}{8}\\) libra</td><td><span class="rv" data-c="1">\\(\\tfrac{2}{3} \\times \\tfrac{7}{8}\\)</span></td><td><span class="rv" data-c="1">\\(\\tfrac{14}{24}=\\tfrac{7}{12}\\) libra</span></td></tr>
+  <tr><td style="font-weight:800">Almidón de yuca</td><td>\\(2\\tfrac{1}{4}\\) libras</td><td><span class="rv" data-c="2">\\(\\tfrac{2}{3} \\times \\tfrac{9}{4}\\)</span></td><td><span class="rv" data-c="2">\\(\\tfrac{3}{2}=1\\tfrac{1}{2}\\) libras</span></td></tr>
+  <tr><td style="font-weight:800">Leche</td><td>\\(\\tfrac{3}{4}\\) taza</td><td><span class="rv" data-c="3">\\(\\tfrac{2}{3} \\times \\tfrac{3}{4}\\)</span></td><td><span class="rv" data-c="3">\\(\\tfrac{1}{2}\\) taza</span></td></tr>
+  <tr><td style="font-weight:800">Costo del queso</td><td>\\$14.400 la libra</td><td><span class="rv" data-c="4">\\(\\tfrac{7}{12} \\times 14400\\)</span></td><td class="hi"><span class="rv" data-c="4">\\$8.400</span></td></tr>
+</table>
+<div class="info-box rv" data-c="5" style="margin-top:var(--gap)">
+  <strong>Fíjate en la última fila:</strong> multiplicaste una fracción por un número entero. \\(\\tfrac{7}{12} \\times 14400 = \\tfrac{7 \\times 14400}{12} = \\tfrac{100800}{12} = 8400\\). <em>Un entero es una fracción con denominador 1. Nada nuevo: la misma regla de siempre.</em>
+</div>`},
+
+/* ── 22 · S3 ERROR FRECUENTE ───────────────────────── */
+{bread:'Sem. 9 · S3 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'#1C3A6E',clicks:4,fL:'Sesión 3 · El error que hay que cazar',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--red)"></div>
+  <div style="flex:1">
+    <div class="slide-title">¿Multiplico o sumo?</div>
+    <div class="slide-instr">Clic para revelar cada caso. La operación NO se decide por las palabras del enunciado.</div>
+  </div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--gap)">
+  <div class="metodo-card mal" data-c="1">
+    <div class="metodo-lbl">❌ «Vi la palabra <em>de</em>, entonces multiplico»</div>
+    <div class="metodo-body">«Andrea compró \\(\\tfrac{2}{3}\\) <strong>de</strong> las obleas y Samuel \\(\\tfrac{3}{4}\\) <strong>de</strong> las obleas. ¿Cuánto compraron entre los dos?»<br><em style="color:var(--red);font-size:var(--fs-xs)">Aquí hay dos «de» y NO se multiplica: se SUMA. Es el problema de la Semana 8.</em></div>
+  </div>
+  <div class="metodo-card bien" data-c="2">
+    <div class="metodo-lbl">✔ Multiplico cuando una fracción actúa SOBRE la otra</div>
+    <div class="metodo-body">«De la zona azul (\\(\\tfrac{3}{5}\\)), los \\(\\tfrac{2}{3}\\) llevan baldosín.»<br><em style="color:var(--green);font-size:var(--fs-xs)">El \\(\\tfrac{2}{3}\\) se toma <strong>dentro</strong> del \\(\\tfrac{3}{5}\\). Una fracción es la unidad de la otra → multiplico.</em></div>
+  </div>
+</div>
+<div class="error-box" data-c="3" style="opacity:0;transition:opacity .45s;margin-top:var(--gap)">
+  <div class="error-title">🎯 La pregunta que decide</div>
+  <div class="error-txt">Las dos fracciones, <strong>¿se refieren a la MISMA unidad o una está dentro de la otra?</strong><br>· <strong>Misma unidad</strong> (los dos compran del mismo total) → <strong>SUMO</strong>.<br>· <strong>Una dentro de la otra</strong> (una parte de una parte) → <strong>MULTIPLICO</strong>.</div>
+</div>
+<div class="info-box rv" data-c="4">
+  <strong>Hazlo tú:</strong> escribe DOS enunciados con \\(\\tfrac{1}{2}\\) y \\(\\tfrac{1}{3}\\): uno donde haya que sumar y otro donde haya que multiplicar. Cámbialos con tu compañero: él debe decidir cuál es cuál <em>sin que le digas</em>.
+</div>`},
+
+/* ── 23 · S3 TÚ HACES ──────────────────────────────── */
+{bread:'Sem. 9 · S3 › Aplicación',badge:'APLICACIÓN',badgeColor:'#00695C',clicks:7,fL:'Sesión 3 · Trabajo independiente',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--teal)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--teal);color:#fff">Tú haces — Sin guía, sin compañero</div>
+    <div class="slide-title">Decide la operación, luego resuelve</div>
+    <div class="slide-instr">Muestra todo el procedimiento. Clic solo después de terminar en el cuaderno.</div>
+  </div>
+</div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--blue)">
+    <div class="ex-head"><div class="ex-num" style="background:var(--blue)">A</div><div class="ex-title">Parque Explora</div></div>
+    <div class="ex-ctx">La salida dura \\(3\\tfrac{1}{2}\\) horas. El grupo pasa \\(\\tfrac{2}{7}\\) del tiempo en el acuario.</div>
+    <div class="ex-task">¿Cuánto tiempo en el acuario?</div>
+    <div class="rv" data-c="4" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-sm);text-align:center;color:var(--green);font-weight:800">\\(\\tfrac{2}{7} \\times \\tfrac{7}{2} = 1\\) hora</div>
+  </div>
+  <div class="ex-card" data-c="2" style="border-top-color:var(--blue)">
+    <div class="ex-head"><div class="ex-num" style="background:var(--blue)">B</div><div class="ex-title">Tienda escolar</div></div>
+    <div class="ex-ctx">Un paquete de galletas cuesta \\$3.600. Hoy vale \\(\\tfrac{5}{6}\\) del precio normal.</div>
+    <div class="ex-task">¿Cuánto cuesta hoy?</div>
+    <div class="rv" data-c="5" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-sm);text-align:center;color:var(--green);font-weight:800">\\(\\tfrac{5}{6} \\times 3600 = \\$3.000\\)</div>
+  </div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--amber)">
+    <div class="ex-head"><div class="ex-num" style="background:var(--amber)">C</div><div class="ex-title">Reto — decide tú</div></div>
+    <div class="ex-ctx">Andrés corrió \\(\\tfrac{3}{4}\\) de km y luego \\(\\tfrac{2}{3}\\) de km más. Sara corrió \\(\\tfrac{2}{3}\\) de los \\(\\tfrac{3}{4}\\) de km que corrió Andrés al comienzo.</div>
+    <div class="ex-task">¿Quién corrió más? ¿Qué operación va en cada caso?</div>
+    <div class="rv" data-c="6" style="background:#FFF8ED;border:2.5px solid var(--amber);border-radius:10px;padding:8px 12px;font-size:var(--fs-sm);text-align:center;color:var(--amber);font-weight:800">Andrés SUMA: \\(\\tfrac{17}{12}\\) km<br>Sara MULTIPLICA: \\(\\tfrac{1}{2}\\) km</div>
+  </div>
+</div>
+<div class="piar-box rv" data-c="7">
+  <span class="piar-lbl">🧩 Apoyo diferenciado</span>
+  <strong>Eybril, Juan Pablo, Sebastián:</strong> resuelve A y B; en A, convierte primero \\(3\\tfrac{1}{2}\\) a impropia y busca el 7 arriba y abajo. <strong>Matías:</strong> A y B, con pausa entre las dos; el reto C es opcional. <strong>Jerónimo:</strong> puedes sustentar C oralmente; te aviso antes si tu trío expone. <strong>Sebastián:</strong> el ejemplo del almidón de la sesión pasada está en tu cuaderno — úsalo como modelo antes de empezar A.
+</div>`},
+
+/* ── 24 · S3 SÍNTESIS DE LA SEMANA ─────────────────── */
+{bread:'Sem. 9 · S3 › Formalización',badge:'SÍNTESIS',badgeColor:'#2E7D32',clicks:4,fL:'Sesión 3 · Lo que nos llevamos de la Semana 9',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--green)"></div>
+  <div style="flex:1">
+    <div class="badge" style="background:var(--green);color:#fff">Síntesis · PPT animado</div>
+    <div class="slide-title">Cierra la semana en tu cuaderno</div>
+    <div class="slide-instr">Escribe las tres ideas ANTES del clic. Corrige en otro color.</div>
+  </div>
+</div>
+<div class="formal-box">
+  <div class="formal-title">Las tres cosas que hay que sacar de aquí</div>
+  <div class="formal-step" data-c="1"><div class="formal-step-n">1</div><div class="formal-step-txt"><strong>La regla:</strong> \\(\\dfrac{a}{b} \\times \\dfrac{c}{d} = \\dfrac{a \\cdot c}{b \\cdot d}\\). Y no es un truco: el denominador es en cuántos cuadritos quedó partida la hoja; el numerador, cuántos quedaron morados.</div></div>
+  <div class="formal-step" data-c="2"><div class="formal-step-n">2</div><div class="formal-step-txt"><strong>La predicción:</strong> miro el segundo factor y lo comparo con 1. Menor que 1 → encoge. Mayor que 1 → agranda. Igual a 1 → no pasa nada. <em>Antes de calcular, ya sé qué esperar.</em></div></div>
+  <div class="formal-step" data-c="3"><div class="formal-step-n">3</div><div class="formal-step-txt"><strong>La pregunta:</strong> «¿fracción DE QUÉ?». Si las dos se refieren a la misma unidad → sumo. Si una está dentro de la otra → multiplico.</div></div>
+  <div class="formal-step" data-c="4"><div class="formal-step-n">→</div><div class="formal-step-txt" style="color:var(--blue);font-weight:700">La semana entrante: si multiplicar por \\(\\tfrac{2}{3}\\) encogió la receta… ¿qué operación la devuelve a su tamaño original? <em>Piénsalo antes del lunes.</em></div></div>
+</div>`},
+
+/* ── 25 · S3 METACOGNICIÓN FINAL ───────────────────── */
+{bread:'Sem. 9 · S3 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'#B71C1C',clicks:3,fL:'Sesión 3 · Cierre de la Semana 9',html:`
+<div class="title-row">
+  <div class="accent-bar" style="background:var(--red)"></div>
+  <div style="flex:1">
+    <div class="slide-title">Tu situación, tus datos, tu operación</div>
+    <div class="slide-instr">Escribe tu situación abajo y guárdala: es insumo del díptico «Diseñadores de Mosaicos y Descuentos».</div>
+  </div>
+</div>
+<div class="meta-q">
+  <div class="meta-qlbl">Pregunta metacognitiva de la semana</div>
+  <div class="meta-qtxt">«Describe una situación real de tu casa o tu barrio en Medellín donde haya que tomar una fracción DE otra fracción. Incluye los datos reales, plantea la multiplicación, predice si el resultado crecerá o encogerá, y resuélvela.»</div>
+</div>
+<div class="espacio-respuesta" contenteditable="true" role="textbox" aria-label="Escribe tu situación y solución">Describe tu situación real aquí...</div>
+<div style="font-size:var(--fs-md);font-weight:800;color:var(--navy);margin-top:6px">Semáforo final de la semana</div>
+<div class="semaforo">
+  <div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Multiplico fracciones y mixtos, predigo el resultado y distingo cuándo sumar y cuándo multiplicar.<span class="sema-sub">Estoy listo para la división de fracciones.</span></div></div>
+  <div class="sema-item" data-c="2"><div class="sema-circle" style="background:#E08C20"></div><div class="sema-txt">Resuelvo bien, pero con números mixtos a veces multiplico por partes.<span class="sema-sub">Voy a hacer 5 ejercicios con mixtos convirtiendo primero a impropia.</span></div></div>
+  <div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Todavía dudo si el problema pide sumar o multiplicar.<span class="sema-sub">Voy a usar la pregunta «¿de qué?» en cada ejercicio y pedir apoyo a la profesora Karol.</span></div></div>
+</div>
+<div style="margin-top:var(--gap);text-align:center">
+  <button class="btn-exportar" onclick="exportarReflexion()">💾 Guardar mi reflexión final</button>
+</div>`},
+]; // fin SLIDES
+
+let cur=0,clicks=0;
+const deck=document.getElementById('deck');
+const saved=loadProgress();
+if(saved){cur=saved.slide||0;clicks=0;}
+
+function doKatex(el){
+  if(window.renderMathInElement){
+    renderMathInElement(el,{
+      delimiters:[
+        {left:'\\(',right:'\\)',display:false},
+        {left:'\\[',right:'\\]',display:true}
+      ],
+      throwOnError:false,
+      strict:false
+    });
+  }
+}
+
+function buildSlide(idx){
+  const s=SLIDES[idx];
+  const d=document.createElement('div');
+  d.className='slide'+(s.cls?' '+s.cls:'');
+  d.setAttribute('role','region');
+  d.setAttribute('aria-label','Diapositiva '+(idx+1)+' de '+SLIDES.length);
+  let h='';
+  if(!s.noH){
+    const bc=s.badgeColor||'var(--blue)';
+    h+='<header class="hdr"><span class="hdr-b">'+(s.bread||'')+'</span>'+(s.badge?'<span class="hdr-badge" style="background:'+bc+'">'+s.badge+'</span>':'')+'</header>';
+  }
+  h+='<main class="body">'+s.html+'</main>';
+  if(!s.noF) h+='<footer class="ftr"><span>'+(s.fL||'')+'</span><span>I.E. Merceditas Gómez Martínez · Aritmética 7°</span></footer>';
+  d.innerHTML=h;
+  return d;
+}
+
+function show(idx,dir){
+  const prev=deck.querySelector('.slide.active');
+  if(prev) prev.classList.remove('active','enter-r','enter-l');
+  const el=buildSlide(idx);
+  deck.appendChild(el);
+  const all=deck.querySelectorAll('.slide');
+  if(all.length>3) all[0].remove();
+  requestAnimationFrame(()=>{
+    el.classList.add('active',dir>=0?'enter-r':'enter-l');
+    setTimeout(()=>el.classList.remove('enter-r','enter-l'),360);
+    doKatex(el);
+    const main=el.querySelector('main.body');
+    if(main) main.scrollTop=0;
+    const title=el.querySelector('.slide-title');
+    announceToScreenReader(title?'Diapositiva '+(idx+1)+': '+title.textContent:'Diapositiva '+(idx+1)+' de '+SLIDES.length);
+  });
+  clicks=0;
+  document.getElementById('ncnt').textContent=(idx+1)+' / '+SLIDES.length;
+  const pct=((idx+1)/SLIDES.length*100).toFixed(1);
+  document.getElementById('pbar').style.width=pct+'%';
+  saveProgress(idx,0);
+}
+
+function advance(){
+  const s=SLIDES[cur];
+  const mx=s.clicks||0;
+  if(clicks<mx){
+    clicks++;
+    const el=deck.querySelector('.slide.active');
+    if(el){
+      el.querySelectorAll('[data-c="'+clicks+'"]').forEach(e=>{
+        e.classList.add('vis');
+        e.style.opacity='1';
+      });
+      doKatex(el);
+    }
+    announceToScreenReader('Paso '+clicks+' de '+mx);
+    saveProgress(cur,clicks);
+    return;
+  }
+  if(cur<SLIDES.length-1){cur++;show(cur,1);}
+  else showFeedback('¡Has completado la Semana 9! 🎉');
+}
+function retreat(){if(cur>0){cur--;show(cur,-1);}}
+
+document.addEventListener('keydown',e=>{
+  if(['Space','ArrowRight','ArrowLeft'].includes(e.code))e.preventDefault();
+  if(e.code==='Space'||e.code==='ArrowRight')advance();
+  if(e.code==='ArrowLeft')retreat();
+  if(e.code==='KeyF')document.getElementById('fs-btn')?.click();
+});
+document.getElementById('bn').addEventListener('click',advance);
+document.getElementById('bp').addEventListener('click',retreat);
+
+let tx=0;
+document.addEventListener('touchstart',e=>{if(e.touches?.[0])tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const t=e.changedTouches?.[0];if(!t)return;
+  const dx=t.clientX-tx;
+  if(Math.abs(dx)>50){dx<0?advance():retreat();}
+});
+
+const fsBtn=document.getElementById('fs-btn');
+if(fsBtn){
+  fsBtn.addEventListener('click',async()=>{
+    try{
+      if(!document.fullscreenElement)await document.documentElement.requestFullscreen();
+      else await document.exitFullscreen();
+    }catch(e){showFeedback('Pantalla completa no disponible',true);}
+  });
+  document.addEventListener('fullscreenchange',()=>{
+    fsBtn.textContent=document.fullscreenElement?'✕':'⛶';
+  });
+}
+
+function exportarReflexion(){
+  const espacios=[];
+  document.querySelectorAll('.espacio-respuesta').forEach((el,i)=>{if(el.textContent.trim())espacios.push('Reflexión '+(i+1)+': '+el.textContent.trim());});
+  let contenido='EVIDENCIAS — Aritmética 7° — Semana 9\n'+new Date().toLocaleString('es-CO')+'\n\n';
+  if(espacios.length)contenido+=espacios.join('\n\n---\n\n');
+  try{
+    const blob=new Blob([contenido],{type:'text/plain;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;
+    a.download='arit7_s9_evidencias_'+new Date().toISOString().slice(0,10)+'.txt';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+    showFeedback('📥 Reflexiones guardadas');
+  }catch(e){navigator.clipboard?.writeText(contenido);showFeedback('📋 Copiado al portapapeles');}
+}
+
+setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
+show(saved?.slide||0,1);
+</script>
+</body>
+</html>
