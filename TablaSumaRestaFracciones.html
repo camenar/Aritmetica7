@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller Suma y Resta de Fracciones P2</title>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    startup: {
+      pageReady: function() {
+        return MathJax.startup.defaultPageReady();
+      }
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e8f4f8 0%, #f0e6f6 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+  }
+
+  .overlay.hidden { display: none; }
+
+  .login-card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: slideIn 0.4s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .login-card h2 {
+    color: #4a90d9;
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 1.6em;
+  }
+
+  .login-card .subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95em;
+  }
+
+  .form-group { margin-bottom: 18px; }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+    font-size: 0.95em;
+  }
+
+  .form-group label .required { color: #e74c3c; }
+
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.2s;
+    background: #fafafa;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    border-color: #4a90d9;
+    outline: none;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(74,144,217,0.15);
+  }
+
+  .form-group input.error, .form-group select.error {
+    border-color: #e74c3c;
+    background: #fde8e8;
+  }
+
+  .error-msg {
+    color: #e74c3c;
+    font-size: 0.85em;
+    margin-top: 4px;
+    display: none;
+  }
+
+  .error-msg.show { display: block; }
+
+  .btn-enter {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #4a90d9, #357abd);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+  }
+
+  .btn-enter:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74,144,217,0.4);
+  }
+
+  .btn-enter:active { transform: translateY(0); }
+
+  .container {
+    max-width: 1350px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    padding: 30px;
+    display: none;
+  }
+
+  .container.visible { display: block; }
+
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #4a90d9;
+  }
+
+  .header h2 {
+    font-size: 2.2em;
+    color: #4a90d9;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .admin-bar {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px dashed #bdc3c7;
+  }
+
+  .admin-bar .admin-label {
+    width: 100%;
+    text-align: center;
+    font-size: 0.85em;
+    color: #7f8c8d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-admin {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-view { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
+  .btn-view:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(52,152,219,0.4); }
+
+  .btn-export { background: linear-gradient(135deg, #27ae60, #219a52); color: white; }
+  .btn-export:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(39,174,96,0.4); }
+
+  .btn-clear-data { background: linear-gradient(135deg, #95a5a6, #7f8c8d); color: white; }
+  .btn-clear-data:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(149,165,166,0.4); }
+
+  .student-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    background: #eef4ff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid #4a90d9;
+  }
+
+  .student-info .info-item { font-size: 0.95em; }
+  .student-info .info-item strong { color: #2c5f9e; }
+  .student-info .info-item span { color: #333; font-weight: 600; }
+
+  .btn-change-student {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 0.85em;
+    text-decoration: underline;
+    margin-left: 10px;
+  }
+
+  .attempts-info {
+    background: #e8f4f8;
+    border: 1px solid #4a90d9;
+    border-radius: 8px;
+    padding: 8px 15px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #2c5f9e;
+    text-align: center;
+  }
+
+  .instruction {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95em;
+    color: #856404;
+  }
+
+  .new-problems-notice {
+    background: #d4edda;
+    border-left: 4px solid #27ae60;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95em;
+    color: #155724;
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .new-problems-notice.show { display: block; }
+
+  .table-wrapper { overflow-x: auto; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+  }
+
+  thead th {
+    background: linear-gradient(135deg, #4a90d9, #357abd);
+    color: white;
+    padding: 14px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95em;
+    border: 1px solid #2c5f9e;
+  }
+
+  tbody td {
+    border: 1px solid #d0d0d0;
+    padding: 14px 10px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  tbody tr:nth-child(even) { background: #f8fbff; }
+  tbody tr:hover { background: #eef4ff; transition: background 0.2s; }
+
+  tbody tr.example-row { background: #fffbe6 !important; }
+  tbody tr.example-row td { border-color: #f5d76e; }
+
+  .example-badge {
+    display: inline-block;
+    background: #f39c12;
+    color: white;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .operation-cell {
+    font-weight: bold;
+    color: #2c3e50;
+    min-width: 220px;
+    padding: 18px 15px !important;
+  }
+
+  .operation-cell .math-display { font-size: 1.3em; }
+
+  input.cell-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 1em;
+    transition: all 0.2s;
+    background: #fafafa;
+  }
+
+  input.cell-input:focus {
+    border-color: #4a90d9;
+    outline: none;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(74,144,217,0.15);
+  }
+
+  input.cell-input.correct { border-color: #27ae60; background: #e8f8f0; }
+  input.cell-input.incorrect { border-color: #e74c3c; background: #fde8e8; }
+  input.cell-input.partial { border-color: #f39c12; background: #fff8e1; }
+
+  .example-latex { font-size: 1.05em; padding: 4px; }
+  .example-latex.result-latex { font-size: 1.2em; font-weight: bold; }
+
+  .btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-check { background: linear-gradient(135deg, #27ae60, #219a52); color: white; }
+  .btn-check:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(39,174,96,0.4); }
+
+  .btn-show { background: linear-gradient(135deg, #4a90d9, #357abd); color: white; }
+  .btn-show:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(74,144,217,0.4); }
+
+  .btn-show:disabled {
+    background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-show:disabled:hover { transform: none; box-shadow: none; }
+
+  .btn-reset { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; }
+  .btn-reset:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(231,76,60,0.4); }
+
+  .btn-new { background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; }
+  .btn-new:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(155,89,182,0.4); }
+
+  .btn:active:not(:disabled) { transform: translateY(0); }
+
+  .hidden-answer {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s;
+    margin-top: 0;
+  }
+
+  .hidden-answer.visible {
+    opacity: 1;
+    max-height: 100px;
+    margin-top: 8px;
+  }
+
+  .score-display {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: none;
+  }
+
+  .score-display.show { display: block; animation: fadeIn 0.4s ease; }
+  .score-display.perfect { background: linear-gradient(135deg, #fff3cd, #ffeaa7); color: #856404; border: 3px solid #ffc107; }
+  .score-display.good { background: #e8f8f0; color: #27ae60; border: 2px solid #27ae60; }
+  .score-display.average { background: #fff8e1; color: #f39c12; border: 2px solid #f39c12; }
+  .score-display.bad { background: #fde8e8; color: #e74c3c; border: 2px solid #e74c3c; }
+
+  .score-number {
+    font-size: 3em;
+    font-weight: 800;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .score-detail {
+    font-size: 0.9em;
+    font-weight: normal;
+    margin-top: 8px;
+    opacity: 0.9;
+  }
+
+  .hint-text {
+    font-size: 0.85em;
+    color: #7f8c8d;
+    margin-top: 5px;
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* Modal de resultados */
+  .results-modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+  }
+
+  .results-modal.show { display: flex; animation: fadeIn 0.3s ease; }
+
+  .results-content {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 1100px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .results-content h3 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+    font-size: 1.5em;
+  }
+
+  .results-content .results-subtitle {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+  }
+
+  .results-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    border-left: 4px solid #4a90d9;
+  }
+
+  .stat-card .stat-value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: #2c3e50;
+  }
+
+  .stat-card .stat-label {
+    font-size: 0.85em;
+    color: #7f8c8d;
+    margin-top: 4px;
+  }
+
+  .results-table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+
+  .results-table thead th {
+    background: #34495e;
+    color: white;
+    padding: 10px 8px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid #2c3e50;
+  }
+
+  .results-table tbody td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+
+  .results-table tbody tr:nth-child(even) { background: #f8f9fa; }
+
+  .score-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+
+  .score-badge.high { background: #e8f8f0; color: #27ae60; }
+  .score-badge.medium { background: #fff8e1; color: #f39c12; }
+  .score-badge.low { background: #fde8e8; color: #e74c3c; }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .btn-close { background: linear-gradient(135deg, #95a5a6, #7f8c8d); color: white; }
+  .btn-close:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(149,165,166,0.4); }
+
+  .no-data {
+    text-align: center;
+    padding: 40px 20px;
+    color: #95a5a6;
+    font-size: 1.1em;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .pulse { animation: pulse 0.5s ease; }
+
+  @media (max-width: 768px) {
+    .container { padding: 15px; }
+    .header h2 { font-size: 1.6em; }
+    .operation-cell { font-size: 1em; min-width: 160px; }
+    input.cell-input { padding: 6px 4px; font-size: 0.85em; }
+    .login-card { padding: 25px; }
+    .student-info { gap: 15px; }
+    .results-content { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="loginOverlay">
+  <div class="login-card">
+    <h2>🎓 Identificación del Estudiante</h2>
+    <p class="subtitle">Completa tus datos para acceder al taller</p>
+    
+    <form id="studentForm" onsubmit="return enterWorkshop(event)">
+      <div class="form-group">
+        <label>Nombre <span class="required">*</span></label>
+        <input type="text" id="firstName" placeholder="Escribe tu nombre" autocomplete="given-name">
+        <div class="error-msg" id="firstNameError">Por favor ingresa tu nombre</div>
+      </div>
+
+      <div class="form-group">
+        <label>Apellido <span class="required">*</span></label>
+        <input type="text" id="lastName" placeholder="Escribe tu apellido" autocomplete="family-name">
+        <div class="error-msg" id="lastNameError">Por favor ingresa tu apellido</div>
+      </div>
+
+      <div class="form-group">
+        <label>Grupo <span class="required">*</span></label>
+        <select id="group">
+          <option value="">-- Selecciona tu grupo --</option>
+          <option value="7-1">7-1</option>
+          <option value="7-2">7-2</option>
+          <option value="7-3">7-3</option>
+        </select>
+        <div class="error-msg" id="groupError">Por favor selecciona tu grupo</div>
+      </div>
+
+      <button type="submit" class="btn-enter"> Ingresar al taller</button>
+    </form>
+  </div>
+</div>
+
+<div class="container" id="mainContainer">
+  <div class="header">
+    <h2>Taller suma y resta de fracciones P2</h2>
+    
+    <div class="admin-bar">
+      <div class="admin-label"> Panel del Docente</div>
+      <button class="btn-admin btn-view" onclick="openResultsModal()">📊 Ver resultados</button>
+      <button class="btn-admin btn-export" onclick="exportToCSV()">📥 Exportar a Excel/CSV</button>
+      <button class="btn-admin btn-clear-data" onclick="clearAllData()">🗑️ Borrar todos los datos</button>
+    </div>
+
+    <div class="student-info" id="studentInfo">
+      <div class="info-item"><strong>Estudiante:</strong> <span id="displayStudentName">-</span></div>
+      <div class="info-item"><strong>Grupo:</strong> <span id="displayGroup">-</span></div>
+      <button class="btn-change-student" onclick="changeStudent()">Cambiar estudiante</button>
+    </div>
+    <div class="attempts-info" id="attemptsInfo">
+       Intentos realizados: <strong id="attemptsCount">0</strong>
+    </div>
+  </div>
+
+  <div class="new-problems-notice" id="newProblemsNotice">
+    ✨ ¡Nuevos ejercicios generados! Todos los problemas son diferentes a los que ya has resuelto.
+  </div>
+
+  <div class="instruction">
+    <strong>Instrucciones:</strong> Completa las <strong>5 filas</strong> de la tabla siguiendo el formato del <strong>ejemplo resuelto</strong> (fila resaltada en amarillo). Cada vez que abras la página o presiones "Nuevos ejercicios", se generarán operaciones <strong>diferentes a las ya realizadas</strong>. <strong>Recuerda simplificar tu resultado</strong> para obtener la máxima puntuación. Primero verifica tus respuestas para obtener tu calificación, y luego podrás revisar las soluciones correctas.
+  </div>
+
+  <div class="table-wrapper">
+    <table id="fractionTable">
+      <thead>
+        <tr>
+          <th style="min-width:220px;">Operación</th>
+          <th>Denominadores</th>
+          <th>mcm</th>
+          <th>Amplificación</th>
+          <th>Proceso</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-check" onclick="checkAnswers()">✅ Verificar respuestas</button>
+    <button class="btn btn-show" id="btnShowAnswers" disabled onclick="showAnswers()">👁️ Mostrar respuestas</button>
+    <button class="btn btn-new" onclick="generateNewProblems()">🔄 Nuevos ejercicios</button>
+    <button class="btn btn-reset" onclick="resetTable()">🧹 Limpiar</button>
+  </div>
+  <div class="hint-text" id="btnHint">⚠️ Primero debes verificar tus respuestas para poder ver las soluciones</div>
+
+  <div id="scoreDisplay" class="score-display"></div>
+</div>
+
+<!-- Modal de resultados -->
+<div class="results-modal" id="resultsModal">
+  <div class="results-content">
+    <h3> Resultados de los Estudiantes</h3>
+    <p class="results-subtitle">Historial completo de intentos registrados</p>
+    
+    <div class="results-stats" id="resultsStats"></div>
+    
+    <div class="results-table-wrapper">
+      <table class="results-table" id="resultsTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Fecha y hora</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Grupo</th>
+            <th>Intento</th>
+            <th>Puntaje</th>
+            <th>Pts. obtenidos</th>
+          </tr>
+        </thead>
+        <tbody id="resultsTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-admin btn-export" onclick="exportToCSV()">📥 Exportar a Excel/CSV</button>
+      <button class="btn btn-admin btn-close" onclick="closeResultsModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let problems = [];
+let exampleIndex = 0;
+let studentData = { firstName: '', lastName: '', group: '' };
+let usedProblems = [];
+let attemptsCount = 0;
+let answersChecked = false;
+let allResults = [];
+
+const RESULTS_KEY = 'fractionWorkshop_allResults';
+
+function getStorageKey() {
+  return 'studentData_' + studentData.firstName.toLowerCase() + '_' + studentData.lastName.toLowerCase() + '_' + studentData.group;
+}
+
+function saveStudentData() {
+  try { sessionStorage.setItem('currentStudent', JSON.stringify(studentData)); } catch(e) {}
+}
+
+function loadStudentData() {
+  try {
+    var saved = sessionStorage.getItem('currentStudent');
+    if (saved) {
+      studentData = JSON.parse(saved);
+      if (studentData.firstName && studentData.lastName && studentData.group) {
+        loadHistory();
+        loadAllResults();
+        showWorkshop();
+      }
+    }
+  } catch(e) {}
+}
+
+function loadHistory() {
+  try {
+    var key = getStorageKey();
+    var saved = localStorage.getItem(key);
+    if (saved) {
+      var history = JSON.parse(saved);
+      usedProblems = history.usedProblems || [];
+      attemptsCount = history.attemptsCount || 0;
+    } else {
+      usedProblems = [];
+      attemptsCount = 0;
+    }
+  } catch(e) {
+    usedProblems = [];
+    attemptsCount = 0;
+  }
+}
+
+function saveHistory() {
+  try {
+    var key = getStorageKey();
+    localStorage.setItem(key, JSON.stringify({
+      usedProblems: usedProblems,
+      attemptsCount: attemptsCount
+    }));
+  } catch(e) {}
+}
+
+function loadAllResults() {
+  try {
+    var saved = localStorage.getItem(RESULTS_KEY);
+    if (saved) {
+      allResults = JSON.parse(saved);
+    } else {
+      allResults = [];
+    }
+  } catch(e) {
+    allResults = [];
+  }
+}
+
+function saveAllResults() {
+  try {
+    localStorage.setItem(RESULTS_KEY, JSON.stringify(allResults));
+  } catch(e) {}
+}
+
+function saveResult(finalScore, totalPoints) {
+  var now = new Date();
+  var dateStr = now.toLocaleDateString('es-CO') + ' ' + now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+  
+  var record = {
+    date: dateStr,
+    timestamp: now.getTime(),
+    firstName: studentData.firstName,
+    lastName: studentData.lastName,
+    group: studentData.group,
+    attempt: attemptsCount,
+    finalScore: finalScore,
+    totalPoints: totalPoints
+  };
+  
+  allResults.push(record);
+  saveAllResults();
+}
+
+function enterWorkshop(e) {
+  e.preventDefault();
+  
+  var firstName = document.getElementById('firstName').value.trim();
+  var lastName = document.getElementById('lastName').value.trim();
+  var group = document.getElementById('group').value;
+  
+  var valid = true;
+  
+  if (firstName === '') {
+    document.getElementById('firstName').classList.add('error');
+    document.getElementById('firstNameError').classList.add('show');
+    valid = false;
+  } else {
+    document.getElementById('firstName').classList.remove('error');
+    document.getElementById('firstNameError').classList.remove('show');
+  }
+  
+  if (lastName === '') {
+    document.getElementById('lastName').classList.add('error');
+    document.getElementById('lastNameError').classList.add('show');
+    valid = false;
+  } else {
+    document.getElementById('lastName').classList.remove('error');
+    document.getElementById('lastNameError').classList.remove('show');
+  }
+  
+  if (group === '') {
+    document.getElementById('group').classList.add('error');
+    document.getElementById('groupError').classList.add('show');
+    valid = false;
+  } else {
+    document.getElementById('group').classList.remove('error');
+    document.getElementById('groupError').classList.remove('show');
+  }
+  
+  if (!valid) return false;
+  
+  studentData = { firstName: firstName, lastName: lastName, group: group };
+  saveStudentData();
+  loadHistory();
+  loadAllResults();
+  showWorkshop();
+  return false;
+}
+
+function showWorkshop() {
+  document.getElementById('loginOverlay').classList.add('hidden');
+  document.getElementById('mainContainer').classList.add('visible');
+  
+  document.getElementById('displayStudentName').textContent = studentData.firstName + ' ' + studentData.lastName;
+  document.getElementById('displayGroup').textContent = studentData.group;
+  document.getElementById('attemptsCount').textContent = attemptsCount;
+  
+  generateNewProblems();
+}
+
+function changeStudent() {
+  if (confirm('¿Seguro que deseas cambiar de estudiante? Se perderán las respuestas actuales.')) {
+    document.getElementById('loginOverlay').classList.remove('hidden');
+    document.getElementById('mainContainer').classList.remove('visible');
+    document.getElementById('scoreDisplay').classList.remove('show');
+    document.getElementById('newProblemsNotice').classList.remove('show');
+    
+    document.getElementById('firstName').value = '';
+    document.getElementById('lastName').value = '';
+    document.getElementById('group').value = '';
+    
+    studentData = { firstName: '', lastName: '', group: '' };
+    usedProblems = [];
+    attemptsCount = 0;
+  }
+}
+
+function gcd(a, b) {
+  a = Math.abs(a); b = Math.abs(b);
+  while (b) { var t = b; b = a % b; a = t; }
+  return a;
+}
+
+function lcm(a, b) {
+  return Math.abs(a * b) / gcd(a, b);
+}
+
+function simplify(num, den) {
+  var g = gcd(num, den);
+  return { num: num / g, den: den / g };
+}
+
+function randInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getProblemKey(num1, den1, op, num2, den2) {
+  return num1 + '/' + den1 + '_' + op + '_' + num2 + '/' + den2;
+}
+
+function generateProblem() {
+  var maxAttempts = 100;
+  var attempt = 0;
+  var problem;
+  
+  do {
+    var num1 = randInt(1, 10);
+    var num2 = randInt(1, 10);
+    var den1 = randInt(2, 12);
+    var den2 = randInt(2, 12);
+    while (den2 === den1) { den2 = randInt(2, 12); }
+
+    var op = Math.random() < 0.5 ? '+' : '-';
+
+    var mcmVal = lcm(den1, den2);
+    var factor1 = mcmVal / den1;
+    var factor2 = mcmVal / den2;
+    var newNum1 = num1 * factor1;
+    var newNum2 = num2 * factor2;
+
+    var resultNum, resultDen;
+
+    if (op === '+') {
+      resultNum = newNum1 + newNum2;
+    } else {
+      if (newNum1 < newNum2) {
+        var tmpN = num1; num1 = num2; num2 = tmpN;
+        var tmpD = den1; den1 = den2; den2 = tmpD;
+        factor1 = mcmVal / den1;
+        factor2 = mcmVal / den2;
+        newNum1 = num1 * factor1;
+        newNum2 = num2 * factor2;
+      }
+      resultNum = newNum1 - newNum2;
+    }
+    resultDen = mcmVal;
+
+    var simplified = simplify(resultNum, resultDen);
+
+    var resultText;
+    if (simplified.num === resultNum && simplified.den === resultDen) {
+      resultText = resultNum + '/' + resultDen;
+    } else {
+      resultText = resultNum + '/' + resultDen + ' = ' + simplified.num + '/' + simplified.den;
+    }
+
+    var amplification = num1 + '×' + factor1 + '/' + den1 + '×' + factor1 + ' ' + op + ' ' + num2 + '×' + factor2 + '/' + den2 + '×' + factor2 + ' = ' + newNum1 + '/' + mcmVal + ' ' + op + ' ' + newNum2 + '/' + mcmVal;
+    var process = '(' + newNum1 + ' ' + op + ' ' + newNum2 + ') / ' + mcmVal + ' = ' + resultNum + '/' + resultDen;
+
+    var opSymbol = op === '+' ? '+' : '-';
+    var latexOperation = '\\dfrac{' + num1 + '}{' + den1 + '} ' + opSymbol + ' \\dfrac{' + num2 + '}{' + den2 + '}';
+    var latexDenominators = den1 + ',\\; ' + den2;
+    var latexAmplification = '\\dfrac{' + num1 + '\\times ' + factor1 + '}{' + den1 + '\\times ' + factor1 + '} ' + opSymbol + ' \\dfrac{' + num2 + '\\times ' + factor2 + '}{' + den2 + '\\times ' + factor2 + '} = \\dfrac{' + newNum1 + '}{' + mcmVal + '} ' + opSymbol + ' \\dfrac{' + newNum2 + '}{' + mcmVal + '}';
+    var latexProcess = '\\dfrac{' + newNum1 + ' ' + opSymbol + ' ' + newNum2 + '}{' + mcmVal + '} = \\dfrac{' + resultNum + '}{' + resultDen + '}';
+    var latexResult;
+    if (simplified.num === resultNum && simplified.den === resultDen) {
+      latexResult = '\\dfrac{' + resultNum + '}{' + resultDen + '}';
+    } else {
+      latexResult = '\\dfrac{' + resultNum + '}{' + resultDen + '} = \\dfrac{' + simplified.num + '}{' + simplified.den + '}';
+    }
+
+    problem = {
+      num1: num1, den1: den1, op: op, num2: num2, den2: den2,
+      denominators: [den1, den2],
+      mcm: mcmVal,
+      amplification: amplification,
+      process: process,
+      resultNum: resultNum, resultDen: resultDen,
+      resultText: resultText,
+      simplified: simplified,
+      latexOperation: latexOperation,
+      latexDenominators: latexDenominators,
+      latexAmplification: latexAmplification,
+      latexProcess: latexProcess,
+      latexResult: latexResult,
+      key: getProblemKey(num1, den1, op, num2, den2)
+    };
+    
+    attempt++;
+  } while (usedProblems.indexOf(problem.key) !== -1 && attempt < maxAttempts);
+  
+  return problem;
+}
+
+function generateNewProblems() {
+  problems = [];
+  for (var i = 0; i < 6; i++) {
+    problems.push(generateProblem());
+  }
+  exampleIndex = randInt(0, 5);
+  buildTable();
+  document.getElementById('scoreDisplay').classList.remove('show');
+  
+  answersChecked = false;
+  document.getElementById('btnShowAnswers').disabled = true;
+  document.getElementById('btnHint').style.display = 'block';
+  
+  var notice = document.getElementById('newProblemsNotice');
+  notice.classList.add('show');
+  setTimeout(function() { notice.classList.remove('show'); }, 4000);
+}
+
+function buildTable() {
+  var tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+
+  for (var idx = 0; idx < problems.length; idx++) {
+    var p = problems[idx];
+    var tr = document.createElement('tr');
+    var isExample = (idx === exampleIndex);
+    if (isExample) { tr.classList.add('example-row'); }
+
+    var exampleBadge = isExample ? '<div><span class="example-badge">EJEMPLO RESUELTO</span></div>' : '';
+
+    var denomContent, mcmContent, ampContent, procContent, resContent;
+
+    if (isExample) {
+      denomContent = '<div class="example-latex">$' + p.latexDenominators + '$</div>';
+      mcmContent = '<div class="example-latex">$' + p.mcm + '$</div>';
+      ampContent = '<div class="example-latex">$' + p.latexAmplification + '$</div>';
+      procContent = '<div class="example-latex">$' + p.latexProcess + '$</div>';
+      resContent = '<div class="example-latex result-latex">$' + p.latexResult + '$</div>';
+    } else {
+      denomContent = '<input type="text" class="cell-input" id="denom-' + idx + '" placeholder="ej: ' + p.denominators[0] + ', ' + p.denominators[1] + '">';
+      mcmContent = '<input type="number" class="cell-input" id="mcm-' + idx + '" placeholder="?">';
+      ampContent = '<input type="text" class="cell-input" id="amp-' + idx + '" placeholder="Escribe la amplificación" style="font-size:0.82em;"><div class="hidden-answer" id="amp-ans-' + idx + '" style="font-size:0.78em; color:#4a90d9;">' + p.amplification + '</div>';
+      procContent = '<input type="text" class="cell-input" id="proc-' + idx + '" placeholder="Escribe el proceso" style="font-size:0.82em;"><div class="hidden-answer" id="proc-ans-' + idx + '" style="font-size:0.85em; color:#4a90d9; font-weight:bold;">' + p.process + '</div>';
+      resContent = '<input type="text" class="cell-input" id="res-' + idx + '" placeholder="?"><div class="hidden-answer" id="res-ans-' + idx + '" style="font-size:1.05em; color:#27ae60; font-weight:bold;">' + p.resultText + '</div>';
+    }
+
+    tr.innerHTML =
+      '<td class="operation-cell">' + exampleBadge +
+        '<div class="math-display">$' + p.latexOperation + '$</div>' +
+      '</td>' +
+      '<td>' + denomContent + '</td>' +
+      '<td>' + mcmContent + '</td>' +
+      '<td>' + ampContent + '</td>' +
+      '<td>' + procContent + '</td>' +
+      '<td>' + resContent + '</td>';
+
+    tbody.appendChild(tr);
+  }
+
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([tbody]).catch(function(err) {
+      console.log('MathJax error:', err);
+    });
+  }
+}
+
+function analyzeAnswer(idx) {
+  var p = problems[idx];
+  var resInput = document.getElementById('res-' + idx);
+  var resVal = resInput.value.replace(/\s/g, '').toLowerCase();
+
+  if (resVal === '') {
+    return { correct: false, simplified: false, points: 0, status: 'empty' };
+  }
+
+  var resSimplified = (p.simplified.num + '/' + p.simplified.den).toLowerCase();
+  var resFull = p.resultText.replace(/\s/g, '').toLowerCase();
+  var resUnsimplified = (p.resultNum + '/' + p.resultDen).toLowerCase();
+
+  if (resVal === resSimplified) {
+    return { correct: true, simplified: true, points: 1, status: 'perfect' };
+  }
+
+  if (resVal === resFull) {
+    return { correct: true, simplified: true, points: 1, status: 'perfect' };
+  }
+
+  if (resVal === resUnsimplified) {
+    return { correct: true, simplified: false, points: 0.5, status: 'partial' };
+  }
+
+  return { correct: false, simplified: false, points: 0, status: 'incorrect' };
+}
+
+function checkAnswers() {
+  var totalPoints = 0;
+  var rowsEvaluated = 0;
+
+  for (var idx = 0; idx < problems.length; idx++) {
+    if (idx === exampleIndex) continue;
+    var p = problems[idx];
+
+    var denomInput = document.getElementById('denom-' + idx);
+    var denomVal = denomInput.value.replace(/\s/g, '').toLowerCase();
+    var denomAns = p.denominators.join(',').replace(/\s/g, '').toLowerCase();
+    var denomAlt = p.denominators[1] + ',' + p.denominators[0];
+    if (denomVal === denomAns || denomVal === denomAlt) {
+      denomInput.classList.add('correct');
+      denomInput.classList.remove('incorrect', 'partial');
+    } else if (denomVal !== '') {
+      denomInput.classList.add('incorrect');
+      denomInput.classList.remove('correct', 'partial');
+    } else {
+      denomInput.classList.remove('correct', 'incorrect', 'partial');
+    }
+
+    var mcmInput = document.getElementById('mcm-' + idx);
+    if (parseInt(mcmInput.value) === p.mcm) {
+      mcmInput.classList.add('correct');
+      mcmInput.classList.remove('incorrect', 'partial');
+    } else if (mcmInput.value !== '') {
+      mcmInput.classList.add('incorrect');
+      mcmInput.classList.remove('correct', 'partial');
+    } else {
+      mcmInput.classList.remove('correct', 'incorrect', 'partial');
+    }
+
+    var analysis = analyzeAnswer(idx);
+    var resInput = document.getElementById('res-' + idx);
+    resInput.classList.remove('correct', 'incorrect', 'partial');
+
+    if (analysis.status === 'perfect') {
+      resInput.classList.add('correct');
+    } else if (analysis.status === 'partial') {
+      resInput.classList.add('partial');
+    } else if (analysis.status === 'incorrect') {
+      resInput.classList.add('incorrect');
+    }
+
+    totalPoints += analysis.points;
+    rowsEvaluated++;
+  }
+
+  var finalScore = Math.round(totalPoints);
+  if (finalScore < 1) finalScore = 1;
+  if (finalScore > 5) finalScore = 5;
+
+  for (var idx = 0; idx < problems.length; idx++) {
+    if (usedProblems.indexOf(problems[idx].key) === -1) {
+      usedProblems.push(problems[idx].key);
+    }
+  }
+  attemptsCount++;
+  document.getElementById('attemptsCount').textContent = attemptsCount;
+  saveHistory();
+
+  // Guardar resultado en el registro global
+  saveResult(finalScore, totalPoints);
+
+  answersChecked = true;
+  document.getElementById('btnShowAnswers').disabled = false;
+  document.getElementById('btnHint').style.display = 'none';
+
+  var scoreDisplay = document.getElementById('scoreDisplay');
+  scoreDisplay.classList.add('show');
+
+  var message = '';
+  var detailMsg = 'Puntaje obtenido: ' + totalPoints.toFixed(1) + ' / 5.0';
+  detailMsg += '<br><small>1 punto por respuesta correcta y simplificada · 0.5 puntos si es correcta pero no simplificada</small>';
+
+  if (finalScore === 5) {
+    scoreDisplay.className = 'score-display show perfect';
+    message = '¡Excelente trabajo, ' + studentData.firstName + '!';
+  } else if (finalScore === 4) {
+    scoreDisplay.className = 'score-display show good';
+    message = '¡Muy bien, ' + studentData.firstName + '!';
+  } else if (finalScore === 3) {
+    scoreDisplay.className = 'score-display show average';
+    message = 'Buen intento, ' + studentData.firstName + '. Sigue practicando.';
+  } else if (finalScore === 2) {
+    scoreDisplay.className = 'score-display show average';
+    message = studentData.firstName + ', necesitas repasar el tema.';
+  } else {
+    scoreDisplay.className = 'score-display show bad';
+    message = studentData.firstName + ', revisa el ejemplo e intenta de nuevo.';
+  }
+
+  scoreDisplay.innerHTML = '<span class="score-number">' + finalScore + '.0 / 5.0</span>' +
+    '<div>' + message + '</div>' +
+    '<div class="score-detail">' + detailMsg + '</div>';
+
+  scoreDisplay.classList.add('pulse');
+  setTimeout(function() { scoreDisplay.classList.remove('pulse'); }, 500);
+}
+
+function showAnswers() {
+  if (!answersChecked) {
+    alert('Primero debes verificar tus respuestas para obtener tu calificación.');
+    return;
+  }
+
+  for (var idx = 0; idx < problems.length; idx++) {
+    if (idx === exampleIndex) continue;
+    var p = problems[idx];
+
+    document.getElementById('amp-ans-' + idx).classList.add('visible');
+    document.getElementById('proc-ans-' + idx).classList.add('visible');
+    document.getElementById('res-ans-' + idx).classList.add('visible');
+
+    document.getElementById('denom-' + idx).value = p.denominators.join(', ');
+    document.getElementById('mcm-' + idx).value = p.mcm;
+    document.getElementById('amp-' + idx).value = p.amplification;
+    document.getElementById('proc-' + idx).value = p.process;
+    document.getElementById('res-' + idx).value = p.resultText;
+
+    document.getElementById('denom-' + idx).classList.add('correct');
+    document.getElementById('denom-' + idx).classList.remove('incorrect', 'partial');
+    document.getElementById('mcm-' + idx).classList.add('correct');
+    document.getElementById('mcm-' + idx).classList.remove('incorrect', 'partial');
+    document.getElementById('res-' + idx).classList.add('correct');
+    document.getElementById('res-' + idx).classList.remove('incorrect', 'partial');
+  }
+
+  var scoreDisplay = document.getElementById('scoreDisplay');
+  scoreDisplay.className = 'score-display show good';
+  scoreDisplay.innerHTML = '<span class="score-number">👁️</span><div>Se han mostrado todas las respuestas. ¡Estúdialas bien!</div>';
+}
+
+function resetTable() {
+  for (var idx = 0; idx < problems.length; idx++) {
+    if (idx === exampleIndex) continue;
+
+    document.getElementById('denom-' + idx).value = '';
+    document.getElementById('denom-' + idx).classList.remove('correct', 'incorrect', 'partial');
+    document.getElementById('mcm-' + idx).value = '';
+    document.getElementById('mcm-' + idx).classList.remove('correct', 'incorrect', 'partial');
+    document.getElementById('amp-' + idx).value = '';
+    document.getElementById('proc-' + idx).value = '';
+    document.getElementById('res-' + idx).value = '';
+    document.getElementById('res-' + idx).classList.remove('correct', 'incorrect', 'partial');
+    document.getElementById('amp-ans-' + idx).classList.remove('visible');
+    document.getElementById('proc-ans-' + idx).classList.remove('visible');
+    document.getElementById('res-ans-' + idx).classList.remove('visible');
+  }
+
+  document.getElementById('scoreDisplay').classList.remove('show');
+  
+  answersChecked = false;
+  document.getElementById('btnShowAnswers').disabled = true;
+  document.getElementById('btnHint').style.display = 'block';
+}
+
+// ============ FUNCIONES DE RESULTADOS Y EXPORTACIÓN ============
+
+function openResultsModal() {
+  loadAllResults();
+  renderResultsTable();
+  document.getElementById('resultsModal').classList.add('show');
+}
+
+function closeResultsModal() {
+  document.getElementById('resultsModal').classList.remove('show');
+}
+
+function renderResultsTable() {
+  var tbody = document.getElementById('resultsTableBody');
+  var statsDiv = document.getElementById('resultsStats');
+  
+  if (allResults.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" class="no-data">📭 Aún no hay registros. Los resultados aparecerán aquí cuando los estudiantes verifiquen sus respuestas.</td></tr>';
+    statsDiv.innerHTML = '';
+    return;
+  }
+
+  // Calcular estadísticas
+  var totalAttempts = allResults.length;
+  var uniqueStudents = {};
+  var totalScore = 0;
+  var highScores = 0;
+  var mediumScores = 0;
+  var lowScores = 0;
+  
+  allResults.forEach(function(r) {
+    uniqueStudents[r.firstName + ' ' + r.lastName + ' ' + r.group] = true;
+    totalScore += r.finalScore;
+    if (r.finalScore >= 4) highScores++;
+    else if (r.finalScore >= 3) mediumScores++;
+    else lowScores++;
+  });
+  
+  var avgScore = (totalScore / totalAttempts).toFixed(1);
+  var uniqueCount = Object.keys(uniqueStudents).length;
+
+  statsDiv.innerHTML = 
+    '<div class="stat-card"><div class="stat-value">' + totalAttempts + '</div><div class="stat-label">Intentos totales</div></div>' +
+    '<div class="stat-card"><div class="stat-value">' + uniqueCount + '</div><div class="stat-label">Estudiantes únicos</div></div>' +
+    '<div class="stat-card"><div class="stat-value">' + avgScore + '</div><div class="stat-label">Promedio general</div></div>' +
+    '<div class="stat-card" style="border-left-color:#27ae60;"><div class="stat-value" style="color:#27ae60;">' + highScores + '</div><div class="stat-label">Notas altas (4-5)</div></div>' +
+    '<div class="stat-card" style="border-left-color:#f39c12;"><div class="stat-value" style="color:#f39c12;">' + mediumScores + '</div><div class="stat-label">Notas medias (3)</div></div>' +
+    '<div class="stat-card" style="border-left-color:#e74c3c;"><div class="stat-value" style="color:#e74c3c;">' + lowScores + '</div><div class="stat-label">Notas bajas (1-2)</div></div>';
+
+  // Renderizar tabla
+  var html = '';
+  // Ordenar por timestamp descendente (más reciente primero)
+  var sorted = allResults.slice().sort(function(a, b) { return b.timestamp - a.timestamp; });
+  
+  sorted.forEach(function(r, i) {
+    var scoreClass = 'high';
+    if (r.finalScore <= 2) scoreClass = 'low';
+    else if (r.finalScore === 3) scoreClass = 'medium';
+    
+    html += '<tr>' +
+      '<td>' + (i + 1) + '</td>' +
+      '<td>' + r.date + '</td>' +
+      '<td>' + escapeHtml(r.firstName) + '</td>' +
+      '<td>' + escapeHtml(r.lastName) + '</td>' +
+      '<td>' + escapeHtml(r.group) + '</td>' +
+      '<td>' + r.attempt + '°</td>' +
+      '<td><span class="score-badge ' + scoreClass + '">' + r.finalScore + '.0 / 5.0</span></td>' +
+      '<td>' + r.totalPoints.toFixed(1) + ' / 5.0</td>' +
+    '</tr>';
+  });
+  
+  tbody.innerHTML = html;
+}
+
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function exportToCSV() {
+  loadAllResults();
+  
+  if (allResults.length === 0) {
+    alert('No hay resultados para exportar. Los estudiantes deben completar al menos un intento.');
+    return;
+  }
+
+  // Encabezados del CSV
+  var headers = ['Fecha y hora', 'Nombre', 'Apellido', 'Grupo', 'Intento N°', 'Puntaje (1-5)', 'Puntos obtenidos', 'Porcentaje'];
+  
+  // Filas
+  var rows = [];
+  var sorted = allResults.slice().sort(function(a, b) { return a.timestamp - b.timestamp; });
+  
+  sorted.forEach(function(r) {
+    var percentage = ((r.totalPoints / 5) * 100).toFixed(0);
+    rows.push([
+      r.date,
+      r.firstName,
+      r.lastName,
+      r.group,
+      r.attempt,
+      r.finalScore + '.0',
+      r.totalPoints.toFixed(1),
+      percentage + '%'
+    ]);
+  });
+
+  // Construir CSV con BOM para que Excel reconozca caracteres especiales (tildes, ñ)
+  var csvContent = '\uFEFF';
+  csvContent += headers.join(';') + '\n';
+  
+  rows.forEach(function(row) {
+    csvContent += row.join(';') + '\n';
+  });
+
+  // Agregar resumen al final
+  csvContent += '\n';
+  csvContent += 'RESUMEN\n';
+  
+  var uniqueStudents = {};
+  var totalScore = 0;
+  allResults.forEach(function(r) {
+    uniqueStudents[r.firstName + ' ' + r.lastName + ' ' + r.group] = true;
+    totalScore += r.finalScore;
+  });
+  var avgScore = (totalScore / allResults.length).toFixed(2);
+  
+  csvContent += 'Total de intentos;' + allResults.length + '\n';
+  csvContent += 'Estudiantes únicos;' + Object.keys(uniqueStudents).length + '\n';
+  csvContent += 'Promedio general;' + avgScore + '\n';
+
+  // Descargar archivo
+  var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  var link = document.createElement('a');
+  var now = new Date();
+  var filename = 'resultados_taller_fracciones_' + now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate() + '.csv';
+  
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  alert('✅ Archivo CSV descargado: ' + filename + '\n\nPuedes abrirlo con Excel, Google Sheets o cualquier hoja de cálculo.');
+}
+
+function clearAllData() {
+  if (confirm('⚠️ ¿Estás seguro de borrar TODOS los resultados de TODOS los estudiantes?\n\nEsta acción no se puede deshacer.')) {
+    if (confirm('Confirma nuevamente: Se eliminarán todos los registros permanentemente.')) {
+      try {
+        localStorage.removeItem(RESULTS_KEY);
+        allResults = [];
+        
+        // También limpiar historiales individuales
+        var keysToRemove = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var key = localStorage.key(i);
+          if (key && key.indexOf('studentData_') === 0) {
+            keysToRemove.push(key);
+          }
+        }
+        keysToRemove.forEach(function(k) { localStorage.removeItem(k); });
+        
+        alert('✅ Todos los datos han sido eliminados correctamente.');
+        location.reload();
+      } catch(e) {
+        alert('Error al borrar los datos: ' + e.message);
+      }
+    }
+  }
+}
+
+// Cerrar modal al hacer clic fuera
+document.getElementById('resultsModal').addEventListener('click', function(e) {
+  if (e.target === this) closeResultsModal();
+});
+
+loadStudentData();
+</script>
+
+</body>
+</html>
