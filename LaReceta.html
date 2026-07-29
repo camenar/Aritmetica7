@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍫 Desafío de Repostería Matemática</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/fredoka@5.0.3/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/quicksand@5.0.3/index.css">
+<style>
+  body { font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #3d1f0f 0%, #6b3410 50%, #8b4513 100%); min-height: 100vh; }
+  .title-font { font-family: 'Fredoka', sans-serif; }
+  .card { background: rgba(255, 250, 240, 0.97); backdrop-filter: blur(10px); }
+  .brownie-gradient { background: linear-gradient(135deg, #6b3410, #3d1f0f); }
+  .input-ans { transition: all 0.3s; }
+  .input-ans:focus { transform: scale(1.02); box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.3); }
+  .correct { background: #d1fae5 !important; border-color: #10b981 !important; }
+  .incorrect { background: #fee2e2 !important; border-color: #ef4444 !important; }
+  .phase-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+  .phase-card.locked { opacity: 0.5; filter: grayscale(0.6); pointer-events: none; }
+  .phase-card.active { transform: scale(1.01); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+  .fade-in { animation: fadeIn 0.6s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .brownie-icon { display: inline-block; animation: bounce 2s infinite; }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  .progress-fill { transition: width 0.8s ease-in-out; }
+  .hint-box { background: linear-gradient(135deg, #fef3c7, #fde68a); border-left: 4px solid #f59e0b; }
+  .solution-box { background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-left: 4px solid #3b82f6; }
+  .sparkle { animation: sparkle 1.5s infinite; }
+  @keyframes sparkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .fraction { display: inline-block; text-align: center; vertical-align: middle; }
+  .fraction .num { display: block; border-bottom: 2px solid currentColor; padding: 0 4px; }
+  .fraction .den { display: block; padding: 0 4px; }
+  .situation-badge { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #3d1f0f; }
+</style>
+</head>
+<body class="p-4 md:p-8">
+
+<div class="max-w-5xl mx-auto">
+
+  <!-- HEADER -->
+  <header class="card rounded-3xl p-6 md:p-8 mb-6 shadow-2xl border-4 border-amber-900">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div>
+        <h1 class="title-font text-3xl md:text-5xl text-amber-900 font-bold">
+          <span class="brownie-icon">🍫</span> Desafío de Repostería Matemática
+        </h1>
+        <p class="text-amber-700 mt-2 text-lg">Fracciones, escalado y negocios — ¡situaciones únicas para cada estudiante!</p>
+      </div>
+      <div class="text-right">
+        <div class="text-sm text-amber-700 font-semibold">PROGRESO</div>
+        <div class="text-3xl title-font text-amber-900" id="progressText">0 / 8</div>
+      </div>
+    </div>
+    <div class="mt-6 bg-amber-100 rounded-full h-4 overflow-hidden border-2 border-amber-900">
+      <div id="progressBar" class="progress-fill h-full brownie-gradient" style="width: 0%"></div>
+    </div>
+    <div id="situationBadge" class="mt-4 hidden">
+      <span class="situation-badge inline-block px-4 py-2 rounded-full font-bold text-sm"></span>
+    </div>
+  </header>
+
+  <!-- SITUATION -->
+  <section id="situation" class="card rounded-3xl p-6 md:p-8 mb-6 shadow-xl border-2 border-amber-800 fade-in">
+    <h2 class="title-font text-2xl md:text-3xl text-amber-900 font-bold mb-4">📖 La Situación</h2>
+    <div id="situationContent" class="text-gray-800 leading-relaxed space-y-3"></div>
+  </section>
+
+  <!-- PHASES -->
+  <div id="phasesContainer" class="space-y-6"></div>
+
+  <!-- FINAL SECTION -->
+  <div id="finalSection" class="hidden"></div>
+
+</div>
+
+<script>
+// ============ BANCO DE DATOS (para generar situaciones únicas) ============
+const NAMES = ["Sofía", "Mateo", "Valentina", "Diego", "Camila", "Andrés", "Luciana", "Sebastián", "Isabella", "Santiago", "Mariana", "Emiliano", "Gabriela", "Nicolás", "Paula", "Alejandro", "Daniela", "Tomás", "Renata", "Felipe", "Catalina", "Joaquín", "Victoria", "Samuel"];
+
+const DESSERTS = [
+  { name: "brownies de chocolate con nueces", short: "brownies", emoji: "🍫" },
+  { name: "galletas de avena con pasas", short: "galletas", emoji: "🍪" },
+  { name: "panqués de vainilla", short: "panqués", emoji: "🍰" },
+  { name: "magdalenas de limón", short: "magdalenas", emoji: "🧁" },
+  { name: "tarta de manzana", short: "tartas", emoji: "🥧" },
+  { name: "cupcakes de fresa", short: "cupcakes", emoji: "🧁" },
+  { name: "barritas de dátiles y almendra", short: "barritas", emoji: "🍫" },
+  { name: "rollos de canela", short: "rollos", emoji: "🥐" },
+  { name: "alfajores de dulce de leche", short: "alfajores", emoji: "🍪" },
+  { name: "tortitas de chocolate", short: "tortitas", emoji: "🥞" },
+  { name: "budín de zanahoria", short: "budín", emoji: "🥕" },
+  { name: "cheesecake de frutos rojos", short: "cheesecakes", emoji: "🍰" }
+];
+
+const INGREDIENTS_POOL = [
+  { name: "Harina", emoji: "🌾" },
+  { name: "Azúcar", emoji: "🍬" },
+  { name: "Azúcar morena", emoji: "🍯" },
+  { name: "Cacao en polvo", emoji: "🍫" },
+  { name: "Mantequilla", emoji: "🧈" },
+  { name: "Avena", emoji: "🌾" },
+  { name: "Leche", emoji: "🥛" },
+  { name: "Crema", emoji: "🍦" },
+  { name: "Huevos (tazas)", emoji: "🥚" },
+  { name: "Pasas", emoji: "🍇" },
+  { name: "Nueces", emoji: "🥜" },
+  { name: "Almendras", emoji: "🌰" },
+  { name: "Manzanas (tazas)", emoji: "🍎" },
+  { name: "Fresas (tazas)", emoji: "🍓" },
+  { name: "Miel", emoji: "🍯" },
+  { name: "Chocolate picado", emoji: "🍫" },
+  { name: "Queso crema", emoji: "🧀" },
+  { name: "Maicena", emoji: "🌽" }
+];
+
+const REASONS = [
+  "se desata una fuerte tormenta y varios amigos cancelan",
+  "su equipo de fútbol cancela el partido y solo algunos compañeros pueden ir",
+  "su hermana cumple años y quiere llevar una porción justa para cada invitado",
+  "su familia se reduce porque algunos primos viajaron fuera de la ciudad",
+  "el colegio cambió la fecha de la fiesta y solo asistirán algunos compañeros",
+  "varios invitados tuvieron que trabajar ese día",
+  "algunos amigos se fueron de vacaciones de última hora",
+  "la reunión se hizo más pequeña porque llovió todo el día",
+  "solo pudo confirmar asistencia la mitad del grupo original",
+  "decidió hacer una reunión más íntima con sus mejores amigos"
+];
+
+// ============ UTILIDADES MATEMÁTICAS ============
+function gcd(a, b) { return b === 0 ? Math.abs(a) : gcd(b, a % b); }
+function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
+function simplify(n, d) {
+  if (d === 0) return [n, d];
+  const g = gcd(Math.abs(n), Math.abs(d));
+  if (d < 0) { n = -n; d = -d; }
+  return [n / g, d / g];
+}
+function fractionHTML(n, d, cls = "") {
+  return `<span class="fraction ${cls}"><span class="num">${n}</span><span class="den">${d}</span></span>`;
+}
+function formatMoney(v) { return `$${v.toFixed(2)}`; }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ============ GENERADOR DE SITUACIÓN ============
+function generateSituation() {
+  const name = pick(NAMES);
+  const dessert = pick(DESSERTS);
+  const reason = pick(REASONS);
+
+  // Porciones: original y nueva con MCD > 1 para que simplifique
+  const servingPairs = [
+    [12, 8], [12, 6], [12, 9], [12, 4],
+    [15, 10], [15, 5], [15, 6],
+    [18, 12], [18, 6], [18, 9],
+    [20, 15], [20, 10], [20, 8], [20, 5],
+    [24, 16], [24, 18], [24, 8], [24, 12],
+    [30, 20], [30, 15], [30, 10]
+  ];
+  const [origServ, newServ] = pick(servingPairs);
+  const [scaleN, scaleD] = simplify(newServ, origServ);
+
+  // Precio por unidad: entre 1.50 y 5.00 en pasos de 0.50
+  const priceOptions = [1.50, 2.00, 2.50, 3.00, 3.50, 4.00, 4.50, 5.00];
+  const pricePerUnit = pick(priceOptions);
+
+  // Seleccionar 4 ingredientes únicos
+  const ingredients = shuffle(INGREDIENTS_POOL).slice(0, 4);
+
+  // Generar fracciones de ingredientes "limpias"
+  // Queremos que al multiplicar por scaleN/scaleD y luego por el precio, el resultado sea manejable
+  // Fracciones posibles: 1/2, 1/3, 1/4, 2/3, 3/4, 1/5, 2/5, 3/5, 4/5, 1/6, 5/6, 1/8, 3/8, 5/8, 7/8
+  const fractionOptions = [
+    [1, 2], [1, 3], [1, 4], [2, 3], [3, 4],
+    [1, 5], [2, 5], [3, 5], [4, 5],
+    [1, 6], [5, 6],
+    [1, 8], [3, 8], [5, 8], [7, 8]
+  ];
+
+  // Precios por taza: enteros entre 3 y 15
+  const pricePerCupOptions = [3, 4, 5, 6, 7, 8, 9, 10, 12, 15];
+
+  ingredients.forEach(ing => {
+    const frac = pick(fractionOptions);
+    ing.amount = frac;
+    ing.pricePerCup = pick(pricePerCupOptions);
+  });
+
+  // Verificar que al menos un ingrediente tenga denominador "difícil" (5, 7, etc.) para la pregunta 7
+  const hasHardDen = ingredients.some(ing => {
+    const [newN, newD] = simplify(ing.amount[0] * scaleN, ing.amount[1] * scaleD);
+    return 12 % newD !== 0;
+  });
+  if (!hasHardDen) {
+    // Forzar uno con denominador 5
+    const idx = Math.floor(Math.random() * 4);
+    ingredients[idx].amount = pick([[1, 5], [2, 5], [3, 5], [4, 5]]);
+  }
+
+  const storyExtra = `El día que iba a hornear, ${reason}. Al final, ${name} confirma que solo vendrán ${newServ} personas. Como no quiere que sobre comida ni desperdiciar ingredientes, decide ajustar (escalar) la receta para preparar exactamente ${newServ} porciones.`;
+
+  return {
+    name, dessert: dessert.name, dessertShort: dessert.short, dessertEmoji: dessert.emoji,
+    originalServings: origServ, newServings: newServ,
+    pricePerUnit, ingredients, reason, storyExtra,
+    scaleN, scaleD
+  };
+}
+
+let currentSituation = generateSituation();
+let completedPhases = new Set();
+
+// ============ SITUATION RENDER ============
+function renderSituation() {
+  const s = currentSituation;
+  const ingList = s.ingredients.map(i => {
+    return `<li><strong>${i.emoji} ${i.name}:</strong> ${fractionHTML(i.amount[0], i.amount[1])} de taza</li>`;
+  }).join('');
+  const priceList = s.ingredients.map(i =>
+    `<li><strong>${i.name}:</strong> ${formatMoney(i.pricePerCup)} por taza</li>`
+  ).join('');
+
+  document.getElementById('situationContent').innerHTML = `
+    <p><strong>${s.name}</strong> quiere preparar su famosa receta de <em>${s.dessert}</em>. La receta original de su abuela está diseñada para rendir exactamente <strong>${s.originalServings} porciones</strong>.</p>
+    <p>Los ingredientes originales son:</p>
+    <ul class="list-none pl-4 space-y-1">${ingList}</ul>
+    <p class="mt-3"><strong>🌪️ El giro en la historia:</strong> ${s.storyExtra}</p>
+    <p>Además, a <strong>${s.name}</strong> se le ocurrió una idea: vender los ${s.dessertShort} en la reunión a <strong>${formatMoney(s.pricePerUnit)} la porción</strong> para recuperar su inversión y comprar un nuevo libro de cocina. Para saber si es un buen negocio, necesita calcular sus costos y ganancias.</p>
+    <p class="mt-3"><strong>💰 En su despensa, ${s.name} anotó el precio que le cuesta comprar 1 taza completa de cada ingrediente:</strong></p>
+    <ul class="list-none pl-4 space-y-1">${priceList}</ul>
+  `;
+
+  // Badge con ID único de situación
+  const badge = document.getElementById('situationBadge');
+  badge.classList.remove('hidden');
+  const seed = `${s.name}-${s.originalServings}-${s.newServings}-${s.ingredients.map(i=>i.amount.join(',')).join('|')}`;
+  const shortId = Math.abs(hashCode(seed)).toString(36).toUpperCase().slice(0, 6);
+  badge.querySelector('span').textContent = `🎲 Situación #${shortId} — ${s.name} prepara ${s.dessertShort}`;
+}
+
+function hashCode(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
+
+// ============ PHASES ============
+function buildPhases() {
+  const s = currentSituation;
+  const [scaleN, scaleD] = [s.scaleN, s.scaleD];
+
+  return [
+    // Q1 - Fracción de escalado
+    {
+      id: 1, title: "Fase 1: Escalando la Receta", subtitle: "Pregunta 1 de 8", icon: "📏",
+      question: `¿Qué fracción de la receta original necesita preparar ${s.name} para las ${s.newServings} personas? (Simplifica la fracción al máximo)`,
+      hint: `Divide las porciones nuevas entre las originales: ${s.newServings}/${s.originalServings}, y luego simplifica dividiendo entre el MCD.`,
+      inputs: [
+        { key: "q1_num", label: "Numerador", placeholder: "?" },
+        { key: "q1_den", label: "Denominador", placeholder: "?" }
+      ],
+      validate: () => {
+        const n = parseInt(document.getElementById("q1_num").value);
+        const d = parseInt(document.getElementById("q1_den").value);
+        if (isNaN(n) || isNaN(d) || d === 0) return { ok: false, msg: "Ingresa un numerador y un denominador válidos." };
+        const [sn, sd] = simplify(n, d);
+        if (sn === scaleN && sd === scaleD) {
+          return { ok: true, msg: `¡Correcto! ${s.newServings}/${s.originalServings} simplificado es ${scaleN}/${scaleD}.` };
+        }
+        return { ok: false, msg: `Revisa tu simplificación. El MCD de ${s.newServings} y ${s.originalServings} es ${gcd(s.newServings, s.originalServings)}. La respuesta es ${scaleN}/${scaleD}.` };
+      }
+    },
+    // Q2 - Nuevas cantidades
+    {
+      id: 2, title: "Fase 1: Escalando la Receta", subtitle: "Pregunta 2 de 8", icon: "🥣",
+      question: `Calcula la nueva cantidad exacta que ${s.name} necesita para cada uno de los 4 ingredientes. Multiplica cada cantidad original por la fracción de escalado (${scaleN}/${scaleD}).`,
+      hint: `Para multiplicar fracciones: (a/b) × (c/d) = (a×c)/(b×d). Luego simplifica. Escribe cada respuesta como fracción simplificada (ej: 1/2).`,
+      inputs: s.ingredients.map((ing, idx) => ({
+        key: `q2_${idx}`, label: `${ing.emoji} ${ing.name} (num/den)`, placeholder: "num/den", isFraction: true
+      })),
+      validate: () => {
+        for (let i = 0; i < s.ingredients.length; i++) {
+          const val = document.getElementById(`q2_${i}`).value.trim();
+          const parts = val.split('/').map(x => parseInt(x.trim()));
+          if (parts.length !== 2 || isNaN(parts[0]) || isNaN(parts[1]) || parts[1] === 0) {
+            return { ok: false, msg: `Revisa el formato de ${s.ingredients[i].name}. Usa num/den (ej: 1/2).` };
+          }
+          const [un, ud] = parts;
+          const [origN, origD] = s.ingredients[i].amount;
+          const newN = origN * scaleN;
+          const newD = origD * scaleD;
+          const [sn, sd] = simplify(newN, newD);
+          const [usn, usd] = simplify(un, ud);
+          if (usn !== sn || usd !== sd) {
+            return { ok: false, msg: `${s.ingredients[i].name}: ${origN}/${origD} × ${scaleN}/${scaleD} = ${newN}/${newD} = ${sn}/${sd}. Revisa tu cálculo.` };
+          }
+        }
+        const results = s.ingredients.map((ing, i) => {
+          const [origN, origD] = ing.amount;
+          const [sn, sd] = simplify(origN * scaleN, origD * scaleD);
+          return `${ing.name} = ${sn}/${sd}`;
+        }).join(', ');
+        return { ok: true, msg: `¡Excelente! Las nuevas cantidades son: ${results}.` };
+      }
+    },
+    // Q3 - Costos individuales
+    {
+      id: 3, title: "Fase 2: Calculando los Costos", subtitle: "Pregunta 3 de 8", icon: "💵",
+      question: `Utilizando las cantidades calculadas, ¿cuánto gastará ${s.name} en cada ingrediente? (Multiplica cantidad en tazas × precio por taza)`,
+      hint: `Ejemplo: si usas 1/2 taza de un ingrediente que cuesta $6.00/taza, el gasto es (1/2) × 6 = $3.00. Escribe cada respuesta con 2 decimales.`,
+      inputs: s.ingredients.map((ing, idx) => ({
+        key: `q3_${idx}`, label: `${ing.emoji} Costo de ${ing.name} ($)`, placeholder: "0.00", isMoney: true
+      })),
+      validate: () => {
+        for (let i = 0; i < s.ingredients.length; i++) {
+          const val = parseFloat(document.getElementById(`q3_${i}`).value);
+          if (isNaN(val)) return { ok: false, msg: `Ingresa un valor numérico para ${s.ingredients[i].name}.` };
+          const [origN, origD] = s.ingredients[i].amount;
+          const newN = origN * scaleN;
+          const newD = origD * scaleD;
+          const cost = (newN / newD) * s.ingredients[i].pricePerCup;
+          if (Math.abs(val - cost) > 0.02) {
+            return { ok: false, msg: `${s.ingredients[i].name}: (${newN}/${newD}) × ${formatMoney(s.ingredients[i].pricePerCup)} = ${formatMoney(cost)}. Revisa tu cálculo.` };
+          }
+        }
+        return { ok: true, msg: `¡Perfecto! Has calculado correctamente cada costo individual.` };
+      }
+    },
+    // Q4 - Costo total
+    {
+      id: 4, title: "Fase 2: Calculando los Costos", subtitle: "Pregunta 4 de 8", icon: "🧾",
+      question: `¿Cuánto le cuesta en total a ${s.name} producir la bandeja de los ${s.newServings} ${s.dessertShort}?`,
+      hint: `Suma los 4 costos individuales que calculaste en la pregunta anterior.`,
+      inputs: [{ key: "q4", label: "Costo total ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => {
+        const val = parseFloat(document.getElementById("q4").value);
+        if (isNaN(val)) return { ok: false, msg: "Ingresa un valor numérico." };
+        let total = 0;
+        for (let i = 0; i < s.ingredients.length; i++) {
+          const [origN, origD] = s.ingredients[i].amount;
+          total += ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
+        }
+        if (Math.abs(val - total) > 0.05) {
+          return { ok: false, msg: `Suma los 4 costos individuales. El total correcto es ${formatMoney(total)}.` };
+        }
+        return { ok: true, msg: `¡Correcto! El costo total de producción es ${formatMoney(total)}.` };
+      }
+    },
+    // Q5 - Ingreso
+    {
+      id: 5, title: "Fase 3: Análisis de Negocios", subtitle: "Pregunta 5 de 8", icon: "💰",
+      question: `Si ${s.name} vende cada uno de los ${s.newServings} ${s.dessertShort} a ${formatMoney(s.pricePerUnit)}, ¿cuánto dinero recaudará en total (Ingreso)?`,
+      hint: `Ingreso = número de porciones × precio por porción.`,
+      inputs: [{ key: "q5", label: "Ingreso total ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => {
+        const val = parseFloat(document.getElementById("q5").value);
+        if (isNaN(val)) return { ok: false, msg: "Ingresa un valor numérico." };
+        const expected = s.newServings * s.pricePerUnit;
+        if (Math.abs(val - expected) > 0.02) {
+          return { ok: false, msg: `${s.newServings} × ${formatMoney(s.pricePerUnit)} = ${formatMoney(expected)}.` };
+        }
+        return { ok: true, msg: `¡Excelente! El ingreso total es ${formatMoney(expected)}.` };
+      }
+    },
+    // Q6 - Ganancia
+    {
+      id: 6, title: "Fase 3: Análisis de Negocios", subtitle: "Pregunta 6 de 8", icon: "📈",
+      question: `¿Cuál será la ganancia neta de ${s.name}? (Ingreso − Costo de producción)`,
+      hint: `Ganancia = Ingreso (pregunta 5) − Costo total (pregunta 4).`,
+      inputs: [{ key: "q6", label: "Ganancia neta ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => {
+        const val = parseFloat(document.getElementById("q6").value);
+        if (isNaN(val)) return { ok: false, msg: "Ingresa un valor numérico." };
+        let cost = 0;
+        for (let i = 0; i < s.ingredients.length; i++) {
+          const [origN, origD] = s.ingredients[i].amount;
+          cost += ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
+        }
+        const income = s.newServings * s.pricePerUnit;
+        const profit = income - cost;
+        if (Math.abs(val - profit) > 0.10) {
+          return { ok: false, msg: `${formatMoney(income)} − ${formatMoney(cost)} = ${formatMoney(profit)}.` };
+        }
+        return { ok: true, msg: `¡Muy bien! La ganancia neta es ${formatMoney(profit)}. ¡${s.name} tiene un buen negocio!` };
+      }
+    },
+    // Q7 - Ingrediente difícil
+    {
+      id: 7, title: "Fase 4: Pensamiento Crítico", subtitle: "Pregunta 7 de 8", icon: "🤔",
+      question: `Las tazas medidoras estándar son: 1, 1/2, 1/3 y 1/4. ¿Cuál de los ingredientes calculados será el más difícil de medir exactamente con estas tazas? Escribe el nombre del ingrediente.`,
+      hint: `Revisa las fracciones resultantes. El MCM de 2, 3 y 4 es 12. Si el denominador de la fracción simplificada NO divide a 12, esa fracción no se puede expresar como suma de 1/2, 1/3 o 1/4.`,
+      inputs: [{ key: "q7", label: "Ingrediente difícil", placeholder: "Ej: Cacao" }],
+      validate: () => {
+        const val = document.getElementById("q7").value.trim().toLowerCase();
+        let hardest = null;
+        for (let i = 0; i < s.ingredients.length; i++) {
+          const [origN, origD] = s.ingredients[i].amount;
+          const [rn, rd] = simplify(origN * scaleN, origD * scaleD);
+          if (12 % rd !== 0) {
+            hardest = s.ingredients[i].name;
+            break;
+          }
+        }
+        if (!hardest) {
+          // Fallback: buscar el denominador más "raro"
+          let maxDen = 0;
+          for (let i = 0; i < s.ingredients.length; i++) {
+            const [origN, origD] = s.ingredients[i].amount;
+            const [rn, rd] = simplify(origN * scaleN, origD * scaleD);
+            if (rd > maxDen) { maxDen = rd; hardest = s.ingredients[i].name; }
+          }
+        }
+        const hardestLower = hardest.toLowerCase();
+        const match = hardestLower.split(' ').some(w => w.length > 2 && val.includes(w)) || val.includes(hardestLower);
+        if (match) {
+          const [origN, origD] = s.ingredients.find(i => i.name === hardest).amount;
+          const [rn, rd] = simplify(origN * scaleN, origD * scaleD);
+          return { ok: true, msg: `¡Correcto! ${hardest} es el más difícil porque su fracción resultante (${rn}/${rd}) no se puede expresar como suma de 1/2, 1/3 o 1/4. Estrategia creativa: usar cucharas medidoras (1 taza = 48 cucharaditas), o medir por aproximación usando marcas en un vaso transparente.` };
+        }
+        return { ok: false, msg: `Busca el ingrediente cuya fracción simplificada tenga un denominador que NO sea divisor de 12. La respuesta correcta es: ${hardest}.` };
+      }
+    },
+    // Q8 - Propiedad distributiva
+    {
+      id: 8, title: "Fase 4: Pensamiento Crítico", subtitle: "Pregunta 8 de 8", icon: "🧠",
+      question: `¿Qué pasaría si ${s.name} calculara primero el costo de la receta original completa (${s.originalServings} porciones) y luego le aplicara la fracción de escalado (${scaleN}/${scaleD}) al costo total? ¿Daría el mismo resultado que sumar los costos individuales? Responde: SI o NO.`,
+      hint: `Piensa en la propiedad distributiva: a·k + b·k + c·k + d·k = (a+b+c+d)·k`,
+      inputs: [{ key: "q8", label: "¿Mismo resultado? (SI/NO)", placeholder: "SI o NO" }],
+      validate: () => {
+        const val = document.getElementById("q8").value.trim().toUpperCase();
+        if (val === "SI" || val === "SÍ" || val === "YES") {
+          return { ok: true, msg: `¡Correcto! Por la propiedad distributiva de la multiplicación, el resultado es el mismo. Comprobación: costo original × (${scaleN}/${scaleD}) = costo escalado. ¡Las matemáticas siempre son coherentes!` };
+        }
+        if (val === "NO") {
+          return { ok: false, msg: `Incorrecto. Por la propiedad distributiva de la multiplicación, SÍ da el mismo resultado. Compruébalo calculando ambos caminos.` };
+        }
+        return { ok: false, msg: `Responde SI o NO.` };
+      }
+    }
+  ];
+}
+
+// ============ RENDER PHASES ============
+let currentPhases = [];
+
+function renderPhases() {
+  currentPhases = buildPhases();
+  const container = document.getElementById('phasesContainer');
+  container.innerHTML = '';
+
+  currentPhases.forEach((phase, idx) => {
+    const isFirst = idx === 0;
+    const div = document.createElement('div');
+    div.className = `phase-card card rounded-3xl p-6 md:p-8 shadow-xl border-2 border-amber-800 ${isFirst ? 'active' : 'locked'}`;
+    div.id = `phase-${phase.id}`;
+
+    const inputsHTML = phase.inputs.map(inp => {
+      if (inp.isFraction) {
+        return `
+          <div class="flex items-center gap-2 flex-wrap">
+            <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
+            <input type="number" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-20 text-center" id="${inp.key}_n" placeholder="num">
+            <span class="text-2xl text-amber-900 font-bold">/</span>
+            <input type="number" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-20 text-center" id="${inp.key}_d" placeholder="den">
+          </div>`;
+      } else if (inp.isMoney) {
+        return `
+          <div class="flex items-center gap-2">
+            <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
+            <span class="text-2xl text-amber-900">$</span>
+            <input type="number" step="0.01" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-32" id="${inp.key}" placeholder="${inp.placeholder}">
+          </div>`;
+      } else {
+        return `
+          <div class="flex items-center gap-2 flex-wrap">
+            <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
+            <input type="text" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-48" id="${inp.key}" placeholder="${inp.placeholder}">
+          </div>`;
+      }
+    }).join('');
+
+    div.innerHTML = `
+      <div class="flex items-center gap-3 mb-4">
+        <div class="text-4xl">${phase.icon}</div>
+        <div>
+          <div class="text-sm text-amber-700 font-semibold">${phase.subtitle}</div>
+          <h3 class="title-font text-xl md:text-2xl text-amber-900 font-bold">${phase.title}</h3>
+        </div>
+      </div>
+      <div class="bg-amber-50 rounded-xl p-4 mb-4 border-2 border-amber-200">
+        <p class="text-gray-800 leading-relaxed">${phase.question}</p>
+      </div>
+      <div class="hint-box rounded-xl p-4 mb-4">
+        <p class="text-sm text-amber-900"><strong>💡 Pista:</strong> ${phase.hint}</p>
+      </div>
+      <div class="space-y-3 mb-4">${inputsHTML}</div>
+      <div class="flex gap-3 flex-wrap">
+        <button onclick="checkPhase(${phase.id})" class="bg-amber-800 hover:bg-amber-900 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition transform hover:scale-105">
+          ✓ Verificar respuesta
+        </button>
+      </div>
+      <div id="feedback-${phase.id}" class="mt-4 hidden"></div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// ============ INTERACTIONS ============
+function checkPhase(phaseId) {
+  const phase = currentPhases.find(p => p.id === phaseId);
+  const result = phase.validate();
+  const fb = document.getElementById(`feedback-${phaseId}`);
+  fb.classList.remove('hidden');
+
+  if (result.ok) {
+    fb.className = 'mt-4 solution-box rounded-xl p-4 fade-in';
+    fb.innerHTML = `
+      <p class="text-green-900 font-bold text-lg">✅ ¡Correcto!</p>
+      <p class="text-blue-900 mt-2">${result.msg}</p>
+    `;
+    phase.inputs.forEach(inp => {
+      if (inp.isFraction) {
+        const n = document.getElementById(`${inp.key}_n`);
+        const d = document.getElementById(`${inp.key}_d`);
+        if (n) n.classList.add('correct');
+        if (d) d.classList.add('correct');
+      } else {
+        const el = document.getElementById(inp.key);
+        if (el) el.classList.add('correct');
+      }
+    });
+
+    completedPhases.add(phaseId);
+    updateProgress();
+    unlockNextPhase(phaseId);
+
+    if (completedPhases.size === currentPhases.length) {
+      setTimeout(showFinal, 800);
+    }
+  } else {
+    fb.className = 'mt-4 rounded-xl p-4 fade-in';
+    fb.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+    fb.style.borderLeft = '4px solid #ef4444';
+    fb.innerHTML = `
+      <p class="text-red-900 font-bold">❌ Aún no es correcto</p>
+      <p class="text-red-800 mt-1">${result.msg}</p>
+    `;
+    phase.inputs.forEach(inp => {
+      if (inp.isFraction) {
+        const n = document.getElementById(`${inp.key}_n`);
+        const d = document.getElementById(`${inp.key}_d`);
+        if (n) { n.classList.add('incorrect'); setTimeout(() => n.classList.remove('incorrect'), 1500); }
+        if (d) { d.classList.add('incorrect'); setTimeout(() => d.classList.remove('incorrect'), 1500); }
+      } else {
+        const el = document.getElementById(inp.key);
+        if (el) { el.classList.add('incorrect'); setTimeout(() => el.classList.remove('incorrect'), 1500); }
+      }
+    });
+  }
+}
+
+function unlockNextPhase(currentId) {
+  const idx = currentPhases.findIndex(p => p.id === currentId);
+  if (idx >= 0 && idx < currentPhases.length - 1) {
+    const nextPhase = currentPhases[idx + 1];
+    const nextEl = document.getElementById(`phase-${nextPhase.id}`);
+    nextEl.classList.remove('locked');
+    nextEl.classList.add('active');
+    setTimeout(() => {
+      nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 400);
+  }
+}
+
+function updateProgress() {
+  const pct = (completedPhases.size / currentPhases.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${completedPhases.size} / ${currentPhases.length}`;
+}
+
+// ============ FINAL ============
+function showFinal() {
+  const s = currentSituation;
+  const [scaleN, scaleD] = [s.scaleN, s.scaleD];
+  let cost = 0;
+  for (let i = 0; i < s.ingredients.length; i++) {
+    const [origN, origD] = s.ingredients[i].amount;
+    cost += ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
+  }
+  const income = s.newServings * s.pricePerUnit;
+  const profit = income - cost;
+
+  const finalSection = document.getElementById('finalSection');
+  finalSection.classList.remove('hidden');
+  finalSection.innerHTML = `
+    <div class="card rounded-3xl p-6 md:p-8 shadow-2xl border-4 border-amber-900 fade-in">
+      <div class="text-center mb-6">
+        <div class="text-6xl mb-3 sparkle">🏆</div>
+        <h2 class="title-font text-3xl md:text-4xl text-amber-900 font-bold">¡Felicidades!</h2>
+        <p class="text-lg text-amber-700 mt-2">Has completado el desafío de ${s.name}</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-50 to-orange-100 rounded-2xl p-6 mb-6 border-2 border-amber-300">
+        <h3 class="title-font text-2xl text-amber-900 font-bold mb-4">📊 Resumen de Resultados</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-white rounded-xl p-4 shadow">
+            <div class="text-sm text-gray-600">Fracción de escalado</div>
+            <div class="text-2xl title-font text-amber-900">${scaleN}/${scaleD}</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow">
+            <div class="text-sm text-gray-600">Costo total de producción</div>
+            <div class="text-2xl title-font text-green-700">${formatMoney(cost)}</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow">
+            <div class="text-sm text-gray-600">Ingreso por ventas</div>
+            <div class="text-2xl title-font text-blue-700">${formatMoney(income)}</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow">
+            <div class="text-sm text-gray-600">Ganancia neta</div>
+            <div class="text-2xl title-font text-purple-700">${formatMoney(profit)}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solution-box rounded-2xl p-6 mb-6">
+        <h3 class="title-font text-xl text-blue-900 font-bold mb-3">🎓 Lecciones aprendidas</h3>
+        <ul class="list-disc pl-5 space-y-2 text-blue-900">
+          <li><strong>Escalado de recetas:</strong> multiplicar cada ingrediente por la misma fracción mantiene las proporciones.</li>
+          <li><strong>Simplificación:</strong> reducir fracciones facilita los cálculos.</li>
+          <li><strong>Propiedad distributiva:</strong> escalar la suma total o sumar los escalados individuales da el mismo resultado.</li>
+          <li><strong>Análisis de negocios:</strong> Ganancia = Ingreso − Costo.</li>
+        </ul>
+      </div>
+
+      <div class="text-center">
+        <button onclick="generateNewSituation()" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-2xl shadow-xl transition transform hover:scale-105 text-lg">
+          🎲 Generar nueva situación
+        </button>
+        <p class="text-sm text-gray-600 mt-3">Se creará un desafío completamente nuevo con personaje, postre, fracciones y precios diferentes</p>
+      </div>
+    </div>
+  `;
+  finalSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function generateNewSituation() {
+  currentSituation = generateSituation();
+  completedPhases.clear();
+  document.getElementById('finalSection').classList.add('hidden');
+  renderSituation();
+  renderPhases();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============ INIT ============
+renderSituation();
+renderPhases();
+updateProgress();
+</script>
+
+</body>
+</html>
