@@ -32,13 +32,19 @@
   .fraction .num { display: block; border-bottom: 2px solid currentColor; padding: 0 4px; }
   .fraction .den { display: block; padding: 0 4px; }
   .situation-badge { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #3d1f0f; }
+  .score-badge { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+  .penalty-badge { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+  .template-badge { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
+  .hint-revealed { animation: hintPulse 0.5s ease-out; }
+  @keyframes hintPulse { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+  .option-a { background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-left: 4px solid #3b82f6; }
+  .option-b { background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-left: 4px solid #ec4899; }
 </style>
 </head>
 <body class="p-4 md:p-8">
 
 <div class="max-w-5xl mx-auto">
 
-  <!-- HEADER -->
   <header class="card rounded-3xl p-6 md:p-8 mb-6 shadow-2xl border-4 border-amber-900">
     <div class="flex items-center justify-between flex-wrap gap-4">
       <div>
@@ -49,33 +55,31 @@
       </div>
       <div class="text-right">
         <div class="text-sm text-amber-700 font-semibold">PROGRESO</div>
-        <div class="text-3xl title-font text-amber-900" id="progressText">0 / 8</div>
+        <div class="text-3xl title-font text-amber-900" id="progressText">0 / 0</div>
       </div>
     </div>
     <div class="mt-6 bg-amber-100 rounded-full h-4 overflow-hidden border-2 border-amber-900">
       <div id="progressBar" class="progress-fill h-full brownie-gradient" style="width: 0%"></div>
     </div>
-    <div id="situationBadge" class="mt-4 hidden">
-      <span class="situation-badge inline-block px-4 py-2 rounded-full font-bold text-sm"></span>
+    <div class="flex gap-3 flex-wrap mt-4">
+      <div id="situationBadge" class="hidden"><span class="situation-badge inline-block px-4 py-2 rounded-full font-bold text-sm"></span></div>
+      <div id="templateBadge" class="hidden"><span class="template-badge inline-block px-4 py-2 rounded-full font-bold text-sm"></span></div>
+      <div id="scoreBadge" class="hidden"><span class="score-badge inline-block px-4 py-2 rounded-full font-bold text-sm">⭐ Puntaje: 0.0 / 5.0</span></div>
     </div>
   </header>
 
-  <!-- SITUATION -->
   <section id="situation" class="card rounded-3xl p-6 md:p-8 mb-6 shadow-xl border-2 border-amber-800 fade-in">
     <h2 class="title-font text-2xl md:text-3xl text-amber-900 font-bold mb-4">📖 La Situación</h2>
     <div id="situationContent" class="text-gray-800 leading-relaxed space-y-3"></div>
   </section>
 
-  <!-- PHASES -->
   <div id="phasesContainer" class="space-y-6"></div>
-
-  <!-- FINAL SECTION -->
   <div id="finalSection" class="hidden"></div>
 
 </div>
 
 <script>
-// ============ BANCO DE DATOS (para generar situaciones únicas) ============
+// ============ BANCO DE DATOS ============
 const NAMES = ["Sofía", "Mateo", "Valentina", "Diego", "Camila", "Andrés", "Luciana", "Sebastián", "Isabella", "Santiago", "Mariana", "Emiliano", "Gabriela", "Nicolás", "Paula", "Alejandro", "Daniela", "Tomás", "Renata", "Felipe", "Catalina", "Joaquín", "Victoria", "Samuel"];
 
 const DESSERTS = [
@@ -94,24 +98,15 @@ const DESSERTS = [
 ];
 
 const INGREDIENTS_POOL = [
-  { name: "Harina", emoji: "🌾" },
-  { name: "Azúcar", emoji: "🍬" },
-  { name: "Azúcar morena", emoji: "🍯" },
-  { name: "Cacao en polvo", emoji: "🍫" },
-  { name: "Mantequilla", emoji: "🧈" },
-  { name: "Avena", emoji: "🌾" },
-  { name: "Leche", emoji: "🥛" },
-  { name: "Crema", emoji: "🍦" },
-  { name: "Huevos (tazas)", emoji: "🥚" },
-  { name: "Pasas", emoji: "🍇" },
-  { name: "Nueces", emoji: "🥜" },
-  { name: "Almendras", emoji: "🌰" },
-  { name: "Manzanas (tazas)", emoji: "🍎" },
-  { name: "Fresas (tazas)", emoji: "🍓" },
-  { name: "Miel", emoji: "🍯" },
-  { name: "Chocolate picado", emoji: "🍫" },
-  { name: "Queso crema", emoji: "🧀" },
-  { name: "Maicena", emoji: "🌽" }
+  { name: "Harina", emoji: "🌾" }, { name: "Azúcar", emoji: "🍬" },
+  { name: "Azúcar morena", emoji: "🍯" }, { name: "Cacao en polvo", emoji: "🍫" },
+  { name: "Mantequilla", emoji: "🧈" }, { name: "Avena", emoji: "🌾" },
+  { name: "Leche", emoji: "🥛" }, { name: "Crema", emoji: "🍦" },
+  { name: "Huevos (tazas)", emoji: "🥚" }, { name: "Pasas", emoji: "🍇" },
+  { name: "Nueces", emoji: "🥜" }, { name: "Almendras", emoji: "🌰" },
+  { name: "Manzanas (tazas)", emoji: "🍎" }, { name: "Fresas (tazas)", emoji: "🍓" },
+  { name: "Miel", emoji: "🍯" }, { name: "Chocolate picado", emoji: "🍫" },
+  { name: "Queso crema", emoji: "🧀" }, { name: "Maicena", emoji: "🌽" }
 ];
 
 const REASONS = [
@@ -127,17 +122,16 @@ const REASONS = [
   "decidió hacer una reunión más íntima con sus mejores amigos"
 ];
 
-// ============ UTILIDADES MATEMÁTICAS ============
+// ============ UTILIDADES ============
 function gcd(a, b) { return b === 0 ? Math.abs(a) : gcd(b, a % b); }
-function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
 function simplify(n, d) {
   if (d === 0) return [n, d];
   const g = gcd(Math.abs(n), Math.abs(d));
   if (d < 0) { n = -n; d = -d; }
   return [n / g, d / g];
 }
-function fractionHTML(n, d, cls = "") {
-  return `<span class="fraction ${cls}"><span class="num">${n}</span><span class="den">${d}</span></span>`;
+function fractionHTML(n, d) {
+  return `<span class="fraction"><span class="num">${n}</span><span class="den">${d}</span></span>`;
 }
 function formatMoney(v) { return `$${v.toFixed(2)}`; }
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
@@ -149,14 +143,20 @@ function shuffle(arr) {
   }
   return a;
 }
+function hashCode(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
 
-// ============ GENERADOR DE SITUACIÓN ============
-function generateSituation() {
+// ============ GENERADOR BASE ============
+function generateBaseSituation() {
   const name = pick(NAMES);
   const dessert = pick(DESSERTS);
   const reason = pick(REASONS);
-
-  // Porciones: original y nueva con MCD > 1 para que simplifique
   const servingPairs = [
     [12, 8], [12, 6], [12, 9], [12, 4],
     [15, 10], [15, 5], [15, 6],
@@ -167,285 +167,497 @@ function generateSituation() {
   ];
   const [origServ, newServ] = pick(servingPairs);
   const [scaleN, scaleD] = simplify(newServ, origServ);
-
-  // Precio por unidad: entre 1.50 y 5.00 en pasos de 0.50
   const priceOptions = [1.50, 2.00, 2.50, 3.00, 3.50, 4.00, 4.50, 5.00];
   const pricePerUnit = pick(priceOptions);
+  const storyExtra = `El día que iba a hornear, ${reason}. Al final, ${name} confirma que solo vendrán ${newServ} personas. Como no quiere que sobre comida ni desperdiciar ingredientes, decide ajustar (escalar) la receta para preparar exactamente ${newServ} porciones.`;
+  return {
+    name, dessert: dessert.name, dessertShort: dessert.short, dessertEmoji: dessert.emoji,
+    originalServings: origServ, newServings: newServ,
+    pricePerUnit, reason, storyExtra, scaleN, scaleD
+  };
+}
 
-  // Seleccionar 4 ingredientes únicos
-  const ingredients = shuffle(INGREDIENTS_POOL).slice(0, 4);
-
-  // Generar fracciones de ingredientes "limpias"
-  // Queremos que al multiplicar por scaleN/scaleD y luego por el precio, el resultado sea manejable
-  // Fracciones posibles: 1/2, 1/3, 1/4, 2/3, 3/4, 1/5, 2/5, 3/5, 4/5, 1/6, 5/6, 1/8, 3/8, 5/8, 7/8
+function generateIngredients(count, scaleN, scaleD) {
+  const ingredients = shuffle(INGREDIENTS_POOL).slice(0, count);
   const fractionOptions = [
     [1, 2], [1, 3], [1, 4], [2, 3], [3, 4],
     [1, 5], [2, 5], [3, 5], [4, 5],
-    [1, 6], [5, 6],
-    [1, 8], [3, 8], [5, 8], [7, 8]
+    [1, 6], [5, 6], [1, 8], [3, 8], [5, 8], [7, 8]
   ];
-
-  // Precios por taza: enteros entre 3 y 15
   const pricePerCupOptions = [3, 4, 5, 6, 7, 8, 9, 10, 12, 15];
-
   ingredients.forEach(ing => {
-    const frac = pick(fractionOptions);
-    ing.amount = frac;
+    ing.amount = pick(fractionOptions);
     ing.pricePerCup = pick(pricePerCupOptions);
   });
-
-  // Verificar que al menos un ingrediente tenga denominador "difícil" (5, 7, etc.) para la pregunta 7
   const hasHardDen = ingredients.some(ing => {
     const [newN, newD] = simplify(ing.amount[0] * scaleN, ing.amount[1] * scaleD);
     return 12 % newD !== 0;
   });
   if (!hasHardDen) {
-    // Forzar uno con denominador 5
-    const idx = Math.floor(Math.random() * 4);
+    const idx = Math.floor(Math.random() * count);
     ingredients[idx].amount = pick([[1, 5], [2, 5], [3, 5], [4, 5]]);
   }
+  return ingredients;
+}
 
-  const storyExtra = `El día que iba a hornear, ${reason}. Al final, ${name} confirma que solo vendrán ${newServ} personas. Como no quiere que sobre comida ni desperdiciar ingredientes, decide ajustar (escalar) la receta para preparar exactamente ${newServ} porciones.`;
+// ============ PLANTILLAS ============
+const TEMPLATES = {
+  A: { name: "Completa", icon: "🅰️", description: "Escalado + costos + negocio + pensamiento crítico", questions: 8 },
+  B: { name: "Solo escalado", icon: "🅱️", description: "Fracciones y proporciones puras", questions: 3 },
+  C: { name: "Escalado + costos", icon: "🅲️", description: "Producción sin análisis de negocio", questions: 5 },
+  D: { name: "Negocio directo", icon: "🅳️", description: "Ingresos y ganancias sin desglose", questions: 5 },
+  E: { name: "Escalado inverso", icon: "🅴️", description: "De la receta nueva a la original", questions: 4 },
+  F: { name: "Comparativa", icon: "🅵️", description: "Dos recetas, ¿cuál conviene más?", questions: 6 }
+};
 
-  return {
-    name, dessert: dessert.name, dessertShort: dessert.short, dessertEmoji: dessert.emoji,
-    originalServings: origServ, newServings: newServ,
-    pricePerUnit, ingredients, reason, storyExtra,
-    scaleN, scaleD
-  };
+function generateSituation() {
+  const templateKey = pick(Object.keys(TEMPLATES));
+  const template = TEMPLATES[templateKey];
+  const base = generateBaseSituation();
+  let situation = { ...base, template: templateKey, templateName: template.name };
+  if (templateKey === 'F') {
+    const dessert2 = pick(DESSERTS.filter(d => d.name !== base.dessert));
+    situation.dessert2 = dessert2.name;
+    situation.dessertShort2 = dessert2.short;
+    situation.dessertEmoji2 = dessert2.emoji;
+    situation.ingredients = generateIngredients(3, base.scaleN, base.scaleD);
+    situation.ingredients2 = generateIngredients(3, base.scaleN, base.scaleD);
+  } else {
+    const ingCount = templateKey === 'B' ? 2 : (templateKey === 'E' ? 3 : 4);
+    situation.ingredients = generateIngredients(ingCount, base.scaleN, base.scaleD);
+  }
+  return situation;
 }
 
 let currentSituation = generateSituation();
 let completedPhases = new Set();
+let phaseScores = {};
 
 // ============ SITUATION RENDER ============
 function renderSituation() {
   const s = currentSituation;
-  const ingList = s.ingredients.map(i => {
-    return `<li><strong>${i.emoji} ${i.name}:</strong> ${fractionHTML(i.amount[0], i.amount[1])} de taza</li>`;
-  }).join('');
-  const priceList = s.ingredients.map(i =>
-    `<li><strong>${i.name}:</strong> ${formatMoney(i.pricePerCup)} por taza</li>`
-  ).join('');
+  const template = TEMPLATES[s.template];
+  let content = '';
 
-  document.getElementById('situationContent').innerHTML = `
-    <p><strong>${s.name}</strong> quiere preparar su famosa receta de <em>${s.dessert}</em>. La receta original de su abuela está diseñada para rendir exactamente <strong>${s.originalServings} porciones</strong>.</p>
-    <p>Los ingredientes originales son:</p>
-    <ul class="list-none pl-4 space-y-1">${ingList}</ul>
-    <p class="mt-3"><strong>🌪️ El giro en la historia:</strong> ${s.storyExtra}</p>
-    <p>Además, a <strong>${s.name}</strong> se le ocurrió una idea: vender los ${s.dessertShort} en la reunión a <strong>${formatMoney(s.pricePerUnit)} la porción</strong> para recuperar su inversión y comprar un nuevo libro de cocina. Para saber si es un buen negocio, necesita calcular sus costos y ganancias.</p>
-    <p class="mt-3"><strong>💰 En su despensa, ${s.name} anotó el precio que le cuesta comprar 1 taza completa de cada ingrediente:</strong></p>
-    <ul class="list-none pl-4 space-y-1">${priceList}</ul>
-  `;
+  if (s.template === 'F') {
+    const ingList1 = s.ingredients.map(i => `<li><strong>${i.emoji} ${i.name}:</strong> ${fractionHTML(i.amount[0], i.amount[1])} de taza (${formatMoney(i.pricePerCup)}/taza)</li>`).join('');
+    const ingList2 = s.ingredients2.map(i => `<li><strong>${i.emoji} ${i.name}:</strong> ${fractionHTML(i.amount[0], i.amount[1])} de taza (${formatMoney(i.pricePerCup)}/taza)</li>`).join('');
+    content = `
+      <p><strong>${s.name}</strong> quiere preparar postres para su reunión de ${s.newServings} personas. Tiene dos recetas en mente y no sabe cuál elegir:</p>
+      <div class="option-a rounded-xl p-4 my-3">
+        <h4 class="font-bold text-blue-900 mb-2">🅰️ Opción A: ${s.dessert}</h4>
+        <p class="text-sm text-gray-700 mb-2">Receta original para ${s.originalServings} porciones:</p>
+        <ul class="list-none pl-4 space-y-1 text-sm">${ingList1}</ul>
+      </div>
+      <div class="option-b rounded-xl p-4 my-3">
+        <h4 class="font-bold text-pink-900 mb-2">🅱️ Opción B: ${s.dessert2}</h4>
+        <p class="text-sm text-gray-700 mb-2">Receta original para ${s.originalServings} porciones:</p>
+        <ul class="list-none pl-4 space-y-1 text-sm">${ingList2}</ul>
+      </div>
+      <p class="mt-3"><strong>🌪️ El giro:</strong> ${s.storyExtra}</p>
+      <p><strong>💰 ${s.name}</strong> venderá cada porción a <strong>${formatMoney(s.pricePerUnit)}</strong>. ¿Cuál receta le da MAYOR ganancia?</p>
+    `;
+  } else {
+    const ingList = s.ingredients.map(i => `<li><strong>${i.emoji} ${i.name}:</strong> ${fractionHTML(i.amount[0], i.amount[1])} de taza (${formatMoney(i.pricePerCup)}/taza)</li>`).join('');
+    if (s.template === 'E') {
+      content = `
+        <p><strong>${s.name}</strong> ya preparó su receta ajustada para ${s.newServings} personas, pero olvidó las cantidades originales de la receta de su abuela.</p>
+        <p>Los ingredientes que usó en la receta ajustada son:</p>
+        <ul class="list-none pl-4 space-y-1">${ingList}</ul>
+        <p class="mt-3"><strong>🔍 Tu misión:</strong> Ayudar a ${s.name} a descubrir las cantidades de la receta original, que rendía ${s.originalServings} porciones.</p>
+      `;
+    } else {
+      content = `
+        <p><strong>${s.name}</strong> quiere preparar su famosa receta de <em>${s.dessert}</em>. La receta original está diseñada para rendir exactamente <strong>${s.originalServings} porciones</strong>.</p>
+        <p>Los ingredientes originales son:</p>
+        <ul class="list-none pl-4 space-y-1">${ingList}</ul>
+        <p class="mt-3"><strong>🌪️ El giro:</strong> ${s.storyExtra}</p>
+      `;
+      if (s.template !== 'B') {
+        content += `<p>Además, <strong>${s.name}</strong> venderá cada porción a <strong>${formatMoney(s.pricePerUnit)}</strong> para recuperar su inversión.</p>`;
+      }
+    }
+  }
 
-  // Badge con ID único de situación
+  document.getElementById('situationContent').innerHTML = content;
   const badge = document.getElementById('situationBadge');
   badge.classList.remove('hidden');
-  const seed = `${s.name}-${s.originalServings}-${s.newServings}-${s.ingredients.map(i=>i.amount.join(',')).join('|')}`;
+  const seed = `${s.name}-${s.originalServings}-${s.newServings}-${s.template}`;
   const shortId = Math.abs(hashCode(seed)).toString(36).toUpperCase().slice(0, 6);
-  badge.querySelector('span').textContent = `🎲 Situación #${shortId} — ${s.name} prepara ${s.dessertShort}`;
+  badge.querySelector('span').textContent = `🎲 Situación #${shortId}`;
+  const templateBadge = document.getElementById('templateBadge');
+  templateBadge.classList.remove('hidden');
+  templateBadge.querySelector('span').textContent = `${template.icon} ${template.name}`;
 }
 
-function hashCode(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
-    hash |= 0;
+// ============ VALIDADORES COMUNES ============
+function validateFraction(inputN, inputD, expectedN, expectedD) {
+  const n = parseInt(inputN);
+  const d = parseInt(inputD);
+  if (isNaN(n) || isNaN(d) || d === 0) return { ok: false, msg: "Ingresa valores válidos." };
+  const [sn, sd] = simplify(n, d);
+  const [en, ed] = simplify(expectedN, expectedD);
+  if (sn === en && sd === ed) return { ok: true, msg: `¡Correcto! ${en}/${ed}.` };
+  return { ok: false, msg: `La respuesta es ${en}/${ed}.` };
+}
+
+function validateMoney(input, expected, tolerance = 0.05) {
+  const val = parseFloat(input);
+  if (isNaN(val)) return { ok: false, msg: "Ingresa un valor numérico." };
+  if (Math.abs(val - expected) > tolerance) return { ok: false, msg: `La respuesta es ${formatMoney(expected)}.` };
+  return { ok: true, msg: `¡Correcto! ${formatMoney(expected)}.` };
+}
+
+function validateIngredient(input, ingredients, scaleN, scaleD) {
+  const val = input.trim().toLowerCase();
+  let hardest = null;
+  for (let i = 0; i < ingredients.length; i++) {
+    const [origN, origD] = ingredients[i].amount;
+    const [rn, rd] = simplify(origN * scaleN, origD * scaleD);
+    if (12 % rd !== 0) { hardest = ingredients[i].name; break; }
   }
-  return hash;
+  if (!hardest) {
+    let maxDen = 0;
+    for (let i = 0; i < ingredients.length; i++) {
+      const [origN, origD] = ingredients[i].amount;
+      const [rn, rd] = simplify(origN * scaleN, origD * scaleD);
+      if (rd > maxDen) { maxDen = rd; hardest = ingredients[i].name; }
+    }
+  }
+  const match = hardest.toLowerCase().split(' ').some(w => w.length > 2 && val.includes(w)) || val.includes(hardest.toLowerCase());
+  if (match) return { ok: true, msg: `¡Correcto! ${hardest} es el más difícil.` };
+  return { ok: false, msg: `La respuesta es: ${hardest}.` };
 }
 
-// ============ PHASES ============
+function calcTotalCost(ingredients, scaleN, scaleD) {
+  let total = 0;
+  for (let i = 0; i < ingredients.length; i++) {
+    const [origN, origD] = ingredients[i].amount;
+    total += ((origN * scaleN) / (origD * scaleD)) * ingredients[i].pricePerCup;
+  }
+  return total;
+}
+
+// ============ PHASES POR PLANTILLA ============
 function buildPhases() {
   const s = currentSituation;
   const [scaleN, scaleD] = [s.scaleN, s.scaleD];
+  switch(s.template) {
+    case 'A': return buildTemplateA(s, scaleN, scaleD);
+    case 'B': return buildTemplateB(s, scaleN, scaleD);
+    case 'C': return buildTemplateC(s, scaleN, scaleD);
+    case 'D': return buildTemplateD(s, scaleN, scaleD);
+    case 'E': return buildTemplateE(s, scaleN, scaleD);
+    case 'F': return buildTemplateF(s, scaleN, scaleD);
+    default: return buildTemplateA(s, scaleN, scaleD);
+  }
+}
 
+function buildTemplateA(s, scaleN, scaleD) {
+  const totalCost = calcTotalCost(s.ingredients, scaleN, scaleD);
+  const income = s.newServings * s.pricePerUnit;
+  const profit = income - totalCost;
   return [
-    // Q1 - Fracción de escalado
-    {
-      id: 1, title: "Fase 1: Escalando la Receta", subtitle: "Pregunta 1 de 8", icon: "📏",
-      question: `¿Qué fracción de la receta original necesita preparar ${s.name} para las ${s.newServings} personas? (Simplifica la fracción al máximo)`,
-      hint: `Divide las porciones nuevas entre las originales: ${s.newServings}/${s.originalServings}, y luego simplifica dividiendo entre el MCD.`,
-      inputs: [
-        { key: "q1_num", label: "Numerador", placeholder: "?" },
-        { key: "q1_den", label: "Denominador", placeholder: "?" }
-      ],
-      validate: () => {
-        const n = parseInt(document.getElementById("q1_num").value);
-        const d = parseInt(document.getElementById("q1_den").value);
-        if (isNaN(n) || isNaN(d) || d === 0) return { ok: false, msg: "Ingresa un numerador y un denominador válidos." };
-        const [sn, sd] = simplify(n, d);
-        if (sn === scaleN && sd === scaleD) {
-          return { ok: true, msg: `¡Correcto! ${s.newServings}/${s.originalServings} simplificado es ${scaleN}/${scaleD}.` };
-        }
-        return { ok: false, msg: `Revisa tu simplificación. El MCD de ${s.newServings} y ${s.originalServings} es ${gcd(s.newServings, s.originalServings)}. La respuesta es ${scaleN}/${scaleD}.` };
-      }
+    { id: 1, title: "Fase 1: Escalando la Receta", subtitle: "Pregunta 1 de 8", icon: "📏",
+      question: `¿Qué fracción de la receta original necesita preparar ${s.name} para las ${s.newServings} personas? (Simplifica al máximo)`,
+      hint: `Divide ${s.newServings}/${s.originalServings} y simplifica dividiendo entre el MCD (${gcd(s.newServings, s.originalServings)}).`,
+      inputs: [{ key: "q1_num", label: "Numerador", placeholder: "?" }, { key: "q1_den", label: "Denominador", placeholder: "?" }],
+      validate: () => validateFraction(document.getElementById("q1_num").value, document.getElementById("q1_den").value, scaleN, scaleD)
     },
-    // Q2 - Nuevas cantidades
-    {
-      id: 2, title: "Fase 1: Escalando la Receta", subtitle: "Pregunta 2 de 8", icon: "🥣",
-      question: `Calcula la nueva cantidad exacta que ${s.name} necesita para cada uno de los 4 ingredientes. Multiplica cada cantidad original por la fracción de escalado (${scaleN}/${scaleD}).`,
-      hint: `Para multiplicar fracciones: (a/b) × (c/d) = (a×c)/(b×d). Luego simplifica. Escribe cada respuesta como fracción simplificada (ej: 1/2).`,
-      inputs: s.ingredients.map((ing, idx) => ({
-        key: `q2_${idx}`, label: `${ing.emoji} ${ing.name} (num/den)`, placeholder: "num/den", isFraction: true
-      })),
+    { id: 2, title: "Fase 1: Escalando la Receta", subtitle: "Pregunta 2 de 8", icon: "🥣",
+      question: `Calcula la nueva cantidad exacta para cada ingrediente multiplicando por ${scaleN}/${scaleD}.`,
+      hint: `(a/b) × (c/d) = (a×c)/(b×d). Luego simplifica.`,
+      inputs: s.ingredients.map((ing, idx) => ({ key: `q2_${idx}`, label: `${ing.emoji} ${ing.name} (num/den)`, placeholder: "num/den", isFraction: true })),
       validate: () => {
         for (let i = 0; i < s.ingredients.length; i++) {
           const val = document.getElementById(`q2_${i}`).value.trim();
           const parts = val.split('/').map(x => parseInt(x.trim()));
-          if (parts.length !== 2 || isNaN(parts[0]) || isNaN(parts[1]) || parts[1] === 0) {
-            return { ok: false, msg: `Revisa el formato de ${s.ingredients[i].name}. Usa num/den (ej: 1/2).` };
-          }
-          const [un, ud] = parts;
+          if (parts.length !== 2 || isNaN(parts[0]) || isNaN(parts[1]) || parts[1] === 0) return { ok: false, msg: `Revisa el formato de ${s.ingredients[i].name}.` };
           const [origN, origD] = s.ingredients[i].amount;
-          const newN = origN * scaleN;
-          const newD = origD * scaleD;
-          const [sn, sd] = simplify(newN, newD);
-          const [usn, usd] = simplify(un, ud);
-          if (usn !== sn || usd !== sd) {
-            return { ok: false, msg: `${s.ingredients[i].name}: ${origN}/${origD} × ${scaleN}/${scaleD} = ${newN}/${newD} = ${sn}/${sd}. Revisa tu cálculo.` };
-          }
+          const r = validateFraction(parts[0], parts[1], origN * scaleN, origD * scaleD);
+          if (!r.ok) return { ok: false, msg: `${s.ingredients[i].name}: ${r.msg}` };
         }
-        const results = s.ingredients.map((ing, i) => {
-          const [origN, origD] = ing.amount;
-          const [sn, sd] = simplify(origN * scaleN, origD * scaleD);
-          return `${ing.name} = ${sn}/${sd}`;
-        }).join(', ');
-        return { ok: true, msg: `¡Excelente! Las nuevas cantidades son: ${results}.` };
+        return { ok: true, msg: `¡Excelente! Todas las cantidades son correctas.` };
       }
     },
-    // Q3 - Costos individuales
-    {
-      id: 3, title: "Fase 2: Calculando los Costos", subtitle: "Pregunta 3 de 8", icon: "💵",
-      question: `Utilizando las cantidades calculadas, ¿cuánto gastará ${s.name} en cada ingrediente? (Multiplica cantidad en tazas × precio por taza)`,
-      hint: `Ejemplo: si usas 1/2 taza de un ingrediente que cuesta $6.00/taza, el gasto es (1/2) × 6 = $3.00. Escribe cada respuesta con 2 decimales.`,
-      inputs: s.ingredients.map((ing, idx) => ({
-        key: `q3_${idx}`, label: `${ing.emoji} Costo de ${ing.name} ($)`, placeholder: "0.00", isMoney: true
-      })),
+    { id: 3, title: "Fase 2: Calculando los Costos", subtitle: "Pregunta 3 de 8", icon: "💵",
+      question: `¿Cuánto gastará ${s.name} en cada ingrediente? (cantidad × precio por taza)`,
+      hint: `Ejemplo: 1/2 taza × $6.00/taza = $3.00.`,
+      inputs: s.ingredients.map((ing, idx) => ({ key: `q3_${idx}`, label: `${ing.emoji} ${ing.name} ($)`, placeholder: "0.00", isMoney: true })),
       validate: () => {
         for (let i = 0; i < s.ingredients.length; i++) {
-          const val = parseFloat(document.getElementById(`q3_${i}`).value);
-          if (isNaN(val)) return { ok: false, msg: `Ingresa un valor numérico para ${s.ingredients[i].name}.` };
           const [origN, origD] = s.ingredients[i].amount;
-          const newN = origN * scaleN;
-          const newD = origD * scaleD;
-          const cost = (newN / newD) * s.ingredients[i].pricePerCup;
-          if (Math.abs(val - cost) > 0.02) {
-            return { ok: false, msg: `${s.ingredients[i].name}: (${newN}/${newD}) × ${formatMoney(s.ingredients[i].pricePerCup)} = ${formatMoney(cost)}. Revisa tu cálculo.` };
-          }
+          const cost = ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
+          const r = validateMoney(document.getElementById(`q3_${i}`).value, cost, 0.02);
+          if (!r.ok) return { ok: false, msg: `${s.ingredients[i].name}: ${r.msg}` };
         }
-        return { ok: true, msg: `¡Perfecto! Has calculado correctamente cada costo individual.` };
+        return { ok: true, msg: `¡Perfecto!` };
       }
     },
-    // Q4 - Costo total
-    {
-      id: 4, title: "Fase 2: Calculando los Costos", subtitle: "Pregunta 4 de 8", icon: "🧾",
-      question: `¿Cuánto le cuesta en total a ${s.name} producir la bandeja de los ${s.newServings} ${s.dessertShort}?`,
-      hint: `Suma los 4 costos individuales que calculaste en la pregunta anterior.`,
+    { id: 4, title: "Fase 2: Calculando los Costos", subtitle: "Pregunta 4 de 8", icon: "🧾",
+      question: `¿Costo total de producción de los ${s.newServings} ${s.dessertShort}?`,
+      hint: `Suma los 4 costos individuales.`,
       inputs: [{ key: "q4", label: "Costo total ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => {
-        const val = parseFloat(document.getElementById("q4").value);
-        if (isNaN(val)) return { ok: false, msg: "Ingresa un valor numérico." };
-        let total = 0;
-        for (let i = 0; i < s.ingredients.length; i++) {
-          const [origN, origD] = s.ingredients[i].amount;
-          total += ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
-        }
-        if (Math.abs(val - total) > 0.05) {
-          return { ok: false, msg: `Suma los 4 costos individuales. El total correcto es ${formatMoney(total)}.` };
-        }
-        return { ok: true, msg: `¡Correcto! El costo total de producción es ${formatMoney(total)}.` };
-      }
+      validate: () => validateMoney(document.getElementById("q4").value, totalCost)
     },
-    // Q5 - Ingreso
-    {
-      id: 5, title: "Fase 3: Análisis de Negocios", subtitle: "Pregunta 5 de 8", icon: "💰",
-      question: `Si ${s.name} vende cada uno de los ${s.newServings} ${s.dessertShort} a ${formatMoney(s.pricePerUnit)}, ¿cuánto dinero recaudará en total (Ingreso)?`,
-      hint: `Ingreso = número de porciones × precio por porción.`,
-      inputs: [{ key: "q5", label: "Ingreso total ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => {
-        const val = parseFloat(document.getElementById("q5").value);
-        if (isNaN(val)) return { ok: false, msg: "Ingresa un valor numérico." };
-        const expected = s.newServings * s.pricePerUnit;
-        if (Math.abs(val - expected) > 0.02) {
-          return { ok: false, msg: `${s.newServings} × ${formatMoney(s.pricePerUnit)} = ${formatMoney(expected)}.` };
-        }
-        return { ok: true, msg: `¡Excelente! El ingreso total es ${formatMoney(expected)}.` };
-      }
+    { id: 5, title: "Fase 3: Análisis de Negocios", subtitle: "Pregunta 5 de 8", icon: "💰",
+      question: `Si vende los ${s.newServings} a ${formatMoney(s.pricePerUnit)} c/u, ¿cuánto recauda (Ingreso)?`,
+      hint: `Ingreso = porciones × precio por porción.`,
+      inputs: [{ key: "q5", label: "Ingreso ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q5").value, income, 0.02)
     },
-    // Q6 - Ganancia
-    {
-      id: 6, title: "Fase 3: Análisis de Negocios", subtitle: "Pregunta 6 de 8", icon: "📈",
-      question: `¿Cuál será la ganancia neta de ${s.name}? (Ingreso − Costo de producción)`,
-      hint: `Ganancia = Ingreso (pregunta 5) − Costo total (pregunta 4).`,
-      inputs: [{ key: "q6", label: "Ganancia neta ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => {
-        const val = parseFloat(document.getElementById("q6").value);
-        if (isNaN(val)) return { ok: false, msg: "Ingresa un valor numérico." };
-        let cost = 0;
-        for (let i = 0; i < s.ingredients.length; i++) {
-          const [origN, origD] = s.ingredients[i].amount;
-          cost += ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
-        }
-        const income = s.newServings * s.pricePerUnit;
-        const profit = income - cost;
-        if (Math.abs(val - profit) > 0.10) {
-          return { ok: false, msg: `${formatMoney(income)} − ${formatMoney(cost)} = ${formatMoney(profit)}.` };
-        }
-        return { ok: true, msg: `¡Muy bien! La ganancia neta es ${formatMoney(profit)}. ¡${s.name} tiene un buen negocio!` };
-      }
+    { id: 6, title: "Fase 3: Análisis de Negocios", subtitle: "Pregunta 6 de 8", icon: "📈",
+      question: `¿Ganancia neta? (Ingreso − Costo)`,
+      hint: `Ganancia = Ingreso − Costo total.`,
+      inputs: [{ key: "q6", label: "Ganancia ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q6").value, profit, 0.10)
     },
-    // Q7 - Ingrediente difícil
-    {
-      id: 7, title: "Fase 4: Pensamiento Crítico", subtitle: "Pregunta 7 de 8", icon: "🤔",
-      question: `Las tazas medidoras estándar son: 1, 1/2, 1/3 y 1/4. ¿Cuál de los ingredientes calculados será el más difícil de medir exactamente con estas tazas? Escribe el nombre del ingrediente.`,
-      hint: `Revisa las fracciones resultantes. El MCM de 2, 3 y 4 es 12. Si el denominador de la fracción simplificada NO divide a 12, esa fracción no se puede expresar como suma de 1/2, 1/3 o 1/4.`,
-      inputs: [{ key: "q7", label: "Ingrediente difícil", placeholder: "Ej: Cacao" }],
-      validate: () => {
-        const val = document.getElementById("q7").value.trim().toLowerCase();
-        let hardest = null;
-        for (let i = 0; i < s.ingredients.length; i++) {
-          const [origN, origD] = s.ingredients[i].amount;
-          const [rn, rd] = simplify(origN * scaleN, origD * scaleD);
-          if (12 % rd !== 0) {
-            hardest = s.ingredients[i].name;
-            break;
-          }
-        }
-        if (!hardest) {
-          // Fallback: buscar el denominador más "raro"
-          let maxDen = 0;
-          for (let i = 0; i < s.ingredients.length; i++) {
-            const [origN, origD] = s.ingredients[i].amount;
-            const [rn, rd] = simplify(origN * scaleN, origD * scaleD);
-            if (rd > maxDen) { maxDen = rd; hardest = s.ingredients[i].name; }
-          }
-        }
-        const hardestLower = hardest.toLowerCase();
-        const match = hardestLower.split(' ').some(w => w.length > 2 && val.includes(w)) || val.includes(hardestLower);
-        if (match) {
-          const [origN, origD] = s.ingredients.find(i => i.name === hardest).amount;
-          const [rn, rd] = simplify(origN * scaleN, origD * scaleD);
-          return { ok: true, msg: `¡Correcto! ${hardest} es el más difícil porque su fracción resultante (${rn}/${rd}) no se puede expresar como suma de 1/2, 1/3 o 1/4. Estrategia creativa: usar cucharas medidoras (1 taza = 48 cucharaditas), o medir por aproximación usando marcas en un vaso transparente.` };
-        }
-        return { ok: false, msg: `Busca el ingrediente cuya fracción simplificada tenga un denominador que NO sea divisor de 12. La respuesta correcta es: ${hardest}.` };
-      }
+    { id: 7, title: "Fase 4: Pensamiento Crítico", subtitle: "Pregunta 7 de 8", icon: "🤔",
+      question: `Las tazas medidoras son: 1, 1/2, 1/3 y 1/4. ¿Cuál ingrediente será más difícil de medir?`,
+      hint: `El MCM de 2, 3 y 4 es 12. Si el denominador simplificado NO divide a 12, esa fracción no se puede medir con esas tazas.`,
+      inputs: [{ key: "q7", label: "Ingrediente", placeholder: "Ej: Cacao" }],
+      validate: () => validateIngredient(document.getElementById("q7").value, s.ingredients, scaleN, scaleD)
     },
-    // Q8 - Propiedad distributiva
-    {
-      id: 8, title: "Fase 4: Pensamiento Crítico", subtitle: "Pregunta 8 de 8", icon: "🧠",
-      question: `¿Qué pasaría si ${s.name} calculara primero el costo de la receta original completa (${s.originalServings} porciones) y luego le aplicara la fracción de escalado (${scaleN}/${scaleD}) al costo total? ¿Daría el mismo resultado que sumar los costos individuales? Responde: SI o NO.`,
-      hint: `Piensa en la propiedad distributiva: a·k + b·k + c·k + d·k = (a+b+c+d)·k`,
-      inputs: [{ key: "q8", label: "¿Mismo resultado? (SI/NO)", placeholder: "SI o NO" }],
+    { id: 8, title: "Fase 4: Pensamiento Crítico", subtitle: "Pregunta 8 de 8", icon: "🧠",
+      question: `¿Escalar el costo total o sumar costos escalados da el mismo resultado? (SI/NO)`,
+      hint: `Propiedad distributiva: a·k + b·k + c·k = (a+b+c)·k`,
+      inputs: [{ key: "q8", label: "Respuesta", placeholder: "SI o NO" }],
       validate: () => {
         const val = document.getElementById("q8").value.trim().toUpperCase();
-        if (val === "SI" || val === "SÍ" || val === "YES") {
-          return { ok: true, msg: `¡Correcto! Por la propiedad distributiva de la multiplicación, el resultado es el mismo. Comprobación: costo original × (${scaleN}/${scaleD}) = costo escalado. ¡Las matemáticas siempre son coherentes!` };
-        }
-        if (val === "NO") {
-          return { ok: false, msg: `Incorrecto. Por la propiedad distributiva de la multiplicación, SÍ da el mismo resultado. Compruébalo calculando ambos caminos.` };
-        }
+        if (val === "SI" || val === "SÍ") return { ok: true, msg: `¡Correcto! Por la propiedad distributiva, el resultado es el mismo.` };
+        if (val === "NO") return { ok: false, msg: `Incorrecto. Sí da el mismo resultado.` };
         return { ok: false, msg: `Responde SI o NO.` };
+      }
+    }
+  ];
+}
+
+function buildTemplateB(s, scaleN, scaleD) {
+  return [
+    { id: 1, title: "Escalado", subtitle: "Pregunta 1 de 3", icon: "📏",
+      question: `¿Qué fracción de la receta original necesita preparar ${s.name}?`,
+      hint: `${s.newServings}/${s.originalServings} simplificado.`,
+      inputs: [{ key: "q1_num", label: "Numerador", placeholder: "?" }, { key: "q1_den", label: "Denominador", placeholder: "?" }],
+      validate: () => validateFraction(document.getElementById("q1_num").value, document.getElementById("q1_den").value, scaleN, scaleD)
+    },
+    { id: 2, title: "Escalado", subtitle: "Pregunta 2 de 3", icon: "🥣",
+      question: `Calcula la nueva cantidad para cada ingrediente.`,
+      hint: `Multiplica cada fracción por ${scaleN}/${scaleD}.`,
+      inputs: s.ingredients.map((ing, idx) => ({ key: `q2_${idx}`, label: `${ing.emoji} ${ing.name} (num/den)`, placeholder: "num/den", isFraction: true })),
+      validate: () => {
+        for (let i = 0; i < s.ingredients.length; i++) {
+          const val = document.getElementById(`q2_${i}`).value.trim();
+          const parts = val.split('/').map(x => parseInt(x.trim()));
+          if (parts.length !== 2 || isNaN(parts[0]) || isNaN(parts[1]) || parts[1] === 0) return { ok: false, msg: `Revisa el formato.` };
+          const [origN, origD] = s.ingredients[i].amount;
+          const r = validateFraction(parts[0], parts[1], origN * scaleN, origD * scaleD);
+          if (!r.ok) return { ok: false, msg: `${s.ingredients[i].name}: ${r.msg}` };
+        }
+        return { ok: true, msg: `¡Perfecto!` };
+      }
+    },
+    { id: 3, title: "Pensamiento Crítico", subtitle: "Pregunta 3 de 3", icon: "🤔",
+      question: `¿Cuál ingrediente será más difícil de medir con tazas de 1, 1/2, 1/3 y 1/4?`,
+      hint: `Busca el denominador que no divida a 12.`,
+      inputs: [{ key: "q3", label: "Ingrediente", placeholder: "Nombre" }],
+      validate: () => validateIngredient(document.getElementById("q3").value, s.ingredients, scaleN, scaleD)
+    }
+  ];
+}
+
+function buildTemplateC(s, scaleN, scaleD) {
+  const totalCost = calcTotalCost(s.ingredients, scaleN, scaleD);
+  return [
+    { id: 1, title: "Escalado", subtitle: "Pregunta 1 de 5", icon: "📏",
+      question: `¿Fracción de escalado?`,
+      hint: `${s.newServings}/${s.originalServings} simplificado.`,
+      inputs: [{ key: "q1_num", label: "Numerador", placeholder: "?" }, { key: "q1_den", label: "Denominador", placeholder: "?" }],
+      validate: () => validateFraction(document.getElementById("q1_num").value, document.getElementById("q1_den").value, scaleN, scaleD)
+    },
+    { id: 2, title: "Escalado", subtitle: "Pregunta 2 de 5", icon: "🥣",
+      question: `Calcula la nueva cantidad para cada ingrediente.`,
+      hint: `Multiplica por ${scaleN}/${scaleD}.`,
+      inputs: s.ingredients.map((ing, idx) => ({ key: `q2_${idx}`, label: `${ing.emoji} ${ing.name} (num/den)`, placeholder: "num/den", isFraction: true })),
+      validate: () => {
+        for (let i = 0; i < s.ingredients.length; i++) {
+          const val = document.getElementById(`q2_${i}`).value.trim();
+          const parts = val.split('/').map(x => parseInt(x.trim()));
+          if (parts.length !== 2 || isNaN(parts[0]) || isNaN(parts[1]) || parts[1] === 0) return { ok: false, msg: `Revisa el formato.` };
+          const [origN, origD] = s.ingredients[i].amount;
+          const r = validateFraction(parts[0], parts[1], origN * scaleN, origD * scaleD);
+          if (!r.ok) return { ok: false, msg: `${s.ingredients[i].name}: ${r.msg}` };
+        }
+        return { ok: true, msg: `¡Perfecto!` };
+      }
+    },
+    { id: 3, title: "Costos", subtitle: "Pregunta 3 de 5", icon: "💵",
+      question: `¿Cuánto gastará ${s.name} en cada ingrediente?`,
+      hint: `Cantidad × precio por taza.`,
+      inputs: s.ingredients.map((ing, idx) => ({ key: `q3_${idx}`, label: `${ing.emoji} ${ing.name} ($)`, placeholder: "0.00", isMoney: true })),
+      validate: () => {
+        for (let i = 0; i < s.ingredients.length; i++) {
+          const [origN, origD] = s.ingredients[i].amount;
+          const cost = ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
+          const r = validateMoney(document.getElementById(`q3_${i}`).value, cost, 0.02);
+          if (!r.ok) return { ok: false, msg: `${s.ingredients[i].name}: ${r.msg}` };
+        }
+        return { ok: true, msg: `¡Correcto!` };
+      }
+    },
+    { id: 4, title: "Costos", subtitle: "Pregunta 4 de 5", icon: "🧾",
+      question: `¿Costo total de producción?`,
+      hint: `Suma los costos individuales.`,
+      inputs: [{ key: "q4", label: "Total ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q4").value, totalCost)
+    },
+    { id: 5, title: "Pensamiento Crítico", subtitle: "Pregunta 5 de 5", icon: "🤔",
+      question: `¿Cuál ingrediente será más difícil de medir?`,
+      hint: `Denominador que no divida a 12.`,
+      inputs: [{ key: "q5", label: "Ingrediente", placeholder: "Nombre" }],
+      validate: () => validateIngredient(document.getElementById("q5").value, s.ingredients, scaleN, scaleD)
+    }
+  ];
+}
+
+function buildTemplateD(s, scaleN, scaleD) {
+  const totalCost = calcTotalCost(s.ingredients, scaleN, scaleD);
+  const income = s.newServings * s.pricePerUnit;
+  const profit = income - totalCost;
+  return [
+    { id: 1, title: "Escalado", subtitle: "Pregunta 1 de 5", icon: "📏",
+      question: `¿Fracción de escalado?`,
+      hint: `${s.newServings}/${s.originalServings} simplificado.`,
+      inputs: [{ key: "q1_num", label: "Numerador", placeholder: "?" }, { key: "q1_den", label: "Denominador", placeholder: "?" }],
+      validate: () => validateFraction(document.getElementById("q1_num").value, document.getElementById("q1_den").value, scaleN, scaleD)
+    },
+    { id: 2, title: "Costos", subtitle: "Pregunta 2 de 5", icon: "🧾",
+      question: `¿Costo total de producción de los ${s.newServings} ${s.dessertShort}?`,
+      hint: `Calcula cada ingrediente y suma.`,
+      inputs: [{ key: "q2", label: "Costo total ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q2").value, totalCost)
+    },
+    { id: 3, title: "Negocio", subtitle: "Pregunta 3 de 5", icon: "💰",
+      question: `¿Ingreso total si vende los ${s.newServings} a ${formatMoney(s.pricePerUnit)} c/u?`,
+      hint: `Porciones × precio.`,
+      inputs: [{ key: "q3", label: "Ingreso ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q3").value, income, 0.02)
+    },
+    { id: 4, title: "Negocio", subtitle: "Pregunta 4 de 5", icon: "📈",
+      question: `¿Ganancia neta?`,
+      hint: `Ingreso − Costo.`,
+      inputs: [{ key: "q4", label: "Ganancia ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q4").value, profit, 0.10)
+    },
+    { id: 5, title: "Pensamiento Crítico", subtitle: "Pregunta 5 de 5", icon: "🧠",
+      question: `¿Escalar el costo total o sumar costos escalados da lo mismo? (SI/NO)`,
+      hint: `Propiedad distributiva.`,
+      inputs: [{ key: "q5", label: "Respuesta", placeholder: "SI/NO" }],
+      validate: () => {
+        const val = document.getElementById("q5").value.trim().toUpperCase();
+        if (val === "SI" || val === "SÍ") return { ok: true, msg: `¡Correcto!` };
+        if (val === "NO") return { ok: false, msg: `Sí da lo mismo.` };
+        return { ok: false, msg: `Responde SI o NO.` };
+      }
+    }
+  ];
+}
+
+function buildTemplateE(s, scaleN, scaleD) {
+  return [
+    { id: 1, title: "Escalado Inverso", subtitle: "Pregunta 1 de 4", icon: "🔄",
+      question: `Si la receta ajustada usa ${fractionHTML(s.ingredients[0].amount[0], s.ingredients[0].amount[1])} taza de ${s.ingredients[0].name}, ¿cuánto usaba la receta original?`,
+      hint: `Divide entre ${scaleN}/${scaleD}, o multiplica por su inverso ${scaleD}/${scaleN}.`,
+      inputs: [{ key: "q1_num", label: "Numerador", placeholder: "?" }, { key: "q1_den", label: "Denominador", placeholder: "?" }],
+      validate: () => {
+        const scaledN = s.ingredients[0].amount[0], scaledD = s.ingredients[0].amount[1];
+        return validateFraction(document.getElementById("q1_num").value, document.getElementById("q1_den").value, scaledN * scaleD, scaledD * scaleN);
+      }
+    },
+    { id: 2, title: "Escalado Inverso", subtitle: "Pregunta 2 de 4", icon: "🔄",
+      question: `¿Cantidad original de ${s.ingredients[1].name}?`,
+      hint: `Multiplica la cantidad ajustada por ${scaleD}/${scaleN}.`,
+      inputs: [{ key: "q2_num", label: "Numerador", placeholder: "?" }, { key: "q2_den", label: "Denominador", placeholder: "?" }],
+      validate: () => {
+        const scaledN = s.ingredients[1].amount[0], scaledD = s.ingredients[1].amount[1];
+        return validateFraction(document.getElementById("q2_num").value, document.getElementById("q2_den").value, scaledN * scaleD, scaledD * scaleN);
+      }
+    },
+    { id: 3, title: "Escalado Inverso", subtitle: "Pregunta 3 de 4", icon: "🔄",
+      question: `¿Cantidad original de ${s.ingredients[2].name}?`,
+      hint: `Multiplica por ${scaleD}/${scaleN}.`,
+      inputs: [{ key: "q3_num", label: "Numerador", placeholder: "?" }, { key: "q3_den", label: "Denominador", placeholder: "?" }],
+      validate: () => {
+        const scaledN = s.ingredients[2].amount[0], scaledD = s.ingredients[2].amount[1];
+        return validateFraction(document.getElementById("q3_num").value, document.getElementById("q3_den").value, scaledN * scaleD, scaledD * scaleN);
+      }
+    },
+    { id: 4, title: "Pensamiento Crítico", subtitle: "Pregunta 4 de 4", icon: "🧠",
+      question: `Para "deshacer" el escalado, ¿multiplicas por ${scaleN}/${scaleD} o por ${scaleD}/${scaleN}?`,
+      hint: `Si escalas multiplicando por a/b, deshaces multiplicando por b/a (el inverso).`,
+      inputs: [{ key: "q4", label: "Respuesta", placeholder: `${scaleN}/${scaleD} o ${scaleD}/${scaleN}` }],
+      validate: () => {
+        const val = document.getElementById("q4").value.trim();
+        if (val.includes(`${scaleD}/${scaleN}`)) return { ok: true, msg: `¡Correcto! El inverso de ${scaleN}/${scaleD} es ${scaleD}/${scaleN}.` };
+        return { ok: false, msg: `La respuesta es ${scaleD}/${scaleN}.` };
+      }
+    }
+  ];
+}
+
+function buildTemplateF(s, scaleN, scaleD) {
+  const costA = calcTotalCost(s.ingredients, scaleN, scaleD);
+  const costB = calcTotalCost(s.ingredients2, scaleN, scaleD);
+  const income = s.newServings * s.pricePerUnit;
+  const profitA = income - costA;
+  const profitB = income - costB;
+  const betterOption = profitA >= profitB ? 'A' : 'B';
+  const difference = Math.abs(profitA - profitB);
+  return [
+    { id: 1, title: "Escalado", subtitle: "Pregunta 1 de 6", icon: "📏",
+      question: `¿Fracción de escalado para ${s.newServings} porciones?`,
+      hint: `${s.newServings}/${s.originalServings} simplificado.`,
+      inputs: [{ key: "q1_num", label: "Numerador", placeholder: "?" }, { key: "q1_den", label: "Denominador", placeholder: "?" }],
+      validate: () => validateFraction(document.getElementById("q1_num").value, document.getElementById("q1_den").value, scaleN, scaleD)
+    },
+    { id: 2, title: "Comparativa", subtitle: "Pregunta 2 de 6", icon: "🅰️",
+      question: `¿Costo total de la Opción A (${s.dessert})?`,
+      hint: `Suma los costos de los 3 ingredientes de la Opción A.`,
+      inputs: [{ key: "q2", label: "Costo A ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q2").value, costA)
+    },
+    { id: 3, title: "Comparativa", subtitle: "Pregunta 3 de 6", icon: "🅱️",
+      question: `¿Costo total de la Opción B (${s.dessert2})?`,
+      hint: `Suma los costos de los 3 ingredientes de la Opción B.`,
+      inputs: [{ key: "q3", label: "Costo B ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q3").value, costB)
+    },
+    { id: 4, title: "Comparativa", subtitle: "Pregunta 4 de 6", icon: "📈",
+      question: `¿Ganancia neta de la Opción A?`,
+      hint: `Ingreso (${formatMoney(income)}) − Costo A.`,
+      inputs: [{ key: "q4", label: "Ganancia A ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q4").value, profitA, 0.10)
+    },
+    { id: 5, title: "Comparativa", subtitle: "Pregunta 5 de 6", icon: "📈",
+      question: `¿Ganancia neta de la Opción B?`,
+      hint: `Ingreso − Costo B.`,
+      inputs: [{ key: "q5", label: "Ganancia B ($)", placeholder: "0.00", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q5").value, profitB, 0.10)
+    },
+    { id: 6, title: "Decisión", subtitle: "Pregunta 6 de 6", icon: "🎯",
+      question: `¿Cuál opción conviene más y por cuánto? (Ej: "A por 2.50")`,
+      hint: `Compara las ganancias. La diferencia es |Ganancia A − Ganancia B|.`,
+      inputs: [
+        { key: "q6_option", label: "Opción (A o B)", placeholder: "A o B" },
+        { key: "q6_diff", label: "Diferencia ($)", placeholder: "0.00", isMoney: true }
+      ],
+      validate: () => {
+        const option = document.getElementById("q6_option").value.trim().toUpperCase();
+        const diff = parseFloat(document.getElementById("q6_diff").value);
+        if (isNaN(diff)) return { ok: false, msg: "Ingresa la diferencia." };
+        if (option !== 'A' && option !== 'B') return { ok: false, msg: "Responde A o B." };
+        if (option !== betterOption) return { ok: false, msg: `Conviene la Opción ${betterOption}.` };
+        if (Math.abs(diff - difference) > 0.10) return { ok: false, msg: `La diferencia es ${formatMoney(difference)}.` };
+        return { ok: true, msg: `¡Correcto! Conviene la Opción ${betterOption} por ${formatMoney(difference)}.` };
       }
     }
   ];
@@ -458,6 +670,7 @@ function renderPhases() {
   currentPhases = buildPhases();
   const container = document.getElementById('phasesContainer');
   container.innerHTML = '';
+  document.getElementById('progressText').textContent = `0 / ${currentPhases.length}`;
 
   currentPhases.forEach((phase, idx) => {
     const isFirst = idx === 0;
@@ -467,26 +680,23 @@ function renderPhases() {
 
     const inputsHTML = phase.inputs.map(inp => {
       if (inp.isFraction) {
-        return `
-          <div class="flex items-center gap-2 flex-wrap">
-            <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
-            <input type="number" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-20 text-center" id="${inp.key}_n" placeholder="num">
-            <span class="text-2xl text-amber-900 font-bold">/</span>
-            <input type="number" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-20 text-center" id="${inp.key}_d" placeholder="den">
-          </div>`;
+        return `<div class="flex items-center gap-2 flex-wrap">
+          <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
+          <input type="number" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-20 text-center" id="${inp.key}_n" placeholder="num">
+          <span class="text-2xl text-amber-900 font-bold">/</span>
+          <input type="number" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-20 text-center" id="${inp.key}_d" placeholder="den">
+        </div>`;
       } else if (inp.isMoney) {
-        return `
-          <div class="flex items-center gap-2">
-            <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
-            <span class="text-2xl text-amber-900">$</span>
-            <input type="number" step="0.01" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-32" id="${inp.key}" placeholder="${inp.placeholder}">
-          </div>`;
+        return `<div class="flex items-center gap-2">
+          <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
+          <span class="text-2xl text-amber-900">$</span>
+          <input type="number" step="0.01" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-32" id="${inp.key}" placeholder="${inp.placeholder}">
+        </div>`;
       } else {
-        return `
-          <div class="flex items-center gap-2 flex-wrap">
-            <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
-            <input type="text" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-48" id="${inp.key}" placeholder="${inp.placeholder}">
-          </div>`;
+        return `<div class="flex items-center gap-2 flex-wrap">
+          <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
+          <input type="text" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-48" id="${inp.key}" placeholder="${inp.placeholder}">
+        </div>`;
       }
     }).join('');
 
@@ -497,12 +707,12 @@ function renderPhases() {
           <div class="text-sm text-amber-700 font-semibold">${phase.subtitle}</div>
           <h3 class="title-font text-xl md:text-2xl text-amber-900 font-bold">${phase.title}</h3>
         </div>
+        <div id="phase-score-${phase.id}" class="ml-auto hidden">
+          <span class="inline-block px-3 py-1 rounded-full font-bold text-sm"></span>
+        </div>
       </div>
       <div class="bg-amber-50 rounded-xl p-4 mb-4 border-2 border-amber-200">
         <p class="text-gray-800 leading-relaxed">${phase.question}</p>
-      </div>
-      <div class="hint-box rounded-xl p-4 mb-4">
-        <p class="text-sm text-amber-900"><strong>💡 Pista:</strong> ${phase.hint}</p>
       </div>
       <div class="space-y-3 mb-4">${inputsHTML}</div>
       <div class="flex gap-3 flex-wrap">
@@ -524,11 +734,27 @@ function checkPhase(phaseId) {
   fb.classList.remove('hidden');
 
   if (result.ok) {
+    const usedHint = phaseScores[phaseId]?.usedHint || false;
+    const score = usedHint ? 0.75 : 1.0;
+    phaseScores[phaseId] = { score, usedHint };
+
     fb.className = 'mt-4 solution-box rounded-xl p-4 fade-in';
-    fb.innerHTML = `
-      <p class="text-green-900 font-bold text-lg">✅ ¡Correcto!</p>
-      <p class="text-blue-900 mt-2">${result.msg}</p>
-    `;
+    const scoreBadge = usedHint 
+      ? `<span class="penalty-badge inline-block px-3 py-1 rounded-full font-bold text-sm ml-2">+0.75 puntos (con pista)</span>`
+      : `<span class="score-badge inline-block px-3 py-1 rounded-full font-bold text-sm ml-2">+1.0 punto</span>`;
+    fb.innerHTML = `<p class="text-green-900 font-bold text-lg">✅ ¡Correcto! ${scoreBadge}</p><p class="text-blue-900 mt-2">${result.msg}</p>`;
+
+    const phaseScoreEl = document.getElementById(`phase-score-${phase.id}`);
+    const spanEl = phaseScoreEl.querySelector('span');
+    if (usedHint) {
+      spanEl.textContent = '+0.75 ⚠️';
+      spanEl.className = 'penalty-badge inline-block px-3 py-1 rounded-full font-bold text-sm';
+    } else {
+      spanEl.textContent = '+1.0 ✓';
+      spanEl.className = 'score-badge inline-block px-3 py-1 rounded-full font-bold text-sm';
+    }
+    phaseScoreEl.classList.remove('hidden');
+
     phase.inputs.forEach(inp => {
       if (inp.isFraction) {
         const n = document.getElementById(`${inp.key}_n`);
@@ -543,19 +769,27 @@ function checkPhase(phaseId) {
 
     completedPhases.add(phaseId);
     updateProgress();
+    updateScoreBadge();
     unlockNextPhase(phaseId);
 
     if (completedPhases.size === currentPhases.length) {
       setTimeout(showFinal, 800);
     }
   } else {
+    if (!phaseScores[phaseId]) phaseScores[phaseId] = { score: 0, usedHint: false };
+    phaseScores[phaseId].usedHint = true;
+
     fb.className = 'mt-4 rounded-xl p-4 fade-in';
     fb.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
     fb.style.borderLeft = '4px solid #ef4444';
     fb.innerHTML = `
       <p class="text-red-900 font-bold">❌ Aún no es correcto</p>
       <p class="text-red-800 mt-1">${result.msg}</p>
+      <div class="hint-box rounded-xl p-4 mt-3 hint-revealed">
+        <p class="text-sm text-amber-900"><strong>💡 Pista (penaliza -0.25 puntos):</strong> ${phase.hint}</p>
+      </div>
     `;
+
     phase.inputs.forEach(inp => {
       if (inp.isFraction) {
         const n = document.getElementById(`${inp.key}_n`);
@@ -577,9 +811,7 @@ function unlockNextPhase(currentId) {
     const nextEl = document.getElementById(`phase-${nextPhase.id}`);
     nextEl.classList.remove('locked');
     nextEl.classList.add('active');
-    setTimeout(() => {
-      nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 400);
+    setTimeout(() => nextEl.scrollIntoView({ behavior: 'smooth', block: "center" }), 400);
   }
 }
 
@@ -589,47 +821,89 @@ function updateProgress() {
   document.getElementById('progressText').textContent = `${completedPhases.size} / ${currentPhases.length}`;
 }
 
+function updateScoreBadge() {
+  const totalScore = Object.values(phaseScores).reduce((sum, p) => sum + p.score, 0);
+  const scaledScore = (totalScore / currentPhases.length) * 5;
+  const badge = document.getElementById('scoreBadge');
+  badge.classList.remove('hidden');
+  badge.querySelector('span').textContent = `⭐ Puntaje: ${scaledScore.toFixed(1)} / 5.0`;
+}
+
 // ============ FINAL ============
 function showFinal() {
   const s = currentSituation;
-  const [scaleN, scaleD] = [s.scaleN, s.scaleD];
-  let cost = 0;
-  for (let i = 0; i < s.ingredients.length; i++) {
-    const [origN, origD] = s.ingredients[i].amount;
-    cost += ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
-  }
-  const income = s.newServings * s.pricePerUnit;
-  const profit = income - cost;
+  const template = TEMPLATES[s.template];
+  const totalScore = Object.values(phaseScores).reduce((sum, p) => sum + p.score, 0);
+  const scaledScore = (totalScore / currentPhases.length) * 5;
+  const perfectCount = Object.values(phaseScores).filter(p => p.score === 1).length;
+  const hintCount = Object.values(phaseScores).filter(p => p.score === 0.75).length;
+
+  let gradeEmoji = "🏆", gradeMessage = "¡Excelente trabajo!";
+  if (scaledScore >= 4.5) { gradeEmoji = "🌟"; gradeMessage = "¡Desempeño sobresaliente!"; }
+  else if (scaledScore >= 3.5) { gradeEmoji = "👏"; gradeMessage = "¡Muy buen trabajo!"; }
+  else if (scaledScore >= 2.5) { gradeEmoji = "👍"; gradeMessage = "¡Buen esfuerzo!"; }
+  else if (scaledScore >= 1.5) { gradeEmoji = "📚"; gradeMessage = "Sigue practicando."; }
+  else { gradeEmoji = "💪"; gradeMessage = "No te rindas, ¡tú puedes!"; }
 
   const finalSection = document.getElementById('finalSection');
   finalSection.classList.remove('hidden');
   finalSection.innerHTML = `
     <div class="card rounded-3xl p-6 md:p-8 shadow-2xl border-4 border-amber-900 fade-in">
       <div class="text-center mb-6">
-        <div class="text-6xl mb-3 sparkle">🏆</div>
-        <h2 class="title-font text-3xl md:text-4xl text-amber-900 font-bold">¡Felicidades!</h2>
-        <p class="text-lg text-amber-700 mt-2">Has completado el desafío de ${s.name}</p>
+        <div class="text-6xl mb-3 sparkle">${gradeEmoji}</div>
+        <h2 class="title-font text-3xl md:text-4xl text-amber-900 font-bold">¡Desafío Completado!</h2>
+        <p class="text-lg text-amber-700 mt-2">${gradeMessage}</p>
       </div>
 
-      <div class="bg-gradient-to-br from-amber-50 to-orange-100 rounded-2xl p-6 mb-6 border-2 border-amber-300">
-        <h3 class="title-font text-2xl text-amber-900 font-bold mb-4">📊 Resumen de Resultados</h3>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="bg-white rounded-xl p-4 shadow">
-            <div class="text-sm text-gray-600">Fracción de escalado</div>
-            <div class="text-2xl title-font text-amber-900">${scaleN}/${scaleD}</div>
+      <div class="bg-gradient-to-br from-yellow-100 via-amber-100 to-orange-100 rounded-2xl p-6 mb-6 border-4 border-amber-600 shadow-xl">
+        <h3 class="title-font text-2xl text-amber-900 font-bold mb-4 text-center">🏅 Tu Puntaje Final</h3>
+        <div class="text-center">
+          <div class="text-7xl title-font text-amber-900 font-bold">${scaledScore.toFixed(1)}</div>
+          <div class="text-2xl text-amber-700 font-semibold mt-2">de 5.0 puntos</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3 mt-6">
+          <div class="bg-white rounded-xl p-3 shadow text-center">
+            <div class="text-3xl title-font text-green-600 font-bold">${perfectCount}</div>
+            <div class="text-xs text-gray-600 font-semibold">Perfectas</div>
+            <div class="text-xs text-gray-500">(+1.0 c/u)</div>
           </div>
-          <div class="bg-white rounded-xl p-4 shadow">
-            <div class="text-sm text-gray-600">Costo total de producción</div>
-            <div class="text-2xl title-font text-green-700">${formatMoney(cost)}</div>
+          <div class="bg-white rounded-xl p-3 shadow text-center">
+            <div class="text-3xl title-font text-amber-600 font-bold">${hintCount}</div>
+            <div class="text-xs text-gray-600 font-semibold">Con pista</div>
+            <div class="text-xs text-gray-500">(+0.75 c/u)</div>
           </div>
-          <div class="bg-white rounded-xl p-4 shadow">
-            <div class="text-sm text-gray-600">Ingreso por ventas</div>
-            <div class="text-2xl title-font text-blue-700">${formatMoney(income)}</div>
+          <div class="bg-white rounded-xl p-3 shadow text-center">
+            <div class="text-3xl title-font text-blue-600 font-bold">${totalScore.toFixed(1)}</div>
+            <div class="text-xs text-gray-600 font-semibold">Puntos brutos</div>
+            <div class="text-xs text-gray-500">de ${currentPhases.length}.0</div>
           </div>
-          <div class="bg-white rounded-xl p-4 shadow">
-            <div class="text-sm text-gray-600">Ganancia neta</div>
-            <div class="text-2xl title-font text-purple-700">${formatMoney(profit)}</div>
-          </div>
+        </div>
+        <div class="mt-4 bg-amber-50 rounded-xl p-3 border border-amber-300">
+          <p class="text-sm text-amber-900 text-center">
+            <strong>Fórmula:</strong> (${totalScore.toFixed(2)} ÷ ${currentPhases.length}) × 5 = <strong>${scaledScore.toFixed(1)}</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 mb-6 border-2 border-gray-200">
+        <h3 class="title-font text-xl text-gray-900 font-bold mb-4">📋 Detalle por Pregunta</h3>
+        <div class="space-y-2">
+          ${currentPhases.map(phase => {
+            const ps = phaseScores[phase.id];
+            const scoreVal = ps ? ps.score : 0;
+            const icon = scoreVal === 1 ? '✅' : (scoreVal === 0.75 ? '⚠️' : '❌');
+            const color = scoreVal === 1 ? 'text-green-700' : (scoreVal === 0.75 ? 'text-amber-700' : 'text-red-700');
+            const bg = scoreVal === 1 ? 'bg-green-50' : (scoreVal === 0.75 ? 'bg-amber-50' : 'bg-red-50');
+            return `
+              <div class="flex items-center justify-between p-2 rounded-lg ${bg}">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">${icon}</span>
+                  <span class="text-sm font-semibold text-gray-800">${phase.icon} ${phase.title} - ${phase.subtitle}</span>
+                </div>
+                <span class="${color} font-bold">+${scoreVal.toFixed(2)}</span>
+              </div>
+            `;
+          }).join('')}
         </div>
       </div>
 
@@ -640,6 +914,7 @@ function showFinal() {
           <li><strong>Simplificación:</strong> reducir fracciones facilita los cálculos.</li>
           <li><strong>Propiedad distributiva:</strong> escalar la suma total o sumar los escalados individuales da el mismo resultado.</li>
           <li><strong>Análisis de negocios:</strong> Ganancia = Ingreso − Costo.</li>
+          <li><strong>Sistema de puntaje:</strong> Sin pista = 1.0 punto. Con pista = 0.75 puntos (penalización del 25%).</li>
         </ul>
       </div>
 
@@ -647,7 +922,7 @@ function showFinal() {
         <button onclick="generateNewSituation()" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-2xl shadow-xl transition transform hover:scale-105 text-lg">
           🎲 Generar nueva situación
         </button>
-        <p class="text-sm text-gray-600 mt-3">Se creará un desafío completamente nuevo con personaje, postre, fracciones y precios diferentes</p>
+        <p class="text-sm text-gray-600 mt-3">Se creará un desafío completamente nuevo (plantilla, personaje, postre y fracciones diferentes)</p>
       </div>
     </div>
   `;
@@ -657,7 +932,9 @@ function showFinal() {
 function generateNewSituation() {
   currentSituation = generateSituation();
   completedPhases.clear();
+  phaseScores = {};
   document.getElementById('finalSection').classList.add('hidden');
+  document.getElementById('scoreBadge').classList.add('hidden');
   renderSituation();
   renderPhases();
   updateProgress();
