@@ -79,7 +79,6 @@
 </div>
 
 <script>
-// ============ BANCO DE DATOS ============
 const NAMES = ["Sofía", "Mateo", "Valentina", "Diego", "Camila", "Andrés", "Luciana", "Sebastián", "Isabella", "Santiago", "Mariana", "Emiliano", "Gabriela", "Nicolás", "Paula", "Alejandro", "Daniela", "Tomás", "Renata", "Felipe", "Catalina", "Joaquín", "Victoria", "Samuel"];
 
 const DESSERTS = [
@@ -122,7 +121,6 @@ const REASONS = [
   "decidió hacer una reunión más íntima con sus mejores amigos"
 ];
 
-// ============ UTILIDADES ============
 function gcd(a, b) { return b === 0 ? Math.abs(a) : gcd(b, a % b); }
 function simplify(n, d) {
   if (d === 0) return [n, d];
@@ -133,7 +131,10 @@ function simplify(n, d) {
 function fractionHTML(n, d) {
   return `<span class="fraction"><span class="num">${n}</span><span class="den">${d}</span></span>`;
 }
-function formatMoney(v) { return `$${v.toFixed(2)}`; }
+function formatMoney(v) {
+  const rounded = Math.round(v);
+  return `$${rounded.toLocaleString('es-CO')}`;
+}
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function shuffle(arr) {
   const a = [...arr];
@@ -152,7 +153,6 @@ function hashCode(str) {
   return hash;
 }
 
-// ============ GENERADOR BASE ============
 function generateBaseSituation() {
   const name = pick(NAMES);
   const dessert = pick(DESSERTS);
@@ -167,7 +167,7 @@ function generateBaseSituation() {
   ];
   const [origServ, newServ] = pick(servingPairs);
   const [scaleN, scaleD] = simplify(newServ, origServ);
-  const priceOptions = [1.50, 2.00, 2.50, 3.00, 3.50, 4.00, 4.50, 5.00];
+  const priceOptions = [2000, 2500, 3000, 3500, 4000, 4500, 5000];
   const pricePerUnit = pick(priceOptions);
   const storyExtra = `El día que iba a hornear, ${reason}. Al final, ${name} confirma que solo vendrán ${newServ} personas. Como no quiere que sobre comida ni desperdiciar ingredientes, decide ajustar (escalar) la receta para preparar exactamente ${newServ} porciones.`;
   return {
@@ -184,7 +184,7 @@ function generateIngredients(count, scaleN, scaleD) {
     [1, 5], [2, 5], [3, 5], [4, 5],
     [1, 6], [5, 6], [1, 8], [3, 8], [5, 8], [7, 8]
   ];
-  const pricePerCupOptions = [3, 4, 5, 6, 7, 8, 9, 10, 12, 15];
+  const pricePerCupOptions = [3000, 4000, 5000, 6000, 7000, 8000, 10000, 12000, 15000];
   ingredients.forEach(ing => {
     ing.amount = pick(fractionOptions);
     ing.pricePerCup = pick(pricePerCupOptions);
@@ -200,7 +200,6 @@ function generateIngredients(count, scaleN, scaleD) {
   return ingredients;
 }
 
-// ============ PLANTILLAS ============
 const TEMPLATES = {
   A: { name: "Completa", icon: "🅰️", description: "Escalado + costos + negocio + pensamiento crítico", questions: 8 },
   B: { name: "Solo escalado", icon: "🅱️", description: "Fracciones y proporciones puras", questions: 3 },
@@ -233,7 +232,6 @@ let currentSituation = generateSituation();
 let completedPhases = new Set();
 let phaseScores = {};
 
-// ============ SITUATION RENDER ============
 function renderSituation() {
   const s = currentSituation;
   const template = TEMPLATES[s.template];
@@ -290,7 +288,6 @@ function renderSituation() {
   templateBadge.querySelector('span').textContent = `${template.icon} ${template.name}`;
 }
 
-// ============ VALIDADORES COMUNES ============
 function validateFraction(inputN, inputD, expectedN, expectedD) {
   const n = parseInt(inputN);
   const d = parseInt(inputD);
@@ -301,7 +298,7 @@ function validateFraction(inputN, inputD, expectedN, expectedD) {
   return { ok: false, msg: `La respuesta es ${en}/${ed}.` };
 }
 
-function validateMoney(input, expected, tolerance = 0.05) {
+function validateMoney(input, expected, tolerance = 500) {
   const val = parseFloat(input);
   if (isNaN(val)) return { ok: false, msg: "Ingresa un valor numérico." };
   if (Math.abs(val - expected) > tolerance) return { ok: false, msg: `La respuesta es ${formatMoney(expected)}.` };
@@ -338,7 +335,6 @@ function calcTotalCost(ingredients, scaleN, scaleD) {
   return total;
 }
 
-// ============ PHASES POR PLANTILLA ============
 function buildPhases() {
   const s = currentSituation;
   const [scaleN, scaleD] = [s.scaleN, s.scaleD];
@@ -382,13 +378,13 @@ function buildTemplateA(s, scaleN, scaleD) {
     },
     { id: 3, title: "Fase 2: Calculando los Costos", subtitle: "Pregunta 3 de 8", icon: "💵",
       question: `¿Cuánto gastará ${s.name} en cada ingrediente? (cantidad × precio por taza)`,
-      hint: `Ejemplo: 1/2 taza × $6.00/taza = $3.00.`,
-      inputs: s.ingredients.map((ing, idx) => ({ key: `q3_${idx}`, label: `${ing.emoji} ${ing.name} ($)`, placeholder: "0.00", isMoney: true })),
+      hint: `Ejemplo: 1/2 taza × $6.000/taza = $3.000.`,
+      inputs: s.ingredients.map((ing, idx) => ({ key: `q3_${idx}`, label: `${ing.emoji} ${ing.name} ($)`, placeholder: "0", isMoney: true })),
       validate: () => {
         for (let i = 0; i < s.ingredients.length; i++) {
           const [origN, origD] = s.ingredients[i].amount;
           const cost = ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
-          const r = validateMoney(document.getElementById(`q3_${i}`).value, cost, 0.02);
+          const r = validateMoney(document.getElementById(`q3_${i}`).value, cost, 100);
           if (!r.ok) return { ok: false, msg: `${s.ingredients[i].name}: ${r.msg}` };
         }
         return { ok: true, msg: `¡Perfecto!` };
@@ -397,20 +393,20 @@ function buildTemplateA(s, scaleN, scaleD) {
     { id: 4, title: "Fase 2: Calculando los Costos", subtitle: "Pregunta 4 de 8", icon: "🧾",
       question: `¿Costo total de producción de los ${s.newServings} ${s.dessertShort}?`,
       hint: `Suma los 4 costos individuales.`,
-      inputs: [{ key: "q4", label: "Costo total ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q4").value, totalCost)
+      inputs: [{ key: "q4", label: "Costo total ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q4").value, totalCost, 500)
     },
     { id: 5, title: "Fase 3: Análisis de Negocios", subtitle: "Pregunta 5 de 8", icon: "💰",
       question: `Si vende los ${s.newServings} a ${formatMoney(s.pricePerUnit)} c/u, ¿cuánto recauda (Ingreso)?`,
       hint: `Ingreso = porciones × precio por porción.`,
-      inputs: [{ key: "q5", label: "Ingreso ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q5").value, income, 0.02)
+      inputs: [{ key: "q5", label: "Ingreso ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q5").value, income, 100)
     },
     { id: 6, title: "Fase 3: Análisis de Negocios", subtitle: "Pregunta 6 de 8", icon: "📈",
       question: `¿Ganancia neta? (Ingreso − Costo)`,
       hint: `Ganancia = Ingreso − Costo total.`,
-      inputs: [{ key: "q6", label: "Ganancia ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q6").value, profit, 0.10)
+      inputs: [{ key: "q6", label: "Ganancia ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q6").value, profit, 1000)
     },
     { id: 7, title: "Fase 4: Pensamiento Crítico", subtitle: "Pregunta 7 de 8", icon: "🤔",
       question: `Las tazas medidoras son: 1, 1/2, 1/3 y 1/4. ¿Cuál ingrediente será más difícil de medir?`,
@@ -493,12 +489,12 @@ function buildTemplateC(s, scaleN, scaleD) {
     { id: 3, title: "Costos", subtitle: "Pregunta 3 de 5", icon: "💵",
       question: `¿Cuánto gastará ${s.name} en cada ingrediente?`,
       hint: `Cantidad × precio por taza.`,
-      inputs: s.ingredients.map((ing, idx) => ({ key: `q3_${idx}`, label: `${ing.emoji} ${ing.name} ($)`, placeholder: "0.00", isMoney: true })),
+      inputs: s.ingredients.map((ing, idx) => ({ key: `q3_${idx}`, label: `${ing.emoji} ${ing.name} ($)`, placeholder: "0", isMoney: true })),
       validate: () => {
         for (let i = 0; i < s.ingredients.length; i++) {
           const [origN, origD] = s.ingredients[i].amount;
           const cost = ((origN * scaleN) / (origD * scaleD)) * s.ingredients[i].pricePerCup;
-          const r = validateMoney(document.getElementById(`q3_${i}`).value, cost, 0.02);
+          const r = validateMoney(document.getElementById(`q3_${i}`).value, cost, 100);
           if (!r.ok) return { ok: false, msg: `${s.ingredients[i].name}: ${r.msg}` };
         }
         return { ok: true, msg: `¡Correcto!` };
@@ -507,8 +503,8 @@ function buildTemplateC(s, scaleN, scaleD) {
     { id: 4, title: "Costos", subtitle: "Pregunta 4 de 5", icon: "🧾",
       question: `¿Costo total de producción?`,
       hint: `Suma los costos individuales.`,
-      inputs: [{ key: "q4", label: "Total ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q4").value, totalCost)
+      inputs: [{ key: "q4", label: "Total ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q4").value, totalCost, 500)
     },
     { id: 5, title: "Pensamiento Crítico", subtitle: "Pregunta 5 de 5", icon: "🤔",
       question: `¿Cuál ingrediente será más difícil de medir?`,
@@ -533,20 +529,20 @@ function buildTemplateD(s, scaleN, scaleD) {
     { id: 2, title: "Costos", subtitle: "Pregunta 2 de 5", icon: "🧾",
       question: `¿Costo total de producción de los ${s.newServings} ${s.dessertShort}?`,
       hint: `Calcula cada ingrediente y suma.`,
-      inputs: [{ key: "q2", label: "Costo total ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q2").value, totalCost)
+      inputs: [{ key: "q2", label: "Costo total ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q2").value, totalCost, 500)
     },
     { id: 3, title: "Negocio", subtitle: "Pregunta 3 de 5", icon: "💰",
       question: `¿Ingreso total si vende los ${s.newServings} a ${formatMoney(s.pricePerUnit)} c/u?`,
       hint: `Porciones × precio.`,
-      inputs: [{ key: "q3", label: "Ingreso ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q3").value, income, 0.02)
+      inputs: [{ key: "q3", label: "Ingreso ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q3").value, income, 100)
     },
     { id: 4, title: "Negocio", subtitle: "Pregunta 4 de 5", icon: "📈",
       question: `¿Ganancia neta?`,
       hint: `Ingreso − Costo.`,
-      inputs: [{ key: "q4", label: "Ganancia ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q4").value, profit, 0.10)
+      inputs: [{ key: "q4", label: "Ganancia ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q4").value, profit, 1000)
     },
     { id: 5, title: "Pensamiento Crítico", subtitle: "Pregunta 5 de 5", icon: "🧠",
       question: `¿Escalar el costo total o sumar costos escalados da lo mismo? (SI/NO)`,
@@ -622,33 +618,33 @@ function buildTemplateF(s, scaleN, scaleD) {
     { id: 2, title: "Comparativa", subtitle: "Pregunta 2 de 6", icon: "🅰️",
       question: `¿Costo total de la Opción A (${s.dessert})?`,
       hint: `Suma los costos de los 3 ingredientes de la Opción A.`,
-      inputs: [{ key: "q2", label: "Costo A ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q2").value, costA)
+      inputs: [{ key: "q2", label: "Costo A ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q2").value, costA, 500)
     },
     { id: 3, title: "Comparativa", subtitle: "Pregunta 3 de 6", icon: "🅱️",
       question: `¿Costo total de la Opción B (${s.dessert2})?`,
       hint: `Suma los costos de los 3 ingredientes de la Opción B.`,
-      inputs: [{ key: "q3", label: "Costo B ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q3").value, costB)
+      inputs: [{ key: "q3", label: "Costo B ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q3").value, costB, 500)
     },
     { id: 4, title: "Comparativa", subtitle: "Pregunta 4 de 6", icon: "📈",
       question: `¿Ganancia neta de la Opción A?`,
       hint: `Ingreso (${formatMoney(income)}) − Costo A.`,
-      inputs: [{ key: "q4", label: "Ganancia A ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q4").value, profitA, 0.10)
+      inputs: [{ key: "q4", label: "Ganancia A ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q4").value, profitA, 1000)
     },
     { id: 5, title: "Comparativa", subtitle: "Pregunta 5 de 6", icon: "📈",
       question: `¿Ganancia neta de la Opción B?`,
       hint: `Ingreso − Costo B.`,
-      inputs: [{ key: "q5", label: "Ganancia B ($)", placeholder: "0.00", isMoney: true }],
-      validate: () => validateMoney(document.getElementById("q5").value, profitB, 0.10)
+      inputs: [{ key: "q5", label: "Ganancia B ($)", placeholder: "0", isMoney: true }],
+      validate: () => validateMoney(document.getElementById("q5").value, profitB, 1000)
     },
     { id: 6, title: "Decisión", subtitle: "Pregunta 6 de 6", icon: "🎯",
-      question: `¿Cuál opción conviene más y por cuánto? (Ej: "A por 2.50")`,
+      question: `¿Cuál opción conviene más y por cuánto? (Ej: "A por 2500")`,
       hint: `Compara las ganancias. La diferencia es |Ganancia A − Ganancia B|.`,
       inputs: [
         { key: "q6_option", label: "Opción (A o B)", placeholder: "A o B" },
-        { key: "q6_diff", label: "Diferencia ($)", placeholder: "0.00", isMoney: true }
+        { key: "q6_diff", label: "Diferencia ($)", placeholder: "0", isMoney: true }
       ],
       validate: () => {
         const option = document.getElementById("q6_option").value.trim().toUpperCase();
@@ -656,14 +652,13 @@ function buildTemplateF(s, scaleN, scaleD) {
         if (isNaN(diff)) return { ok: false, msg: "Ingresa la diferencia." };
         if (option !== 'A' && option !== 'B') return { ok: false, msg: "Responde A o B." };
         if (option !== betterOption) return { ok: false, msg: `Conviene la Opción ${betterOption}.` };
-        if (Math.abs(diff - difference) > 0.10) return { ok: false, msg: `La diferencia es ${formatMoney(difference)}.` };
+        if (Math.abs(diff - difference) > 1000) return { ok: false, msg: `La diferencia es ${formatMoney(difference)}.` };
         return { ok: true, msg: `¡Correcto! Conviene la Opción ${betterOption} por ${formatMoney(difference)}.` };
       }
     }
   ];
 }
 
-// ============ RENDER PHASES ============
 let currentPhases = [];
 
 function renderPhases() {
@@ -690,7 +685,7 @@ function renderPhases() {
         return `<div class="flex items-center gap-2">
           <label class="text-amber-900 font-semibold w-48">${inp.label}</label>
           <span class="text-2xl text-amber-900">$</span>
-          <input type="number" step="0.01" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-32" id="${inp.key}" placeholder="${inp.placeholder}">
+          <input type="number" step="100" class="input-ans border-2 border-amber-400 rounded-lg px-3 py-2 w-32" id="${inp.key}" placeholder="${inp.placeholder}">
         </div>`;
       } else {
         return `<div class="flex items-center gap-2 flex-wrap">
@@ -726,7 +721,6 @@ function renderPhases() {
   });
 }
 
-// ============ INTERACTIONS ============
 function checkPhase(phaseId) {
   const phase = currentPhases.find(p => p.id === phaseId);
   const result = phase.validate();
@@ -829,7 +823,6 @@ function updateScoreBadge() {
   badge.querySelector('span').textContent = `⭐ Puntaje: ${scaledScore.toFixed(1)} / 5.0`;
 }
 
-// ============ FINAL ============
 function showFinal() {
   const s = currentSituation;
   const template = TEMPLATES[s.template];
@@ -941,7 +934,6 @@ function generateNewSituation() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ============ INIT ============
 renderSituation();
 renderPhases();
 updateProgress();
