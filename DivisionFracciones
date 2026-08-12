@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Aritmética 7° · Sem. 10 · División de fracciones · I.E. Merceditas Gómez Martínez</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#023047;--blue:#219EBC;--blue-mid:#219EBC;
+  --green:#2E7D32;--teal:#00695C;--amber:#FFB703;--red:#B71C1C;
+  --green-b:#27AE60;--amber-b:#FB8500;--red-b:#C0392B;
+  --cream:#F7F6F2;--warm:#EDECEA;--border:#C0BDB4;
+  --text:#1C1C1E;--text2:#3A3A3C;--text3:#6B6B6E;
+  --sky:#8ECAE6;
+  --fs-xs:clamp(18px,1.25vw,26px);
+  --fs-sm:clamp(22px,1.6vw,32px);
+  --fs-md:clamp(26px,2vw,40px);
+  --fs-lg:clamp(32px,2.6vw,50px);
+  --fs-xl:clamp(38px,3.2vw,62px);
+  --fs-2xl:clamp(48px,4.2vw,80px);
+  --fs-3xl:clamp(60px,5.8vw,105px);
+  --gap:clamp(14px,1.6vw,22px);
+  --pad:clamp(20px,2.8vw,40px);
+  --line-h:1.55;
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a101e;font-family:'DM Sans',system-ui,sans-serif;line-height:var(--line-h)}
+#deck{width:100vw;height:100vh;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;background:var(--cream)}
+.slide.active{opacity:1;pointer-events:all}
+.slide.enter-r{animation:inR .32s cubic-bezier(.22,.68,0,1.1) forwards}
+.slide.enter-l{animation:inL .32s cubic-bezier(.22,.68,0,1.1) forwards}
+@keyframes inR{from{transform:translateX(3.5%);opacity:0}to{transform:none;opacity:1}}
+@keyframes inL{from{transform:translateX(-3.5%);opacity:0}to{transform:none;opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+header.hdr{background:var(--navy);height:clamp(44px,5.2vh,60px);display:flex;align-items:center;padding:0 var(--pad);justify-content:space-between;flex-shrink:0}
+.hdr-b{font-size:var(--fs-xs);font-weight:500;color:var(--sky);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-badge{background:var(--blue);color:#fff;font-size:var(--fs-xs);font-weight:800;padding:6px clamp(12px,1.8vw,22px);border-radius:6px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;margin-left:14px}
+footer.ftr{background:var(--warm);border-top:2px solid var(--border);height:clamp(36px,4vh,48px);display:flex;align-items:center;padding:0 var(--pad);justify-content:space-between;flex-shrink:0}
+.ftr span{font-size:var(--fs-xs);color:var(--text3);font-weight:500}
+main.body{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smooth;padding:clamp(16px,2.2vh,28px) var(--pad) clamp(12px,1.5vh,20px);display:flex;flex-direction:column;gap:var(--gap)}
+main.body::-webkit-scrollbar{width:6px}
+main.body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:3px}
+.s-portada{background:var(--blue)}
+.portada-inner{width:100%;max-width:1400px;margin:0 auto;padding:clamp(28px,5vh,60px) clamp(40px,6vw,80px);display:flex;flex-direction:column;gap:clamp(14px,2.4vh,26px)}
+.p-ie{font-size:var(--fs-sm);color:rgba(180,210,240,.85);text-align:center;letter-spacing:.05em}
+.p-area{font-size:var(--fs-sm);font-weight:700;color:rgba(180,210,240,.95);text-align:center;letter-spacing:.16em;text-transform:uppercase}
+.p-title{font-family:'DM Serif Display',serif;font-size:var(--fs-3xl);color:#fff;text-align:center;line-height:1.05;animation:fadeUp .9s .1s both}
+.p-sub{font-size:var(--fs-xl);color:rgba(200,228,255,.9);text-align:center;font-style:italic;animation:fadeUp .9s .25s both}
+.p-divider{height:3px;background:rgba(255,255,255,.25);border-radius:2px;margin:clamp(6px,1.2vh,12px) 0}
+.p-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.2vw,18px);animation:fadeUp .9s .4s both}
+.p-card{background:rgba(255,255,255,.09);border:2px solid rgba(255,255,255,.18);border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(12px,1.5vw,20px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.p-card-num{width:clamp(44px,4.6vw,60px);height:clamp(44px,4.6vw,60px);border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:var(--fs-lg);font-weight:700;color:#fff}
+.p-card-title{font-size:var(--fs-md);font-weight:700;color:#fff;line-height:1.15}
+.p-card-sub{font-size:var(--fs-sm);color:rgba(200,228,255,.8);font-style:italic;line-height:1.4}
+.p-docente{font-size:var(--fs-sm);color:rgba(180,210,240,.7);text-align:right;font-style:italic}
+.s-sesion{background:var(--navy)}
+.sesion-inner{display:flex;height:100%;width:100%}
+.sesion-num{width:clamp(160px,18vw,260px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;flex-shrink:0}
+.sesion-num-lbl{font-size:var(--fs-sm);color:var(--sky);text-transform:uppercase;letter-spacing:.16em;font-weight:700}
+.sesion-num-big{font-size:clamp(100px,14vw,200px);font-weight:800;color:#fff;line-height:1}
+.sesion-right{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,5vh,70px) clamp(32px,4vw,70px);gap:clamp(14px,2vh,24px)}
+.sesion-tag{font-size:var(--fs-sm);font-weight:800;color:var(--sky);text-transform:uppercase;letter-spacing:.18em}
+.sesion-title{font-family:'DM Serif Display',serif;font-size:var(--fs-2xl);color:#fff;line-height:1.08}
+.sesion-sub{font-size:var(--fs-md);color:rgba(200,228,255,.75);font-style:italic;line-height:1.45}
+.sesion-chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.sesion-chip{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:24px;padding:8px 20px;font-size:var(--fs-xs);color:var(--sky);font-weight:600}
+.title-row{display:flex;align-items:flex-start;gap:16px}
+.accent-bar{width:clamp(10px,1vw,14px);border-radius:6px;flex-shrink:0;align-self:stretch;min-height:48px}
+.slide-title{font-family:'DM Serif Display',serif;font-size:var(--fs-xl);color:var(--navy);line-height:1.08}
+.slide-instr{font-size:var(--fs-md);color:var(--text2);font-style:italic;margin-top:6px;line-height:1.4}
+.badge{display:inline-flex;align-items:center;font-size:var(--fs-sm);font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:6px;margin-bottom:4px}
+.det-box{background:#FFF8ED;border:3px solid var(--amber-b);border-radius:14px;padding:clamp(16px,2vh,24px) clamp(18px,2.2vw,30px);display:flex;flex-direction:column;gap:clamp(10px,1.4vh,16px)}
+.det-label{font-size:var(--fs-sm);font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-b)}
+.det-text{font-family:'DM Serif Display',serif;font-size:var(--fs-lg);color:var(--text);line-height:1.55;font-style:italic}
+.det-q{font-size:var(--fs-xl);font-weight:800;color:var(--navy);line-height:1.35}
+.activacion-previa{background:var(--warm);border-left:5px solid var(--blue);border-radius:0 10px 10px 0;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,26px);font-size:var(--fs-md);color:var(--text2);font-style:italic}
+.activacion-previa strong{color:var(--navy);font-style:normal}
+.paso-row{display:flex;align-items:center;gap:clamp(12px,1.4vw,20px);background:#fff;border:2px solid var(--border);border-radius:12px;padding:clamp(10px,1.2vh,18px) clamp(14px,1.8vw,24px);border-left:6px solid var(--blue);opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.paso-row.vis{opacity:1;transform:none}
+.paso-num{width:clamp(30px,3.2vw,46px);height:clamp(30px,3.2vw,46px);border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);font-weight:800;color:#fff;flex-shrink:0}
+.paso-lbl{font-size:var(--fs-sm);font-weight:800;color:var(--blue);flex-shrink:0;min-width:clamp(100px,11vw,150px)}
+.paso-body{font-size:var(--fs-md);color:var(--text);flex:1;line-height:1.4}
+.result-bar{background:var(--navy);border-radius:12px;padding:clamp(12px,1.6vh,22px) clamp(16px,2vw,28px);display:flex;align-items:center;justify-content:center;gap:20px;font-size:var(--fs-xl);font-weight:800;color:var(--amber);text-align:center;white-space:nowrap;overflow-x:auto;opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s}
+.result-bar.vis{opacity:1;transform:none}
+.formal-box{background:var(--warm);border:3px solid var(--green);border-radius:14px;padding:clamp(14px,1.8vh,26px) clamp(16px,2vw,30px);display:flex;flex-direction:column;gap:clamp(12px,1.6vh,20px);align-items:stretch}
+.formal-title{font-size:var(--fs-lg);font-weight:800;color:var(--green);text-align:center}
+.formal-step{background:#fff;border:2px solid var(--border);border-radius:10px;padding:clamp(10px,1.2vh,18px) clamp(14px,1.8vw,22px);display:flex;align-items:center;gap:14px;width:100%;opacity:0;transition:opacity .4s}
+.formal-step.vis{opacity:1}
+.formal-step-n{width:clamp(30px,3.2vw,44px);height:clamp(30px,3.2vw,44px);border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);font-weight:800;color:#fff;flex-shrink:0}
+.formal-step-txt{font-size:var(--fs-md);color:var(--text);line-height:1.4;flex:1}
+.conj-box{background:#E8F5E9;border:3px solid var(--green);border-radius:12px;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,22px);font-size:var(--fs-md);color:var(--green);font-style:italic;line-height:1.5}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(10px,1vw,16px)}
+.ex-card{background:#fff;border-radius:14px;border:2.5px solid var(--border);border-top:6px solid transparent;padding:clamp(12px,1.6vh,20px) clamp(12px,1.6vw,20px);display:flex;flex-direction:column;gap:clamp(8px,1vh,12px);opacity:0;transform:translateY(16px);transition:opacity .45s,transform .45s}
+.ex-card.vis{opacity:1;transform:none}
+.ex-head{display:flex;align-items:center;gap:12px}
+.ex-num{width:clamp(30px,3.2vw,46px);height:clamp(30px,3.2vw,46px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--fs-md);color:#fff;flex-shrink:0}
+.ex-title{font-size:var(--fs-md);font-weight:800;color:var(--text)}
+.ex-ctx{font-size:var(--fs-sm);color:var(--text2);font-style:italic;line-height:1.4}
+.ex-task{background:var(--warm);border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,18px);font-size:var(--fs-lg);font-weight:800;color:var(--navy);text-align:center;border:2px solid var(--border)}
+.error-box{background:#FFF0F0;border:3px solid var(--red);border-radius:14px;padding:clamp(14px,1.8vh,22px) clamp(16px,2vw,26px);display:flex;flex-direction:column;gap:clamp(8px,1vh,12px)}
+.error-title{font-size:var(--fs-md);font-weight:800;color:var(--red)}
+.error-txt{font-size:var(--fs-sm);color:var(--text);line-height:1.55}
+.metodo-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.metodo-card{border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(14px,1.8vw,22px);display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.metodo-card.vis{opacity:1;transform:none}
+.metodo-card.mal{background:#FFF0F0;border:3px solid var(--red)}
+.metodo-card.bien{background:#E8F5E9;border:3px solid var(--green)}
+.metodo-lbl{font-size:var(--fs-sm);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.metodo-card.mal .metodo-lbl{color:var(--red)}
+.metodo-card.bien .metodo-lbl{color:var(--green)}
+.metodo-body{font-size:var(--fs-md);color:var(--text);line-height:1.5}
+.info-box{background:#EBF4FB;border-left:5px solid var(--blue);border-radius:0 12px 12px 0;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,24px);font-size:var(--fs-md);color:var(--text2);line-height:1.6}
+.info-box strong{color:var(--navy);font-style:normal}
+.piar-box{background:#F3E5F5;border:2.5px solid #6A1B9A;border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,20px);font-size:var(--fs-xs);color:#4A148C;line-height:1.6;margin-top:var(--gap)}
+.piar-lbl{font-weight:800;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px}
+.meta-q{background:#E0F2F1;border:3px solid var(--teal);border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(16px,2vw,28px)}
+.meta-qlbl{font-size:var(--fs-xs);font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+.meta-qtxt{font-family:'DM Serif Display',serif;font-size:var(--fs-xl);color:var(--text);font-style:italic;line-height:1.55}
+.semaforo{display:flex;flex-direction:column;gap:clamp(10px,1.2vh,18px)}
+.sema-item{display:flex;align-items:flex-start;gap:16px;background:#fff;border-radius:12px;padding:clamp(12px,1.6vh,20px) clamp(14px,1.8vw,24px);border:2.5px solid var(--border);opacity:0;transform:translateX(16px);transition:opacity .45s,transform .45s}
+.sema-item.vis{opacity:1;transform:none}
+.sema-circle{width:clamp(46px,5vw,68px);height:clamp(46px,5vw,68px);border-radius:50%;flex-shrink:0}
+.sema-txt{font-size:var(--fs-md);color:var(--text);line-height:1.35}
+.sema-sub{display:block;font-size:var(--fs-sm);color:var(--text3);margin-top:4px;font-style:italic}
+.mcm-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.mcm-table th{background:var(--navy);color:#fff;padding:clamp(8px,1vh,14px) clamp(10px,1.2vw,18px);text-align:center}
+.mcm-table td{padding:clamp(8px,1vh,14px) clamp(10px,1.2vw,18px);border-bottom:2px solid var(--border);text-align:center;font-size:var(--fs-md);color:var(--text)}
+.mcm-table tr:nth-child(even) td{background:#fff}
+.mcm-table tr:nth-child(odd) td{background:var(--warm)}
+.mcm-table .hi{background:#FFF9C4!important;font-weight:800;color:var(--amber-b)}
+.espacio-respuesta{background:#fff;border:2.5px dashed var(--border);border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,20px);font-size:var(--fs-md);color:var(--text);min-height:clamp(70px,9vh,110px);margin:var(--gap) 0;font-style:italic}
+.espacio-respuesta:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 4px rgba(33,158,188,.25)}
+.btn-exportar{background:var(--green-b);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-weight:700;cursor:pointer;margin-top:12px;font-size:var(--fs-sm);display:inline-flex;align-items:center;gap:8px}
+.btn-exportar:hover{background:var(--green)}
+.feedback-msg{position:fixed;top:clamp(70px,9vh,90px);left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:12px 24px;border-radius:10px;font-size:var(--fs-sm);font-weight:600;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center}
+.feedback-msg.error{background:var(--red-b)}
+.feedback-msg.show{opacity:1}
+#fs-btn{position:fixed;top:clamp(10px,1.2vh,16px);right:clamp(76px,8.5vw,100px);z-index:200;background:rgba(2,48,71,.8);border:2px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:18px;width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#fs-btn:hover{background:var(--blue)}
+#nav{position:fixed;bottom:clamp(16px,2.2vh,26px);right:clamp(20px,2.8vw,34px);display:flex;align-items:center;gap:clamp(10px,1.2vw,16px);z-index:100}
+.nbtn{width:clamp(46px,5vw,62px);height:clamp(46px,5vw,62px);border-radius:50%;background:rgba(2,48,71,.9);border:2px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:clamp(20px,2.4vw,28px);display:flex;align-items:center;justify-content:center;transition:background .2s}
+.nbtn:hover{background:var(--blue)}
+#ncnt{font-size:clamp(15px,1.6vw,20px);color:rgba(255,255,255,.9);background:rgba(2,48,71,.85);padding:clamp(6px,.8vh,10px) clamp(14px,1.8vw,22px);border-radius:24px;font-family:monospace;font-weight:700}
+#pbar{position:fixed;bottom:0;left:0;height:5px;background:var(--blue);transition:width .32s ease;z-index:100}
+#hint{position:fixed;bottom:clamp(16px,2.2vh,26px);left:clamp(20px,2.8vw,34px);font-size:14px;color:rgba(255,255,255,.55);background:rgba(2,48,71,.75);padding:8px 16px;border-radius:24px;font-family:monospace;transition:opacity .3s;z-index:100}
+.katex{font-size:1.15em!important}
+.katex-display{margin:0!important}
+.rv{opacity:0;transition:opacity .45s}
+.rv.vis{opacity:1}
+.pill{display:inline-block;background:var(--warm);border:2px solid var(--border);border-radius:8px;padding:4px 12px;font-size:var(--fs-sm);font-weight:700;color:var(--navy)}
+.vote-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.vote-card{background:#fff;border-radius:14px;border:2.5px solid var(--border);padding:clamp(12px,1.6vh,20px) clamp(12px,1.6vw,20px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.vote-card.vis{opacity:1;transform:none}
+.vote-person{font-size:var(--fs-lg);font-weight:800;color:var(--navy)}
+.vote-claim{font-family:'DM Serif Display',serif;font-size:var(--fs-sm);color:var(--text2);font-style:italic;line-height:1.45}
+.vote-verdict{font-size:var(--fs-sm);font-weight:800;padding:6px 16px;border-radius:8px;margin-top:6px}
+.decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.decision-card{background:#fff;border-radius:14px;border:2.5px solid var(--border);padding:clamp(14px,1.8vh,24px) clamp(14px,1.8vw,22px);display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.decision-card.vis{opacity:1;transform:none}
+.decision-title{font-size:var(--fs-md);font-weight:800}
+.decision-detail{font-size:var(--fs-sm);color:var(--text2);line-height:1.4}
+.decision-result{background:var(--warm);border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-size:var(--fs-lg);font-weight:800;color:var(--navy);text-align:center}
+.strip-svg{width:100%;max-width:800px;margin:0 auto;display:block}
+@media(max-width:1100px) and (orientation:landscape){:root{--fs-xs:clamp(16px,1.6vw,24px);--fs-sm:clamp(19px,2vw,28px);--fs-md:clamp(22px,2.4vw,34px);--fs-lg:clamp(26px,2.8vw,42px);--fs-xl:clamp(30px,3.4vw,50px);--fs-2xl:clamp(38px,4.4vw,64px)}.metodo-grid{grid-template-columns:1fr}}
+@media(min-width:1920px){:root{--fs-xs:26px;--fs-sm:32px;--fs-md:40px;--fs-lg:50px;--fs-xl:62px;--fs-2xl:80px;--fs-3xl:105px;--gap:22px;--pad:40px}}
+</style>
+</head>
+<body>
+<div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<div id="deck"></div>
+<button id="fs-btn" title="Pantalla completa (F)" aria-label="Alternar pantalla completa">⛶</button>
+<div id="nav" role="navigation" aria-label="Navegación de diapositivas">
+  <button class="nbtn" id="bp" aria-label="Diapositiva anterior">&#8592;</button>
+  <span id="ncnt" aria-live="polite">1 / 23</span>
+  <button class="nbtn" id="bn" aria-label="Siguiente diapositiva">&#8594;</button>
+</div>
+<div id="pbar" role="progressbar"></div>
+<div id="hint">Espacio / → avanzar &nbsp;·&nbsp; ← retroceder &nbsp;·&nbsp; F pantalla completa</div>
+<div id="feedback" class="feedback-msg" role="status" aria-live="polite"></div>
+<script>
+function announceToScreenReader(msg){const r=document.getElementById('live-region');if(r){r.textContent='';setTimeout(()=>{r.textContent=msg;},100);}}
+function showFeedback(msg,isError=false){const fb=document.getElementById('feedback');if(!fb)return;fb.textContent=msg;fb.className='feedback-msg'+(isError?' error':'')+' show';setTimeout(()=>fb.classList.remove('show'),3200);}
+function saveProgress(idx,cl){try{localStorage.setItem('s10_arit7',JSON.stringify({slide:idx,clicks:cl,ts:Date.now()}));}catch(e){}}
+function loadProgress(){try{const s=localStorage.getItem('s10_arit7');if(s){const d=JSON.parse(s);if(Date.now()-d.ts<86400000)return d;}}catch(e){}return null;}
+
+function stripBase(){
+  const W=800,H=120,x0=60,sW=640,sH=56;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" class="strip-svg" xmlns="http://www.w3.org/2000/svg">';
+  // full kilo bar
+  s+='<rect x="'+x0+'" y="30" width="'+sW+'" height="'+sH+'" fill="#E8E8E8" stroke="#999" stroke-width="1.5" rx="5"/>';
+  // quarter marks (thick) + labels
+  for(let i=0;i<=4;i++){
+    const x=x0+sW*i/4;
+    s+='<line x1="'+x+'" y1="28" x2="'+x+'" y2="'+(32+sH)+'" stroke="#666" stroke-width="2"/>';
+    const labels=['0','¼','½','¾','1 kg'];
+    s+='<text x="'+x+'" y="'+(36+sH+18)+'" text-anchor="middle" font-size="16" font-weight="700" fill="#333">'+labels[i]+'</text>';
+  }
+  // highlight 3/4 with strong fill
+  const w34=sW*3/4;
+  s+='<rect x="'+x0+'" y="30" width="'+w34+'" height="'+sH+'" fill="rgba(0,105,92,.25)" stroke="#00695C" stroke-width="3" rx="5"/>';
+  // label ¾
+  s+='<text x="'+(x0+w34/2)+'" y="22" text-anchor="middle" font-size="20" font-weight="800" fill="#00695C">¾ de kilo de arequipe</text>';
+  // bracket below ¾
+  const bY=36+sH+36;
+  s+='<line x1="'+x0+'" y1="'+bY+'" x2="'+(x0+w34)+'" y2="'+bY+'" stroke="#00695C" stroke-width="2"/>';
+  s+='<line x1="'+x0+'" y1="'+(bY-4)+'" x2="'+x0+'" y2="'+(bY+4)+'" stroke="#00695C" stroke-width="2"/>';
+  s+='<line x1="'+(x0+w34)+'" y1="'+(bY-4)+'" x2="'+(x0+w34)+'" y2="'+(bY+4)+'" stroke="#00695C" stroke-width="2"/>';
+  // gray zone for unused ¼
+  s+='<rect x="'+(x0+w34)+'" y="30" width="'+(sW-w34)+'" height="'+sH+'" fill="rgba(0,0,0,.06)" rx="0 5 5 0"/>';
+  s+='<text x="'+(x0+w34+sW/8)+'" y="'+(30+sH/2+6)+'" text-anchor="middle" font-size="14" fill="#999" font-style="italic">sobra</text>';
+  s+='</svg>';return s;
+}
+
+function stripOctavos(){
+  const W=800,H=160,x0=60,sW=640,sH=56;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" class="strip-svg" xmlns="http://www.w3.org/2000/svg">';
+  // full kilo bar (lighter)
+  s+='<rect x="'+x0+'" y="18" width="'+sW+'" height="'+sH+'" fill="#F0F0F0" stroke="#CCC" rx="5"/>';
+  // 3/4 shaded
+  const w34=sW*3/4;
+  s+='<rect x="'+x0+'" y="18" width="'+w34+'" height="'+sH+'" fill="rgba(0,105,92,.12)" stroke="#00695C" stroke-width="2" rx="5"/>';
+  // eighth lines inside ¾
+  for(let i=0;i<=6;i++){
+    const x=x0+sW*i/8;
+    s+='<line x1="'+x+'" y1="18" x2="'+x+'" y2="'+(18+sH)+'" stroke="'+(i<=6?'#00695C':'#CCC')+'" stroke-width="1" stroke-dasharray="4 3"/>';
+  }
+  // 6 orange pieces below
+  const pw=sW/8,y2=18+sH+22;
+  for(let i=0;i<6;i++){
+    const px=x0+i*pw;
+    s+='<rect x="'+px+'" y="'+y2+'" width="'+(pw-4)+'" height="42" fill="rgba(251,133,0,.25)" stroke="#FB8500" stroke-width="2.5" rx="5"/>';
+    s+='<text x="'+(px+pw/2-2)+'" y="'+(y2+28)+'" text-anchor="middle" font-size="18" font-weight="800" fill="#FB8500">'+(i+1)+'</text>';
+    // arrow from piece up to strip
+    const cx=px+pw/2-2;
+    s+='<line x1="'+cx+'" y1="'+y2+'" x2="'+cx+'" y2="'+(18+sH)+'" stroke="#FB8500" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>';
+  }
+  s+='<text x="'+(x0+6*pw+16)+'" y="'+(y2+28)+'" font-size="18" font-weight="800" fill="#FB8500">= 6 frascos de ⅛</text>';
+  s+='</svg>';return s;
+}
+
+const SLIDES=[
+/* ═══════════════════════════════════════════════════════
+   PORTADA GENERAL
+   ═══════════════════════════════════════════════════════ */
+{noH:true,noF:true,clicks:0,cls:'s-portada',html:`
+<div class="portada-inner">
+  <div class="p-ie">I.E. Merceditas Gómez Martínez · Medellín, Antioquia</div>
+  <div class="p-area">Aritmética · Grado 7° · Período 2 · Semana 10</div>
+  <div class="p-title">División de fracciones</div>
+  <div class="p-sub">Tres sesiones · 55 minutos cada una</div>
+  <div class="p-divider"></div>
+  <div class="p-card-grid">
+    <div class="p-card"><div class="p-card-num">1</div><div class="p-card-title">Sesión 1</div><div class="p-card-sub">¿Cuántas veces cabe? — El arequipe de don Álvaro</div></div>
+    <div class="p-card"><div class="p-card-num">2</div><div class="p-card-title">Sesión 2</div><div class="p-card-sub">Invertir y multiplicar — Números mixtos y simplificación</div></div>
+    <div class="p-card"><div class="p-card-num">3</div><div class="p-card-title">Sesión 3</div><div class="p-card-sub">Decidir y argumentar — Las obleas de doña Marleny</div></div>
+  </div>
+  <div class="p-docente">Docente: Carlos Alberto Mena Romaña</div>
+</div>`},
+
+/* ═══════════════════════════════════════════════════════
+   SESIÓN 1 — ¿CUÁNTAS VECES CABE?
+   ═══════════════════════════════════════════════════════ */
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner">
+  <div class="sesion-num" style="background:var(--blue)"><div class="sesion-num-lbl">Sesión</div><div class="sesion-num-big">1</div></div>
+  <div class="sesion-right">
+    <div class="sesion-tag">Semana 10 · Aritmética 7°</div>
+    <div class="sesion-title">¿Cuántas veces cabe?</div>
+    <div class="sesion-sub">El sentido de medida de la división.<br>Construcción con tira de cartulina de 24 cm.</div>
+    <div class="sesion-chips"><span class="sesion-chip">⏱ 55 min</span><span class="sesion-chip">📍 Galería Minorista</span><span class="sesion-chip">🧩 Manipulativo</span><span class="sesion-chip">GRR: Yo hago</span></div>
+  </div>
+</div>`},
+
+/* ── S1 · DETONANTE ──────────────────────────────────── */
+{bread:'Sem. 10 · S1 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:0,fL:'Sesión 1 · El arequipe de don Álvaro',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--amber-b);color:#fff">Situación detonante</div>
+  <div class="slide-title">El arequipe de don Álvaro</div>
+  <div class="slide-instr">Lee la situación. Escribe con cuál personaje estás de acuerdo y una razón.</div>
+</div></div>
+<div class="det-box">
+  <div class="det-label">🍯 Situación problema</div>
+  <div class="det-text">Don Álvaro vende arequipe artesanal en la Galería Minorista. Al final del día le quedan \\(\\tfrac{3}{4}\\) de kilo y decide empacarlo en frasquitos de \\(\\tfrac{1}{8}\\) de kilo para venderlos mañana a $3.500 cada uno. Su hija Camila dice que salen 6 frascos y que se recogen $21.000. Andrés multiplicó y le dio \\(\\tfrac{3}{32}\\): «no alcanza ni para un frasco». Jhon dice: «Si usted DIVIDE \\(\\tfrac{3}{4}\\), el resultado tiene que ser MÁS PEQUEÑO. Y 6 es enorme al lado de \\(\\tfrac{3}{4}\\). Imposible.»</div>
+  <div class="det-q">¿Cuántos frascos salen, cuánto dinero recibe, y por qué el resultado puede ser mayor que el dividendo?</div>
+</div>`},
+
+/* ── S1 · CONFLICTO — TRES PERSONAJES ────────────────── */
+{bread:'Sem. 10 · S1 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:3,fL:'Sesión 1 · ¿Con quién estás de acuerdo?',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div style="flex:1">
+  <div class="slide-title">Tres personajes, tres argumentos</div>
+  <div class="slide-instr">Clic para revelar el veredicto de cada uno.</div>
+</div></div>
+<div class="vote-wrap">
+  <div class="vote-card" data-c="1"><div class="vote-person">🧑‍🍳 Camila</div><div class="vote-claim">«Salen 6 frascos → $21.000»</div><div class="vote-verdict" style="background:#E8F5E9;color:var(--green)">✔ CORRECTA</div></div>
+  <div class="vote-card" data-c="2"><div class="vote-person">👷 Andrés</div><div class="vote-claim">«Multiplicó: \\(\\tfrac{3}{4} \\times \\tfrac{1}{8} = \\tfrac{3}{32}\\)»</div><div class="vote-verdict" style="background:#FFF0F0;color:var(--red)">✘ Confundió ÷ con ×</div></div>
+  <div class="vote-card" data-c="3"><div class="vote-person">🤔 Jhon</div><div class="vote-claim">«Dividir siempre achica. 6 es imposible.»</div><div class="vote-verdict" style="background:#FFF8ED;color:var(--amber-b)">⚠ Suena lógico… pero falla</div></div>
+</div>
+<div class="info-box rv" data-c="3" style="margin-top:var(--gap)"><strong>La pregunta queda en el tablero los 55 minutos:</strong> «El argumento de Jhon suena impecable. Si está equivocado, ¿dónde exactamente está la falla?»</div>`},
+
+/* ── S1 · TIRA DE CARTULINA ──────────────────────────── */
+{bread:'Sem. 10 · S1 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:3,fL:'Sesión 1 · Tira de 24 cm marcada en octavos',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--blue);color:#fff">Yo hago — La tira de cartulina</div>
+  <div class="slide-title">¿Cuántas veces cabe \\(\\tfrac{1}{8}\\) dentro de \\(\\tfrac{3}{4}\\)?</div>
+  <div class="slide-instr">Clic 1: la tira con ¾ marcado. Clic 2: los frasquitos de ⅛ encajados. Clic 3: la reformulación.</div>
+</div></div>
+<div class="rv" data-c="1">`+stripBase()+`<div style="text-align:center;margin-top:8px;font-size:var(--fs-md);color:var(--teal);font-weight:700">Recorten esta porción de la tira de 24 cm. Esos son los ¾ de kilo de arequipe.</div></div>
+<div class="rv" data-c="2">`+stripOctavos()+`<div style="text-align:center;margin-top:8px;font-size:var(--fs-md);color:var(--amber-b);font-weight:700">Superpongan los trocitos de ⅛ sobre los ¾. ¿Cuántos caben?</div></div>
+<div class="paso-row" data-c="3" style="border-left-color:var(--teal)"><div class="paso-num" style="background:var(--teal)">→</div><div class="paso-lbl" style="color:var(--teal)">Reformulación</div><div class="paso-body">\\(\\dfrac{3}{4} \\div \\dfrac{1}{8}\\) pregunta: <strong>«¿Cuántas veces cabe \\(\\tfrac{1}{8}\\) en \\(\\tfrac{3}{4}\\)?»</strong><br><em style="font-size:var(--fs-xs);color:var(--text3)">La división de fracciones es una pregunta de medida.</em></div></div>`},
+
+/* ── S1 · TABLA COMPARATIVA ──────────────────────────── */
+{bread:'Sem. 10 · S1 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:16,fL:'Sesión 1 · Tabla comparativa — tríos',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--blue);color:#fff">Hacemos — Tabla para completar</div>
+  <div class="slide-title">¿El resultado crece o se encoge?</div>
+  <div class="slide-instr">Las divisiones ya están planteadas. Clic a clic: primero la multiplicación equivalente, luego el resultado, luego si crece o encoge.</div>
+</div></div>
+<table class="mcm-table">
+  <tr><th>Situación</th><th>División</th><th>× equivalente</th><th>Resultado</th><th>¿Crece?</th></tr>
+  <tr><td style="font-weight:800;text-align:left">Arequipe</td><td>\\(\\tfrac{3}{4} \\div \\tfrac{1}{8}\\)</td><td>\\(\\tfrac{3}{4} \\times \\tfrac{8}{1}\\)</td><td class="hi">6</td><td style="color:var(--teal);font-weight:800">Mayor ▲</td></tr>
+  <tr><td style="text-align:left">Jugo de lulo</td><td>\\(\\tfrac{1}{2} \\div \\tfrac{1}{4}\\)</td><td><span class="rv" data-c="1">\\(\\tfrac{1}{2} \\times 4\\)</span></td><td><span class="rv" data-c="2" style="font-weight:800">2</span></td><td><span class="rv" data-c="3" style="color:var(--teal);font-weight:800">Mayor ▲</span></td></tr>
+  <tr><td style="text-align:left">Chocolate</td><td>\\(\\tfrac{2}{3} \\div 2\\)</td><td><span class="rv" data-c="4">\\(\\tfrac{2}{3} \\times \\tfrac{1}{2}\\)</span></td><td><span class="rv" data-c="5" style="font-weight:800">\\(\\tfrac{1}{3}\\)</span></td><td><span class="rv" data-c="6" style="color:var(--red);font-weight:800">Menor ▼</span></td></tr>
+  <tr><td style="text-align:left">Cinta</td><td>\\(\\tfrac{5}{6} \\div \\tfrac{5}{3}\\)</td><td><span class="rv" data-c="7">\\(\\tfrac{5}{6} \\times \\tfrac{3}{5}\\)</span></td><td><span class="rv" data-c="8" style="font-weight:800">\\(\\tfrac{1}{2}\\)</span></td><td><span class="rv" data-c="9" style="color:var(--red);font-weight:800">Menor ▼</span></td></tr>
+  <tr><td style="text-align:left">Arroz</td><td>\\(\\tfrac{3}{8} \\div \\tfrac{1}{16}\\)</td><td><span class="rv" data-c="10">\\(\\tfrac{3}{8} \\times 16\\)</span></td><td><span class="rv" data-c="11" style="font-weight:800">6</span></td><td><span class="rv" data-c="12" style="color:var(--teal);font-weight:800">Mayor ▲</span></td></tr>
+  <tr><td style="text-align:left">Panela</td><td>\\(\\tfrac{9}{4} \\div \\tfrac{3}{2}\\)</td><td><span class="rv" data-c="13">\\(\\tfrac{9}{4} \\times \\tfrac{2}{3}\\)</span></td><td><span class="rv" data-c="14" style="font-weight:800">\\(\\tfrac{3}{2}\\)</span></td><td><span class="rv" data-c="15" style="color:var(--red);font-weight:800">Menor ▼</span></td></tr>
+</table>
+<div class="info-box rv" data-c="16"><strong>📌 Patrón:</strong> «El resultado es mayor que el dividendo cuando el divisor es <strong>menor que 1</strong>.» Jhon habría tenido razón si el divisor fuera mayor que 1.</div>`},
+
+/* ── S1 · FORMALIZACIÓN — CONJETURA + RECÍPROCO ──────── */
+{bread:'Sem. 10 · S1 › Formalización',badge:'FORMALIZACIÓN',badgeColor:'var(--green)',clicks:4,fL:'Sesión 1 · Tu regla primero, el clic después',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--green)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--green);color:#fff">Formalización · PPT animado</div>
+  <div class="slide-title">Escribe TU conjetura antes del primer clic</div>
+  <div class="slide-instr">Cuando la pantalla revele la fórmula, corrige en otro color.</div>
+</div></div>
+<div class="conj-box">✍️ <strong>Completa en tu cuaderno:</strong> «La operación que da el mismo resultado que dividir entre \\(\\tfrac{1}{8}\\) es ______»</div>
+<div class="formal-box">
+  <div class="formal-title">De la tira a la fórmula</div>
+  <div class="formal-step" data-c="1"><div class="formal-step-n">1</div><div class="formal-step-txt"><strong>La tira confirma:</strong> en \\(\\tfrac{3}{4}\\) caben 6 trozos de \\(\\tfrac{1}{8}\\). ✔</div></div>
+  <div class="formal-step" data-c="2"><div class="formal-step-n">2</div><div class="formal-step-txt"><strong>La igualdad:</strong> \\(\\dfrac{3}{4} \\div \\dfrac{1}{8} = \\dfrac{3}{4} \\times \\dfrac{8}{1} = \\dfrac{24}{4} = 6\\)</div></div>
+  <div class="formal-step" data-c="3"><div class="formal-step-n">3</div><div class="formal-step-txt"><strong>Recíproco</strong> de \\(\\dfrac{a}{b}\\) = \\(\\dfrac{b}{a}\\). Ejemplo: recíproco de \\(\\tfrac{1}{8} = \\tfrac{8}{1}\\).</div></div>
+  <div class="formal-step" data-c="4"><div class="formal-step-n" style="font-size:var(--fs-lg)">→</div><div class="formal-step-txt" style="font-size:var(--fs-lg);text-align:center;font-weight:800">\\(\\dfrac{a}{b} \\div \\dfrac{c}{d} = \\dfrac{a}{b} \\times \\dfrac{d}{c}\\)</div></div>
+</div>`},
+
+/* ── S1 · APLICACIÓN — DECISIÓN ──────────────────────── */
+{bread:'Sem. 10 · S1 › Aplicación',badge:'APLICACIÓN',badgeColor:'var(--teal)',clicks:2,fL:'Sesión 1 · ¿Cuál empaque conviene?',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--teal)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--teal);color:#fff">Tú haces — Decisión comercial</div>
+  <div class="slide-title">¿Cuál empaque le conviene más a don Álvaro?</div>
+  <div class="slide-instr">Calcula, compara y argumenta en dos renglones.</div>
+</div></div>
+<div class="decision-grid">
+  <div class="decision-card" data-c="1" style="border-color:var(--blue)"><div class="decision-title" style="color:var(--blue)">Opción A: frascos de ⅛ kg · $3.500</div><div class="decision-result">\\(\\tfrac{3}{4} \\div \\tfrac{1}{8} = 6\\) → \\(6 \\times \\$3.500 = \\mathbf{\\$21.000}\\)</div></div>
+  <div class="decision-card" data-c="2" style="border-color:var(--amber-b)"><div class="decision-title" style="color:var(--amber-b)">Opción B: frascos de ¼ kg · $6.500</div><div class="decision-result">\\(\\tfrac{3}{4} \\div \\tfrac{1}{4} = 3\\) → \\(3 \\times \\$6.500 = \\mathbf{\\$19.500}\\)</div></div>
+</div>
+<div class="info-box rv" data-c="2" style="margin-top:var(--gap)"><strong>La Opción A gana por $1.500.</strong> Quien termine, plantea una tercera opción propia.</div>`},
+
+/* ── S1 · METACOGNICIÓN ──────────────────────────────── */
+{bread:'Sem. 10 · S1 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'var(--red)',clicks:3,fL:'Sesión 1 · Cierre',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div style="flex:1">
+  <div class="slide-title">¿Dónde falló Jhon?</div>
+  <div class="slide-instr">Responde en el cuaderno. Después levanta tu ficha del semáforo.</div>
+</div></div>
+<div class="meta-q"><div class="meta-qlbl">Pregunta metacognitiva</div><div class="meta-qtxt">«¿Dónde estaba exactamente la falla en el razonamiento de Jhon, y por qué su argumento sonaba tan convincente?»</div></div>
+<div style="font-size:var(--fs-md);font-weight:800;color:var(--navy);margin-top:var(--gap)">Semáforo de comprensión</div>
+<div class="semaforo">
+  <div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Puedo dividir fracciones con la tira y anticipar si el resultado crece o encoge.<span class="sema-sub">Listo para el algoritmo formal.</span></div></div>
+  <div class="sema-item" data-c="2"><div class="sema-circle" style="background:var(--amber)"></div><div class="sema-txt">Entiendo la tira pero no conecto con «invertir y multiplicar».<span class="sema-sub">Voy a rehacer la tabla con tira al lado.</span></div></div>
+  <div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Me pierdo entre dividir y multiplicar fracciones.<span class="sema-sub">Pido apoyo a la profesora Karol.</span></div></div>
+</div>`},
+
+/* ═══════════════════════════════════════════════════════
+   SESIÓN 2 — INVERTIR Y MULTIPLICAR
+   ═══════════════════════════════════════════════════════ */
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner">
+  <div class="sesion-num" style="background:var(--teal)"><div class="sesion-num-lbl">Sesión</div><div class="sesion-num-big">2</div></div>
+  <div class="sesion-right">
+    <div class="sesion-tag">Semana 10 · Aritmética 7°</div>
+    <div class="sesion-title">Invertir y multiplicar</div>
+    <div class="sesion-sub">El algoritmo con números mixtos.<br>¿Cuál de las dos se invierte?</div>
+    <div class="sesion-chips"><span class="sesion-chip">⏱ 55 min</span><span class="sesion-chip">📍 Tienda escolar</span><span class="sesion-chip">⚠️ Error estructural</span><span class="sesion-chip">GRR: Hacemos</span></div>
+  </div>
+</div>`},
+
+/* ── S2 · DETONANTE ──────────────────────────────────── */
+{bread:'Sem. 10 · S2 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:0,fL:'Sesión 2 · El error peligroso',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--amber-b);color:#fff">Situación detonante</div>
+  <div class="slide-title">¿Cuál se invierte?</div>
+  <div class="slide-instr">Lee las dos soluciones de Samuel. Una da 6 y la otra \\(\\tfrac{1}{6}\\). ¿Cuál es la correcta y por qué?</div>
+</div></div>
+<div class="det-box">
+  <div class="det-label">🔄 Dos soluciones para \\(\\tfrac{3}{4} \\div \\tfrac{1}{8}\\)</div>
+  <div class="det-text">Samuel A invirtió el \\(\\tfrac{1}{8}\\) → \\(\\tfrac{3}{4} \\times \\tfrac{8}{1} = 6\\).<br>Samuel B invirtió el \\(\\tfrac{3}{4}\\) → \\(\\tfrac{4}{3} \\times \\tfrac{1}{8} = \\tfrac{4}{24} = \\tfrac{1}{6}\\).<br>Los dos aplicaron «se invierte y se multiplica». Solo uno lo hizo bien.</div>
+  <div class="det-q">¿Cuál de los dos la hizo bien? ¿Cómo lo sabes sin calculadora?</div>
+</div>
+<div class="activacion-previa"><strong>🧠 Pista de la Sesión 1:</strong> la tira de cartulina ya demostró que la respuesta es 6. <em>Si tu procedimiento da \\(\\tfrac{1}{6}\\), algo está mal en tu procedimiento, no en la tira.</em></div>`},
+
+/* ── S2 · ERROR ESTRUCTURAL ──────────────────────────── */
+{bread:'Sem. 10 · S2 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:2,fL:'Sesión 2 · El error que hay que cazar',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div style="flex:1">
+  <div class="slide-title">El error más peligroso no es aritmético</div>
+  <div class="slide-instr">Clic para ver por qué invertir el dividendo produce un absurdo.</div>
+</div></div>
+<div class="metodo-grid">
+  <div class="metodo-card mal" data-c="1">
+    <div class="metodo-lbl">❌ Invierte el DIVIDENDO</div>
+    <div class="metodo-body">\\(\\dfrac{3}{4} \\div \\dfrac{1}{8} \\xrightarrow{\\text{error}} \\dfrac{4}{3} \\times \\dfrac{1}{8} = \\dfrac{1}{6}\\)<br><em style="color:var(--red);font-size:var(--fs-xs)">\\(\\tfrac{1}{6}\\) de frasco… pero en la tira caben 6 enteros.</em></div>
+  </div>
+  <div class="metodo-card bien" data-c="2">
+    <div class="metodo-lbl">✔ Invierte el DIVISOR</div>
+    <div class="metodo-body">\\(\\dfrac{3}{4} \\div \\dfrac{1}{8} = \\dfrac{3}{4} \\times \\dfrac{8}{1} = 6\\)<br><em style="color:var(--green);font-size:var(--fs-xs)">Se invierte lo que viene DESPUÉS del ÷.</em></div>
+  </div>
+</div>
+<div class="info-box rv" data-c="2" style="margin-top:var(--gap)"><strong>Hábito permanente:</strong> antes de cada división, escribe «mi resultado debe ser mayor / menor que ___». El que anticipa detecta su propio error; el que solo aplica la regla, no.</div>`},
+
+/* ── S2 · YO HAGO — NÚMERO MIXTO ────────────────────── */
+{bread:'Sem. 10 · S2 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:4,fL:'Sesión 2 · Dividir con números mixtos',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--blue);color:#fff">Yo hago — Número mixto</div>
+  <div class="slide-title">¿Cómo divido \\(2\\tfrac{1}{4} \\div \\tfrac{3}{4}\\)?</div>
+  <div class="slide-instr">Doña Marleny tiene \\(2\\tfrac{1}{4}\\) kilos de masa y cada arepa lleva \\(\\tfrac{3}{4}\\) de kilo. ¿Cuántas arepas salen? Predice primero: ¿será mayor o menor que \\(2\\tfrac{1}{4}\\)?</div>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:clamp(8px,1vh,14px)">
+  <div class="paso-row" data-c="1"><div class="paso-num">1</div><div class="paso-lbl">Predigo</div><div class="paso-body">El divisor \\(\\tfrac{3}{4} < 1\\) → el resultado será <strong>mayor</strong>.</div></div>
+  <div class="paso-row" data-c="2"><div class="paso-num">2</div><div class="paso-lbl">Convierto</div><div class="paso-body">\\(2\\tfrac{1}{4} = \\dfrac{9}{4}\\)</div></div>
+  <div class="paso-row" data-c="3"><div class="paso-num">3</div><div class="paso-lbl">Invierto el divisor</div><div class="paso-body">\\(\\dfrac{9}{4} \\div \\dfrac{3}{4} = \\dfrac{9}{4} \\times \\dfrac{4}{3}\\). Simplifico en cruz: el 4 con el 4, el 9 con el 3.</div></div>
+</div>
+<div class="result-bar" data-c="4">\\(\\dfrac{9}{4} \\times \\dfrac{4}{3} = 3\\) arepas · creció ✔</div>`},
+
+/* ── S2 · HACEMOS — PRÁCTICA GUIADA ──────────────────── */
+{bread:'Sem. 10 · S2 › Hacemos',badge:'HACEMOS',badgeColor:'var(--teal)',clicks:6,fL:'Sesión 2 · Práctica guiada',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--teal)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--teal);color:#fff">Hacemos — Juntos</div>
+  <div class="slide-title">Predice, divide, comprueba</div>
+  <div class="slide-instr">Antes de cada solución, escribe tu predicción: ¿crece o encoge?</div>
+</div></div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--teal)"><div class="ex-head"><div class="ex-num" style="background:var(--teal)">1</div><div class="ex-title">Metro Línea A</div></div><div class="ex-ctx">El trayecto dura \\(\\tfrac{5}{6}\\) de hora. ¿Cuántos tramos de \\(\\tfrac{1}{3}\\) de hora caben?</div><div class="ex-task">\\(\\dfrac{5}{6} \\div \\dfrac{1}{3}\\)</div>
+    <div class="rv" data-c="2" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(= \\dfrac{5}{6} \\times 3 = \\dfrac{5}{2} = 2\\tfrac{1}{2}\\) tramos<br><span style="font-size:var(--fs-xs);font-weight:400;font-style:italic">Mayor: divisor < 1</span></div></div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--teal)"><div class="ex-head"><div class="ex-num" style="background:var(--teal)">2</div><div class="ex-title">Cinta para el mural</div></div><div class="ex-ctx">Hay \\(\\tfrac{3}{4}\\) de metro de cinta. Cada lazo usa \\(\\tfrac{3}{8}\\) de metro.</div><div class="ex-task">\\(\\dfrac{3}{4} \\div \\dfrac{3}{8}\\)</div>
+    <div class="rv" data-c="4" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(= \\dfrac{3}{4} \\times \\dfrac{8}{3} = 2\\) lazos<br><span style="font-size:var(--fs-xs);font-weight:400;font-style:italic">Simplificando el 3 con el 3</span></div></div>
+  <div class="ex-card" data-c="5" style="border-top-color:var(--amber)"><div class="ex-head"><div class="ex-num" style="background:var(--amber)">3</div><div class="ex-title">Reto: ¿encoge?</div></div><div class="ex-ctx">Reparto \\(\\tfrac{5}{8}\\) de torta entre porciones de \\(\\tfrac{3}{4}\\).</div><div class="ex-task">\\(\\dfrac{5}{8} \\div \\dfrac{3}{4}\\)</div>
+    <div class="rv" data-c="6" style="background:#FFF8ED;border:2.5px solid var(--amber);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--amber-b);font-weight:800">\\(= \\dfrac{5}{8} \\times \\dfrac{4}{3} = \\dfrac{5}{6}\\)<br><span style="font-size:var(--fs-xs);font-weight:400;font-style:italic">Mayor: divisor \\(\\tfrac{3}{4} < 1\\), pero apenas</span></div></div>
+</div>`},
+
+/* ── S2 · TÚ HACES ──────────────────────────────────── */
+{bread:'Sem. 10 · S2 › Aplicación',badge:'APLICACIÓN',badgeColor:'var(--teal)',clicks:7,fL:'Sesión 2 · Trabajo independiente',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--teal)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--teal);color:#fff">Tú haces — Sin guía</div>
+  <div class="slide-title">Anticipa, resuelve, verifica</div>
+  <div class="slide-instr">Escribe primero «mayor / menor que ___». Clic solo cuando termines.</div>
+</div></div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--blue)"><div class="ex-head"><div class="ex-num" style="background:var(--blue)">A</div><div class="ex-title">Parque Arví</div></div><div class="ex-ctx">El sendero mide \\(\\tfrac{7}{2}\\) km. Cada tramo señalizado es de \\(\\tfrac{7}{6}\\) km.</div><div class="ex-task">\\(\\dfrac{7}{2} \\div \\dfrac{7}{6}\\)</div>
+    <div class="rv" data-c="4" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(= \\dfrac{7}{2} \\times \\dfrac{6}{7} = 3\\) tramos</div></div>
+  <div class="ex-card" data-c="2" style="border-top-color:var(--blue)"><div class="ex-head"><div class="ex-num" style="background:var(--blue)">B</div><div class="ex-title">Tienda escolar</div></div><div class="ex-ctx">Un tarro tiene \\(1\\tfrac{1}{2}\\) litros de jugo. Cada vaso es de \\(\\tfrac{1}{4}\\) de litro.</div><div class="ex-task">\\(1\\tfrac{1}{2} \\div \\tfrac{1}{4}\\)</div>
+    <div class="rv" data-c="5" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(= \\dfrac{3}{2} \\times 4 = 6\\) vasos</div></div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--amber)"><div class="ex-head"><div class="ex-num" style="background:var(--amber)">C</div><div class="ex-title">Reto inverso</div></div><div class="ex-ctx">En la Semana 9 vimos que \\(\\tfrac{2}{3} \\times \\tfrac{3}{4} = \\tfrac{1}{2}\\).</div><div class="ex-task">¿Qué división devuelve \\(\\tfrac{3}{4}\\) a partir de \\(\\tfrac{1}{2}\\)?</div>
+    <div class="rv" data-c="6" style="background:#FFF8ED;border:2.5px solid var(--amber);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--amber-b);font-weight:800">\\(\\tfrac{1}{2} \\div \\tfrac{2}{3} = \\tfrac{1}{2} \\times \\tfrac{3}{2} = \\tfrac{3}{4}\\) ✔</div></div>
+</div>
+<div class="piar-box rv" data-c="7"><span class="piar-lbl">🧩 Apoyo diferenciado</span><strong>Eybril, Juan Pablo, Sebastián:</strong> resuelve A y B; en B convierte primero el mixto a impropia. <strong>Matías:</strong> una tarjeta con pausa de 40 seg. <strong>Jerónimo:</strong> explica A en voz alta. <strong>Jhon Alejandro:</strong> audita las predicciones del trío.</div>`},
+
+/* ── S2 · METACOGNICIÓN ──────────────────────────────── */
+{bread:'Sem. 10 · S2 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'var(--red)',clicks:3,fL:'Sesión 2 · Cierre',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div style="flex:1">
+  <div class="slide-title">¿Qué relación hay entre × y ÷?</div>
+  <div class="slide-instr">Responde en el cuaderno. Después levanta tu ficha del semáforo.</div>
+</div></div>
+<div class="meta-q"><div class="meta-qlbl">Pregunta metacognitiva</div><div class="meta-qtxt">«¿Qué relación encontré entre lo que aprendí la semana pasada sobre multiplicar y lo que aprendí hoy sobre dividir? Si mañana me dan una división cualquiera, ¿puedo saber si el resultado será mayor o menor que el dividendo sin hacer la cuenta?»</div></div>
+<div style="font-size:var(--fs-md);font-weight:800;color:var(--navy);margin-top:var(--gap)">Semáforo de comprensión</div>
+<div class="semaforo">
+  <div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Divido fracciones y mixtos, anticipando el resultado. Conecto × con ÷.<span class="sema-sub">Listo para aplicar en contextos reales.</span></div></div>
+  <div class="sema-item" data-c="2"><div class="sema-circle" style="background:var(--amber)"></div><div class="sema-txt">Aplico el algoritmo pero a veces invierto la fracción equivocada.<span class="sema-sub">Voy a usar «¿cuántas veces cabe?» como control.</span></div></div>
+  <div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Confundo los pasos con los de la multiplicación.<span class="sema-sub">Voy a hacer una tabla comparativa × vs ÷ con la profesora Karol.</span></div></div>
+</div>`},
+
+/* ═══════════════════════════════════════════════════════
+   SESIÓN 3 — DECIDIR Y ARGUMENTAR
+   ═══════════════════════════════════════════════════════ */
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner">
+  <div class="sesion-num" style="background:var(--red)"><div class="sesion-num-lbl">Sesión</div><div class="sesion-num-big">3</div></div>
+  <div class="sesion-right">
+    <div class="sesion-tag">Semana 10 · Aritmética 7°</div>
+    <div class="sesion-title">Decidir y argumentar</div>
+    <div class="sesion-sub">Las obleas de doña Marleny, operaciones combinadas<br>y la operación que deshace.</div>
+    <div class="sesion-chips"><span class="sesion-chip">⏱ 55 min</span><span class="sesion-chip">📍 Tienda escolar</span><span class="sesion-chip">💰 Negocio real</span><span class="sesion-chip">GRR: Tú haces</span></div>
+  </div>
+</div>`},
+
+/* ── S3 · DETONANTE — OBLEAS ─────────────────────────── */
+{bread:'Sem. 10 · S3 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:0,fL:'Sesión 3 · Las obleas de doña Marleny',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--amber-b);color:#fff">Situación detonante</div>
+  <div class="slide-title">El negocio de las obleas</div>
+  <div class="slide-instr">Lee con atención. Explícale a un compañero qué hay que hacer ANTES de resolver.</div>
+</div></div>
+<div class="det-box">
+  <div class="det-label">🧇 Situación problema</div>
+  <div class="det-text">Doña Marleny compra arequipe por baldes de \\(\\tfrac{5}{2}\\) de kilo a $34.000 el balde en la tienda escolar. En cada oblea unta \\(\\tfrac{1}{20}\\) de kilo y la vende a $2.500. Un proveedor le ofrece baldes de \\(\\tfrac{3}{4}\\) de kilo a $11.000.</div>
+  <div class="det-q">¿Cuántas obleas salen de cada balde, cuánto gana con cada uno, y cuál le conviene?</div>
+</div>`},
+
+/* ── S3 · YO HAGO — OBLEAS BALDE GRANDE ──────────────── */
+{bread:'Sem. 10 · S3 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:4,fL:'Sesión 3 · El negocio paso a paso',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--blue);color:#fff">Yo hago — Balde grande</div>
+  <div class="slide-title">¿Cuántas obleas salen de \\(\\tfrac{5}{2}\\) kg?</div>
+  <div class="slide-instr">Predice: ¿el resultado será mayor o menor que \\(\\tfrac{5}{2}\\)?</div>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:clamp(8px,1vh,14px)">
+  <div class="paso-row" data-c="1"><div class="paso-num">1</div><div class="paso-lbl">Divido</div><div class="paso-body">\\(\\dfrac{5}{2} \\div \\dfrac{1}{20} = \\dfrac{5}{2} \\times 20 = \\dfrac{100}{2} = 50\\) obleas</div></div>
+  <div class="paso-row" data-c="2"><div class="paso-num">2</div><div class="paso-lbl">Ingreso</div><div class="paso-body">\\(50 \\times \\$2.500 = \\$125.000\\)</div></div>
+  <div class="paso-row" data-c="3"><div class="paso-num">3</div><div class="paso-lbl">Ganancia</div><div class="paso-body">\\(\\$125.000 - \\$34.000 = \\$91.000\\) de ganancia por balde</div></div>
+</div>
+<div class="result-bar" data-c="4">50 obleas → ganancia $91.000</div>`},
+
+/* ── S3 · HACEMOS — COMPARACIÓN ──────────────────────── */
+{bread:'Sem. 10 · S3 › Hacemos',badge:'HACEMOS',badgeColor:'var(--teal)',clicks:4,fL:'Sesión 3 · ¿Conviene cambiar de proveedor?',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--teal)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--teal);color:#fff">Hacemos — Balde pequeño</div>
+  <div class="slide-title">¿Y el balde de \\(\\tfrac{3}{4}\\) kg a $11.000?</div>
+  <div class="slide-instr">Calcula obleas, ingreso y ganancia. Clic para comprobar.</div>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:clamp(8px,1vh,14px)">
+  <div class="paso-row" data-c="1"><div class="paso-num">1</div><div class="paso-lbl">Divido</div><div class="paso-body">\\(\\dfrac{3}{4} \\div \\dfrac{1}{20} = \\dfrac{3}{4} \\times 20 = \\dfrac{60}{4} = 15\\) obleas</div></div>
+  <div class="paso-row" data-c="2"><div class="paso-num">2</div><div class="paso-lbl">Ingreso</div><div class="paso-body">\\(15 \\times \\$2.500 = \\$37.500\\)</div></div>
+  <div class="paso-row" data-c="3"><div class="paso-num">3</div><div class="paso-lbl">Ganancia</div><div class="paso-body">\\(\\$37.500 - \\$11.000 = \\$26.500\\) por balde pequeño</div></div>
+</div>
+<div class="info-box rv" data-c="4" style="margin-top:var(--gap)"><strong>Comparación:</strong> el balde grande da \\(\\$91.000\\) de ganancia, el pequeño \\(\\$26.500\\). Pero necesitaría <strong>4 baldes pequeños</strong> (\\(4 \\times \\$11.000 = \\$44.000\\)) para igualar los \\(\\tfrac{5}{2}\\) kg → \\(4 \\times \\$26.500 = \\$106.000\\) de ganancia con \\(\\$44.000\\) de inversión. <em>¿Le conviene el cambio? Argumenta.</em></div>`},
+
+/* ── S3 · OPERACIONES COMBINADAS ─────────────────────── */
+{bread:'Sem. 10 · S3 › Aplicación',badge:'APLICACIÓN',badgeColor:'var(--teal)',clicks:7,fL:'Sesión 3 · La operación que deshace',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--teal)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--teal);color:#fff">Tú haces — Sin guía</div>
+  <div class="slide-title">Decide la operación, luego resuelve</div>
+  <div class="slide-instr">Muestra todo el procedimiento. Clic solo después de terminar.</div>
+</div></div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--blue)"><div class="ex-head"><div class="ex-num" style="background:var(--blue)">A</div><div class="ex-title">Combinada</div></div><div class="ex-ctx">Respeta el orden de las operaciones.</div><div class="ex-task">\\(\\left(\\dfrac{1}{2} + \\dfrac{1}{3}\\right) \\div \\dfrac{5}{6}\\)</div>
+    <div class="rv" data-c="4" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(\\tfrac{5}{6} \\div \\tfrac{5}{6} = 1\\)</div></div>
+  <div class="ex-card" data-c="2" style="border-top-color:var(--blue)"><div class="ex-head"><div class="ex-num" style="background:var(--blue)">B</div><div class="ex-title">La inversa</div></div><div class="ex-ctx">Si \\(\\tfrac{2}{3} \\times \\tfrac{3}{4} = \\tfrac{1}{2}\\), ¿qué división devuelve \\(\\tfrac{3}{4}\\)?</div><div class="ex-task">\\(\\dfrac{1}{2} \\div \\dfrac{2}{3} = \\;?\\)</div>
+    <div class="rv" data-c="5" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(= \\tfrac{1}{2} \\times \\tfrac{3}{2} = \\tfrac{3}{4}\\) ✔ — dividir deshace la multiplicación</div></div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--amber)"><div class="ex-head"><div class="ex-num" style="background:var(--amber)">C</div><div class="ex-title">Reto final</div></div><div class="ex-ctx">¿Qué tienen en común el recíproco y el m.c.m.?</div><div class="ex-task">Escríbelo con tus palabras</div>
+    <div class="rv" data-c="6" style="background:#FFF8ED;border:2.5px solid var(--amber);border-radius:10px;padding:8px 12px;font-size:var(--fs-sm);text-align:center;color:var(--amber-b);font-weight:800">El m.c.m. convierte denominadores distintos en iguales (para sumar).<br>El recíproco convierte una división en multiplicación.<br>Los dos son herramientas que transforman un problema difícil en uno más fácil.</div></div>
+</div>
+<div class="piar-box rv" data-c="7"><span class="piar-lbl">🧩 Apoyo diferenciado</span><strong>Eybril, Juan Pablo, Sebastián:</strong> resuelve A y B; en A, primero suma \\(\\tfrac{1}{2}+\\tfrac{1}{3}\\) usando m.c.m. como en la Semana 8. <strong>Matías:</strong> A y B con pausa entre las dos. <strong>Jerónimo:</strong> el reto C puede ser oral. <strong>Jhon Alejandro:</strong> presenta al tablero la respuesta del reto C de su trío.</div>`},
+
+/* ── S3 · SÍNTESIS DE LA SEMANA ──────────────────────── */
+{bread:'Sem. 10 · S3 › Formalización',badge:'SÍNTESIS',badgeColor:'var(--green)',clicks:3,fL:'Sesión 3 · Lo que nos llevamos de la Semana 10',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--green)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--green);color:#fff">Síntesis · PPT animado</div>
+  <div class="slide-title">Cierra la semana en tu cuaderno</div>
+  <div class="slide-instr">Escribe las tres ideas ANTES del clic. Corrige en otro color.</div>
+</div></div>
+<div class="formal-box">
+  <div class="formal-title">Las tres cosas que hay que sacar de aquí</div>
+  <div class="formal-step" data-c="1"><div class="formal-step-n">1</div><div class="formal-step-txt"><strong>La regla:</strong> \\(\\dfrac{a}{b} \\div \\dfrac{c}{d} = \\dfrac{a}{b} \\times \\dfrac{d}{c}\\). Se invierte el <strong>divisor</strong>, nunca el dividendo.</div></div>
+  <div class="formal-step" data-c="2"><div class="formal-step-n">2</div><div class="formal-step-txt"><strong>La predicción:</strong> si el divisor es menor que 1 → el resultado crece. Si es mayor que 1 → encoge. Antes de calcular, ya sé qué esperar.</div></div>
+  <div class="formal-step" data-c="3"><div class="formal-step-n">3</div><div class="formal-step-txt"><strong>La conexión:</strong> dividir entre \\(\\tfrac{c}{d}\\) deshace lo que hizo multiplicar por \\(\\tfrac{c}{d}\\). Son operaciones inversas. <em>La semana entrante: fracción → decimal → porcentaje.</em></div></div>
+</div>`},
+
+/* ── S3 · METACOGNICIÓN FINAL ────────────────────────── */
+{bread:'Sem. 10 · S3 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'var(--red)',clicks:3,fL:'Sesión 3 · Cierre de la Semana 10',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div style="flex:1">
+  <div class="slide-title">La pregunta que te llevas</div>
+  <div class="slide-instr">Escribe tu respuesta abajo. Es insumo del díptico «Diseñadores de Mosaicos y Descuentos».</div>
+</div></div>
+<div class="meta-q"><div class="meta-qlbl">Pregunta metacognitiva de la semana</div><div class="meta-qtxt">«El argumento de Jhon me pareció convincente al comenzar la clase, y sin embargo era falso. ¿Qué tenía ese razonamiento que lo hacía sonar tan seguro, cómo distingo yo un argumento que suena bien de uno que además es verdadero, y qué debería exigirle a una explicación mía antes de defenderla delante del grupo?»</div></div>
+<div class="espacio-respuesta" contenteditable="true" role="textbox" aria-label="Escribe tu reflexión">Escribe tu reflexión aquí...</div>
+<div style="font-size:var(--fs-md);font-weight:800;color:var(--navy);margin-top:6px">Semáforo final de la semana</div>
+<div class="semaforo">
+  <div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Divido fracciones y mixtos, predigo el resultado y conecto con la multiplicación.<span class="sema-sub">Listo para fracción–decimal–porcentaje.</span></div></div>
+  <div class="sema-item" data-c="2"><div class="sema-circle" style="background:var(--amber)"></div><div class="sema-txt">Resuelvo bien pero a veces invierto la fracción equivocada.<span class="sema-sub">Voy a usar «¿cuántas veces cabe?» como control permanente.</span></div></div>
+  <div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Todavía me confundo entre las cuatro operaciones con fracciones.<span class="sema-sub">Voy a hacer una tabla comparativa +, −, ×, ÷ con la profesora Karol.</span></div></div>
+</div>
+<div style="margin-top:var(--gap);text-align:center"><button class="btn-exportar" onclick="exportarReflexion()">💾 Guardar mi reflexión final</button></div>`},
+]; // fin SLIDES
+
+let cur=0,clicks=0;
+const deck=document.getElementById('deck');
+const saved=loadProgress();
+if(saved){cur=saved.slide||0;clicks=0;}
+
+function doKatex(el){
+  if(window.renderMathInElement){
+    renderMathInElement(el,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}],throwOnError:false,strict:false});
+  }
+}
+
+function buildSlide(idx){
+  const s=SLIDES[idx];const d=document.createElement('div');
+  d.className='slide'+(s.cls?' '+s.cls:'');d.setAttribute('role','region');d.setAttribute('aria-label','Diapositiva '+(idx+1)+' de '+SLIDES.length);
+  let h='';
+  if(!s.noH){const bc=s.badgeColor||'var(--blue)';h+='<header class="hdr"><span class="hdr-b">'+(s.bread||'')+'</span>'+(s.badge?'<span class="hdr-badge" style="background:'+bc+'">'+s.badge+'</span>':'')+'</header>';}
+  h+='<main class="body">'+s.html+'</main>';
+  if(!s.noF) h+='<footer class="ftr"><span>'+(s.fL||'')+'</span><span>I.E. Merceditas Gómez Martínez · Aritmética 7°</span></footer>';
+  d.innerHTML=h;return d;
+}
+
+function show(idx,dir){
+  const prev=deck.querySelector('.slide.active');if(prev)prev.classList.remove('active','enter-r','enter-l');
+  const el=buildSlide(idx);deck.appendChild(el);
+  const all=deck.querySelectorAll('.slide');if(all.length>3)all[0].remove();
+  requestAnimationFrame(()=>{el.classList.add('active',dir>=0?'enter-r':'enter-l');setTimeout(()=>el.classList.remove('enter-r','enter-l'),360);doKatex(el);const main=el.querySelector('main.body');if(main)main.scrollTop=0;const title=el.querySelector('.slide-title');announceToScreenReader(title?'Diapositiva '+(idx+1)+': '+title.textContent:'Diapositiva '+(idx+1)+' de '+SLIDES.length);});
+  clicks=0;document.getElementById('ncnt').textContent=(idx+1)+' / '+SLIDES.length;
+  document.getElementById('pbar').style.width=((idx+1)/SLIDES.length*100).toFixed(1)+'%';saveProgress(idx,0);
+}
+
+function advance(){
+  const s=SLIDES[cur];const mx=s.clicks||0;
+  if(clicks<mx){clicks++;const el=deck.querySelector('.slide.active');if(el){el.querySelectorAll('[data-c="'+clicks+'"]').forEach(e=>{e.classList.add('vis');e.style.opacity='1';});doKatex(el);}announceToScreenReader('Paso '+clicks+' de '+mx);saveProgress(cur,clicks);return;}
+  if(cur<SLIDES.length-1){cur++;show(cur,1);}else showFeedback('¡Has completado la Semana 10! 🎉');
+}
+function retreat(){if(cur>0){cur--;show(cur,-1);}}
+
+document.addEventListener('keydown',e=>{if(['Space','ArrowRight','ArrowLeft'].includes(e.code))e.preventDefault();if(e.code==='Space'||e.code==='ArrowRight')advance();if(e.code==='ArrowLeft')retreat();if(e.code==='KeyF')document.getElementById('fs-btn')?.click();});
+document.getElementById('bn').addEventListener('click',advance);
+document.getElementById('bp').addEventListener('click',retreat);
+let tx=0;
+document.addEventListener('touchstart',e=>{if(e.touches?.[0])tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{const t=e.changedTouches?.[0];if(!t)return;const dx=t.clientX-tx;if(Math.abs(dx)>50){dx<0?advance():retreat();}});
+
+const fsBtn=document.getElementById('fs-btn');
+if(fsBtn){fsBtn.addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();}catch(e){showFeedback('Pantalla completa no disponible',true);}});document.addEventListener('fullscreenchange',()=>{fsBtn.textContent=document.fullscreenElement?'✕':'⛶';});}
+
+function exportarReflexion(){
+  const espacios=[];document.querySelectorAll('.espacio-respuesta').forEach((el,i)=>{if(el.textContent.trim()&&el.textContent.trim()!=='Escribe tu reflexión aquí...')espacios.push('Reflexión '+(i+1)+': '+el.textContent.trim());});
+  let contenido='EVIDENCIAS — Aritmética 7° — Semana 10\n'+new Date().toLocaleString('es-CO')+'\n\n';
+  if(espacios.length)contenido+=espacios.join('\n\n---\n\n');
+  try{const blob=new Blob([contenido],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='arit7_s10_evidencias_'+new Date().toISOString().slice(0,10)+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showFeedback('📥 Reflexiones guardadas');}catch(e){navigator.clipboard?.writeText(contenido);showFeedback('📋 Copiado al portapapeles');}
+}
+
+setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
+show(saved?.slide||0,1);
+</script>
+</body>
+</html>
