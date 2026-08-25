@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Aritmética 7° · P3 · Sem. 1 · Fracción, decimal y porcentaje · I.E. Merceditas Gómez Martínez</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#023047;--blue:#219EBC;--blue-mid:#219EBC;
+  --green:#2E7D32;--teal:#00695C;--amber:#FFB703;--red:#B71C1C;
+  --green-b:#27AE60;--amber-b:#FB8500;--red-b:#C0392B;
+  --cream:#F7F6F2;--warm:#EDECEA;--border:#C0BDB4;
+  --text:#1C1C1E;--text2:#3A3A3C;--text3:#6B6B6E;
+  --sky:#8ECAE6;
+  --fs-xs:clamp(18px,1.25vw,26px);
+  --fs-sm:clamp(22px,1.6vw,32px);
+  --fs-md:clamp(26px,2vw,40px);
+  --fs-lg:clamp(32px,2.6vw,50px);
+  --fs-xl:clamp(38px,3.2vw,62px);
+  --fs-2xl:clamp(48px,4.2vw,80px);
+  --fs-3xl:clamp(60px,5.8vw,105px);
+  --gap:clamp(14px,1.6vw,22px);
+  --pad:clamp(20px,2.8vw,40px);
+  --line-h:1.55;
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a101e;font-family:'DM Sans',system-ui,sans-serif;line-height:var(--line-h)}
+#deck{width:100vw;height:100vh;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;background:var(--cream)}
+.slide.active{opacity:1;pointer-events:all}
+.slide.enter-r{animation:inR .32s cubic-bezier(.22,.68,0,1.1) forwards}
+.slide.enter-l{animation:inL .32s cubic-bezier(.22,.68,0,1.1) forwards}
+@keyframes inR{from{transform:translateX(3.5%);opacity:0}to{transform:none;opacity:1}}
+@keyframes inL{from{transform:translateX(-3.5%);opacity:0}to{transform:none;opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+header.hdr{background:var(--navy);height:clamp(44px,5.2vh,60px);display:flex;align-items:center;padding:0 var(--pad);justify-content:space-between;flex-shrink:0}
+.hdr-b{font-size:var(--fs-xs);font-weight:500;color:var(--sky);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-badge{background:var(--blue);color:#fff;font-size:var(--fs-xs);font-weight:800;padding:6px clamp(12px,1.8vw,22px);border-radius:6px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;margin-left:14px}
+footer.ftr{background:var(--warm);border-top:2px solid var(--border);height:clamp(36px,4vh,48px);display:flex;align-items:center;padding:0 var(--pad);justify-content:space-between;flex-shrink:0}
+.ftr span{font-size:var(--fs-xs);color:var(--text3);font-weight:500}
+main.body{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smooth;padding:clamp(16px,2.2vh,28px) var(--pad) clamp(12px,1.5vh,20px);display:flex;flex-direction:column;gap:var(--gap)}
+main.body::-webkit-scrollbar{width:6px}
+main.body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:3px}
+.s-portada{background:var(--blue)}
+.portada-inner{width:100%;max-width:1400px;margin:0 auto;padding:clamp(28px,5vh,60px) clamp(40px,6vw,80px);display:flex;flex-direction:column;gap:clamp(14px,2.4vh,26px)}
+.p-ie{font-size:var(--fs-sm);color:rgba(180,210,240,.85);text-align:center;letter-spacing:.05em}
+.p-area{font-size:var(--fs-sm);font-weight:700;color:rgba(180,210,240,.95);text-align:center;letter-spacing:.16em;text-transform:uppercase}
+.p-title{font-family:'DM Serif Display',serif;font-size:var(--fs-3xl);color:#fff;text-align:center;line-height:1.05;animation:fadeUp .9s .1s both}
+.p-sub{font-size:var(--fs-xl);color:rgba(200,228,255,.9);text-align:center;font-style:italic;animation:fadeUp .9s .25s both}
+.p-divider{height:3px;background:rgba(255,255,255,.25);border-radius:2px;margin:clamp(6px,1.2vh,12px) 0}
+.p-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.2vw,18px);animation:fadeUp .9s .4s both}
+.p-card{background:rgba(255,255,255,.09);border:2px solid rgba(255,255,255,.18);border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(12px,1.5vw,20px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.p-card-num{width:clamp(44px,4.6vw,60px);height:clamp(44px,4.6vw,60px);border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:var(--fs-lg);font-weight:700;color:#fff}
+.p-card-title{font-size:var(--fs-md);font-weight:700;color:#fff;line-height:1.15}
+.p-card-sub{font-size:var(--fs-sm);color:rgba(200,228,255,.8);font-style:italic;line-height:1.4}
+.p-docente{font-size:var(--fs-sm);color:rgba(180,210,240,.7);text-align:right;font-style:italic}
+.s-sesion{background:var(--navy)}
+.sesion-inner{display:flex;height:100%;width:100%}
+.sesion-num{width:clamp(160px,18vw,260px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;flex-shrink:0}
+.sesion-num-lbl{font-size:var(--fs-sm);color:var(--sky);text-transform:uppercase;letter-spacing:.16em;font-weight:700}
+.sesion-num-big{font-size:clamp(100px,14vw,200px);font-weight:800;color:#fff;line-height:1}
+.sesion-right{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,5vh,70px) clamp(32px,4vw,70px);gap:clamp(14px,2vh,24px)}
+.sesion-tag{font-size:var(--fs-sm);font-weight:800;color:var(--sky);text-transform:uppercase;letter-spacing:.18em}
+.sesion-title{font-family:'DM Serif Display',serif;font-size:var(--fs-2xl);color:#fff;line-height:1.08}
+.sesion-sub{font-size:var(--fs-md);color:rgba(200,228,255,.75);font-style:italic;line-height:1.45}
+.sesion-chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.sesion-chip{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:24px;padding:8px 20px;font-size:var(--fs-xs);color:var(--sky);font-weight:600}
+.title-row{display:flex;align-items:flex-start;gap:16px}
+.accent-bar{width:clamp(10px,1vw,14px);border-radius:6px;flex-shrink:0;align-self:stretch;min-height:48px}
+.slide-title{font-family:'DM Serif Display',serif;font-size:var(--fs-xl);color:var(--navy);line-height:1.08}
+.slide-instr{font-size:var(--fs-md);color:var(--text2);font-style:italic;margin-top:6px;line-height:1.4}
+.badge{display:inline-flex;align-items:center;font-size:var(--fs-sm);font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:6px;margin-bottom:4px}
+.det-box{background:#FFF8ED;border:3px solid var(--amber-b);border-radius:14px;padding:clamp(16px,2vh,24px) clamp(18px,2.2vw,30px);display:flex;flex-direction:column;gap:clamp(10px,1.4vh,16px)}
+.det-label{font-size:var(--fs-sm);font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-b)}
+.det-text{font-family:'DM Serif Display',serif;font-size:var(--fs-lg);color:var(--text);line-height:1.55;font-style:italic}
+.det-q{font-size:var(--fs-xl);font-weight:800;color:var(--navy);line-height:1.35}
+.activacion-previa{background:var(--warm);border-left:5px solid var(--blue);border-radius:0 10px 10px 0;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,26px);font-size:var(--fs-md);color:var(--text2);font-style:italic}
+.activacion-previa strong{color:var(--navy);font-style:normal}
+.paso-row{display:flex;align-items:center;gap:clamp(12px,1.4vw,20px);background:#fff;border:2px solid var(--border);border-radius:12px;padding:clamp(10px,1.2vh,18px) clamp(14px,1.8vw,24px);border-left:6px solid var(--blue);opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.paso-row.vis{opacity:1;transform:none}
+.paso-num{width:clamp(30px,3.2vw,46px);height:clamp(30px,3.2vw,46px);border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);font-weight:800;color:#fff;flex-shrink:0}
+.paso-lbl{font-size:var(--fs-sm);font-weight:800;color:var(--blue);flex-shrink:0;min-width:clamp(100px,11vw,150px)}
+.paso-body{font-size:var(--fs-md);color:var(--text);flex:1;line-height:1.4}
+.formal-box{background:var(--warm);border:3px solid var(--green);border-radius:14px;padding:clamp(14px,1.8vh,26px) clamp(16px,2vw,30px);display:flex;flex-direction:column;gap:clamp(12px,1.6vh,20px);align-items:stretch}
+.formal-title{font-size:var(--fs-lg);font-weight:800;color:var(--green);text-align:center}
+.formal-step{background:#fff;border:2px solid var(--border);border-radius:10px;padding:clamp(10px,1.2vh,18px) clamp(14px,1.8vw,22px);display:flex;align-items:center;gap:14px;width:100%;opacity:0;transition:opacity .4s}
+.formal-step.vis{opacity:1}
+.formal-step-n{width:clamp(30px,3.2vw,44px);height:clamp(30px,3.2vw,44px);border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);font-weight:800;color:#fff;flex-shrink:0}
+.formal-step-txt{font-size:var(--fs-md);color:var(--text);line-height:1.4;flex:1}
+.conj-box{background:#E8F5E9;border:3px solid var(--green);border-radius:12px;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,22px);font-size:var(--fs-md);color:var(--green);font-style:italic;line-height:1.5}
+.info-box{background:#EBF4FB;border-left:5px solid var(--blue);border-radius:0 12px 12px 0;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,24px);font-size:var(--fs-md);color:var(--text2);line-height:1.6}
+.info-box strong{color:var(--navy);font-style:normal}
+.meta-q{background:#E0F2F1;border:3px solid var(--teal);border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(16px,2vw,28px)}
+.meta-qlbl{font-size:var(--fs-xs);font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+.meta-qtxt{font-family:'DM Serif Display',serif;font-size:var(--fs-xl);color:var(--text);font-style:italic;line-height:1.55}
+.semaforo{display:flex;flex-direction:column;gap:clamp(10px,1.2vh,18px)}
+.sema-item{display:flex;align-items:flex-start;gap:16px;background:#fff;border-radius:12px;padding:clamp(12px,1.6vh,20px) clamp(14px,1.8vw,24px);border:2.5px solid var(--border);opacity:0;transform:translateX(16px);transition:opacity .45s,transform .45s}
+.sema-item.vis{opacity:1;transform:none}
+.sema-circle{width:clamp(46px,5vw,68px);height:clamp(46px,5vw,68px);border-radius:50%;flex-shrink:0}
+.sema-txt{font-size:var(--fs-md);color:var(--text);line-height:1.35}
+.sema-sub{display:block;font-size:var(--fs-sm);color:var(--text3);margin-top:4px;font-style:italic}
+.pct-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.pct-table th{background:var(--navy);color:#fff;padding:clamp(8px,1vh,14px) clamp(10px,1.2vw,18px);text-align:center}
+.pct-table td{padding:clamp(8px,1vh,14px) clamp(10px,1.2vw,18px);border-bottom:2px solid var(--border);text-align:center;font-size:var(--fs-md);color:var(--text)}
+.pct-table tr:nth-child(even) td{background:#fff}
+.pct-table tr:nth-child(odd) td{background:var(--warm)}
+.espacio-respuesta{background:#fff;border:2.5px dashed var(--border);border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,20px);font-size:var(--fs-md);color:var(--text);min-height:clamp(70px,9vh,110px);margin:var(--gap) 0;font-style:italic}
+.espacio-respuesta:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 4px rgba(33,158,188,.25)}
+.btn-exportar{background:var(--green-b);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-weight:700;cursor:pointer;margin-top:12px;font-size:var(--fs-sm);display:inline-flex;align-items:center;gap:8px}
+.btn-exportar:hover{background:var(--green)}
+.feedback-msg{position:fixed;top:clamp(70px,9vh,90px);left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:12px 24px;border-radius:10px;font-size:var(--fs-sm);font-weight:600;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center}
+.feedback-msg.error{background:var(--red-b)}
+.feedback-msg.show{opacity:1}
+#fs-btn{position:fixed;top:clamp(10px,1.2vh,16px);right:clamp(76px,8.5vw,100px);z-index:200;background:rgba(2,48,71,.8);border:2px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:18px;width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#fs-btn:hover{background:var(--blue)}
+#nav{position:fixed;bottom:clamp(16px,2.2vh,26px);right:clamp(20px,2.8vw,34px);display:flex;align-items:center;gap:clamp(10px,1.2vw,16px);z-index:100}
+.nbtn{width:clamp(46px,5vw,62px);height:clamp(46px,5vw,62px);border-radius:50%;background:rgba(2,48,71,.9);border:2px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:clamp(20px,2.4vw,28px);display:flex;align-items:center;justify-content:center;transition:background .2s}
+.nbtn:hover{background:var(--blue)}
+#ncnt{font-size:clamp(15px,1.6vw,20px);color:rgba(255,255,255,.9);background:rgba(2,48,71,.85);padding:clamp(6px,.8vh,10px) clamp(14px,1.8vw,22px);border-radius:24px;font-family:monospace;font-weight:700}
+#pbar{position:fixed;bottom:0;left:0;height:5px;background:var(--blue);transition:width .32s ease;z-index:100}
+#hint{position:fixed;bottom:clamp(16px,2.2vh,26px);left:clamp(20px,2.8vw,34px);font-size:14px;color:rgba(255,255,255,.55);background:rgba(2,48,71,.75);padding:8px 16px;border-radius:24px;font-family:monospace;transition:opacity .3s;z-index:100}
+.katex{font-size:1.15em!important}
+.katex-display{margin:0!important}
+.rv{opacity:0;transition:opacity .45s}
+.rv.vis{opacity:1}
+.vote-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.vote-card{background:#fff;border-radius:14px;border:2.5px solid var(--border);padding:clamp(12px,1.6vh,20px) clamp(12px,1.6vw,20px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.vote-card.vis{opacity:1;transform:none}
+.vote-person{font-size:var(--fs-lg);font-weight:800;color:var(--navy)}
+.vote-claim{font-family:'DM Serif Display',serif;font-size:var(--fs-sm);color:var(--text2);font-style:italic;line-height:1.45}
+.vote-verdict{font-size:var(--fs-sm);font-weight:800;padding:6px 16px;border-radius:8px;margin-top:6px}
+.bar-viz{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.bar-track{position:relative;height:clamp(40px,5vh,60px);background:var(--warm);border:2px solid var(--border);border-radius:10px;overflow:hidden}
+.bar-fill{position:absolute;top:0;left:0;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:var(--fs-sm);transition:width .6s ease}
+.grid100{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;max-width:min(420px,60vw);margin:0 auto;aspect-ratio:1}
+.grid100 .cell{background:#fff;border:1px solid var(--border);border-radius:2px}
+.act-banner{display:flex;align-items:center;gap:14px;background:var(--navy);color:#fff;border-radius:12px;padding:clamp(12px,1.5vh,18px) clamp(16px,2vw,26px);font-size:var(--fs-md);font-weight:800}
+.act-banner .ico{font-size:1.3em}
+.act-banner small{display:block;font-size:var(--fs-xs);font-weight:400;color:var(--sky);font-style:italic;margin-top:2px}
+.act-list{display:flex;flex-direction:column;gap:clamp(10px,1.3vh,16px)}
+.act-item{background:#fff;border:2.5px solid var(--border);border-left:6px solid var(--blue);border-radius:12px;padding:clamp(12px,1.5vh,18px) clamp(14px,1.8vw,22px);display:flex;gap:16px;align-items:flex-start}
+.act-num{width:clamp(32px,3.4vw,46px);height:clamp(32px,3.4vw,46px);border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--fs-md);flex-shrink:0}
+.act-body{flex:1;display:flex;flex-direction:column;gap:8px}
+.act-q{font-size:var(--fs-md);color:var(--text);line-height:1.4}
+.act-ans{background:#E8F5E9;border:2px solid var(--green);border-radius:8px;padding:8px 14px;font-size:var(--fs-md);color:var(--green);font-weight:700;align-self:flex-start}
+.piar-marker{position:absolute;top:calc(clamp(44px,5.2vh,60px) + 12px);right:clamp(16px,2vw,26px);z-index:60;width:clamp(38px,4vw,50px);height:clamp(38px,4vw,50px);border-radius:50%;background:#F3E5F5;border:2.5px solid #6A1B9A;color:#6A1B9A;display:flex;align-items:center;justify-content:center;font-size:var(--fs-sm);cursor:help;opacity:.5;transition:opacity .2s}
+.piar-marker:hover,.piar-marker:focus,.piar-marker.show{opacity:1;outline:none}
+.piar-tip{position:absolute;top:calc(100% + 10px);right:0;width:min(560px,74vw);background:#F3E5F5;border:2.5px solid #6A1B9A;border-radius:12px;padding:clamp(12px,1.6vh,20px) clamp(14px,1.8vw,22px);font-size:var(--fs-xs);color:#4A148C;line-height:1.6;box-shadow:0 12px 34px rgba(0,0,0,.28);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s;pointer-events:none;text-align:left;font-weight:400}
+.piar-marker:hover .piar-tip,.piar-marker:focus .piar-tip,.piar-marker.show .piar-tip{opacity:1;visibility:visible;transform:none}
+.piar-tip .piar-lbl{font-weight:800;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px;color:#6A1B9A}
+@media(max-width:1100px) and (orientation:landscape){:root{--fs-xs:clamp(16px,1.6vw,24px);--fs-sm:clamp(19px,2vw,28px);--fs-md:clamp(22px,2.4vw,34px);--fs-lg:clamp(26px,2.8vw,42px);--fs-xl:clamp(30px,3.4vw,50px);--fs-2xl:clamp(38px,4.4vw,64px)}.vote-wrap{grid-template-columns:1fr}}
+@media(min-width:1920px){:root{--fs-xs:26px;--fs-sm:32px;--fs-md:40px;--fs-lg:50px;--fs-xl:62px;--fs-2xl:80px;--fs-3xl:105px;--gap:22px;--pad:40px}}
+</style>
+</head>
+<body>
+<div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<div id="deck"></div>
+<button id="fs-btn" title="Pantalla completa (F)" aria-label="Alternar pantalla completa">⛶</button>
+<div id="nav" role="navigation" aria-label="Navegación de diapositivas">
+  <button class="nbtn" id="bp" aria-label="Diapositiva anterior">&#8592;</button>
+  <span id="ncnt" aria-live="polite">1 / 19</span>
+  <button class="nbtn" id="bn" aria-label="Siguiente diapositiva">&#8594;</button>
+</div>
+<div id="pbar" role="progressbar"></div>
+<div id="hint">Espacio / → avanzar &nbsp;·&nbsp; ← retroceder &nbsp;·&nbsp; F pantalla completa</div>
+<div id="feedback" class="feedback-msg" role="status" aria-live="polite"></div>
+<script>
+function announceToScreenReader(msg){const r=document.getElementById('live-region');if(r){r.textContent='';setTimeout(()=>{r.textContent=msg;},100);}}
+function showFeedback(msg,isError=false){const fb=document.getElementById('feedback');if(!fb)return;fb.textContent=msg;fb.className='feedback-msg'+(isError?' error':'')+' show';setTimeout(()=>fb.classList.remove('show'),3200);}
+function saveProgress(idx,cl){try{localStorage.setItem('p3s1_arit7',JSON.stringify({slide:idx,clicks:cl,ts:Date.now()}));}catch(e){}}
+function loadProgress(){try{const s=localStorage.getItem('p3s1_arit7');if(s){const d=JSON.parse(s);if(Date.now()-d.ts<86400000)return d;}}catch(e){}return null;}
+
+function grid100(n,color){color=color||'var(--blue)';let s='<div class="grid100">';for(let i=0;i<100;i++){s+='<div class="cell'+(i<n?' on':'')+'" style="'+(i<n?'background:'+color:'')+'"></div>';}s+='</div>';return s;}
+
+const SLIDES=[
+// ═══ 0 · PORTADA ═══
+{noH:true,noF:true,clicks:0,cls:'s-portada',html:`
+<div class="portada-inner">
+  <div class="p-ie">I.E. Merceditas Gómez Martínez · Medellín, Antioquia</div>
+  <div class="p-area">Aritmética 7° · Período 3 · Semana 1</div>
+  <div class="p-title">Fracción, decimal<br>y porcentaje</div>
+  <div class="p-sub">Las tres caras de una misma cantidad</div>
+  <div class="p-divider"></div>
+  <div class="p-card-grid">
+    <div class="p-card"><div class="p-card-num">1</div><div class="p-card-title">Las tres caras</div><div class="p-card-sub">Fracción ↔ decimal ↔ porcentaje en la cuadrícula de 100</div></div>
+    <div class="p-card"><div class="p-card-num">2</div><div class="p-card-title">El porcentaje de una cantidad</div><div class="p-card-sub">El % como operador · descuentos e IVA</div></div>
+    <div class="p-card"><div class="p-card-num">3</div><div class="p-card-title">Descuentos sucesivos</div><div class="p-card-sub">¿40 % y luego 10 % es 50 %?</div></div>
+  </div>
+  <div class="p-docente">Prof. Carlos Alberto Mena Romaña · Puente hacia la proporcionalidad</div>
+</div>`},
+
+// ═══════════ SESIÓN 1 ═══════════
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner"><div class="sesion-num"><div class="sesion-num-lbl">Sesión</div><div class="sesion-num-big">1</div></div>
+<div class="sesion-right"><div class="sesion-tag">Las tres caras de una cantidad</div><div class="sesion-title">Fracción, decimal y porcentaje</div><div class="sesion-sub">De la cuadrícula de 100 casillas a la equivalencia entre las tres representaciones.</div>
+<div class="sesion-chips"><span class="sesion-chip">Exploración</span><span class="sesion-chip">Construcción</span><span class="sesion-chip">Formalización</span><span class="sesion-chip">Tú haces</span><span class="sesion-chip">Metacognición</span></div></div></div>`},
+
+// 1.1 Exploración
+{bread:'Sem. 1 · S1 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:0,fL:'Sesión 1 · La cancha del descanso',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div><div class="slide-title">La cancha en el descanso</div><div class="slide-instr">Lee la situación y estima antes de calcular.</div></div></div>
+<div class="det-box"><div class="det-label">Situación detonante</div>
+<div class="det-text">«En el descanso, de los 100 estudiantes de grado 7.°, 45 están en la cancha, 30 en la tienda escolar y el resto en el salón. Tres compañeros describen lo mismo de tres formas: Ana dice "\\(\\tfrac{45}{100}\\) están en la cancha", Beto dice "0,45 de todos", y Cami dice "el 45 %".»</div>
+<div class="det-q">¿Están diciendo lo mismo o cosas diferentes? ¿Cómo lo compruebas?</div></div>
+<div class="activacion-previa"><strong>✍ Actividad:</strong> en tu cuaderno escribe con lápiz: «Las tres formas dicen ______ (lo mismo / cosas distintas) porque ______». La corregirás en otro color al final.</div>`},
+
+// 1.2 Construcción
+{bread:'Sem. 1 · S1 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:4,fL:'Sesión 1 · La cuadrícula de 100',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div><div class="slide-title">Una cuadrícula, tres lecturas</div><div class="slide-instr">✍ Cada casilla es 1 de 100 estudiantes. Pinten en su cuaderno las 45 de la cancha.</div></div></div>
+<div class="rv" data-c="1" id="grid-holder"></div>
+<div class="paso-row" data-c="2"><div class="paso-num">1</div><div class="paso-lbl">Fracción</div><div class="paso-body">45 casillas de 100: \\(\\dfrac{45}{100}\\). Es una <strong>parte sobre el total</strong>.</div></div>
+<div class="paso-row" data-c="3" style="border-left-color:var(--teal)"><div class="paso-num" style="background:var(--teal)">2</div><div class="paso-lbl" style="color:var(--teal)">Decimal</div><div class="paso-body">La misma fracción como número: \\(45 \\div 100 = 0{,}45\\).</div></div>
+<div class="paso-row" data-c="4" style="border-left-color:var(--amber-b)"><div class="paso-num" style="background:var(--amber-b)">3</div><div class="paso-lbl" style="color:var(--amber-b)">Porcentaje</div><div class="paso-body">«Por cada 100», \\(45\\): eso es <strong>45 %</strong>. El símbolo % ya significa "\\(\\div 100\\)".</div></div>`},
+
+// 1.3 Formalización
+{bread:'Sem. 1 · S1 › Formalización',badge:'FORMALIZACIÓN',badgeColor:'var(--green)',clicks:4,fL:'Sesión 1 · Tu regla primero, el clic después',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--green)"></div><div><div class="slide-title">La regla de las tres caras</div><div class="slide-instr">✍ Escribe tu conjetura en el cuaderno; luego contrasta al hacer clic.</div></div></div>
+<div class="conj-box">Completa: «Para pasar de fracción con denominador 100 a decimal, yo ______. Para pasar de decimal a porcentaje, yo ______.»</div>
+<div class="formal-box"><div class="formal-title">Fracción → Decimal → Porcentaje</div>
+<div class="formal-step" data-c="1"><div class="formal-step-n">1</div><div class="formal-step-txt"><strong>Fracción a decimal:</strong> divido numerador entre denominador. \\(\\tfrac{45}{100}=0{,}45\\); \\(\\tfrac{3}{4}=0{,}75\\).</div></div>
+<div class="formal-step" data-c="2"><div class="formal-step-n">2</div><div class="formal-step-txt"><strong>Decimal a porcentaje:</strong> multiplico por 100 y agrego %. \\(0{,}45 \\times 100 = 45\\,\\%\\).</div></div>
+<div class="formal-step" data-c="3"><div class="formal-step-n">3</div><div class="formal-step-txt"><strong>Porcentaje a fracción:</strong> escribo sobre 100 y simplifico. \\(45\\,\\% = \\tfrac{45}{100} = \\tfrac{9}{20}\\).</div></div>
+<div class="formal-step" data-c="4"><div class="formal-step-n" style="font-size:var(--fs-lg)">→</div><div class="formal-step-txt" style="text-align:center;font-weight:800;font-size:var(--fs-lg)">\\(\\dfrac{a}{100} = 0{,}a = a\\,\\%\\) — tres nombres, una cantidad.</div></div></div>`},
+
+// 1.4 Tú haces (ACTIVIDAD) + PIAR hover
+{bread:'Sem. 1 · S1 › Tú haces',badge:'TÚ HACES',badgeColor:'var(--teal)',clicks:4,fL:'Sesión 1 · Actividad individual',piar:'<strong>Eybril</strong> y <strong>Sebastián</strong> (7.2): entregar los ejercicios con la primera conversión resuelta como modelo y una cuadrícula de 100 al lado; tiempo ampliado. <strong>Juan Pablo</strong> (7.2): los ejercicios de a uno. <strong>Matías</strong> (7.1): resolver en tramos cortos con una pausa activa. <strong>Jhon Alejandro</strong> (7.3): elige el orden de los ejercicios. Coordinación con la profesora Karol Melissa Erazo.',html:`
+<div class="act-banner"><span class="ico">✏️</span><div>Actividad — Resuelve en tu cuaderno<small>Trabaja solo. Cuando termines, tu profe revelará las respuestas para que te autocorrijas.</small></div></div>
+<div class="act-list">
+  <div class="act-item"><div class="act-num">1</div><div class="act-body"><div class="act-q">Convierte \\(\\dfrac{3}{5}\\) a decimal y a porcentaje.</div><div class="act-ans rv" data-c="1">\\(\\tfrac{3}{5}=0{,}6=60\\,\\%\\)</div></div></div>
+  <div class="act-item"><div class="act-num">2</div><div class="act-body"><div class="act-q">Escribe \\(0{,}8\\) como fracción simplificada y como porcentaje.</div><div class="act-ans rv" data-c="2">\\(0{,}8=\\tfrac{8}{10}=\\tfrac{4}{5}=80\\,\\%\\)</div></div></div>
+  <div class="act-item"><div class="act-num">3</div><div class="act-body"><div class="act-q">Expresa \\(35\\,\\%\\) como fracción simplificada y como decimal.</div><div class="act-ans rv" data-c="3">\\(35\\,\\%=\\tfrac{35}{100}=\\tfrac{7}{20}=0{,}35\\)</div></div></div>
+  <div class="act-item"><div class="act-num">4</div><div class="act-body"><div class="act-q">En 7.2, <strong>24 de 40</strong> estudiantes entregaron el taller. Exprésalo como fracción, decimal y porcentaje.</div><div class="act-ans rv" data-c="4">\\(\\tfrac{24}{40}=\\tfrac{3}{5}=0{,}6=60\\,\\%\\)</div></div></div>
+</div>`},
+
+// 1.5 Metacognición
+{bread:'Sem. 1 · S1 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'var(--red)',clicks:3,fL:'Sesión 1 · Cierre',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div><div class="slide-title">Semáforo de comprensión</div><div class="slide-instr">✍ Marca en tu cuaderno el color que te representa hoy.</div></div></div>
+<div class="semaforo">
+<div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Convierto entre fracción, decimal y porcentaje sin dudar.<span class="sema-sub">Listo para calcular porcentajes de cantidades.</span></div></div>
+<div class="sema-item" data-c="2"><div class="sema-circle" style="background:var(--amber)"></div><div class="sema-txt">Convierto con denominador 100, pero me cuesta con \\(\\tfrac{3}{4}\\).<span class="sema-sub">Voy a repasar la división numerador ÷ denominador.</span></div></div>
+<div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Aún confundo cuándo multiplicar o dividir por 100.<span class="sema-sub">Pido apoyo a la profesora Karol.</span></div></div></div>`},
+
+// ═══════════ SESIÓN 2 ═══════════
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner"><div class="sesion-num"><div class="sesion-num-lbl">Sesión</div><div class="sesion-num-big">2</div></div>
+<div class="sesion-right"><div class="sesion-tag">El porcentaje que opera</div><div class="sesion-title">El porcentaje de una cantidad</div><div class="sesion-sub">El % deja de ser una etiqueta y se convierte en una operación: descuentos e IVA.</div>
+<div class="sesion-chips"><span class="sesion-chip">Exploración</span><span class="sesion-chip">Construcción</span><span class="sesion-chip">Formalización</span><span class="sesion-chip">Tú haces</span><span class="sesion-chip">Metacognición</span></div></div></div>`},
+
+// 2.1 Exploración
+{bread:'Sem. 1 · S2 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:0,fL:'Sesión 2 · El uniforme de educación física',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div><div class="slide-title">El uniforme rebajado</div><div class="slide-instr">Estima antes de calcular. ¿Cuánto se ahorra?</div></div></div>
+<div class="det-box"><div class="det-label">Situación detonante</div>
+<div class="det-text">«En un almacén de Medellín, la camiseta del uniforme de educación física cuesta \\(\\$30.000\\). El sábado tiene "20 % de descuento". Un estudiante dice que se ahorra \\(\\$20\\); otro dice \\(\\$600\\); otro dice \\(\\$6.000\\).»</div>
+<div class="det-q">¿Cuál es el ahorro real? ¿Y el precio que se paga en caja?</div></div>
+<div class="activacion-previa"><strong>✍ Actividad:</strong> escribe tu estimación del ahorro con lápiz. La corregirás en otro color al final.</div>`},
+
+// 2.2 Construcción
+{bread:'Sem. 1 · S2 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:3,fL:'Sesión 2 · El 20 % como parte de la barra',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div><div class="slide-title">El precio como una barra</div><div class="slide-instr">Piensa el precio completo como el 100 %. ¿Qué trozo es el 20 %?</div></div></div>
+<div class="rv" data-c="1"><div class="bar-viz"><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--navy)">100 % = \\(\\$30.000\\)</div></div></div></div>
+<div class="rv" data-c="2"><div class="bar-viz"><div class="bar-track"><div class="bar-fill" style="width:20%;background:var(--amber-b)">20 %</div></div></div><div style="text-align:center;font-size:var(--fs-md);color:var(--amber-b);font-weight:700">Ese 20 % es el descuento. ¿Cuántos pesos son?</div></div>
+<div class="paso-row" data-c="3" style="border-left-color:var(--teal)"><div class="paso-num" style="background:var(--teal)">→</div><div class="paso-lbl" style="color:var(--teal)">Cálculo</div><div class="paso-body"><strong>20 % de 30 000</strong> \\(= 0{,}20 \\times 30.000 = \\mathbf{6.000}\\). El ahorro es \\(\\$6.000\\); el porcentaje se volvió una <strong>multiplicación</strong>.</div></div>`},
+
+// 2.3 Formalización
+{bread:'Sem. 1 · S2 › Formalización',badge:'FORMALIZACIÓN',badgeColor:'var(--green)',clicks:4,fL:'Sesión 2 · El porcentaje como operador',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--green)"></div><div><div class="slide-title">El % es un operador</div><div class="slide-instr">✍ Escribe tu regla en el cuaderno y contrástala al hacer clic.</div></div></div>
+<div class="conj-box">Completa: «Para hallar el <em>p</em> % de una cantidad, yo la multiplico por ______.»</div>
+<div class="formal-box"><div class="formal-title">Porcentaje de una cantidad</div>
+<div class="formal-step" data-c="1"><div class="formal-step-n">1</div><div class="formal-step-txt"><strong>Convierto el % en decimal:</strong> \\(20\\,\\% = 0{,}20\\).</div></div>
+<div class="formal-step" data-c="2"><div class="formal-step-n">2</div><div class="formal-step-txt"><strong>Multiplico por la cantidad:</strong> \\(0{,}20 \\times 30.000 = 6.000\\).</div></div>
+<div class="formal-step" data-c="3"><div class="formal-step-n">3</div><div class="formal-step-txt"><strong>Precio con descuento:</strong> \\(30.000 - 6.000 = 24.000\\). O directo: \\(0{,}80 \\times 30.000\\).</div></div>
+<div class="formal-step" data-c="4"><div class="formal-step-n" style="font-size:var(--fs-lg)">→</div><div class="formal-step-txt" style="text-align:center;font-weight:800;font-size:var(--fs-lg)">\\(p\\,\\% \\text{ de } N = \\dfrac{p}{100} \\times N\\)</div></div></div>`},
+
+// 2.4 Tú haces (ACTIVIDAD) + PIAR
+{bread:'Sem. 1 · S2 › Tú haces',badge:'TÚ HACES',badgeColor:'var(--teal)',clicks:3,fL:'Sesión 2 · Actividad individual',piar:'<strong>Eybril</strong> y <strong>Juan Pablo</strong> (7.2): solo los dos primeros ejercicios, con calculadora y el primero resuelto como modelo; tiempo ampliado. <strong>Sebastián</strong> (7.2): un ejemplo adicional antes de empezar. <strong>Jerónimo</strong> (7.1): puede sustentar el procedimiento de forma oral. Coordinación con la profesora Karol Melissa Erazo.',html:`
+<div class="act-banner"><span class="ico">✏️</span><div>Actividad — Resuelve en tu cuaderno<small>Usa la calculadora solo para verificar. Escribe la operación completa.</small></div></div>
+<div class="act-list">
+<div class="act-item"><div class="act-num">1</div><div class="act-body"><div class="act-q">Calcula el \\(25\\,\\%\\) de \\(\\$16.000\\) (descuento de la tienda escolar).</div><div class="act-ans rv" data-c="1">\\(0{,}25 \\times 16.000 = \\$4.000\\)</div></div></div>
+<div class="act-item"><div class="act-num">2</div><div class="act-body"><div class="act-q">Una sudadera de \\(\\$28.000\\) tiene \\(30\\,\\%\\) de descuento. ¿Cuánto pagas en caja?</div><div class="act-ans rv" data-c="2">\\(0{,}70 \\times 28.000 = \\$19.600\\)</div></div></div>
+<div class="act-item"><div class="act-num">3</div><div class="act-body"><div class="act-q">Un balón cuesta \\(\\$50.000\\) y se le suma el IVA del \\(19\\,\\%\\). ¿Precio final?</div><div class="act-ans rv" data-c="3">\\(50.000 + 0{,}19 \\times 50.000 = \\$59.500\\)</div></div></div>
+</div>`},
+
+// 2.5 Metacognición
+{bread:'Sem. 1 · S2 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'var(--red)',clicks:3,fL:'Sesión 2 · Cierre',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div><div class="slide-title">Semáforo de comprensión</div><div class="slide-instr">✍ Marca el color que te representa hoy.</div></div></div>
+<div class="semaforo">
+<div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Calculo el porcentaje de una cantidad y el precio final con descuento.<span class="sema-sub">Listo para los descuentos sucesivos.</span></div></div>
+<div class="sema-item" data-c="2"><div class="sema-circle" style="background:var(--amber)"></div><div class="sema-txt">Hallo el descuento, pero me confundo con el precio final.<span class="sema-sub">Practico el método del "70 % que sí se paga".</span></div></div>
+<div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">No sé por cuánto multiplicar para hallar el porcentaje.<span class="sema-sub">Pido apoyo a la profesora Karol.</span></div></div></div>`},
+
+// ═══════════ SESIÓN 3 ═══════════
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner"><div class="sesion-num"><div class="sesion-num-lbl">Sesión</div><div class="sesion-num-big">3</div></div>
+<div class="sesion-right"><div class="sesion-tag">El error que parece cierto</div><div class="sesion-title">Descuentos sucesivos</div><div class="sesion-sub">¿Un 40 % y luego un 10 % adicional es lo mismo que un 50 %? El puente hacia la proporcionalidad.</div>
+<div class="sesion-chips"><span class="sesion-chip">Exploración</span><span class="sesion-chip">Construcción</span><span class="sesion-chip">Formalización</span><span class="sesion-chip">Tú haces</span><span class="sesion-chip">Metacognición</span></div></div></div>`},
+
+// 3.1 Exploración (votación)
+{bread:'Sem. 1 · S3 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:3,fL:'Sesión 3 · ¿Con quién estás de acuerdo?',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div><div class="slide-title">La maleta del Éxito</div><div class="slide-instr">Una maleta de \\(\\$80.000\\): "40 % de descuento" y, en caja, "10 % adicional para estudiantes".</div></div></div>
+<div class="vote-wrap">
+<div class="vote-card" data-c="1"><div class="vote-person">🛍️ Camila</div><div class="vote-claim">«40 % + 10 % = 50 %. Pago \\(\\$40.000\\).»</div><div class="vote-verdict" style="background:#FFF0F0;color:var(--red)">✘ Sumó los porcentajes</div></div>
+<div class="vote-card" data-c="2"><div class="vote-person">🎒 Andrés</div><div class="vote-claim">«Primero el 40 %, luego el 10 % sobre lo que quedó.»</div><div class="vote-verdict" style="background:#E8F5E9;color:var(--green)">✔ Va por buen camino</div></div>
+<div class="vote-card" data-c="3"><div class="vote-person">🤔 Jhon</div><div class="vote-claim">«Da igual el orden, el resultado es el mismo.»</div><div class="vote-verdict" style="background:#FFF8ED;color:var(--amber-b)">⚠ Cierto en parte… ¿por qué?</div></div></div>
+<div class="info-box rv" data-c="3" style="margin-top:var(--gap)"><strong>La pregunta queda en el tablero:</strong> «Si el 40 % y el 10 % no se suman, ¿sobre qué precio se aplica el segundo descuento?»</div>`},
+
+// 3.2 Construcción (barras)
+{bread:'Sem. 1 · S3 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:4,fL:'Sesión 3 · La barra que se acorta dos veces',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div><div class="slide-title">Dos descuentos, dos barras</div><div class="slide-instr">Observen sobre qué barra se aplica cada descuento.</div></div></div>
+<div class="rv" data-c="1"><div style="font-size:var(--fs-md);color:var(--navy);font-weight:700">Precio inicial</div><div class="bar-viz"><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--navy)">100 % = \\(\\$80.000\\)</div></div></div></div>
+<div class="rv" data-c="2"><div style="font-size:var(--fs-md);color:var(--amber-b);font-weight:700">Tras el 40 % de descuento (queda el 60 %)</div><div class="bar-viz"><div class="bar-track"><div class="bar-fill" style="width:60%;background:var(--amber-b)">60 % = \\(\\$48.000\\)</div></div></div></div>
+<div class="rv" data-c="3"><div style="font-size:var(--fs-md);color:var(--teal);font-weight:700">El 10 % adicional se toma de la barra corta, no de la original</div><div class="bar-viz"><div class="bar-track"><div class="bar-fill" style="width:54%;background:var(--teal)">90 % de 48 000 = \\(\\$43.200\\)</div></div></div></div>
+<div class="info-box rv" data-c="4"><strong>Descubrimiento:</strong> el 10 % se calcula sobre \\(\\$48.000\\), no sobre \\(\\$80.000\\). Por eso el precio final es \\(\\$43.200\\) y <strong>no</strong> \\(\\$40.000\\).</div>`},
+
+// 3.3 Formalización
+{bread:'Sem. 1 · S3 › Formalización',badge:'FORMALIZACIÓN',badgeColor:'var(--green)',clicks:4,fL:'Sesión 3 · Encadenar operadores',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--green)"></div><div><div class="slide-title">Encadenar porcentajes</div><div class="slide-instr">✍ Escribe tu conjetura y contrástala al hacer clic.</div></div></div>
+<div class="conj-box">Completa: «Dos descuentos sucesivos del 40 % y el 10 % equivalen a multiplicar por ______ y por ______.»</div>
+<div class="formal-box"><div class="formal-title">Descuentos sucesivos = producto de operadores</div>
+<div class="formal-step" data-c="1"><div class="formal-step-n">1</div><div class="formal-step-txt">Quitar 40 % es <strong>dejar el 60 %</strong>: \\(\\times 0{,}60\\).</div></div>
+<div class="formal-step" data-c="2"><div class="formal-step-n">2</div><div class="formal-step-txt">Quitar 10 % es <strong>dejar el 90 %</strong>: \\(\\times 0{,}90\\).</div></div>
+<div class="formal-step" data-c="3"><div class="formal-step-n">3</div><div class="formal-step-txt">Encadeno: \\(80.000 \\times 0{,}60 \\times 0{,}90 = 43.200\\).</div></div>
+<div class="formal-step" data-c="4"><div class="formal-step-n" style="font-size:var(--fs-lg)">→</div><div class="formal-step-txt" style="text-align:center;font-weight:800;font-size:var(--fs-lg)">\\(0{,}60 \\times 0{,}90 = 0{,}54\\) → un <strong>solo</strong> descuento del 46 %, nunca del 50 %.</div></div></div>`},
+
+// 3.4 Tú haces (ACTIVIDAD cálculo + crea tu caso) + PIAR
+{bread:'Sem. 1 · S3 › Tú haces',badge:'TÚ HACES',badgeColor:'var(--teal)',clicks:4,fL:'Sesión 3 · Actividad individual',piar:'<strong>Jerónimo</strong> (7.1): puede grabar su explicación en audio como evidencia, sin exposición sin preparación. <strong>Jhon Alejandro</strong> (7.3): elige el producto de su interés (autonomía controlada). Estudiantes de 7.2: reciben el producto y los descuentos ya dados. Coordinación con la profesora Karol Melissa Erazo.',html:`
+<div class="act-banner"><span class="ico">✏️</span><div>Actividad — Resuelve y luego crea<small>Primero el cálculo; después inventa tu propio caso de descuentos.</small></div></div>
+<div class="act-list">
+<div class="act-item"><div class="act-num">1</div><div class="act-body"><div class="act-q">Un artículo de \\(\\$100.000\\): \\(30\\,\\%\\) de descuento y luego \\(20\\,\\%\\) adicional. ¿Precio final?</div><div class="act-ans rv" data-c="1">\\(100.000 \\times 0{,}70 \\times 0{,}80 = \\$56.000\\)</div></div></div>
+<div class="act-item"><div class="act-num">2</div><div class="act-body"><div class="act-q">¿Qué <strong>descuento único</strong> equivale a ese \\(30\\,\\%\\) y \\(20\\,\\%\\)?</div><div class="act-ans rv" data-c="2">\\(0{,}70 \\times 0{,}80 = 0{,}56\\) → se paga 56 % → descuento único del <strong>44 %</strong></div></div></div>
+</div>
+<div class="rv" data-c="3"><div class="info-box"><strong>🎯 Ahora crea tu caso:</strong> elige un producto real (tienda escolar, almacén, comida), aplícale <strong>dos</strong> descuentos y halla el precio final encadenando operadores. Escribe también el descuento único equivalente.</div></div>
+<div class="rv" data-c="4"><div contenteditable="true" class="espacio-respuesta" role="textbox" aria-label="Espacio para tu caso">Producto: ___ · Precio: ___ · Descuentos: __ % y __ % · Precio final: ___ · Descuento único: __ %</div>
+<button class="btn-exportar" onclick="exportarReflexion()">📥 Guardar mi caso</button></div>`},
+
+// 3.5 Metacognición (cierre puente)
+{bread:'Sem. 1 · S3 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'var(--red)',clicks:4,fL:'Sesión 3 · Cierre del puente hacia la proporcionalidad',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div><div class="slide-title">Cierre: del porcentaje a lo que viene</div><div class="slide-instr">✍ Reflexiona y marca tu semáforo.</div></div></div>
+<div class="meta-q"><div class="meta-qlbl">Pregunta metacognitiva de la semana</div><div class="meta-qtxt">«¿Por qué dos descuentos sucesivos nunca se suman? ¿Qué me dice esto sobre cómo una cantidad opera sobre otra?»</div></div>
+<div class="semaforo">
+<div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Encadeno descuentos con operadores y sé por qué no se suman.<span class="sema-sub">Listo para razones y proporciones.</span></div></div>
+<div class="sema-item" data-c="2"><div class="sema-circle" style="background:var(--amber)"></div><div class="sema-txt">Entiendo las barras pero me cuesta encadenar la multiplicación.<span class="sema-sub">Rehago el caso de la maleta paso a paso.</span></div></div>
+<div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Todavía sumo los porcentajes de los descuentos.<span class="sema-sub">Pido apoyo a la profesora Karol.</span></div></div></div>
+<div class="info-box rv" data-c="4" style="margin-top:var(--gap)"><strong>Puente a la Semana 2:</strong> un porcentaje es una razón sobre 100. La próxima semana generalizamos: <em>toda</em> razón entre dos cantidades, y qué se conserva cuando ambas cambian juntas.</div>`}
+
+]; // fin SLIDES
+
+let cur=0,clicks=0;
+const deck=document.getElementById('deck');
+const saved=loadProgress();
+
+function doKatex(el){if(window.renderMathInElement){renderMathInElement(el,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}],throwOnError:false,strict:false});}}
+
+function buildSlide(idx){
+  const s=SLIDES[idx];const d=document.createElement('div');
+  d.className='slide'+(s.cls?' '+s.cls:'');d.setAttribute('role','region');d.setAttribute('aria-label','Diapositiva '+(idx+1)+' de '+SLIDES.length);
+  let h='';
+  if(!s.noH){const bc=s.badgeColor||'var(--blue)';h+='<header class="hdr"><span class="hdr-b">'+(s.bread||'')+'</span>'+(s.badge?'<span class="hdr-badge" style="background:'+bc+'">'+s.badge+'</span>':'')+'</header>';}
+  h+='<main class="body">'+s.html+'</main>';
+  if(!s.noF) h+='<footer class="ftr"><span>'+(s.fL||'')+'</span><span>I.E. Merceditas Gómez Martínez · Aritmética 7°</span></footer>';
+  d.innerHTML=h;
+  const gh=d.querySelector('#grid-holder');if(gh)gh.innerHTML=grid100(45,'var(--blue)');
+  // Marcador PIAR (solo docente): invisible salvo hover/foco/clic
+  if(s.piar){const pm=document.createElement('div');pm.className='piar-marker';pm.tabIndex=0;pm.setAttribute('role','button');pm.setAttribute('aria-label','Apoyos y ajustes para el docente');pm.innerHTML='🔑<div class="piar-tip"><span class="piar-lbl">Apoyos · solo docente</span>'+s.piar+'</div>';pm.addEventListener('click',e=>{e.stopPropagation();pm.classList.toggle('show');});d.appendChild(pm);}
+  d.querySelectorAll('.espacio-respuesta').forEach(e=>{e.addEventListener('focus',function(){const t=this.textContent.trim();if(t.startsWith('Producto:'))this.textContent='';});});
+  return d;
+}
+
+function show(idx,dir){
+  const prev=deck.querySelector('.slide.active');if(prev)prev.classList.remove('active','enter-r','enter-l');
+  const el=buildSlide(idx);deck.appendChild(el);
+  const all=deck.querySelectorAll('.slide');if(all.length>3)all[0].remove();
+  requestAnimationFrame(()=>{el.classList.add('active',dir>=0?'enter-r':'enter-l');setTimeout(()=>el.classList.remove('enter-r','enter-l'),360);doKatex(el);const main=el.querySelector('main.body');if(main)main.scrollTop=0;const title=el.querySelector('.slide-title');announceToScreenReader(title?'Diapositiva '+(idx+1)+': '+title.textContent:'Diapositiva '+(idx+1)+' de '+SLIDES.length);});
+  clicks=0;document.getElementById('ncnt').textContent=(idx+1)+' / '+SLIDES.length;
+  document.getElementById('pbar').style.width=((idx+1)/SLIDES.length*100).toFixed(1)+'%';saveProgress(idx,0);
+}
+
+function advance(){
+  const s=SLIDES[cur];const mx=s.clicks||0;
+  if(clicks<mx){clicks++;const el=deck.querySelector('.slide.active');if(el){el.querySelectorAll('[data-c="'+clicks+'"]').forEach(e=>{e.classList.add('vis');e.style.opacity='1';});doKatex(el);}announceToScreenReader('Paso '+clicks+' de '+mx);saveProgress(cur,clicks);return;}
+  if(cur<SLIDES.length-1){cur++;show(cur,1);}else showFeedback('¡Has completado la Semana 1 del Período 3! 🎉');
+}
+function retreat(){if(cur>0){cur--;show(cur,-1);}}
+
+document.addEventListener('keydown',e=>{if(['Space','ArrowRight','ArrowLeft'].includes(e.code))e.preventDefault();if(e.code==='Space'||e.code==='ArrowRight')advance();if(e.code==='ArrowLeft')retreat();if(e.code==='KeyF')document.getElementById('fs-btn')?.click();});
+document.getElementById('bn').addEventListener('click',advance);
+document.getElementById('bp').addEventListener('click',retreat);
+let tx=0;
+document.addEventListener('touchstart',e=>{if(e.touches?.[0])tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{const t=e.changedTouches?.[0];if(!t)return;const dx=t.clientX-tx;if(Math.abs(dx)>50){dx<0?advance():retreat();}});
+
+const fsBtn=document.getElementById('fs-btn');
+if(fsBtn){fsBtn.addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();}catch(e){showFeedback('Pantalla completa no disponible',true);}});document.addEventListener('fullscreenchange',()=>{fsBtn.textContent=document.fullscreenElement?'✕':'⛶';});}
+
+function exportarReflexion(){
+  const espacios=[];document.querySelectorAll('.espacio-respuesta').forEach((el,i)=>{const t=el.textContent.trim();if(t&&!t.startsWith('Producto:'))espacios.push('Caso '+(i+1)+': '+t);});
+  let contenido='EVIDENCIAS — Aritmética 7° — Período 3 · Semana 1 (Fracción-decimal-porcentaje)\n'+new Date().toLocaleString('es-CO')+'\n\n';
+  contenido+=espacios.length?espacios.join('\n\n---\n\n'):'(Sin texto escrito)';
+  try{const blob=new Blob([contenido],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='arit7_p3s1_evidencias_'+new Date().toISOString().slice(0,10)+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showFeedback('📥 Caso guardado');}catch(e){navigator.clipboard?.writeText(contenido);showFeedback('📋 Copiado al portapapeles');}
+}
+
+setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
+show(saved?.slide||0,1);
+</script>
+</body>
+</html>
