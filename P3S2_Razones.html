@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Aritmética 7° · Sem. 2 P3 · Razones y proporciones · I.E. Merceditas Gómez Martínez</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#023047;--blue:#219EBC;--blue-mid:#219EBC;
+  --green:#2E7D32;--teal:#00695C;--amber:#FFB703;--red:#B71C1C;
+  --green-b:#27AE60;--amber-b:#FB8500;--red-b:#C0392B;
+  --cream:#F7F6F2;--warm:#EDECEA;--border:#C0BDB4;
+  --text:#1C1C1E;--text2:#3A3A3C;--text3:#6B6B6E;
+  --sky:#8ECAE6;
+  --fs-xs:clamp(18px,1.25vw,26px);
+  --fs-sm:clamp(22px,1.6vw,32px);
+  --fs-md:clamp(26px,2vw,40px);
+  --fs-lg:clamp(32px,2.6vw,50px);
+  --fs-xl:clamp(38px,3.2vw,62px);
+  --fs-2xl:clamp(48px,4.2vw,80px);
+  --fs-3xl:clamp(60px,5.8vw,105px);
+  --gap:clamp(14px,1.6vw,22px);
+  --pad:clamp(20px,2.8vw,40px);
+  --line-h:1.55;
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a101e;font-family:'DM Sans',system-ui,sans-serif;line-height:var(--line-h)}
+#deck{width:100vw;height:100vh;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;background:var(--cream)}
+.slide.active{opacity:1;pointer-events:all}
+.slide.enter-r{animation:inR .32s cubic-bezier(.22,.68,0,1.1) forwards}
+.slide.enter-l{animation:inL .32s cubic-bezier(.22,.68,0,1.1) forwards}
+@keyframes inR{from{transform:translateX(3.5%);opacity:0}to{transform:none;opacity:1}}
+@keyframes inL{from{transform:translateX(-3.5%);opacity:0}to{transform:none;opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+header.hdr{background:var(--navy);height:clamp(44px,5.2vh,60px);display:flex;align-items:center;padding:0 var(--pad);justify-content:space-between;flex-shrink:0}
+.hdr-b{font-size:var(--fs-xs);font-weight:500;color:var(--sky);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-badge{background:var(--blue);color:#fff;font-size:var(--fs-xs);font-weight:800;padding:6px clamp(12px,1.8vw,22px);border-radius:6px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;margin-left:14px}
+footer.ftr{background:var(--warm);border-top:2px solid var(--border);height:clamp(36px,4vh,48px);display:flex;align-items:center;padding:0 var(--pad);justify-content:space-between;flex-shrink:0}
+.ftr span{font-size:var(--fs-xs);color:var(--text3);font-weight:500}
+main.body{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smooth;padding:clamp(16px,2.2vh,28px) var(--pad) clamp(12px,1.5vh,20px);display:flex;flex-direction:column;gap:var(--gap)}
+main.body::-webkit-scrollbar{width:6px}
+main.body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:3px}
+/* portada & sesión */
+.s-portada{background:var(--blue)}
+.portada-inner{width:100%;max-width:1400px;margin:0 auto;padding:clamp(28px,5vh,60px) clamp(40px,6vw,80px);display:flex;flex-direction:column;gap:clamp(14px,2.4vh,26px)}
+.p-ie{font-size:var(--fs-sm);color:rgba(180,210,240,.85);text-align:center;letter-spacing:.05em}
+.p-area{font-size:var(--fs-sm);font-weight:700;color:rgba(180,210,240,.95);text-align:center;letter-spacing:.16em;text-transform:uppercase}
+.p-title{font-family:'DM Serif Display',serif;font-size:var(--fs-3xl);color:#fff;text-align:center;line-height:1.05;animation:fadeUp .9s .1s both}
+.p-sub{font-size:var(--fs-xl);color:rgba(200,228,255,.9);text-align:center;font-style:italic;animation:fadeUp .9s .25s both}
+.p-divider{height:3px;background:rgba(255,255,255,.25);border-radius:2px;margin:clamp(6px,1.2vh,12px) 0}
+.p-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.2vw,18px);animation:fadeUp .9s .4s both}
+.p-card{background:rgba(255,255,255,.09);border:2px solid rgba(255,255,255,.18);border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(12px,1.5vw,20px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.p-card-num{width:clamp(44px,4.6vw,60px);height:clamp(44px,4.6vw,60px);border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:var(--fs-lg);font-weight:700;color:#fff}
+.p-card-title{font-size:var(--fs-md);font-weight:700;color:#fff;line-height:1.15}
+.p-card-sub{font-size:var(--fs-sm);color:rgba(200,228,255,.8);font-style:italic;line-height:1.4}
+.p-docente{font-size:var(--fs-sm);color:rgba(180,210,240,.7);text-align:right;font-style:italic}
+.s-sesion{background:var(--navy)}
+.sesion-inner{display:flex;height:100%;width:100%}
+.sesion-num{width:clamp(160px,18vw,260px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;flex-shrink:0}
+.sesion-num-lbl{font-size:var(--fs-sm);color:var(--sky);text-transform:uppercase;letter-spacing:.16em;font-weight:700}
+.sesion-num-big{font-size:clamp(100px,14vw,200px);font-weight:800;color:#fff;line-height:1}
+.sesion-right{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,5vh,70px) clamp(32px,4vw,70px);gap:clamp(14px,2vh,24px)}
+.sesion-tag{font-size:var(--fs-sm);font-weight:800;color:var(--sky);text-transform:uppercase;letter-spacing:.18em}
+.sesion-title{font-family:'DM Serif Display',serif;font-size:var(--fs-2xl);color:#fff;line-height:1.08}
+.sesion-sub{font-size:var(--fs-md);color:rgba(200,228,255,.75);font-style:italic;line-height:1.45}
+.sesion-chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.sesion-chip{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:24px;padding:8px 20px;font-size:var(--fs-xs);color:var(--sky);font-weight:600}
+/* contenido de slides */
+.title-row{display:flex;align-items:flex-start;gap:16px}
+.accent-bar{width:clamp(10px,1vw,14px);border-radius:6px;flex-shrink:0;align-self:stretch;min-height:48px}
+.slide-title{font-family:'DM Serif Display',serif;font-size:var(--fs-xl);color:var(--navy);line-height:1.08}
+.slide-instr{font-size:var(--fs-md);color:var(--text2);font-style:italic;margin-top:6px;line-height:1.4}
+.badge{display:inline-flex;align-items:center;font-size:var(--fs-sm);font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:6px;margin-bottom:4px}
+.det-box{background:#FFF8ED;border:3px solid var(--amber-b);border-radius:14px;padding:clamp(16px,2vh,24px) clamp(18px,2.2vw,30px);display:flex;flex-direction:column;gap:clamp(10px,1.4vh,16px)}
+.det-label{font-size:var(--fs-sm);font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-b)}
+.det-text{font-family:'DM Serif Display',serif;font-size:var(--fs-lg);color:var(--text);line-height:1.55;font-style:italic}
+.det-q{font-size:var(--fs-xl);font-weight:800;color:var(--navy);line-height:1.35}
+.activacion-previa{background:var(--warm);border-left:5px solid var(--blue);border-radius:0 10px 10px 0;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,26px);font-size:var(--fs-md);color:var(--text2);font-style:italic}
+.activacion-previa strong{color:var(--navy);font-style:normal}
+.paso-row{display:flex;align-items:center;gap:clamp(12px,1.4vw,20px);background:#fff;border:2px solid var(--border);border-radius:12px;padding:clamp(10px,1.2vh,18px) clamp(14px,1.8vw,24px);border-left:6px solid var(--blue);opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.paso-row.vis{opacity:1;transform:none}
+.paso-num{width:clamp(30px,3.2vw,46px);height:clamp(30px,3.2vw,46px);border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);font-weight:800;color:#fff;flex-shrink:0}
+.paso-lbl{font-size:var(--fs-sm);font-weight:800;color:var(--blue);flex-shrink:0;min-width:clamp(100px,11vw,150px)}
+.paso-body{font-size:var(--fs-md);color:var(--text);flex:1;line-height:1.4}
+.result-bar{background:var(--navy);border-radius:12px;padding:clamp(12px,1.6vh,22px) clamp(16px,2vw,28px);display:flex;align-items:center;justify-content:center;gap:20px;font-size:var(--fs-xl);font-weight:800;color:var(--amber);text-align:center;overflow-x:auto;opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s}
+.result-bar.vis{opacity:1;transform:none}
+.formal-box{background:var(--warm);border:3px solid var(--green);border-radius:14px;padding:clamp(14px,1.8vh,26px) clamp(16px,2vw,30px);display:flex;flex-direction:column;gap:clamp(12px,1.6vh,20px);align-items:stretch}
+.formal-title{font-size:var(--fs-lg);font-weight:800;color:var(--green);text-align:center}
+.formal-step{background:#fff;border:2px solid var(--border);border-radius:10px;padding:clamp(10px,1.2vh,18px) clamp(14px,1.8vw,22px);display:flex;align-items:center;gap:14px;width:100%;opacity:0;transition:opacity .4s}
+.formal-step.vis{opacity:1}
+.formal-step-n{width:clamp(30px,3.2vw,44px);height:clamp(30px,3.2vw,44px);border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);font-weight:800;color:#fff;flex-shrink:0}
+.formal-step-txt{font-size:var(--fs-md);color:var(--text);line-height:1.4;flex:1}
+.conj-box{background:#E8F5E9;border:3px solid var(--green);border-radius:12px;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,22px);font-size:var(--fs-md);color:var(--green);font-style:italic;line-height:1.5}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(10px,1vw,16px)}
+.ex-card{background:#fff;border-radius:14px;border:2.5px solid var(--border);border-top:6px solid transparent;padding:clamp(12px,1.6vh,20px) clamp(12px,1.6vw,20px);display:flex;flex-direction:column;gap:clamp(8px,1vh,12px);opacity:0;transform:translateY(16px);transition:opacity .45s,transform .45s}
+.ex-card.vis{opacity:1;transform:none}
+.ex-head{display:flex;align-items:center;gap:12px}
+.ex-num{width:clamp(30px,3.2vw,46px);height:clamp(30px,3.2vw,46px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--fs-md);color:#fff;flex-shrink:0}
+.ex-title{font-size:var(--fs-md);font-weight:800;color:var(--text)}
+.ex-ctx{font-size:var(--fs-sm);color:var(--text2);font-style:italic;line-height:1.4}
+.ex-task{background:var(--warm);border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,18px);font-size:var(--fs-lg);font-weight:800;color:var(--navy);text-align:center;border:2px solid var(--border)}
+.error-box{background:#FFF0F0;border:3px solid var(--red);border-radius:14px;padding:clamp(14px,1.8vh,22px) clamp(16px,2vw,26px);display:flex;flex-direction:column;gap:clamp(8px,1vh,12px)}
+.error-title{font-size:var(--fs-md);font-weight:800;color:var(--red)}
+.error-txt{font-size:var(--fs-sm);color:var(--text);line-height:1.55}
+.metodo-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.metodo-card{border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(14px,1.8vw,22px);display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.metodo-card.vis{opacity:1;transform:none}
+.metodo-card.mal{background:#FFF0F0;border:3px solid var(--red)}
+.metodo-card.bien{background:#E8F5E9;border:3px solid var(--green)}
+.metodo-lbl{font-size:var(--fs-sm);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.metodo-card.mal .metodo-lbl{color:var(--red)}
+.metodo-card.bien .metodo-lbl{color:var(--green)}
+.metodo-body{font-size:var(--fs-md);color:var(--text);line-height:1.5}
+.info-box{background:#EBF4FB;border-left:5px solid var(--blue);border-radius:0 12px 12px 0;padding:clamp(12px,1.4vh,20px) clamp(14px,1.8vw,24px);font-size:var(--fs-md);color:var(--text2);line-height:1.6}
+.info-box strong{color:var(--navy);font-style:normal}
+.piar-box{background:#F3E5F5;border:2.5px solid #6A1B9A;border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,20px);font-size:var(--fs-xs);color:#4A148C;line-height:1.6;margin-top:var(--gap)}
+.piar-lbl{font-weight:800;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px}
+.meta-q{background:#E0F2F1;border:3px solid var(--teal);border-radius:14px;padding:clamp(14px,1.8vh,24px) clamp(16px,2vw,28px)}
+.meta-qlbl{font-size:var(--fs-xs);font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+.meta-qtxt{font-family:'DM Serif Display',serif;font-size:var(--fs-xl);color:var(--text);font-style:italic;line-height:1.55}
+.semaforo{display:flex;flex-direction:column;gap:clamp(10px,1.2vh,18px)}
+.sema-item{display:flex;align-items:flex-start;gap:16px;background:#fff;border-radius:12px;padding:clamp(12px,1.6vh,20px) clamp(14px,1.8vw,24px);border:2.5px solid var(--border);opacity:0;transform:translateX(16px);transition:opacity .45s,transform .45s}
+.sema-item.vis{opacity:1;transform:none}
+.sema-circle{width:clamp(46px,5vw,68px);height:clamp(46px,5vw,68px);border-radius:50%;flex-shrink:0}
+.sema-txt{font-size:var(--fs-md);color:var(--text);line-height:1.35}
+.sema-sub{display:block;font-size:var(--fs-sm);color:var(--text3);margin-top:4px;font-style:italic}
+.mcm-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.mcm-table th{background:var(--navy);color:#fff;padding:clamp(8px,1vh,14px) clamp(10px,1.2vw,18px);text-align:center}
+.mcm-table td{padding:clamp(8px,1vh,14px) clamp(10px,1.2vw,18px);border-bottom:2px solid var(--border);text-align:center;font-size:var(--fs-md);color:var(--text)}
+.mcm-table tr:nth-child(even) td{background:#fff}
+.mcm-table tr:nth-child(odd) td{background:var(--warm)}
+.mcm-table .hi{background:#FFF9C4!important;font-weight:800;color:var(--amber-b)}
+.espacio-respuesta{background:#fff;border:2.5px dashed var(--border);border-radius:10px;padding:clamp(10px,1.2vh,16px) clamp(12px,1.5vw,20px);font-size:var(--fs-md);color:var(--text);min-height:clamp(70px,9vh,110px);margin:var(--gap) 0;font-style:italic}
+.espacio-respuesta:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 4px rgba(33,158,188,.25)}
+.btn-exportar{background:var(--green-b);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-weight:700;cursor:pointer;margin-top:12px;font-size:var(--fs-sm);display:inline-flex;align-items:center;gap:8px}
+.btn-exportar:hover{background:var(--green)}
+.feedback-msg{position:fixed;top:clamp(70px,9vh,90px);left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:12px 24px;border-radius:10px;font-size:var(--fs-sm);font-weight:600;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center}
+.feedback-msg.error{background:var(--red-b)}
+.feedback-msg.show{opacity:1}
+.vote-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.vote-card{background:#fff;border-radius:14px;border:2.5px solid var(--border);padding:clamp(12px,1.6vh,20px) clamp(12px,1.6vw,20px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.vote-card.vis{opacity:1;transform:none}
+.vote-person{font-size:var(--fs-lg);font-weight:800;color:var(--navy)}
+.vote-claim{font-family:'DM Serif Display',serif;font-size:var(--fs-sm);color:var(--text2);font-style:italic;line-height:1.45}
+.vote-verdict{font-size:var(--fs-sm);font-weight:800;padding:6px 16px;border-radius:8px;margin-top:6px}
+.decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.decision-card{background:#fff;border-radius:14px;border:2.5px solid var(--border);padding:clamp(14px,1.8vh,24px) clamp(14px,1.8vw,22px);display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.decision-card.vis{opacity:1;transform:none}
+.decision-title{font-size:var(--fs-md);font-weight:800}
+.decision-detail{font-size:var(--fs-sm);color:var(--text2);line-height:1.4}
+.decision-result{background:var(--warm);border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-size:var(--fs-lg);font-weight:800;color:var(--navy);text-align:center}
+/* extras for this deck */
+.ratio-visual{display:flex;gap:6px;align-items:flex-end;justify-content:center;margin:clamp(8px,1.2vh,14px) 0}
+.ratio-cup{border-radius:6px 6px 0 0;display:flex;align-items:flex-end;justify-content:center;font-weight:800;font-size:var(--fs-sm);color:#fff;padding-bottom:4px}
+.rv{opacity:0;transition:opacity .45s}
+.rv.vis{opacity:1}
+.pill{display:inline-block;background:var(--warm);border:2px solid var(--border);border-radius:8px;padding:4px 12px;font-size:var(--fs-sm);font-weight:700;color:var(--navy)}
+/* nav */
+#fs-btn{position:fixed;top:clamp(10px,1.2vh,16px);right:clamp(76px,8.5vw,100px);z-index:200;background:rgba(2,48,71,.8);border:2px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:18px;width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#fs-btn:hover{background:var(--blue)}
+#nav{position:fixed;bottom:clamp(16px,2.2vh,26px);right:clamp(20px,2.8vw,34px);display:flex;align-items:center;gap:clamp(10px,1.2vw,16px);z-index:100}
+.nbtn{width:clamp(46px,5vw,62px);height:clamp(46px,5vw,62px);border-radius:50%;background:rgba(2,48,71,.9);border:2px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:clamp(20px,2.4vw,28px);display:flex;align-items:center;justify-content:center;transition:background .2s}
+.nbtn:hover{background:var(--blue)}
+#ncnt{font-size:clamp(15px,1.6vw,20px);color:rgba(255,255,255,.9);background:rgba(2,48,71,.85);padding:clamp(6px,.8vh,10px) clamp(14px,1.8vw,22px);border-radius:24px;font-family:monospace;font-weight:700}
+#pbar{position:fixed;bottom:0;left:0;height:5px;background:var(--blue);transition:width .32s ease;z-index:100}
+#hint{position:fixed;bottom:clamp(16px,2.2vh,26px);left:clamp(20px,2.8vw,34px);font-size:14px;color:rgba(255,255,255,.55);background:rgba(2,48,71,.75);padding:8px 16px;border-radius:24px;font-family:monospace;transition:opacity .3s;z-index:100}
+.katex{font-size:1.15em!important}
+.katex-display{margin:0!important}
+@media(max-width:1100px) and (orientation:landscape){:root{--fs-xs:clamp(16px,1.6vw,24px);--fs-sm:clamp(19px,2vw,28px);--fs-md:clamp(22px,2.4vw,34px);--fs-lg:clamp(26px,2.8vw,42px);--fs-xl:clamp(30px,3.4vw,50px);--fs-2xl:clamp(38px,4.4vw,64px)}.metodo-grid{grid-template-columns:1fr}}
+@media(min-width:1920px){:root{--fs-xs:26px;--fs-sm:32px;--fs-md:40px;--fs-lg:50px;--fs-xl:62px;--fs-2xl:80px;--fs-3xl:105px;--gap:22px;--pad:40px}}
+</style>
+</head>
+<body>
+<div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<div id="deck"></div>
+<button id="fs-btn" title="Pantalla completa (F)" aria-label="Alternar pantalla completa">⛶</button>
+<div id="nav" role="navigation" aria-label="Navegación de diapositivas">
+  <button class="nbtn" id="bp" aria-label="Diapositiva anterior">&#8592;</button>
+  <span id="ncnt" aria-live="polite">1 / ??</span>
+  <button class="nbtn" id="bn" aria-label="Siguiente diapositiva">&#8594;</button>
+</div>
+<div id="pbar" role="progressbar"></div>
+<div id="hint">Espacio / → avanzar &nbsp;·&nbsp; ← retroceder &nbsp;·&nbsp; F pantalla completa</div>
+<div id="feedback" class="feedback-msg" role="status" aria-live="polite"></div>
+<script>
+const SLIDES=[
+/* ═══ 0 · PORTADA DE SEMANA ═══ */
+{noH:true,noF:true,clicks:0,cls:'s-portada',html:`
+<div class="portada-inner">
+  <div class="p-ie">I.E. Merceditas Gómez Martínez · Medellín, Antioquia</div>
+  <div class="p-area">Aritmética 7° · Período 3 · Semana 2</div>
+  <div class="p-title">Razones<br>y proporciones</div>
+  <div class="p-sub">La comparación multiplicativa y la regla de tres</div>
+  <div class="p-divider"></div>
+  <div class="p-card-grid">
+    <div class="p-card"><div class="p-card-num">1</div><div class="p-card-title">La razón</div><div class="p-card-sub">Comparar multiplicativamente · la receta de arepas</div></div>
+    <div class="p-card"><div class="p-card-num">2</div><div class="p-card-title">La proporción</div><div class="p-card-sub">Propiedad fundamental · regla de tres directa</div></div>
+    <div class="p-card"><div class="p-card-num">3</div><div class="p-card-title">Aplicar y decidir</div><div class="p-card-sub">Escalas, mapas y el % como razón</div></div>
+  </div>
+  <div class="p-docente">Prof. Carlos Alberto Mena Romaña · Del porcentaje a la proporcionalidad</div>
+</div>`},
+
+/* ═══════════════════ SESIÓN 1 ═══════════════════ */
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner">
+  <div class="sesion-num" style="background:var(--blue)"><div class="sesion-num-lbl">Sesión</div><div class="sesion-num-big">1</div></div>
+  <div class="sesion-right">
+    <div class="sesion-tag">Semana 2 · Aritmética 7°</div>
+    <div class="sesion-title">La razón: comparar multiplicando</div>
+    <div class="sesion-sub">¿Sumar la diferencia o multiplicar por el mismo factor?<br>La receta de arepas de la abuela.</div>
+    <div class="sesion-chips"><span class="sesion-chip">⏱ 55 min</span><span class="sesion-chip">🌽 Receta de arepas</span><span class="sesion-chip">⚖️ Aditivo vs. multiplicativo</span><span class="sesion-chip">GRR: Yo hago</span></div>
+  </div>
+</div>`},
+
+/* ── S1 · DETONANTE ──────────────────────────────────── */
+{bread:'Sem. 2 · S1 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:0,fL:'Sesión 1 · La receta de arepas de la abuela',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--amber-b);color:#fff">Situación detonante</div>
+  <div class="slide-title">Las arepas de la novena</div>
+  <div class="slide-instr">Lee la situación. Escribe con cuál grupo estás de acuerdo y una razón.</div>
+</div></div>
+<div class="det-box">
+  <div class="det-label">🌽 Situación problema</div>
+  <div class="det-text">La receta de arepas de la abuela usa 3 tazas de maíz por cada 2 tazas de agua. Para la novena del salón se necesitan 12 tazas de maíz. Un grupo dice que se necesitan 8 tazas de agua. Otro grupo dice que 11, porque «si el maíz subió 9, el agua también debe subir 9».</div>
+  <div class="det-q">¿Quién tiene razón y cómo lo saben con seguridad?</div>
+</div>
+<div class="activacion-previa"><strong>🧠 La trampa:</strong> la estrategia de «sumar la misma diferencia» suena lógica, pero rompe el sabor de la arepa. <strong>¿Sumar o multiplicar?</strong> Esa pregunta va a decidir toda la clase.</div>`},
+
+/* ── S1 · CONFLICTO — DOS GRUPOS ─────────────────── */
+{bread:'Sem. 2 · S1 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:2,fL:'Sesión 1 · ¿Sumar o multiplicar?',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div style="flex:1">
+  <div class="slide-title">Dos estrategias, un solo sabor correcto</div>
+  <div class="slide-instr">Clic para revelar el veredicto de cada grupo.</div>
+</div></div>
+<div class="metodo-grid">
+  <div class="metodo-card mal" data-c="1">
+    <div class="metodo-lbl">❌ Grupo «sumadores»</div>
+    <div class="metodo-body">«De 3 a 12 hay +9. Entonces de 2 también sumo 9: \\(2 + 9 = 11\\) tazas de agua.»<br><em style="color:var(--red);font-size:var(--fs-xs)">La razón maíz:agua cambia de 3:2 a 12:11. Ya no es la misma receta.</em></div>
+  </div>
+  <div class="metodo-card bien" data-c="2">
+    <div class="metodo-lbl">✔ Grupo «multiplicadores»</div>
+    <div class="metodo-body">«De 3 a 12: \\(\\times 4\\). Entonces el agua también \\(\\times 4\\): \\(2 \\times 4 = 8\\) tazas.»<br><em style="color:var(--green);font-size:var(--fs-xs)">La razón 3:2 = 12:8. ¡Mismo sabor!</em></div>
+  </div>
+</div>
+<div class="info-box rv" data-c="2" style="margin-top:var(--gap)"><strong>📌 La clave:</strong> cuando dos cantidades se relacionan multiplicativamente, al escalar una <strong>se multiplica</strong>, no se suma. Eso es una <strong>razón</strong>.</div>`},
+
+/* ── S1 · CONSTRUCCIÓN — TABLA DE RAZONES ──────────── */
+{bread:'Sem. 2 · S1 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:9,fL:'Sesión 1 · Tabla de proporciones con la receta',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--blue);color:#fff">Yo hago + Hacemos — Tabla para completar</div>
+  <div class="slide-title">¿La razón se mantiene?</div>
+  <div class="slide-instr">Completa la tabla. Clic a clic: primero el agua, luego la razón, luego si se mantiene.</div>
+</div></div>
+<table class="mcm-table">
+  <tr><th>Receta</th><th>Maíz</th><th>Agua</th><th>Razón maíz/agua</th><th>¿Igual?</th></tr>
+  <tr><td style="font-weight:800;text-align:left">Original</td><td>3</td><td>2</td><td>\\(\\tfrac{3}{2} = 1{,}5\\)</td><td style="color:var(--green);font-weight:800">Modelo</td></tr>
+  <tr><td style="text-align:left">Doble</td><td>6</td><td><span class="rv" data-c="1">4</span></td><td><span class="rv" data-c="2">\\(\\tfrac{6}{4} = 1{,}5\\)</span></td><td><span class="rv" data-c="3" style="color:var(--green);font-weight:800">✔ Igual</span></td></tr>
+  <tr><td style="text-align:left">Triple</td><td>9</td><td><span class="rv" data-c="4">6</span></td><td><span class="rv" data-c="5">\\(\\tfrac{9}{6} = 1{,}5\\)</span></td><td><span class="rv" data-c="6" style="color:var(--green);font-weight:800">✔ Igual</span></td></tr>
+  <tr><td style="text-align:left">Novena</td><td>12</td><td><span class="rv" data-c="7">8</span></td><td><span class="rv" data-c="8">\\(\\tfrac{12}{8} = 1{,}5\\)</span></td><td><span class="rv" data-c="9" style="color:var(--green);font-weight:800">✔ Igual</span></td></tr>
+</table>
+<div class="info-box rv" data-c="9"><strong>📌 Patrón:</strong> la razón \\(\\tfrac{\\text{maíz}}{\\text{agua}} = 1{,}5\\) se mantiene constante en todas las filas. Si la razón cambia, <em>ya no es la misma receta</em>.</div>`},
+
+/* ── S1 · FORMALIZACIÓN ────────────────────────────── */
+{bread:'Sem. 2 · S1 › Formalización',badge:'FORMALIZACIÓN',badgeColor:'var(--green)',clicks:4,fL:'Sesión 1 · Tu definición primero, el clic después',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--green)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--green);color:#fff">Formalización · PPT animado</div>
+  <div class="slide-title">Escribe TU definición antes del primer clic</div>
+  <div class="slide-instr">Cuando la pantalla revele la definición formal, corrige en otro color.</div>
+</div></div>
+<div class="conj-box">✍️ <strong>Completa en tu cuaderno:</strong> «Una razón es ____. Dos razones forman una proporción cuando ____.»</div>
+<div class="formal-box">
+  <div class="formal-title">De la receta a la definición</div>
+  <div class="formal-step" data-c="1"><div class="formal-step-n">1</div><div class="formal-step-txt"><strong>Razón:</strong> es la comparación multiplicativa entre dos cantidades. Se escribe \\(a:b\\) o \\(\\dfrac{a}{b}\\). Ejemplo: maíz:agua = \\(3:2\\).</div></div>
+  <div class="formal-step" data-c="2"><div class="formal-step-n">2</div><div class="formal-step-txt"><strong>Proporción:</strong> es la igualdad de dos razones: \\(\\dfrac{a}{b} = \\dfrac{c}{d}\\). Ejemplo: \\(\\dfrac{3}{2} = \\dfrac{12}{8}\\).</div></div>
+  <div class="formal-step" data-c="3"><div class="formal-step-n">3</div><div class="formal-step-txt"><strong>Propiedad fundamental:</strong> en toda proporción se cumple \\(a \\cdot d = b \\cdot c\\). Ejemplo: \\(3 \\times 8 = 2 \\times 12 = 24\\). ✔</div></div>
+  <div class="formal-step" data-c="4"><div class="formal-step-n" style="font-size:var(--fs-lg)">→</div><div class="formal-step-txt" style="font-size:var(--fs-lg);text-align:center;font-weight:800">\\(\\dfrac{a}{b} = \\dfrac{c}{d} \\iff a \\cdot d = b \\cdot c\\)</div></div>
+</div>`},
+
+/* ── S1 · APLICACIÓN — VERIFICAR PROPORCIONES ─────── */
+{bread:'Sem. 2 · S1 › Aplicación',badge:'APLICACIÓN',badgeColor:'var(--teal)',clicks:6,fL:'Sesión 1 · ¿Proporción o no?',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--teal)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--teal);color:#fff">Tú haces — Verificar con productos cruzados</div>
+  <div class="slide-title">¿Forman proporción?</div>
+  <div class="slide-instr">Usa la propiedad fundamental. Clic para comprobar.</div>
+</div></div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--teal)"><div class="ex-head"><div class="ex-num" style="background:var(--teal)">1</div><div class="ex-title">Jugo de lulo</div></div><div class="ex-ctx">¿\\(\\tfrac{4}{6}\\) y \\(\\tfrac{6}{9}\\) son la misma mezcla?</div><div class="ex-task">\\(4 \\times 9 \\;\\mathop{?}\\; 6 \\times 6\\)</div>
+    <div class="rv" data-c="2" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(36 = 36\\) ✔ Sí forman proporción</div></div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--teal)"><div class="ex-head"><div class="ex-num" style="background:var(--teal)">2</div><div class="ex-title">Pintura</div></div><div class="ex-ctx">¿\\(\\tfrac{5}{3}\\) y \\(\\tfrac{10}{7}\\) son la misma proporción de azul:blanco?</div><div class="ex-task">\\(5 \\times 7 \\;\\mathop{?}\\; 3 \\times 10\\)</div>
+    <div class="rv" data-c="4" style="background:#FFF0F0;border:2.5px solid var(--red);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--red);font-weight:800">\\(35 \\neq 30\\) ✘ No forman proporción</div></div>
+  <div class="ex-card" data-c="5" style="border-top-color:var(--amber)"><div class="ex-head"><div class="ex-num" style="background:var(--amber)">3</div><div class="ex-title">Reto</div></div><div class="ex-ctx">¿\\(\\tfrac{15}{20}\\) y \\(\\tfrac{3}{4}\\) representan la misma razón?</div><div class="ex-task">\\(15 \\times 4 \\;\\mathop{?}\\; 20 \\times 3\\)</div>
+    <div class="rv" data-c="6" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(60 = 60\\) ✔ — y además \\(\\tfrac{15}{20}\\) simplificado da \\(\\tfrac{3}{4}\\)</div></div>
+</div>`},
+
+/* ── S1 · METACOGNICIÓN ──────────────────────────────── */
+{bread:'Sem. 2 · S1 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'var(--red)',clicks:3,fL:'Sesión 1 · Cierre',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div style="flex:1">
+  <div class="slide-title">¿Por qué sumar no funciona?</div>
+  <div class="slide-instr">Responde en el cuaderno. Después levanta tu ficha del semáforo.</div>
+</div></div>
+<div class="meta-q"><div class="meta-qlbl">Pregunta metacognitiva</div><div class="meta-qtxt">«El grupo que sumó 9 estaba convencido de tener razón. ¿Qué tenía su argumento que sonaba lógico, y cómo descubriste que estaba mal?»</div></div>
+<div style="font-size:var(--fs-md);font-weight:800;color:var(--navy);margin-top:var(--gap)">Semáforo de comprensión</div>
+<div class="semaforo">
+  <div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Puedo distinguir razón de diferencia y verificar proporciones con productos cruzados.<span class="sema-sub">Listo para la regla de tres.</span></div></div>
+  <div class="sema-item" data-c="2"><div class="sema-circle" style="background:var(--amber)"></div><div class="sema-txt">Entiendo la tabla pero me cuesta aplicar la propiedad fundamental.<span class="sema-sub">Voy a practicar con 3 pares más.</span></div></div>
+  <div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Me pierdo entre sumar y multiplicar para escalar.<span class="sema-sub">Pido apoyo a la profesora Karol.</span></div></div>
+</div>`},
+
+/* ═══════════════════ SESIÓN 2 ═══════════════════ */
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner">
+  <div class="sesion-num" style="background:var(--teal)"><div class="sesion-num-lbl">Sesión</div><div class="sesion-num-big">2</div></div>
+  <div class="sesion-right">
+    <div class="sesion-tag">Semana 2 · Aritmética 7°</div>
+    <div class="sesion-title">La regla de tres</div>
+    <div class="sesion-sub">Si sé tres valores, puedo encontrar el cuarto.<br>Del mapa del Metro a la tienda escolar.</div>
+    <div class="sesion-chips"><span class="sesion-chip">⏱ 55 min</span><span class="sesion-chip">🗺️ Metro Línea A</span><span class="sesion-chip">🧮 Regla de tres</span><span class="sesion-chip">GRR: Hacemos</span></div>
+  </div>
+</div>`},
+
+/* ── S2 · DETONANTE ──────────────────────────────────── */
+{bread:'Sem. 2 · S2 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:0,fL:'Sesión 2 · El mapa del Metro',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--amber-b);color:#fff">Situación detonante</div>
+  <div class="slide-title">¿Cuántos kilómetros reales?</div>
+  <div class="slide-instr">Estima la respuesta antes de calcular.</div>
+</div></div>
+<div class="det-box">
+  <div class="det-label">🗺️ Situación problema</div>
+  <div class="det-text">En el mapa del Metro de Medellín (escala 1:100.000), la distancia entre la estación Niquía y la estación Itagüí mide 15 cm. Si 1 cm en el mapa equivale a 1 km en la realidad, ¿cuántos kilómetros reales hay entre esas estaciones? Ahora bien: entre Niquía y Bello miden 6 cm. ¿A cuántos km reales equivalen esos 6 cm?</div>
+  <div class="det-q">¿Es este problema una proporción? ¿Cómo lo sabrías sin calculadora?</div>
+</div>`},
+
+/* ── S2 · YO HAGO — REGLA DE TRES PASO A PASO ─────── */
+{bread:'Sem. 2 · S2 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:4,fL:'Sesión 2 · Regla de tres paso a paso',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--blue);color:#fff">Yo hago — Paso a paso</div>
+  <div class="slide-title">Regla de tres simple directa</div>
+  <div class="slide-instr">Observa cómo el problema se convierte en una proporción con una incógnita.</div>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:clamp(8px,1vh,14px)">
+  <div class="paso-row" data-c="1"><div class="paso-num">1</div><div class="paso-lbl">Identifico</div><div class="paso-body">Magnitudes: cm en mapa y km reales.<br>Dato: 1 cm → 1 km.<br>Pregunta: 6 cm → \\(x\\) km.</div></div>
+  <div class="paso-row" data-c="2"><div class="paso-num">2</div><div class="paso-lbl">Planteo</div><div class="paso-body">\\(\\dfrac{1\\text{ cm}}{1\\text{ km}} = \\dfrac{6\\text{ cm}}{x\\text{ km}}\\)</div></div>
+  <div class="paso-row" data-c="3"><div class="paso-num">3</div><div class="paso-lbl">Productos cruzados</div><div class="paso-body">\\(1 \\cdot x = 1 \\cdot 6\\) → \\(x = 6\\)</div></div>
+</div>
+<div class="result-bar" data-c="4">6 cm en el mapa = 6 km reales ✔</div>`},
+
+/* ── S2 · HACEMOS — REGLA DE TRES CON DATOS REALES ── */
+{bread:'Sem. 2 · S2 › Hacemos',badge:'HACEMOS',badgeColor:'var(--teal)',clicks:6,fL:'Sesión 2 · Práctica guiada',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--teal)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--teal);color:#fff">Hacemos — Juntos</div>
+  <div class="slide-title">Plantea, resuelve y comprueba</div>
+  <div class="slide-instr">Escribe la proporción ANTES de hacer clic.</div>
+</div></div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--teal)"><div class="ex-head"><div class="ex-num" style="background:var(--teal)">1</div><div class="ex-title">Tienda escolar</div></div><div class="ex-ctx">3 paquetes de galletas cuestan $4.500. ¿Cuánto cuestan 7 paquetes?</div><div class="ex-task">\\(\\dfrac{3}{4.500} = \\dfrac{7}{x}\\)</div>
+    <div class="rv" data-c="2" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(x = \\dfrac{7 \\times 4.500}{3} = \\$10.500\\)</div></div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--teal)"><div class="ex-head"><div class="ex-num" style="background:var(--teal)">2</div><div class="ex-title">Pintura del salón</div></div><div class="ex-ctx">Con 2 litros de pintura se cubren 8 m² de pared. ¿Cuántos litros se necesitan para 20 m²?</div><div class="ex-task">\\(\\dfrac{2}{8} = \\dfrac{x}{20}\\)</div>
+    <div class="rv" data-c="4" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(x = \\dfrac{2 \\times 20}{8} = 5\\) litros</div></div>
+  <div class="ex-card" data-c="5" style="border-top-color:var(--amber)"><div class="ex-head"><div class="ex-num" style="background:var(--amber)">3</div><div class="ex-title">Reto: receta ampliada</div></div><div class="ex-ctx">La receta original lleva 3 tazas de maíz y 2 de agua. Para 21 tazas de maíz, ¿cuántas de agua?</div><div class="ex-task">\\(\\dfrac{3}{2} = \\dfrac{21}{x}\\)</div>
+    <div class="rv" data-c="6" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(x = \\dfrac{2 \\times 21}{3} = 14\\) tazas de agua</div></div>
+</div>`},
+
+/* ── S2 · TÚ HACES ──────────────────────────────────── */
+{bread:'Sem. 2 · S2 › Aplicación',badge:'APLICACIÓN',badgeColor:'var(--teal)',clicks:7,fL:'Sesión 2 · Trabajo independiente',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--teal)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--teal);color:#fff">Tú haces — Sin guía</div>
+  <div class="slide-title">Plantea la proporción y resuelve</div>
+  <div class="slide-instr">Muestra los tres pasos: identificar, plantear, resolver. Clic solo después de terminar.</div>
+</div></div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--blue)"><div class="ex-head"><div class="ex-num" style="background:var(--blue)">A</div><div class="ex-title">Fotocopias</div></div><div class="ex-ctx">5 fotocopias cuestan $750. ¿Cuánto cuestan 12?</div><div class="ex-task">\\(\\dfrac{5}{750} = \\dfrac{12}{x}\\)</div>
+    <div class="rv" data-c="4" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(x = \\dfrac{12 \\times 750}{5} = \\$1.800\\)</div></div>
+  <div class="ex-card" data-c="2" style="border-top-color:var(--blue)"><div class="ex-head"><div class="ex-num" style="background:var(--blue)">B</div><div class="ex-title">Bus al colegio</div></div><div class="ex-ctx">El bus recorre 14 km en 20 minutos. ¿Cuántos km recorre en 35 minutos?</div><div class="ex-task">\\(\\dfrac{14}{20} = \\dfrac{x}{35}\\)</div>
+    <div class="rv" data-c="5" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:8px 12px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(x = \\dfrac{14 \\times 35}{20} = 24{,}5\\) km</div></div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--amber)"><div class="ex-head"><div class="ex-num" style="background:var(--amber)">C</div><div class="ex-title">Reto: inventar</div></div><div class="ex-ctx">Inventa un problema de regla de tres con precios de la tienda escolar. Escríbelo y resuélvelo.</div><div class="ex-task">Creación propia</div>
+    <div class="rv" data-c="6" style="background:#FFF8ED;border:2.5px solid var(--amber);border-radius:10px;padding:8px 12px;font-size:var(--fs-sm);text-align:center;color:var(--amber-b);font-weight:800">Socializa con tu trío. Verifican con productos cruzados.</div></div>
+</div>
+<div class="piar-box rv" data-c="7"><span class="piar-lbl">🧩 Apoyo diferenciado</span><strong>Eybril, Juan Pablo, Sebastián:</strong> resuelve A y B; el docente ayuda a plantear la proporción. <strong>Matías:</strong> A y B con pausa entre las dos. <strong>Jerónimo:</strong> el reto C puede ser oral. <strong>Jhon Alejandro:</strong> presenta la solución de B al tablero.</div>`},
+
+/* ── S2 · METACOGNICIÓN ──────────────────────────────── */
+{bread:'Sem. 2 · S2 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'var(--red)',clicks:3,fL:'Sesión 2 · Cierre',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div style="flex:1">
+  <div class="slide-title">¿Cuándo NO funciona la regla de tres?</div>
+  <div class="slide-instr">Responde en el cuaderno. Después levanta tu ficha del semáforo.</div>
+</div></div>
+<div class="meta-q"><div class="meta-qlbl">Pregunta metacognitiva</div><div class="meta-qtxt">«¿En qué se parece el error de los "sumadores" en la receta de arepas al error de calcular un descuento sumando porcentajes (Semana 1)?»</div></div>
+<div style="font-size:var(--fs-md);font-weight:800;color:var(--navy);margin-top:var(--gap)">Semáforo de comprensión</div>
+<div class="semaforo">
+  <div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Planteo y resuelvo regla de tres directa, verifico con productos cruzados.<span class="sema-sub">Listo para porcentaje como razón.</span></div></div>
+  <div class="sema-item" data-c="2"><div class="sema-circle" style="background:var(--amber)"></div><div class="sema-txt">Resuelvo bien pero me cuesta decidir cuál va arriba y cuál abajo.<span class="sema-sub">Voy a usar la tabla de tres columnas como estructura.</span></div></div>
+  <div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Me pierdo al plantear la proporción.<span class="sema-sub">Pido apoyo a la profesora Karol para practicar con la tabla.</span></div></div>
+</div>`},
+
+/* ═══════════════════ SESIÓN 3 ═══════════════════ */
+{noH:true,noF:true,clicks:0,cls:'s-sesion',html:`
+<div class="sesion-inner">
+  <div class="sesion-num" style="background:var(--amber)"><div class="sesion-num-lbl">Sesión</div><div class="sesion-num-big">3</div></div>
+  <div class="sesion-right">
+    <div class="sesion-tag">Semana 2 · Aritmética 7°</div>
+    <div class="sesion-title">El porcentaje como razón</div>
+    <div class="sesion-sub">Conectar la Semana 1 con las proporciones.<br>La regla de tres resuelve cualquier porcentaje.</div>
+    <div class="sesion-chips"><span class="sesion-chip">⏱ 55 min</span><span class="sesion-chip">🏷️ Descuentos</span><span class="sesion-chip">📐 % = razón sobre 100</span><span class="sesion-chip">GRR: Tú haces</span></div>
+  </div>
+</div>`},
+
+/* ── S3 · DETONANTE ──────────────────────────────────── */
+{bread:'Sem. 2 · S3 › Exploración',badge:'EXPLORACIÓN',badgeColor:'var(--amber-b)',clicks:0,fL:'Sesión 3 · El porcentaje es una razón',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--amber-b)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--amber-b);color:#fff">Situación detonante</div>
+  <div class="slide-title">¿Y si el % es una proporción?</div>
+  <div class="slide-instr">Conecta lo de la Semana 1 con la regla de tres de hoy.</div>
+</div></div>
+<div class="det-box">
+  <div class="det-label">🏷️ Situación problema</div>
+  <div class="det-text">En la tienda escolar hay un letrero: «Cuaderno argollado: $12.000 con 25 % de descuento». La Semana 1 aprendimos a calcular el 25 % multiplicando. Pero Laura dice: «También puedo usar regla de tres: si 100 % son $12.000, entonces 25 % son \\(x\\)».</div>
+  <div class="det-q">¿Llegan al mismo resultado los dos métodos? ¿Cuál prefieres y por qué?</div>
+</div>`},
+
+/* ── S3 · CONSTRUCCIÓN — DOS MÉTODOS ──────────────── */
+{bread:'Sem. 2 · S3 › Construcción',badge:'CONSTRUCCIÓN',badgeColor:'var(--blue)',clicks:2,fL:'Sesión 3 · Dos caminos, un resultado',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--blue)"></div><div style="flex:1">
+  <div class="slide-title">Dos métodos para el 25 % de $12.000</div>
+  <div class="slide-instr">Clic para ver cada método. Verifica que dan lo mismo.</div>
+</div></div>
+<div class="metodo-grid">
+  <div class="metodo-card bien" data-c="1">
+    <div class="metodo-lbl">Método 1: Multiplicar</div>
+    <div class="metodo-body"><strong>Semana 1:</strong><br>\\(12.000 \\times 0{,}25 = 3.000\\)<br>Descuento = $3.000<br>Precio final = $9.000</div>
+  </div>
+  <div class="metodo-card bien" data-c="2">
+    <div class="metodo-lbl">Método 2: Regla de tres</div>
+    <div class="metodo-body"><strong>Semana 2:</strong><br>\\(\\dfrac{100}{12.000} = \\dfrac{25}{x}\\)<br>\\(x = \\dfrac{25 \\times 12.000}{100} = 3.000\\)<br>Precio final = $9.000 ✔</div>
+  </div>
+</div>
+<div class="info-box rv" data-c="2" style="margin-top:var(--gap)"><strong>📌 Conexión:</strong> el porcentaje es una <strong>razón con denominador 100</strong>. Calcular el 25 % de una cantidad es resolver una proporción donde una de las razones tiene denominador 100. <em>Son dos caras del mismo concepto.</em></div>`},
+
+/* ── S3 · HACEMOS — PROBLEMAS MIXTOS ─────────────── */
+{bread:'Sem. 2 · S3 › Hacemos',badge:'HACEMOS',badgeColor:'var(--teal)',clicks:6,fL:'Sesión 3 · Elige tu método',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--teal)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--teal);color:#fff">Hacemos — Elige el método que prefieras</div>
+  <div class="slide-title">Resuelve con regla de tres o multiplicando</div>
+  <div class="slide-instr">En cada problema, anota cuál método usaste y por qué.</div>
+</div></div>
+<div class="cards-grid">
+  <div class="ex-card" data-c="1" style="border-top-color:var(--teal)"><div class="ex-head"><div class="ex-num" style="background:var(--teal)">1</div><div class="ex-title">Zapatos en D1</div></div><div class="ex-ctx">Unos tenis cuestan $85.000 con 30 % de descuento. ¿Cuánto pago?</div><div class="ex-task">Descuento = \\(\\dfrac{30 \\times 85.000}{100}\\)</div>
+    <div class="rv" data-c="2" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(= \\$25.500\\) → Pago: $59.500</div></div>
+  <div class="ex-card" data-c="3" style="border-top-color:var(--teal)"><div class="ex-head"><div class="ex-num" style="background:var(--teal)">2</div><div class="ex-title">¿Qué porcentaje es?</div></div><div class="ex-ctx">De 40 estudiantes, 14 trajeron tarea. ¿Qué porcentaje trajo tarea?</div><div class="ex-task">\\(\\dfrac{14}{40} = \\dfrac{x}{100}\\)</div>
+    <div class="rv" data-c="4" style="background:#E8F5E9;border:2.5px solid var(--green);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--green);font-weight:800">\\(x = \\dfrac{14 \\times 100}{40} = 35\\,\\%\\)</div></div>
+  <div class="ex-card" data-c="5" style="border-top-color:var(--amber)"><div class="ex-head"><div class="ex-num" style="background:var(--amber)">3</div><div class="ex-title">Reto: ¿cuál es el total?</div></div><div class="ex-ctx">El 15 % de una cantidad es $6.000. ¿Cuál es la cantidad total?</div><div class="ex-task">\\(\\dfrac{15}{100} = \\dfrac{6.000}{x}\\)</div>
+    <div class="rv" data-c="6" style="background:#FFF8ED;border:2.5px solid var(--amber);border-radius:10px;padding:10px 14px;font-size:var(--fs-md);text-align:center;color:var(--amber-b);font-weight:800">\\(x = \\dfrac{6.000 \\times 100}{15} = \\$40.000\\)</div></div>
+</div>`},
+
+/* ── S3 · SÍNTESIS DE LA SEMANA ──────────────────────── */
+{bread:'Sem. 2 · S3 › Formalización',badge:'SÍNTESIS',badgeColor:'var(--green)',clicks:3,fL:'Sesión 3 · Lo que nos llevamos de la Semana 2',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--green)"></div><div style="flex:1">
+  <div class="badge" style="background:var(--green);color:#fff">Síntesis · PPT animado</div>
+  <div class="slide-title">Cierra la semana en tu cuaderno</div>
+  <div class="slide-instr">Escribe las tres ideas ANTES del clic. Corrige en otro color.</div>
+</div></div>
+<div class="formal-box">
+  <div class="formal-title">Las tres cosas que hay que sacar de aquí</div>
+  <div class="formal-step" data-c="1"><div class="formal-step-n">1</div><div class="formal-step-txt"><strong>La razón:</strong> es comparación multiplicativa, no aditiva. \\(a:b\\) o \\(\\tfrac{a}{b}\\). Si se escala, se multiplica por el mismo factor.</div></div>
+  <div class="formal-step" data-c="2"><div class="formal-step-n">2</div><div class="formal-step-txt"><strong>La proporción y la regla de tres:</strong> \\(\\tfrac{a}{b} = \\tfrac{c}{d}\\) se resuelve con \\(a \\cdot d = b \\cdot c\\). Es la herramienta para encontrar un valor desconocido.</div></div>
+  <div class="formal-step" data-c="3"><div class="formal-step-n">3</div><div class="formal-step-txt"><strong>La conexión:</strong> el porcentaje es una razón con denominador 100. Calcular un % es resolver una proporción. <em>La semana entrante: proporcionalidad directa y la constante \\(k\\).</em></div></div>
+</div>`},
+
+/* ── S3 · METACOGNICIÓN FINAL ────────────────────────── */
+{bread:'Sem. 2 · S3 › Metacognición',badge:'METACOGNICIÓN',badgeColor:'var(--red)',clicks:3,fL:'Sesión 3 · Cierre de la Semana 2',html:`
+<div class="title-row"><div class="accent-bar" style="background:var(--red)"></div><div style="flex:1">
+  <div class="slide-title">La pregunta que te llevas</div>
+  <div class="slide-instr">Escribe tu respuesta abajo. Es insumo para la Semana 3 (proporcionalidad directa).</div>
+</div></div>
+<div class="meta-q"><div class="meta-qlbl">Pregunta metacognitiva de la semana</div><div class="meta-qtxt">«El porcentaje resultó ser un caso particular de proporción. ¿Qué otras situaciones de mi vida cotidiana son proporciones que yo resolvía "de cabeza" sin saber que estaba usando regla de tres?»</div></div>
+<div class="espacio-respuesta" contenteditable="true" role="textbox" aria-label="Escribe tu reflexión">Escribe tu reflexión aquí...</div>
+<div style="font-size:var(--fs-md);font-weight:800;color:var(--navy);margin-top:6px">Semáforo final de la semana</div>
+<div class="semaforo">
+  <div class="sema-item" data-c="1"><div class="sema-circle" style="background:#27AE60"></div><div class="sema-txt">Distingo razón de diferencia, planteo y resuelvo regla de tres, y conecto el % con proporciones.<span class="sema-sub">Listo para proporcionalidad directa e inversa.</span></div></div>
+  <div class="sema-item" data-c="2"><div class="sema-circle" style="background:var(--amber)"></div><div class="sema-txt">Resuelvo regla de tres pero no siempre conecto con el porcentaje.<span class="sema-sub">Voy a resolver 3 problemas más con ambos métodos.</span></div></div>
+  <div class="sema-item" data-c="3"><div class="sema-circle" style="background:#C0392B"></div><div class="sema-txt">Todavía me confundo al plantear la proporción.<span class="sema-sub">Voy a practicar la tabla «magnitud 1 | magnitud 2 | razón» con la profesora Karol.</span></div></div>
+</div>
+<div style="margin-top:var(--gap);text-align:center"><button class="btn-exportar" onclick="exportarReflexion()">💾 Guardar mi reflexión final</button></div>`},
+]; // fin SLIDES
+
+function announceToScreenReader(msg){const r=document.getElementById('live-region');if(r){r.textContent='';setTimeout(()=>{r.textContent=msg;},100);}}
+function showFeedback(msg,isError=false){const fb=document.getElementById('feedback');if(!fb)return;fb.textContent=msg;fb.className='feedback-msg'+(isError?' error':'')+' show';setTimeout(()=>fb.classList.remove('show'),3200);}
+function saveProgress(idx,cl){try{localStorage.setItem('p3s2_arit7',JSON.stringify({slide:idx,clicks:cl,ts:Date.now()}));}catch(e){}}
+function loadProgress(){try{const s=localStorage.getItem('p3s2_arit7');if(s){const d=JSON.parse(s);if(Date.now()-d.ts<86400000)return d;}}catch(e){}return null;}
+
+function doKatex(el){
+  if(window.renderMathInElement){
+    renderMathInElement(el,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}],throwOnError:false,strict:false});
+  }
+}
+
+let cur=0,clicks=0;
+const deck=document.getElementById('deck');
+const saved=loadProgress();
+if(saved){cur=saved.slide||0;clicks=0;}
+
+function buildSlide(idx){
+  const s=SLIDES[idx];const d=document.createElement('div');
+  d.className='slide'+(s.cls?' '+s.cls:'');d.setAttribute('role','region');d.setAttribute('aria-label','Diapositiva '+(idx+1)+' de '+SLIDES.length);
+  let h='';
+  if(!s.noH){const bc=s.badgeColor||'var(--blue)';h+='<header class="hdr"><span class="hdr-b">'+(s.bread||'')+'</span>'+(s.badge?'<span class="hdr-badge" style="background:'+bc+'">'+s.badge+'</span>':'')+'</header>';}
+  h+='<main class="body">'+s.html+'</main>';
+  if(!s.noF) h+='<footer class="ftr"><span>'+(s.fL||'')+'</span><span>I.E. Merceditas Gómez Martínez · Aritmética 7°</span></footer>';
+  d.innerHTML=h;return d;
+}
+
+function show(idx,dir){
+  const prev=deck.querySelector('.slide.active');if(prev)prev.classList.remove('active','enter-r','enter-l');
+  const el=buildSlide(idx);deck.appendChild(el);
+  const all=deck.querySelectorAll('.slide');if(all.length>3)all[0].remove();
+  requestAnimationFrame(()=>{el.classList.add('active',dir>=0?'enter-r':'enter-l');setTimeout(()=>el.classList.remove('enter-r','enter-l'),360);doKatex(el);const main=el.querySelector('main.body');if(main)main.scrollTop=0;const title=el.querySelector('.slide-title');announceToScreenReader(title?'Diapositiva '+(idx+1)+': '+title.textContent:'Diapositiva '+(idx+1)+' de '+SLIDES.length);});
+  clicks=0;document.getElementById('ncnt').textContent=(idx+1)+' / '+SLIDES.length;
+  document.getElementById('pbar').style.width=((idx+1)/SLIDES.length*100).toFixed(1)+'%';saveProgress(idx,0);
+}
+
+function advance(){
+  const s=SLIDES[cur];const mx=s.clicks||0;
+  if(clicks<mx){clicks++;const el=deck.querySelector('.slide.active');if(el){el.querySelectorAll('[data-c="'+clicks+'"]').forEach(e=>{e.classList.add('vis');e.style.opacity='1';});doKatex(el);}announceToScreenReader('Paso '+clicks+' de '+mx);saveProgress(cur,clicks);return;}
+  if(cur<SLIDES.length-1){cur++;show(cur,1);}else showFeedback('¡Has completado la Semana 2! 🎉');
+}
+function retreat(){if(cur>0){cur--;show(cur,-1);}}
+
+document.addEventListener('keydown',e=>{if(['Space','ArrowRight','ArrowLeft'].includes(e.code))e.preventDefault();if(e.code==='Space'||e.code==='ArrowRight')advance();if(e.code==='ArrowLeft')retreat();if(e.code==='KeyF')document.getElementById('fs-btn')?.click();});
+document.getElementById('bn').addEventListener('click',advance);
+document.getElementById('bp').addEventListener('click',retreat);
+let tx=0;
+document.addEventListener('touchstart',e=>{if(e.touches?.[0])tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{const t=e.changedTouches?.[0];if(!t)return;const dx=t.clientX-tx;if(Math.abs(dx)>50){dx<0?advance():retreat();}});
+
+const fsBtn=document.getElementById('fs-btn');
+if(fsBtn){fsBtn.addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();}catch(e){showFeedback('Pantalla completa no disponible',true);}});document.addEventListener('fullscreenchange',()=>{fsBtn.textContent=document.fullscreenElement?'✕':'⛶';});}
+
+function exportarReflexion(){
+  const espacios=[];document.querySelectorAll('.espacio-respuesta').forEach((el,i)=>{if(el.textContent.trim()&&el.textContent.trim()!=='Escribe tu reflexión aquí...')espacios.push('Reflexión '+(i+1)+': '+el.textContent.trim());});
+  let contenido='EVIDENCIAS — Aritmética 7° — P3 Semana 2\n'+new Date().toLocaleString('es-CO')+'\n\n';
+  if(espacios.length)contenido+=espacios.join('\n\n---\n\n');
+  try{const blob=new Blob([contenido],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='arit7_p3s2_evidencias_'+new Date().toISOString().slice(0,10)+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showFeedback('📥 Reflexiones guardadas');}catch(e){navigator.clipboard?.writeText(contenido);showFeedback('📋 Copiado al portapapeles');}
+}
+
+setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
+show(saved?.slide||0,1);
+
+</script>
+</body>
+</html>
