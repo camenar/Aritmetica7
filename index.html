@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="Serie de clases interactivas de Aritmética 7° · I.E. Merceditas Gómez Martínez, Medellín.">
+<title>Aritmética 7° · Portada de la serie · I.E. Merceditas Gómez Martínez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--terra:#C4563A;--terra-dark:#A3432D;--terra-soft:#FCEEE9;--bosque:#2D6A4F;--bosque-soft:#E8F5EE;--arena:#F4E8D1;--crema:#FFFAF3;--papel:#FBF7F0;--oscuro:#2C1810;--tinta:#3D2C1E;--gris:#7A6B5D;--gris2:#A89888;--linea:#E6DDD0;--fs-hero:clamp(42px,6vw,88px);--fs-h2:clamp(22px,2.4vw,38px);--fs-card:clamp(16px,1.3vw,22px);--fs-sm:clamp(13px,1vw,17px);--fs-xs:clamp(11px,.85vw,14px);--pad:clamp(20px,4vw,64px);--radius:14px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}body{font-family:'Outfit',system-ui,sans-serif;color:var(--tinta);background:var(--papel);line-height:1.5;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:focus-visible,.card:focus-visible{outline:3px solid var(--terra);outline-offset:3px;border-radius:8px}
+.hero{position:relative;background:linear-gradient(160deg,#2C1810 0%,#4A2E1A 40%,#5C3D28 100%);color:#fff;padding:clamp(40px,6vw,80px) var(--pad) clamp(44px,6vw,76px);overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(196,86,58,.06) 28px,rgba(196,86,58,.06) 30px),repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(45,106,79,.05) 28px,rgba(45,106,79,.05) 30px);pointer-events:none}
+.hero__glyphs{position:absolute;inset:0;pointer-events:none;font-family:'Playfair Display',serif;color:rgba(244,232,209,.06);font-size:clamp(80px,14vw,200px);line-height:.9;user-select:none}.hero__glyphs span{position:absolute;font-style:italic}.hero__glyphs span:nth-child(1){top:6%;right:5%}.hero__glyphs span:nth-child(2){bottom:-8%;left:3%;color:rgba(196,86,58,.06)}
+.hero__inner{position:relative;max-width:1400px;margin:0 auto}
+.hero__kicker{display:inline-flex;align-items:center;gap:10px;font-size:var(--fs-sm);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--arena);margin-bottom:clamp(12px,2vw,20px)}.hero__kicker::before{content:"";width:34px;height:2px;background:var(--terra);display:inline-block}
+.hero__title{font-family:'Playfair Display',serif;font-size:var(--fs-hero);line-height:.96;letter-spacing:-.01em;margin-bottom:clamp(8px,1.4vw,16px)}.hero__title em{color:var(--terra);font-style:italic}
+.hero__sub{font-size:clamp(16px,1.6vw,26px);font-weight:300;color:#d4c4aa;max-width:46ch;margin-bottom:clamp(22px,3vw,36px)}
+.periodos{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:clamp(10px,1.4vw,16px)}
+.periodo-tab{display:flex;align-items:center;gap:10px;font-family:'Outfit',sans-serif;background:rgba(255,255,255,.06);border:1px solid rgba(244,232,209,.22);border-radius:100px;padding:9px 18px 9px 12px;color:#d4c4aa;cursor:pointer;transition:background .18s,border-color .18s,transform .18s,color .18s}
+.periodo-tab:hover{background:rgba(255,255,255,.12);border-color:var(--arena);transform:translateY(-2px)}
+.periodo-tab__n{font-family:'Playfair Display',serif;font-size:clamp(14px,1.2vw,19px);line-height:1;background:rgba(244,232,209,.15);color:var(--arena);border-radius:100px;padding:5px 11px;transition:background .18s,color .18s}
+.periodo-tab__t{font-size:var(--fs-sm);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.periodo-tab.is-active{background:var(--terra);border-color:var(--terra);color:#fff;font-weight:600}
+.periodo-tab.is-active .periodo-tab__n{background:var(--oscuro);color:var(--terra)}
+.periodo-tab.is-active:hover{transform:none}
+.periodo-sub{font-size:var(--fs-sm);color:#bfad94;margin-bottom:clamp(22px,3vw,38px)}.periodo-sub b{color:var(--terra);font-weight:700}.periodo-sub__f{color:var(--arena)}
+.hero__meta{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,44px);border-top:1px solid rgba(255,255,255,.1);padding-top:clamp(18px,2.4vw,28px)}.meta-item .k{display:block;font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--arena);margin-bottom:3px;font-weight:600}.meta-item .v{font-size:clamp(14px,1.1vw,18px);font-weight:500;color:#fff}
+main{max-width:1400px;margin:0 auto;padding:clamp(24px,3.6vw,50px) var(--pad) clamp(50px,6vw,90px)}
+.progreso{display:flex;align-items:center;gap:clamp(14px,2vw,24px);flex-wrap:wrap;background:#fff;border:1px solid var(--linea);border-radius:var(--radius);padding:clamp(16px,1.8vw,24px) clamp(18px,2.2vw,30px);margin-bottom:clamp(30px,4vw,52px);box-shadow:0 4px 18px rgba(44,24,16,.05)}.progreso__txt{font-size:var(--fs-card);font-weight:600;color:var(--oscuro);white-space:nowrap}.progreso__txt b{color:var(--terra)}.progreso__bar{flex:1;min-width:160px;height:10px;border-radius:100px;background:var(--arena);overflow:hidden}.progreso__fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--bosque),var(--terra));width:0;transition:width 1s cubic-bezier(.22,.68,0,1.1)}.progreso__pct{font-size:var(--fs-sm);font-weight:600;color:var(--gris);white-space:nowrap}
+.bloque{margin-bottom:clamp(32px,4.5vw,56px)}.bloque__head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:clamp(14px,1.8vw,24px);padding-bottom:10px;border-bottom:2px solid var(--linea)}.bloque__tag{font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:100px;color:#fff}.bloque__title{font-family:'Playfair Display',serif;font-size:var(--fs-h2);color:var(--oscuro);line-height:1.05}.bloque__range{font-size:var(--fs-sm);color:var(--gris2);font-weight:500;margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(260px,22vw,340px),1fr));gap:clamp(12px,1.4vw,20px)}
+.card{position:relative;display:flex;gap:14px;background:#fff;border:1px solid var(--linea);border-left:4px solid var(--linea);border-radius:var(--radius);padding:clamp(14px,1.4vw,20px);transition:transform .18s,box-shadow .18s,border-color .18s;min-height:130px}
+.card__num{flex-shrink:0;width:clamp(42px,4vw,54px);height:clamp(42px,4vw,54px);display:flex;align-items:center;justify-content:center;border-radius:50%;font-family:'Playfair Display',serif;font-size:clamp(18px,1.8vw,26px);font-weight:700;line-height:1;color:#fff}
+.card__body{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}.card__tema{font-size:var(--fs-card);font-weight:600;color:var(--oscuro);line-height:1.22}.card__estrategia{font-size:var(--fs-sm);font-style:italic;color:var(--gris);line-height:1.35}.card__nota{font-size:var(--fs-xs);color:var(--gris2)}.card__pill{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-sm);font-weight:600;padding:5px 13px;border-radius:100px}
+.card--live{cursor:pointer;border-left-color:var(--terra)}.card--live:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(44,24,16,.12);border-color:var(--terra)}.card--live .card__pill{background:var(--terra);color:#fff;transition:background .18s,transform .18s}.card--live:hover .card__pill{background:var(--bosque);transform:translateX(3px)}
+.card--soon{border-style:solid;border-left-style:dashed;border-color:var(--linea);background:var(--crema)}.card--soon .card__num{background:var(--arena)!important;color:var(--gris2)!important}.card--soon .card__tema{color:var(--gris)}.card--soon .card__pill{background:var(--arena);color:var(--gris);border:1px dashed var(--gris2)}
+.recursos{margin-top:clamp(10px,1.6vw,20px)}.recursos .grid{grid-template-columns:repeat(auto-fill,minmax(clamp(260px,26vw,380px),1fr))}.card--recurso .card__num{background:var(--bosque);font-family:'Outfit',sans-serif;font-size:clamp(18px,1.6vw,24px);font-weight:700}.card--recurso:hover .card__pill{background:var(--bosque)}
+footer{background:var(--oscuro);color:#bfad94;padding:clamp(28px,3.6vw,44px) var(--pad)}.footer__inner{max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px 36px;align-items:center;justify-content:space-between;font-size:var(--fs-sm)}.footer__inner strong{color:#fff}.footer__inner .brand{font-family:'Playfair Display',serif;font-size:clamp(18px,1.8vw,26px);color:#fff}
+.nota-cierre{margin-top:clamp(24px,3.6vw,44px);padding:clamp(14px,1.8vw,20px) clamp(16px,2.2vw,26px);background:var(--terra-soft);border-left:4px solid var(--terra);border-radius:10px;font-size:var(--fs-sm);color:var(--gris);line-height:1.55}.nota-cierre strong{color:var(--oscuro)}
+@media(max-width:560px){.card{flex-direction:row}.bloque__range{margin-left:0;width:100%}.periodo-tab__t{display:none}.periodo-tab{padding:9px 14px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero__glyphs" aria-hidden="true"><span id="glifo-1">¾</span><span id="glifo-2">a:b</span></div>
+  <div class="hero__inner">
+    <p class="hero__kicker">I.E. Merceditas Gómez Martínez · Medellín</p>
+    <h1 class="hero__title">Aritmética <em>7°</em></h1>
+    <p class="hero__sub">Serie de clases interactivas para proyección en aula, semana a semana.</p>
+    <nav class="periodos" id="periodos" role="tablist" aria-label="Seleccionar período"></nav>
+    <p class="periodo-sub" id="periodo-sub"></p>
+    <div class="hero__meta">
+      <div class="meta-item"><span class="k">Docente</span><span class="v">Carlos A. Mena Romaña</span></div>
+      <div class="meta-item"><span class="k">Metodología</span><span class="v">GRR · Pedagogía activa</span></div>
+      <div class="meta-item"><span class="k">Ritmo</span><span class="v">3 sesiones/semana · 55 min</span></div>
+      <div class="meta-item"><span class="k">Enfoque</span><span class="v" id="meta-enfoque"></span></div>
+    </div>
+  </div>
+</header>
+<main id="contenido">
+  <section class="progreso"><span class="progreso__txt"><b id="pub-count">0</b> de <span id="tot-count">0</span> publicadas</span><div class="progreso__bar"><div class="progreso__fill" id="prog-fill"></div></div><span class="progreso__pct" id="prog-pct">0%</span></section>
+  <div id="bloques"></div>
+  <section class="recursos" id="recursos-sec"><div class="bloque__head"><span class="bloque__tag" style="background:var(--bosque)">Recursos</span><h2 class="bloque__title">Juegos y manipulativos</h2><span class="bloque__range">Complementos</span></div><div class="grid" id="recursos-grid"></div></section>
+  <p class="nota-cierre" id="nota-cierre"></p>
+</main>
+<footer><div class="footer__inner"><span class="brand">Aritmética 7°</span><span id="footer-meta"></span><span><strong>2026</strong> · Área de Matemáticas</span></div></footer>
+<script>
+const PERIODOS={
+p1:{num:1,titulo:'Números Naturales y Enteros',rango:'Feb 2 – May 1',enfoque:'Concreto → abstracto · DUA',glifos:['−7','+3'],
+  meta:'Meta: dominar las <strong>operaciones con enteros</strong> y descubrir que los negativos no dan miedo.',
+  cierre:'<strong>En construcción.</strong> Los decks del Período 1 se irán encendiendo conforme se produzcan.',
+  bloques:[
+    {tag:'Bloque 1',color:'#2D6A4F',titulo:'Naturales y valor posicional',rango:'Semanas 1 – 3',semanas:[
+      {n:1,tema:'Conjuntos numéricos: ℕ y ℤ en la recta',estrategia:'La Recta Numérica Humana',archivo:''},
+      {n:2,tema:'Múltiplos, divisores y criterios de divisibilidad',estrategia:'La Criba de Eratóstenes',archivo:''},
+      {n:3,tema:'MCD y MCM — Factorización prima',estrategia:'Árboles de factores',archivo:''},
+    ]},
+    {tag:'Bloque 2',color:'#C4563A',titulo:'Números Enteros ℤ',rango:'Semanas 4 – 7',semanas:[
+      {n:4,tema:'Suma y resta de enteros — ley de signos aditiva',estrategia:'Banqueros vs. Deudores',archivo:''},
+      {n:5,tema:'Multiplicación y división de enteros',estrategia:'El Tablero de Signos',archivo:''},
+      {n:6,tema:'Operaciones combinadas y jerarquía',estrategia:'El Código Secreto',archivo:''},
+      {n:7,tema:'Potenciación en ℤ y bases negativas',estrategia:'Torres de potencias',archivo:''},
+    ]},
+    {tag:'Bloque 3',color:'#8B6914',titulo:'Radicación y cierre',rango:'Semanas 8 – 10',semanas:[
+      {n:8,tema:'Radicación como operación inversa',estrategia:'Cuadrados y cubos perfectos',archivo:''},
+      {n:9,tema:'Repaso integral en ℤ',estrategia:'Rally Matemático',archivo:''},
+      {n:10,tema:'Evaluación y nivelación Período 1',estrategia:'Prueba tipo Saber + coevaluación',archivo:''},
+    ]},
+  ],recursos:[]
+},
+p2:{num:2,titulo:'Fracciones y Decimales',rango:'May 4 – Ago 14',enfoque:'Manipulativo · CoRP',glifos:['¾','⅝'],
+  meta:'Meta: operar con <strong>fracciones y decimales</strong> con sentido, no solo con recetas.',
+  cierre:'<strong>Período en desarrollo.</strong> Cinco semanas publicadas de las diez planeadas.',
+  bloques:[
+    {tag:'Bloque 1',color:'#2D6A4F',titulo:'Concepto y operaciones aditivas',rango:'Semanas 1 – 5',semanas:[
+      {n:1,tema:'Concepto de fracción: parte-todo, medida y cociente',estrategia:'Doblado de tiras de papel',archivo:''},
+      {n:2,tema:'Fracciones equivalentes y simplificación',estrategia:'La Pared de Fracciones',archivo:''},
+      {n:3,tema:'Suma y resta de fracciones homogéneas',estrategia:'Regletas de Cuisenaire',archivo:''},
+      {n:4,tema:'Suma y resta de fracciones heterogéneas',estrategia:'El MCM al rescate',archivo:''},
+      {n:5,tema:'Taller integrado de suma y resta',estrategia:'Tabla interactiva de práctica',archivo:'TablaSumaRestaFracciones.html'},
+    ]},
+    {tag:'Bloque 2',color:'#C4563A',titulo:'Operaciones multiplicativas',rango:'Semanas 6 – 10',semanas:[
+      {n:6,tema:'Fracción de un entero — la "de" como ×',estrategia:'Repartiendo pizzas',archivo:''},
+      {n:7,tema:'Multiplicación de fracciones — introducción',estrategia:'Modelo de áreas con papel cuadriculado',archivo:''},
+      {n:8,tema:'Fracciones en la cocina — contextos reales',estrategia:'La Receta Desastrosa',archivo:'LaReceta.html'},
+      {n:9,tema:'Multiplicación de fracciones — modelo de área',estrategia:'Simplificación cruzada y formalización',archivo:'MultiplicacionFracciones/'},
+      {n:10,tema:'División de fracciones',estrategia:'¿Cuántas veces cabe?',archivo:'DivisionFracciones.html'},
+    ]},
+  ],recursos:[
+    {icono:'▦',tema:'Tabla de suma y resta',desc:'Práctica interactiva de fracciones aditivas',archivo:'TablaSumaRestaFracciones.html'},
+  ]
+},
+p3:{num:3,titulo:'Razones, Proporciones y Porcentajes',rango:'Ago 17 – Nov 13',enfoque:'Covariacional · Social-crítico',glifos:['3:5','25%'],
+  meta:'Meta: entender la <strong>proporcionalidad</strong> como herramienta para leer el mundo y tomar decisiones.',
+  cierre:'<strong>En construcción.</strong> La Semana 2 (Razones) ya está publicada. Las demás se irán encendiendo semana a semana.',
+  bloques:[
+    {tag:'Bloque 1',color:'#2D6A4F',titulo:'Razones y proporciones',rango:'Semanas 1 – 5',semanas:[
+      {n:1,tema:'Concepto de razón — comparación de cantidades',estrategia:'Mezclas de pintura',archivo:''},
+      {n:2,tema:'Razones en contextos cotidianos',estrategia:'Razones en el supermercado y la cancha',archivo:'P3S2_Razones.html'},
+      {n:3,tema:'Proporción y propiedad fundamental',estrategia:'Tablas de valores y producto cruzado',archivo:''},
+      {n:4,tema:'Regla de tres simple directa',estrategia:'La Tienda del Barrio',archivo:''},
+      {n:5,tema:'Regla de tres simple inversa',estrategia:'Los Obreros de la Construcción',archivo:''},
+    ]},
+    {tag:'Bloque 2',color:'#C4563A',titulo:'Porcentajes y aplicaciones',rango:'Semanas 6 – 10',semanas:[
+      {n:6,tema:'Concepto de porcentaje — fracción de base 100',estrategia:'La Cuadrícula del 100',archivo:''},
+      {n:7,tema:'Cálculo de porcentajes — métodos',estrategia:'Descuentos en el centro comercial',archivo:''},
+      {n:8,tema:'IVA, descuentos y aumentos porcentuales',estrategia:'Simulación de tienda escolar',archivo:''},
+      {n:9,tema:'Proyecto: presupuesto familiar con porcentajes',estrategia:'Los García toman decisiones',archivo:'',nota:'Proyecto integrador con Educación Financiera'},
+      {n:10,tema:'Evaluación y nivelación Período 3',estrategia:'Prueba tipo Saber + autoevaluación',archivo:''},
+    ]},
+  ],recursos:[]
+}
+};
+const dos=n=>String(n).padStart(2,'0'),ORDEN=['p1','p2','p3'],LS_KEY='aritmetica7_portada_v1',$=id=>document.getElementById(id);
+const navEl=$('periodos');
+ORDEN.forEach(k=>{const p=PERIODOS[k];const b=document.createElement('button');b.type='button';b.className='periodo-tab';b.id='tab-'+k;b.dataset.k=k;b.setAttribute('role','tab');b.innerHTML=`<span class="periodo-tab__n">P${p.num}</span><span class="periodo-tab__t">${p.titulo}</span>`;b.addEventListener('click',()=>activar(k,true));navEl.appendChild(b)});
+function activar(k,guardar){const p=PERIODOS[k];if(!p)return;ORDEN.forEach(x=>{const t=$('tab-'+x);const on=x===k;t.classList.toggle('is-active',on);t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1});$('glifo-1').textContent=p.glifos[0];$('glifo-2').textContent=p.glifos[1];$('periodo-sub').innerHTML=`Período <b>${p.num}</b> · ${p.titulo} &nbsp;·&nbsp; <span class="periodo-sub__f">${p.rango} de 2026</span>`;$('meta-enfoque').textContent=p.enfoque;$('footer-meta').innerHTML=p.meta;$('nota-cierre').innerHTML=p.cierre;
+const cont=$('bloques');cont.innerHTML='';let total=0,pub=0;p.bloques.forEach(b=>{const sec=document.createElement('section');sec.className='bloque';const hd=document.createElement('div');hd.className='bloque__head';hd.innerHTML=`<span class="bloque__tag" style="background:${b.color}">${b.tag}</span><h2 class="bloque__title">${b.titulo}</h2><span class="bloque__range">${b.rango}</span>`;sec.appendChild(hd);const gr=document.createElement('div');gr.className='grid';b.semanas.forEach(s=>{total++;const v=s.archivo&&s.archivo.trim()!=='';if(v)pub++;const nt=s.nota?`<span class="card__nota">${s.nota}</span>`:'';const inn=`<div class="card__num" style="${v?`background:${b.color}`:''}">${dos(s.n)}</div><div class="card__body"><span class="card__tema">${s.tema}</span><span class="card__estrategia">«${s.estrategia}»</span>${nt}<span class="card__pill">${v?'Abrir clase →':'En construcción'}</span></div>`;let el;if(v){el=document.createElement('a');el.className='card card--live';el.href=s.archivo}else{el=document.createElement('div');el.className='card card--soon'}el.innerHTML=inn;gr.appendChild(el)});sec.appendChild(gr);cont.appendChild(sec)});
+const rS=$('recursos-sec'),rG=$('recursos-grid');rG.innerHTML='';if(!p.recursos||!p.recursos.length){rS.style.display='none'}else{rS.style.display='';p.recursos.forEach(r=>{const v=r.archivo&&r.archivo.trim()!=='';const el=document.createElement(v?'a':'div');el.className='card '+(v?'card--live card--recurso':'card--soon');if(v)el.href=r.archivo;el.innerHTML=`<div class="card__num">${r.icono||'★'}</div><div class="card__body"><span class="card__tema">${r.tema}</span><span class="card__estrategia">${r.desc||''}</span><span class="card__pill">${v?'Abrir →':'En construcción'}</span></div>`;rG.appendChild(el)})}
+$('pub-count').textContent=pub;$('tot-count').textContent=total;const pct=total?Math.round(pub/total*100):0;$('prog-pct').textContent=pct+'%';$('prog-fill').style.width='0%';requestAnimationFrame(()=>{requestAnimationFrame(()=>{$('prog-fill').style.width=pct+'%'})});
+if(guardar){try{localStorage.setItem(LS_KEY,k)}catch(e){}if(history.replaceState)history.replaceState(null,'','#'+k);else location.hash=k}document.title=`Aritmética 7° · P${p.num} — ${p.titulo}`}
+navEl.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;const i=ORDEN.indexOf(document.activeElement.dataset.k);if(i<0)return;const j=e.key==='ArrowRight'?(i+1)%ORDEN.length:(i-1+ORDEN.length)%ORDEN.length;$('tab-'+ORDEN[j]).focus();activar(ORDEN[j],true);e.preventDefault()});
+let ini=(location.hash||'').replace('#','');if(!PERIODOS[ini]){try{ini=localStorage.getItem(LS_KEY)}catch(e){ini=null}}if(!PERIODOS[ini])ini='p3';activar(ini,false);
+</script>
+</body>
+</html>
