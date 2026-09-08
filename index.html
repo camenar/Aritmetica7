@@ -66,6 +66,15 @@ footer{background:var(--oscuro);color:#bfad94;padding:clamp(28px,3.6vw,44px) var
   <div id="bloques"></div>
   <section class="recursos" id="recursos-sec"><div class="bloque__head"><span class="bloque__tag" style="background:var(--bosque)">Recursos</span><h2 class="bloque__title">Juegos y manipulativos</h2><span class="bloque__range">Complementos</span></div><div class="grid" id="recursos-grid"></div></section>
   <p class="nota-cierre" id="nota-cierre"></p>
+
+  <section class="recuperaciones" id="recup-sec">
+    <div class="bloque__head" style="border-bottom-color:#C4563A">
+      <span class="bloque__tag" style="background:#8B6914">🔄 Recuperación</span>
+      <h2 class="bloque__title">Planes de recuperación y nivelación</h2>
+      <span class="bloque__range">Actividades para estudiantes con desempeño bajo</span>
+    </div>
+    <div class="grid" id="recup-grid"></div>
+  </section>
 </main>
 <footer><div class="footer__inner"><span class="brand">Aritmética 7°</span><span id="footer-meta"></span><span><strong>2026</strong> · Área de Matemáticas</span></div></footer>
 <script>
@@ -145,6 +154,26 @@ $('pub-count').textContent=pub;$('tot-count').textContent=total;const pct=total?
 if(guardar){try{localStorage.setItem(LS_KEY,k)}catch(e){}if(history.replaceState)history.replaceState(null,'','#'+k);else location.hash=k}document.title=`Aritmética 7° · P${p.num} — ${p.titulo}`}
 navEl.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;const i=ORDEN.indexOf(document.activeElement.dataset.k);if(i<0)return;const j=e.key==='ArrowRight'?(i+1)%ORDEN.length:(i-1+ORDEN.length)%ORDEN.length;$('tab-'+ORDEN[j]).focus();activar(ORDEN[j],true);e.preventDefault()});
 let ini=(location.hash||'').replace('#','');if(!PERIODOS[ini]){try{ini=localStorage.getItem(LS_KEY)}catch(e){ini=null}}if(!PERIODOS[ini])ini='p3';activar(ini,false);
+
+/* ═══ RECUPERACIONES — siempre visibles, independientes del período ═══ */
+const RECUPERACIONES = [
+  { icono:'🔄', titulo:'Recuperación Período 2 — Fracciones', desc:'Actividades de nivelación para estudiantes con desempeño bajo en operaciones con fracciones.', archivo:'index_recuperacion_2.html', periodo:'P2' },
+  /* Agregar más recuperaciones aquí con el mismo formato */
+];
+
+(function renderRecup(){
+  const grid=$('recup-grid');
+  if(!RECUPERACIONES.length){$('recup-sec').style.display='none';return}
+  RECUPERACIONES.forEach(r=>{
+    const v=r.archivo&&r.archivo.trim()!=='';
+    const el=document.createElement(v?'a':'div');
+    el.className='card '+(v?'card--live':'card--soon');
+    if(v)el.href=r.archivo;
+    el.style.borderLeftColor='#8B6914';
+    el.innerHTML=`<div class="card__num" style="background:#8B6914;font-size:clamp(16px,1.4vw,22px)">${r.icono||'🔄'}</div><div class="card__body"><span class="card__tema">${r.titulo}</span><span class="card__estrategia">${r.desc}</span><span class="card__nota">${r.periodo||''}</span><span class="card__pill" style="${v?'background:#8B6914':''}">${v?'Abrir recuperación →':'En construcción'}</span></div>`;
+    grid.appendChild(el);
+  });
+})();
 </script>
 </body>
 </html>
