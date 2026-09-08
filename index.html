@@ -2,149 +2,942 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<meta name="description" content="Serie de clases interactivas de Aritmética 7° · I.E. Merceditas Gómez Martínez, Medellín.">
-<title>Aritmética 7° · Portada de la serie · I.E. Merceditas Gómez Martínez</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recuperación · Fracción, decimal y porcentaje · Aritmética 7°</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
+:root{
+  --sky:#8ECAE6; --blue:#219EBC; --navy:#023047;
+  --amber:#FFB703; --orange:#FB8500;
+  --paper:#FBFBF9; --card:#FFFFFF; --line:#DDE6EA;
+  --ink:#101E28; --ink-2:#4A5B64;
+  --ok:#1A7A4C; --ok-bg:#E7F5EE;
+  --no:#B02A26; --no-bg:#FCEDEC;
+  --lock:#8C979C;
+  --r:14px;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--terra:#C4563A;--terra-dark:#A3432D;--terra-soft:#FCEEE9;--bosque:#2D6A4F;--bosque-soft:#E8F5EE;--arena:#F4E8D1;--crema:#FFFAF3;--papel:#FBF7F0;--oscuro:#2C1810;--tinta:#3D2C1E;--gris:#7A6B5D;--gris2:#A89888;--linea:#E6DDD0;--fs-hero:clamp(42px,6vw,88px);--fs-h2:clamp(22px,2.4vw,38px);--fs-card:clamp(16px,1.3vw,22px);--fs-sm:clamp(13px,1vw,17px);--fs-xs:clamp(11px,.85vw,14px);--pad:clamp(20px,4vw,64px);--radius:14px}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-html{scroll-behavior:smooth}body{font-family:'Outfit',system-ui,sans-serif;color:var(--tinta);background:var(--papel);line-height:1.5;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:focus-visible,.card:focus-visible{outline:3px solid var(--terra);outline-offset:3px;border-radius:8px}
-.hero{position:relative;background:linear-gradient(160deg,#2C1810 0%,#4A2E1A 40%,#5C3D28 100%);color:#fff;padding:clamp(40px,6vw,80px) var(--pad) clamp(44px,6vw,76px);overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(196,86,58,.06) 28px,rgba(196,86,58,.06) 30px),repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(45,106,79,.05) 28px,rgba(45,106,79,.05) 30px);pointer-events:none}
-.hero__glyphs{position:absolute;inset:0;pointer-events:none;font-family:'Playfair Display',serif;color:rgba(244,232,209,.06);font-size:clamp(80px,14vw,200px);line-height:.9;user-select:none}.hero__glyphs span{position:absolute;font-style:italic}.hero__glyphs span:nth-child(1){top:6%;right:5%}.hero__glyphs span:nth-child(2){bottom:-8%;left:3%;color:rgba(196,86,58,.06)}
-.hero__inner{position:relative;max-width:1400px;margin:0 auto}
-.hero__kicker{display:inline-flex;align-items:center;gap:10px;font-size:var(--fs-sm);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--arena);margin-bottom:clamp(12px,2vw,20px)}.hero__kicker::before{content:"";width:34px;height:2px;background:var(--terra);display:inline-block}
-.hero__title{font-family:'Playfair Display',serif;font-size:var(--fs-hero);line-height:.96;letter-spacing:-.01em;margin-bottom:clamp(8px,1.4vw,16px)}.hero__title em{color:var(--terra);font-style:italic}
-.hero__sub{font-size:clamp(16px,1.6vw,26px);font-weight:300;color:#d4c4aa;max-width:46ch;margin-bottom:clamp(22px,3vw,36px)}
-.periodos{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:clamp(10px,1.4vw,16px)}
-.periodo-tab{display:flex;align-items:center;gap:10px;font-family:'Outfit',sans-serif;background:rgba(255,255,255,.06);border:1px solid rgba(244,232,209,.22);border-radius:100px;padding:9px 18px 9px 12px;color:#d4c4aa;cursor:pointer;transition:background .18s,border-color .18s,transform .18s,color .18s}
-.periodo-tab:hover{background:rgba(255,255,255,.12);border-color:var(--arena);transform:translateY(-2px)}
-.periodo-tab__n{font-family:'Playfair Display',serif;font-size:clamp(14px,1.2vw,19px);line-height:1;background:rgba(244,232,209,.15);color:var(--arena);border-radius:100px;padding:5px 11px;transition:background .18s,color .18s}
-.periodo-tab__t{font-size:var(--fs-sm);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.periodo-tab.is-active{background:var(--terra);border-color:var(--terra);color:#fff;font-weight:600}
-.periodo-tab.is-active .periodo-tab__n{background:var(--oscuro);color:var(--terra)}
-.periodo-tab.is-active:hover{transform:none}
-.periodo-sub{font-size:var(--fs-sm);color:#bfad94;margin-bottom:clamp(22px,3vw,38px)}.periodo-sub b{color:var(--terra);font-weight:700}.periodo-sub__f{color:var(--arena)}
-.hero__meta{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,44px);border-top:1px solid rgba(255,255,255,.1);padding-top:clamp(18px,2.4vw,28px)}.meta-item .k{display:block;font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--arena);margin-bottom:3px;font-weight:600}.meta-item .v{font-size:clamp(14px,1.1vw,18px);font-weight:500;color:#fff}
-main{max-width:1400px;margin:0 auto;padding:clamp(24px,3.6vw,50px) var(--pad) clamp(50px,6vw,90px)}
-.progreso{display:flex;align-items:center;gap:clamp(14px,2vw,24px);flex-wrap:wrap;background:#fff;border:1px solid var(--linea);border-radius:var(--radius);padding:clamp(16px,1.8vw,24px) clamp(18px,2.2vw,30px);margin-bottom:clamp(30px,4vw,52px);box-shadow:0 4px 18px rgba(44,24,16,.05)}.progreso__txt{font-size:var(--fs-card);font-weight:600;color:var(--oscuro);white-space:nowrap}.progreso__txt b{color:var(--terra)}.progreso__bar{flex:1;min-width:160px;height:10px;border-radius:100px;background:var(--arena);overflow:hidden}.progreso__fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--bosque),var(--terra));width:0;transition:width 1s cubic-bezier(.22,.68,0,1.1)}.progreso__pct{font-size:var(--fs-sm);font-weight:600;color:var(--gris);white-space:nowrap}
-.bloque{margin-bottom:clamp(32px,4.5vw,56px)}.bloque__head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:clamp(14px,1.8vw,24px);padding-bottom:10px;border-bottom:2px solid var(--linea)}.bloque__tag{font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:100px;color:#fff}.bloque__title{font-family:'Playfair Display',serif;font-size:var(--fs-h2);color:var(--oscuro);line-height:1.05}.bloque__range{font-size:var(--fs-sm);color:var(--gris2);font-weight:500;margin-left:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(260px,22vw,340px),1fr));gap:clamp(12px,1.4vw,20px)}
-.card{position:relative;display:flex;gap:14px;background:#fff;border:1px solid var(--linea);border-left:4px solid var(--linea);border-radius:var(--radius);padding:clamp(14px,1.4vw,20px);transition:transform .18s,box-shadow .18s,border-color .18s;min-height:130px}
-.card__num{flex-shrink:0;width:clamp(42px,4vw,54px);height:clamp(42px,4vw,54px);display:flex;align-items:center;justify-content:center;border-radius:50%;font-family:'Playfair Display',serif;font-size:clamp(18px,1.8vw,26px);font-weight:700;line-height:1;color:#fff}
-.card__body{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}.card__tema{font-size:var(--fs-card);font-weight:600;color:var(--oscuro);line-height:1.22}.card__estrategia{font-size:var(--fs-sm);font-style:italic;color:var(--gris);line-height:1.35}.card__nota{font-size:var(--fs-xs);color:var(--gris2)}.card__pill{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-sm);font-weight:600;padding:5px 13px;border-radius:100px}
-.card--live{cursor:pointer;border-left-color:var(--terra)}.card--live:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(44,24,16,.12);border-color:var(--terra)}.card--live .card__pill{background:var(--terra);color:#fff;transition:background .18s,transform .18s}.card--live:hover .card__pill{background:var(--bosque);transform:translateX(3px)}
-.card--soon{border-style:solid;border-left-style:dashed;border-color:var(--linea);background:var(--crema)}.card--soon .card__num{background:var(--arena)!important;color:var(--gris2)!important}.card--soon .card__tema{color:var(--gris)}.card--soon .card__pill{background:var(--arena);color:var(--gris);border:1px dashed var(--gris2)}
-.recursos{margin-top:clamp(10px,1.6vw,20px)}.recursos .grid{grid-template-columns:repeat(auto-fill,minmax(clamp(260px,26vw,380px),1fr))}.card--recurso .card__num{background:var(--bosque);font-family:'Outfit',sans-serif;font-size:clamp(18px,1.6vw,24px);font-weight:700}.card--recurso:hover .card__pill{background:var(--bosque)}
-footer{background:var(--oscuro);color:#bfad94;padding:clamp(28px,3.6vw,44px) var(--pad)}.footer__inner{max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px 36px;align-items:center;justify-content:space-between;font-size:var(--fs-sm)}.footer__inner strong{color:#fff}.footer__inner .brand{font-family:'Playfair Display',serif;font-size:clamp(18px,1.8vw,26px);color:#fff}
-.nota-cierre{margin-top:clamp(24px,3.6vw,44px);padding:clamp(14px,1.8vw,20px) clamp(16px,2.2vw,26px);background:var(--terra-soft);border-left:4px solid var(--terra);border-radius:10px;font-size:var(--fs-sm);color:var(--gris);line-height:1.55}.nota-cierre strong{color:var(--oscuro)}
-@media(max-width:560px){.card{flex-direction:row}.bloque__range{margin-left:0;width:100%}.periodo-tab__t{display:none}.periodo-tab{padding:9px 14px}}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--paper); color:var(--ink);
+  font-size:17px; line-height:1.55;
+  padding-bottom:5rem;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 1rem}
+
+/* ---------- Encabezado ---------- */
+header.top{
+  background:var(--navy); color:#fff; padding:1.6rem 0 1.4rem;
+  border-bottom:6px solid var(--orange);
+}
+header.top .eyebrow{color:var(--sky);font-size:.85rem;letter-spacing:.02em}
+header.top h1{
+  font-family:"DM Serif Display",Georgia,serif; font-weight:400;
+  font-size:clamp(1.75rem,6vw,2.5rem); line-height:1.12; margin:.35rem 0 .5rem;
+}
+header.top p{color:#CFE4EC;font-size:.98rem;max-width:52ch}
+
+/* ---------- Tarjetas ---------- */
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  padding:1.15rem; margin:1.1rem 0;
+}
+.card h2{font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:1.35rem;margin-bottom:.5rem}
+label{display:block;font-weight:500;font-size:.92rem;margin:.7rem 0 .25rem;color:var(--ink-2)}
+input,select,textarea{
+  width:100%; font:inherit; font-size:1.05rem; padding:.7rem .8rem;
+  border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--ink);
+}
+input:focus,select:focus,textarea:focus,button:focus-visible{
+  outline:3px solid var(--amber); outline-offset:2px; border-color:var(--blue);
+}
+textarea{min-height:110px;resize:vertical}
+.btn{
+  display:inline-block; font:inherit; font-weight:700; font-size:1.02rem;
+  padding:.8rem 1.3rem; border:none; border-radius:10px; cursor:pointer;
+  background:var(--navy); color:#fff; min-height:48px;
+}
+.btn:active{transform:translateY(1px)}
+.btn.wide{width:100%}
+.btn.alt{background:var(--blue)}
+.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line);font-weight:500}
+.btn.amber{background:var(--amber);color:var(--navy)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+@media(max-width:480px){.row2{grid-template-columns:1fr}}
+.hint{font-size:.88rem;color:var(--ink-2);margin-top:.45rem}
+
+/* ---------- Barra de estado ---------- */
+.statusbar{
+  position:sticky; top:0; z-index:30; background:rgba(251,251,249,.96);
+  backdrop-filter:blur(6px); border-bottom:1px solid var(--line);
+  padding:.55rem 0;
+}
+.statusbar .wrap{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.pill{
+  font-size:.8rem;font-weight:700;padding:.3rem .6rem;border-radius:999px;
+  background:var(--sky);color:var(--navy);
+}
+.dots{display:flex;gap:.3rem;margin-left:auto}
+.dot{width:20px;height:8px;border-radius:99px;background:#D9E2E6}
+.dot.on{background:var(--ok)}
+.dot.now{background:var(--orange)}
+
+/* ---------- Niveles ---------- */
+.level{border:1px solid var(--line);border-radius:var(--r);background:#fff;margin:1.1rem 0;overflow:hidden}
+.level.locked{opacity:.62}
+.level.done{border-color:var(--ok)}
+.lvhead{display:flex;gap:.85rem;align-items:flex-start;padding:1rem;cursor:pointer;background:#fff;border:none;width:100%;text-align:left;font:inherit}
+.lvnum{
+  flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:var(--navy);color:#fff;
+  display:grid;place-items:center;font-weight:700;font-size:1.1rem;
+}
+.level.done .lvnum{background:var(--ok)}
+.level.locked .lvnum{background:var(--lock)}
+.lvtitle{display:block;font-family:"DM Serif Display",Georgia,serif;font-size:1.2rem;line-height:1.2}
+.lvsub{display:block;font-size:.87rem;color:var(--ink-2);margin-top:.15rem}
+.lvbody{padding:0 1rem 1.15rem;display:none}
+.level.open .lvbody{display:block}
+
+.item{border-top:1px solid var(--line);padding:1rem 0}
+.item:first-child{border-top:none}
+.qnum{font-size:.8rem;font-weight:700;color:var(--blue)}
+.qtext{margin:.2rem 0 .6rem}
+.mark{font-weight:700;font-size:.9rem;padding:.15rem .5rem;border-radius:8px;display:inline-block;margin-top:.5rem}
+.mark.ok{background:var(--ok-bg);color:var(--ok)}
+.mark.no{background:var(--no-bg);color:var(--no)}
+.feedback{font-size:.92rem;color:var(--no);background:var(--no-bg);border-left:4px solid var(--no);padding:.6rem .75rem;border-radius:0 8px 8px 0;margin-top:.5rem;display:none}
+.feedback.show{display:block}
+
+/* ---------- Cuadrícula ---------- */
+.grid100{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;max-width:300px;margin:.6rem 0;touch-action:manipulation}
+.cell{aspect-ratio:1;background:#EEF3F5;border:1px solid #DCE5E9;border-radius:2px;cursor:pointer}
+.cell.on{background:var(--blue);border-color:var(--blue)}
+.cell.fixed{cursor:default;background:var(--amber);border-color:var(--amber)}
+.counter{font-weight:700;font-size:1rem;color:var(--navy)}
+
+/* ---------- Fracciones ---------- */
+.frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;line-height:1.05;font-size:.92em;margin:0 .12em}
+.frac b{border-bottom:1.6px solid currentColor;padding:0 .28em;font-weight:500}
+.frac i{padding:0 .28em;font-style:normal}
+
+/* ---------- Detalles / ejemplo ---------- */
+details{border:1px dashed var(--blue);border-radius:10px;padding:.7rem .9rem;margin:.8rem 0;background:#F4FAFC}
+summary{font-weight:700;color:var(--navy);cursor:pointer;font-size:.95rem}
+details p,details ol{margin-top:.55rem;font-size:.95rem}
+details ol{padding-left:1.2rem}
+details li{margin:.25rem 0}
+
+/* ---------- Caja IA ---------- */
+.ia{background:#FFF6E2;border:1px solid var(--amber);border-radius:10px;padding:.85rem;margin:.9rem 0}
+.ia h4{font-size:.95rem;margin-bottom:.3rem;color:var(--navy)}
+.ia p{font-size:.88rem;color:var(--ink-2)}
+
+/* ---------- Auditoría IA ---------- */
+.sol{background:#F5F7F8;border-left:5px solid var(--lock);border-radius:0 10px 10px 0;padding:.85rem;margin:.6rem 0;font-size:.97rem}
+.sol .who{font-size:.78rem;font-weight:700;color:var(--ink-2);margin-bottom:.35rem}
+.sol .step{margin:.2rem 0}
+.opt{display:flex;gap:.6rem;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:.7rem;margin:.4rem 0;cursor:pointer}
+.opt input{width:auto;flex:0 0 auto;margin-top:.2rem;transform:scale(1.25)}
+.opt.sel{border-color:var(--blue);background:#F2FAFC}
+
+/* ---------- Cierre ---------- */
+.code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:clamp(1.1rem,5vw,1.6rem);
+  font-weight:700; letter-spacing:.06em; background:var(--navy); color:var(--amber);
+  padding:1rem; border-radius:12px; text-align:center; word-break:break-all;
+}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0;font-size:.92rem}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.5rem .6rem;text-align:left}
+.tbl th{background:#EEF5F8;color:var(--navy)}
+.big{font-family:"DM Serif Display",Georgia,serif;font-size:2.2rem;color:var(--navy)}
+.hidden{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<header class="hero">
-  <div class="hero__glyphs" aria-hidden="true"><span id="glifo-1">¾</span><span id="glifo-2">a:b</span></div>
-  <div class="hero__inner">
-    <p class="hero__kicker">I.E. Merceditas Gómez Martínez · Medellín</p>
-    <h1 class="hero__title">Aritmética <em>7°</em></h1>
-    <p class="hero__sub">Serie de clases interactivas para proyección en aula, semana a semana.</p>
-    <nav class="periodos" id="periodos" role="tablist" aria-label="Seleccionar período"></nav>
-    <p class="periodo-sub" id="periodo-sub"></p>
-    <div class="hero__meta">
-      <div class="meta-item"><span class="k">Docente</span><span class="v">Carlos A. Mena Romaña</span></div>
-      <div class="meta-item"><span class="k">Metodología</span><span class="v">GRR · Pedagogía activa</span></div>
-      <div class="meta-item"><span class="k">Ritmo</span><span class="v">3 sesiones/semana · 55 min</span></div>
-      <div class="meta-item"><span class="k">Enfoque</span><span class="v" id="meta-enfoque"></span></div>
-    </div>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">I.E. Merceditas Gómez Martínez · Aritmética 7°</p>
+    <h1>Recuperación: fracción, decimal y porcentaje</h1>
+    <p>Cinco niveles con ejercicios generados solo para ti. Cada nivel se abre cuando demuestras que dominas el anterior. Puedes intentarlo las veces que necesites, sin límite de tiempo.</p>
   </div>
 </header>
-<main id="contenido">
-  <section class="progreso"><span class="progreso__txt"><b id="pub-count">0</b> de <span id="tot-count">0</span> publicadas</span><div class="progreso__bar"><div class="progreso__fill" id="prog-fill"></div></div><span class="progreso__pct" id="prog-pct">0%</span></section>
-  <div id="bloques"></div>
-  <section class="recursos" id="recursos-sec"><div class="bloque__head"><span class="bloque__tag" style="background:var(--bosque)">Recursos</span><h2 class="bloque__title">Juegos y manipulativos</h2><span class="bloque__range">Complementos</span></div><div class="grid" id="recursos-grid"></div></section>
-  <p class="nota-cierre" id="nota-cierre"></p>
-</main>
-<footer><div class="footer__inner"><span class="brand">Aritmética 7°</span><span id="footer-meta"></span><span><strong>2026</strong> · Área de Matemáticas</span></div></footer>
+
+<!-- ============ REGISTRO ============ -->
+<section id="registro" class="wrap">
+  <div class="card">
+    <h2>Antes de empezar</h2>
+    <p class="hint">Tu grupo y tu número de lista generan un conjunto de ejercicios único para ti. Escríbelos bien: si los cambias, cambian tus ejercicios y el código final no coincidirá con la lista del profesor.</p>
+    <label for="f-nombre">Nombre completo</label>
+    <input id="f-nombre" type="text" autocomplete="name" placeholder="Escribe tu nombre y apellidos">
+    <div class="row2">
+      <div>
+        <label for="f-grupo">Grupo</label>
+        <select id="f-grupo">
+          <option value="">Selecciona</option>
+          <option>7.1</option><option>7.2</option><option>7.3</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-lista">Número de lista</label>
+        <input id="f-lista" type="number" min="1" max="60" inputmode="numeric" placeholder="Ej: 14">
+      </div>
+    </div>
+    <label for="f-tema" style="margin-top:1rem">Tu conjunto de ejercicios</label>
+    <input id="f-tema" type="text" readonly value="—" style="background:#F2FAFC;font-weight:700;color:var(--navy)">
+    <button class="btn wide" id="btn-entrar" style="margin-top:1.1rem">Empezar la recuperación</button>
+    <p class="hint">Puedes cerrar la página y volver: tu avance queda guardado en este mismo dispositivo.</p>
+  </div>
+
+  <div class="card">
+    <h2>Cómo se califica</h2>
+    <table class="tbl">
+      <tr><th>Esta página</th><td>50 % · Un punto por cada nivel superado</td></tr>
+      <tr><th>Sustentación en el salón</th><td>50 % · 10 minutos, con dos ejercicios del mismo tipo que los tuyos</td></tr>
+    </table>
+    <p class="hint">Sin el código final no hay sustentación, y sin sustentación la nota de la página no se registra. Las dos partes cuentan.</p>
+  </div>
+</section>
+
+<!-- ============ ACTIVIDAD ============ -->
+<div id="app" class="hidden">
+  <div class="statusbar">
+    <div class="wrap">
+      <span class="pill" id="pill-tema">—</span>
+      <span class="pill" id="pill-alum" style="background:#EEF3F5">—</span>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+  <main class="wrap" id="levels"></main>
+
+  <section class="wrap" id="cierre">
+    <div class="card hidden" id="card-cierre">
+      <h2>Tu informe de recuperación</h2>
+      <div id="informe"></div>
+      <p style="margin:.9rem 0 .4rem;font-weight:500">Código de cierre — muéstralo el día de la sustentación:</p>
+      <div class="code" id="codigo">—</div>
+      <button class="btn alt wide" id="btn-copiar" style="margin-top:.8rem">Copiar informe completo</button>
+      <button class="btn ghost wide" id="btn-enviar" style="margin-top:.5rem">Enviar de nuevo al profesor</button>
+      <p class="hint" id="estado-envio">Tu resultado se envía solo al terminar cada nivel.</p>
+      <p class="hint">Toma también una captura de pantalla. Este código guarda tu versión, tus aciertos y tus intentos.</p>
+    </div>
+  </section>
+
+  <div class="wrap" style="margin:2rem 0 3rem">
+    <button class="btn ghost" id="btn-reiniciar">Borrar mi avance y empezar de nuevo</button>
+  </div>
+</div>
+
 <script>
-const PERIODOS={
-p1:{num:1,titulo:'Números Naturales y Enteros',rango:'Feb 2 – May 1',enfoque:'Concreto → abstracto · DUA',glifos:['−7','+3'],
-  meta:'Meta: dominar las <strong>operaciones con enteros</strong> y descubrir que los negativos no dan miedo.',
-  cierre:'<strong>En construcción.</strong> Los decks del Período 1 se irán encendiendo conforme se produzcan.',
-  bloques:[
-    {tag:'Bloque 1',color:'#2D6A4F',titulo:'Naturales y valor posicional',rango:'Semanas 1 – 3',semanas:[
-      {n:1,tema:'Conjuntos numéricos: ℕ y ℤ en la recta',estrategia:'La Recta Numérica Humana',archivo:''},
-      {n:2,tema:'Múltiplos, divisores y criterios de divisibilidad',estrategia:'La Criba de Eratóstenes',archivo:''},
-      {n:3,tema:'MCD y MCM — Factorización prima',estrategia:'Árboles de factores',archivo:''},
-    ]},
-    {tag:'Bloque 2',color:'#C4563A',titulo:'Números Enteros ℤ',rango:'Semanas 4 – 7',semanas:[
-      {n:4,tema:'Suma y resta de enteros — ley de signos aditiva',estrategia:'Banqueros vs. Deudores',archivo:''},
-      {n:5,tema:'Multiplicación y división de enteros',estrategia:'El Tablero de Signos',archivo:''},
-      {n:6,tema:'Operaciones combinadas y jerarquía',estrategia:'El Código Secreto',archivo:''},
-      {n:7,tema:'Potenciación en ℤ y bases negativas',estrategia:'Torres de potencias',archivo:''},
-    ]},
-    {tag:'Bloque 3',color:'#8B6914',titulo:'Radicación y cierre',rango:'Semanas 8 – 10',semanas:[
-      {n:8,tema:'Radicación como operación inversa',estrategia:'Cuadrados y cubos perfectos',archivo:''},
-      {n:9,tema:'Repaso integral en ℤ',estrategia:'Rally Matemático',archivo:''},
-      {n:10,tema:'Evaluación y nivelación Período 1',estrategia:'Prueba tipo Saber + coevaluación',archivo:''},
-    ]},
-  ],recursos:[]
-},
-p2:{num:2,titulo:'Fracciones y Decimales',rango:'May 4 – Ago 14',enfoque:'Manipulativo · CoRP',glifos:['¾','⅝'],
-  meta:'Meta: operar con <strong>fracciones y decimales</strong> con sentido, no solo con recetas.',
-  cierre:'<strong>Período en desarrollo.</strong> Cinco semanas publicadas de las diez planeadas.',
-  bloques:[
-    {tag:'Bloque 1',color:'#2D6A4F',titulo:'Concepto y operaciones aditivas',rango:'Semanas 1 – 5',semanas:[
-      {n:1,tema:'Concepto de fracción: parte-todo, medida y cociente',estrategia:'Doblado de tiras de papel',archivo:'https://camenar.github.io/Introducci-n-a-Fracciones/',nota:'Repositorio externo'},
-      {n:2,tema:'Fracciones equivalentes y simplificación',estrategia:'La Pared de Fracciones',archivo:'https://camenar.github.io/Introducci-n-a-Fracciones/FEqui.html',nota:'Repositorio externo'},
-      {n:3,tema:'Suma y resta de fracciones homogéneas',estrategia:'Regletas de Cuisenaire',archivo:'https://camenar.github.io/Introducci-n-a-Fracciones/SRIgualDeno.html',nota:'Repositorio externo'},
-      {n:4,tema:'Suma y resta de fracciones heterogéneas',estrategia:'El MCM al rescate',archivo:'https://camenar.github.io/Introducci-n-a-Fracciones/SumaRestaDifDeno.html',nota:'Repositorio externo'},
-      {n:5,tema:'Taller integrado de suma y resta',estrategia:'Tabla interactiva de práctica',archivo:'TablaSumaRestaFracciones.html'},
-    ]},
-    {tag:'Bloque 2',color:'#C4563A',titulo:'Operaciones multiplicativas',rango:'Semanas 6 – 10',semanas:[
-      {n:6,tema:'Fracción de un entero — la "de" como ×',estrategia:'Repartiendo pizzas',archivo:''},
-      {n:7,tema:'Multiplicación de fracciones — introducción',estrategia:'Modelo de áreas con papel cuadriculado',archivo:''},
-      {n:8,tema:'Fracciones en la cocina — contextos reales',estrategia:'La Receta Desastrosa',archivo:'LaReceta.html'},
-      {n:9,tema:'Multiplicación de fracciones — modelo de área',estrategia:'Simplificación cruzada y formalización',archivo:'MultiplicacionFracciones/'},
-      {n:10,tema:'División de fracciones',estrategia:'¿Cuántas veces cabe?',archivo:'DivisionFracciones.html'},
-    ]},
-  ],recursos:[
-    {icono:'▦',tema:'Tabla de suma y resta',desc:'Práctica interactiva de fracciones aditivas',archivo:'TablaSumaRestaFracciones.html'},
-  ]
-},
-p3:{num:3,titulo:'Razones, Proporciones y Porcentajes',rango:'Ago 17 – Nov 13',enfoque:'Covariacional · Social-crítico',glifos:['3:5','25%'],
-  meta:'Meta: entender la <strong>proporcionalidad</strong> como herramienta para leer el mundo y tomar decisiones.',
-  cierre:'<strong>En construcción.</strong> Las semanas 1 y 2 están publicadas. Las demás se irán encendiendo semana a semana.',
-  bloques:[
-    {tag:'Bloque 1',color:'#2D6A4F',titulo:'De las fracciones a la proporcionalidad',rango:'Semanas 1 – 5',semanas:[
-      {n:1,tema:'Fracción, decimal y porcentaje — la triple representación',estrategia:'Conversiones entre los tres mundos',archivo:'P3S1_Porcentaje_7.html'},
-      {n:2,tema:'Razones en contextos cotidianos',estrategia:'Razones en el supermercado y la cancha',archivo:'P3S2_Razones.html'},
-      {n:3,tema:'Concepto de razón y comparación de cantidades',estrategia:'Mezclas de pintura',archivo:''},
-      {n:4,tema:'Proporción y propiedad fundamental',estrategia:'Tablas de valores y producto cruzado',archivo:''},
-      {n:5,tema:'Regla de tres simple directa',estrategia:'La Tienda del Barrio',archivo:''},
-    ]},
-    {tag:'Bloque 2',color:'#C4563A',titulo:'Porcentajes y aplicaciones',rango:'Semanas 6 – 10',semanas:[
-      {n:6,tema:'Regla de tres simple inversa',estrategia:'Los Obreros de la Construcción',archivo:''},
-      {n:7,tema:'Cálculo de porcentajes — métodos y atajos',estrategia:'Descuentos en el centro comercial',archivo:''},
-      {n:8,tema:'IVA, descuentos y aumentos porcentuales',estrategia:'Simulación de tienda escolar',archivo:''},
-      {n:9,tema:'Proyecto: presupuesto familiar con porcentajes',estrategia:'Los García toman decisiones',archivo:'',nota:'Proyecto integrador con Educación Financiera'},
-      {n:10,tema:'Evaluación y nivelación Período 3',estrategia:'Prueba tipo Saber + autoevaluación',archivo:''},
-    ]},
-  ],recursos:[]
+/* ============================================================
+   RECUPERACIÓN P2 · Fracción – Decimal – Porcentaje
+   Aritmética 7° · I.E. Merceditas Gómez Martínez
+   ============================================================ */
+
+/* ===== CONFIGURACIÓN =====
+   Pegue aquí la URL del despliegue del Apps Script (termina en /exec).
+   Si se deja vacía, la página funciona igual pero sin enviar nada. */
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzT5gRXbI4O8tafItwTztQHB0Nwx_RXZoI44B7ELo8T6vTNciqUZk83bEWb4Egd9EGk/exec';
+
+const KEY = 'rec_p2_fdp_arit7';
+const fr = (a,b) => `<span class="frac"><b>${a}</b><i>${b}</i></span>`;
+const $  = s => document.querySelector(s);
+
+/* ---------- Ejemplos resueltos (andamiaje permanente, DUA) ---------- */
+const EJEMPLOS = [
+`<ol>
+  <li>La cuadrícula completa tiene <b>100</b> cuadros. Cada cuadro es <b>1 %</b>.</li>
+  <li>Si sombreo <b>4 filas completas</b> tengo 40 cuadros: eso es <b>40 %</b>.</li>
+  <li>Si además sombreo <b>3 cuadros sueltos</b>, van 43 cuadros: <b>43 %</b>.</li>
+  <li>Para sombrear ${fr(1,4)} pienso: 100 ÷ 4 = 25 cuadros.</li>
+</ol>`,
+`<ol>
+  <li><b>De decimal a porcentaje:</b> 0,37 → corro la coma dos lugares a la derecha → <b>37 %</b>.</li>
+  <li><b>De porcentaje a decimal:</b> 8 % → 8 ÷ 100 = <b>0,08</b>.</li>
+  <li><b>De fracción a decimal:</b> ${fr(3,4)} → 3 ÷ 4 = <b>0,75</b> → 75 %.</li>
+  <li><b>De decimal a fracción:</b> 0,37 = ${fr(37,100)}. Si se puede, simplifico: 0,4 = ${fr(40,100)} = ${fr(2,5)}.</li>
+</ol>`,
+`<ol>
+  <li>El 15 % de $8.000. Escribo 15 % como decimal: <b>0,15</b>.</li>
+  <li>Multiplico: 8.000 × 0,15 = <b>$1.200</b>.</li>
+  <li>Comprobación mental: 10 % de 8.000 es 800; la mitad de eso (5 %) es 400; 800 + 400 = 1.200. ✓</li>
+</ol>`,
+`<ol>
+  <li><b>Precio original con descuento:</b> pagué $6.000 con 25 % de descuento. Pagué el <b>75 %</b> del precio.
+  Entonces 6.000 ÷ 0,75 = <b>$8.000</b>.</li>
+  <li><b>Dos descuentos seguidos:</b> $10.000 con 20 % y luego 10 %.
+  Primero: 10.000 × 0,80 = 8.000. Después: 8.000 × 0,90 = <b>$7.200</b>. <u>No</u> es lo mismo que un 30 %.</li>
+  <li><b>¿Qué porcentaje es?</b> 12 de 50 → 12 ÷ 50 = 0,24 → <b>24 %</b>.</li>
+</ol>`,
+`<ol>
+  <li>Reviso el procedimiento paso a paso, no solo el resultado final.</li>
+  <li>Pregunto: ¿la coma quedó en el lugar correcto? ¿sumó porcentajes que no se pueden sumar? ¿aplicó el porcentaje sobre el número correcto?</li>
+  <li>Rehago la operación por mi cuenta y comparo.</li>
+  <li>Una respuesta bien redactada puede estar equivocada. La forma no garantiza la verdad.</li>
+</ol>`
+];
+
+/* ---------- Prompts para consultar a una IA (no resuelve, enseña) ---------- */
+const PROMPTS = [
+ 'Eres mi tutor de matemáticas de grado séptimo. Explícame con una cuadrícula de 100 cuadros cómo se representa un porcentaje y cómo se convierte una fracción a cantidad de cuadros. Usa un ejemplo DIFERENTE al mío y no me des ninguna respuesta: solo enséñame el procedimiento paso a paso, con palabras sencillas.',
+ 'Eres mi tutor de matemáticas de grado séptimo. Explícame paso a paso cómo pasar de fracción a decimal, de decimal a porcentaje y de porcentaje a fracción simplificada. Usa ejemplos distintos a los de mi taller. No resuelvas mis ejercicios: solo enséñame el método y dame un truco para no equivocarme con la coma.',
+ 'Eres mi tutor de matemáticas de grado séptimo. Explícame dos formas de calcular el porcentaje de una cantidad de dinero: multiplicando por el decimal y usando el 10 % como referencia. Usa un ejemplo inventado por ti, no resuelvas el mío, y muéstrame cómo comprobar si el resultado tiene sentido.',
+ 'Eres mi tutor de matemáticas de grado séptimo. Explícame por qué aplicar 20 % y luego 10 % de descuento NO es lo mismo que aplicar 30 %, y cómo se halla el precio original cuando solo conozco el precio ya rebajado. Usa ejemplos propios, no resuelvas mis ejercicios.',
+ 'Eres mi tutor de matemáticas de grado séptimo. Enséñame a revisar la solución de un problema de porcentajes hecha por otra persona: qué errores debo buscar y en qué orden. No me digas si mi respuesta está bien; solo dame la lista de verificación.'
+];
+
+/* ---------- Generador parametrizado por semilla ----------
+   La semilla depende SOLO de grupo + número de lista.
+   Así el docente puede reproducir exactamente los mismos
+   ejercicios de cualquier estudiante escribiendo su grupo
+   y su número de lista en esta misma página.               */
+
+function rng(seed){
+  let a = seed >>> 0;
+  return function(){
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = Math.imul(a ^ (a>>>15), 1 | a);
+    t = (t + Math.imul(t ^ (t>>>7), 61 | t)) ^ t;
+    return ((t ^ (t>>>14)) >>> 0) / 4294967296;
+  };
 }
-};
-const dos=n=>String(n).padStart(2,'0'),ORDEN=['p1','p2','p3'],LS_KEY='aritmetica7_portada_v1',$=id=>document.getElementById(id);
-const navEl=$('periodos');
-ORDEN.forEach(k=>{const p=PERIODOS[k];const b=document.createElement('button');b.type='button';b.className='periodo-tab';b.id='tab-'+k;b.dataset.k=k;b.setAttribute('role','tab');b.innerHTML=`<span class="periodo-tab__n">P${p.num}</span><span class="periodo-tab__t">${p.titulo}</span>`;b.addEventListener('click',()=>activar(k,true));navEl.appendChild(b)});
-function activar(k,guardar){const p=PERIODOS[k];if(!p)return;ORDEN.forEach(x=>{const t=$('tab-'+x);const on=x===k;t.classList.toggle('is-active',on);t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1});$('glifo-1').textContent=p.glifos[0];$('glifo-2').textContent=p.glifos[1];$('periodo-sub').innerHTML=`Período <b>${p.num}</b> · ${p.titulo} &nbsp;·&nbsp; <span class="periodo-sub__f">${p.rango} de 2026</span>`;$('meta-enfoque').textContent=p.enfoque;$('footer-meta').innerHTML=p.meta;$('nota-cierre').innerHTML=p.cierre;
-const cont=$('bloques');cont.innerHTML='';let total=0,pub=0;p.bloques.forEach(b=>{const sec=document.createElement('section');sec.className='bloque';const hd=document.createElement('div');hd.className='bloque__head';hd.innerHTML=`<span class="bloque__tag" style="background:${b.color}">${b.tag}</span><h2 class="bloque__title">${b.titulo}</h2><span class="bloque__range">${b.rango}</span>`;sec.appendChild(hd);const gr=document.createElement('div');gr.className='grid';b.semanas.forEach(s=>{total++;const v=s.archivo&&s.archivo.trim()!=='';if(v)pub++;const nt=s.nota?`<span class="card__nota">${s.nota}</span>`:'';const inn=`<div class="card__num" style="${v?`background:${b.color}`:''}">${dos(s.n)}</div><div class="card__body"><span class="card__tema">${s.tema}</span><span class="card__estrategia">«${s.estrategia}»</span>${nt}<span class="card__pill">${v?'Abrir clase →':'En construcción'}</span></div>`;let el;if(v){el=document.createElement('a');el.className='card card--live';el.href=s.archivo}else{el=document.createElement('div');el.className='card card--soon'}el.innerHTML=inn;gr.appendChild(el)});sec.appendChild(gr);cont.appendChild(sec)});
-const rS=$('recursos-sec'),rG=$('recursos-grid');rG.innerHTML='';if(!p.recursos||!p.recursos.length){rS.style.display='none'}else{rS.style.display='';p.recursos.forEach(r=>{const v=r.archivo&&r.archivo.trim()!=='';const el=document.createElement(v?'a':'div');el.className='card '+(v?'card--live card--recurso':'card--soon');if(v)el.href=r.archivo;el.innerHTML=`<div class="card__num">${r.icono||'★'}</div><div class="card__body"><span class="card__tema">${r.tema}</span><span class="card__estrategia">${r.desc||''}</span><span class="card__pill">${v?'Abrir →':'En construcción'}</span></div>`;rG.appendChild(el)})}
-$('pub-count').textContent=pub;$('tot-count').textContent=total;const pct=total?Math.round(pub/total*100):0;$('prog-pct').textContent=pct+'%';$('prog-fill').style.width='0%';requestAnimationFrame(()=>{requestAnimationFrame(()=>{$('prog-fill').style.width=pct+'%'})});
-if(guardar){try{localStorage.setItem(LS_KEY,k)}catch(e){}if(history.replaceState)history.replaceState(null,'','#'+k);else location.hash=k}document.title=`Aritmética 7° · P${p.num} — ${p.titulo}`}
-navEl.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;const i=ORDEN.indexOf(document.activeElement.dataset.k);if(i<0)return;const j=e.key==='ArrowRight'?(i+1)%ORDEN.length:(i-1+ORDEN.length)%ORDEN.length;$('tab-'+ORDEN[j]).focus();activar(ORDEN[j],true);e.preventDefault()});
-let ini=(location.hash||'').replace('#','');if(!PERIODOS[ini]){try{ini=localStorage.getItem(LS_KEY)}catch(e){ini=null}}if(!PERIODOS[ini])ini='p3';activar(ini,false);
+function semilla(grupo, lista){
+  const g = {'7.1':101,'7.2':202,'7.3':303}[grupo] || 999;
+  return g*10007 + lista*97 + 31;
+}
+
+/* Equivalencias limpias fracción – decimal – porcentaje */
+const EQ = [
+ {f:'1/2',d:0.5,p:50},   {f:'1/4',d:0.25,p:25},  {f:'3/4',d:0.75,p:75},
+ {f:'1/5',d:0.2,p:20},   {f:'2/5',d:0.4,p:40},   {f:'3/5',d:0.6,p:60},
+ {f:'4/5',d:0.8,p:80},   {f:'1/10',d:0.1,p:10},  {f:'3/10',d:0.3,p:30},
+ {f:'7/10',d:0.7,p:70},  {f:'9/10',d:0.9,p:90},  {f:'1/20',d:0.05,p:5},
+ {f:'3/20',d:0.15,p:15}, {f:'7/20',d:0.35,p:35}, {f:'9/20',d:0.45,p:45},
+ {f:'11/20',d:0.55,p:55},{f:'13/20',d:0.65,p:65},{f:'17/20',d:0.85,p:85},
+ {f:'1/25',d:0.04,p:4},  {f:'2/25',d:0.08,p:8},  {f:'3/25',d:0.12,p:12},
+ {f:'8/25',d:0.32,p:32}, {f:'18/25',d:0.72,p:72},{f:'1/50',d:0.02,p:2},
+ {f:'3/50',d:0.06,p:6},  {f:'1/100',d:0.01,p:1}, {f:'1/8',d:0.125,p:12.5},
+ {f:'3/8',d:0.375,p:37.5},{f:'5/8',d:0.625,p:62.5},{f:'7/8',d:0.875,p:87.5}
+];
+
+/* Contextos reales de Medellín para el nivel 2, cada uno con su rango de precios */
+const CTX2 = [
+ {c:'Un paquete de galletas en la tienda escolar cuesta',      pr:[1600,1800,2000,2400,2500,3000]},
+ {c:'El refrigerio de la cafetería cuesta',                    pr:[2400,2500,3000,3200,4000]},
+ {c:'Una empanada en la tienda de la esquina cuesta',          pr:[1800,2000,2400,2500,3000]},
+ {c:'Un cuaderno cuadriculado en la papelería del barrio cuesta', pr:[4000,5000,6000,6400,8000]},
+ {c:'El pasaje del Metro de Medellín cuesta',                  pr:[3000,3200,3600,4000]},
+ {c:'Una recarga de la tarjeta Cívica cuesta',                 pr:[10000,20000,30000,40000,50000]},
+ {c:'La libra de tomate en la Galería Minorista cuesta',       pr:[2000,2400,2800,3000,3200]},
+ {c:'La docena de huevos en la tienda del barrio cuesta',      pr:[10000,12000,14000,15000,16000]},
+ {c:'La entrada de estudiante al Parque Explora cuesta',       pr:[16000,18000,20000,24000]},
+ {c:'El transporte de la salida pedagógica cuesta',            pr:[8000,10000,12000,15000]},
+ {c:'Un plan de datos para el celular cuesta',                 pr:[30000,40000,45000,50000,60000]},
+ {c:'Unos audífonos en el centro comercial cuestan',           pr:[40000,50000,60000,80000]},
+ {c:'Una camiseta del uniforme de educación física cuesta',    pr:[24000,30000,40000,45000]},
+ {c:'El bulto de papa en la plaza de mercado cuesta',          pr:[60000,70000,80000,90000]},
+ {c:'Una funda protectora para el celular cuesta',             pr:[15000,18000,20000,24000]}
+];
+const PCTS    = [10,15,20,25,30,40,50,75];
+
+/* Contextos del nivel 3 */
+const CTX3A = ['una camiseta','un morral escolar','unos audífonos','un par de guayos',
+               'una calculadora científica','un juego de geometría','una sudadera del colegio'];
+const CTX3B = ['un morral','un plan de transporte mensual','un mercado de la semana',
+               'un celular usado','el paquete grupal de la salida pedagógica'];
+const CTX3C = ['un accesorio','un producto de papelería','un artículo deportivo','un electrodoméstico pequeño'];
+const CTX3D = [
+ {t:'estudiantes del salón',s:'llevaron calculadora'},
+ {t:'estudiantes invitados',s:'asistieron a la salida pedagógica'},
+ {t:'usuarios encuestados en la estación',s:'usan tarifa estudiantil'},
+ {t:'puestos del pasillo de la galería',s:'venden fruta'},
+ {t:'megabytes del plan diario',s:'ya se usaron'}
+];
+
+function generar(seed){
+  const r = rng(seed);
+  const pick = a => a[Math.floor(r()*a.length)];
+  const pickN = (a,n) => { const c=[...a],o=[]; while(o.length<n && c.length) o.push(c.splice(Math.floor(r()*c.length),1)[0]); return o; };
+
+  /* ---- Nivel 0 ---- */
+  const p0 = 12 + Math.floor(r()*76);        // porcentaje a sombrear
+  const p1 = 12 + Math.floor(r()*76);        // porcentaje a leer
+  const e0 = pick(EQ.filter(e=>Number.isInteger(e.p) && e.p>=10 && e.p<=90));
+  const n0 = [
+    {tipo:'pinta', meta:p0, texto:`Sombrea el <b>${p0} %</b> de la cuadrícula.`},
+    {tipo:'lee',   n:p1,    texto:'Observa la cuadrícula. ¿Qué porcentaje está sombreado? Escribe solo el número.'},
+    {tipo:'pinta', meta:e0.p, texto:`Sombrea ${fr(...e0.f.split('/'))} de la cuadrícula.`}
+  ];
+
+  /* ---- Nivel 1 ---- */
+  const eqs = pickN(EQ, 5);
+  const n1 = eqs.map((e,k)=>{
+    const forma = ['decimal','fracción','porcentaje'][k%3];
+    const dec = String(e.d).replace('.',',');
+    const [a,b] = e.f.split('/');
+    if(forma==='decimal') return {
+      dado:dec, forma,
+      c:[{l:'Porcentaje (%)',t:'pct',r:e.p},{l:'Fracción',t:'frac',r:e.f}],
+      p:`Para pasar de decimal a porcentaje corre la coma dos lugares a la derecha: ${dec} → ${String(e.p).replace('.',',')} %. Y ${dec} escrito como fracción de denominador 100 se puede simplificar.`};
+    if(forma==='fracción') return {
+      dado:fr(a,b), forma,
+      c:[{l:'Decimal',t:'dec',r:e.d},{l:'Porcentaje (%)',t:'pct',r:e.p}],
+      p:`Divide el numerador entre el denominador: ${a} ÷ ${b} = ${dec}. Luego corre la coma dos lugares.`};
+    return {
+      dado:String(e.p).replace('.',',')+' %', forma,
+      c:[{l:'Decimal',t:'dec',r:e.d},{l:'Fracción',t:'frac',r:e.f}],
+      p:`Un porcentaje se pasa a decimal dividiendo entre 100: ${String(e.p).replace('.',',')} ÷ 100 = ${dec}. Después escribe esa cantidad como fracción y simplifícala.`};
+  });
+
+  /* ---- Nivel 2 ---- */
+  const ctx2 = pickN(CTX2,5);
+  const n2 = ctx2.map(x=>{
+    const c = x.c;
+    let precio, pct, res, k=0;
+    do { precio = pick(x.pr); pct = pick(PCTS); res = precio*pct/100; k++; }
+    while((!Number.isInteger(res) || res < 100) && k < 200);
+    return {q:`${c} <b>${peso(precio)}</b>. ¿Cuánto es el <b>${pct} %</b> de ese valor?`,
+            t:'int', r:res,
+            p:`Escribe ${pct} % como decimal (${String(pct/100).replace('.',',')}) y multiplica por ${peso(precio)}. Comprobación: el 10 % de ${peso(precio)} es ${peso(precio/10)}.`};
+  });
+
+  /* ---- Nivel 3 ---- */
+  let orig, d, fin;
+  do { orig = pick([8000,10000,12000,15000,16000,20000,24000,30000,40000,50000,60000]);
+       d = pick([10,20,25,30,40,50]); fin = orig*(1-d/100); }
+  while(!Number.isInteger(fin));
+
+  let o2, d1, d2, f2, k2=0;
+  do { o2 = pick([50000,60000,80000,100000,120000,150000,200000]);
+       d1 = pick([10,15,20,25]); d2 = pick([5,10,20]);
+       f2 = o2*(1-d1/100)*(1-d2/100); k2++; }
+  while((!Number.isInteger(f2) || f2 % 500 !== 0) && k2 < 400);
+  if(!Number.isInteger(f2) || f2 % 500 !== 0){ o2=100000; d1=20; d2=10; f2=72000; }
+
+  const base = pick([10000,20000,30000,40000,50000,60000,80000,100000]);
+  const conIva = base*1.19;
+
+  let tot, pctD, parte;
+  do { tot = pick([40,50,80,120,150,200,250,400,500]);
+       pctD = pick([15,24,25,35,45,60,65,75]); parte = tot*pctD/100; }
+  while(!Number.isInteger(parte));
+
+  const c3a=pick(CTX3A), c3b=pick(CTX3B), c3c=pick(CTX3C), c3d=pick(CTX3D);
+  const n3 = [
+   {q:`Pagaste <b>${peso(fin)}</b> por ${c3a} que tenía <b>${d} % de descuento</b>. ¿Cuál era el precio original?`,
+    t:'int', r:orig,
+    p:`Si te descontaron el ${d} %, pagaste el ${100-d} % del precio. Divide ${peso(fin)} entre ${String((100-d)/100).replace('.',',')}.`},
+   {q:`El precio de ${c3b} es <b>${peso(o2)}</b>. Le aplican <b>${d1} %</b> de descuento y sobre ese nuevo precio, otro <b>${d2} %</b>. ¿Cuánto se paga al final?`,
+    t:'int', r:f2,
+    p:`Aplica un descuento y después el otro sobre el precio ya rebajado: ${o2} × ${String(1-d1/100).replace('.',',')} × ${String(1-d2/100).replace('.',',')}. No sumes los porcentajes.`},
+   {q:`El precio de ${c3c} es <b>${peso(conIva)}</b> con el IVA del <b>19 %</b> ya incluido. ¿Cuál es el precio sin IVA?`,
+    t:'int', r:base,
+    p:`El precio con IVA es el 119 % del precio base: divide ${peso(conIva)} entre 1,19.`},
+   {q:`De los <b>${tot} ${c3d.t}</b>, <b>${parte}</b> ${c3d.s}. ¿Qué porcentaje representa? Escribe solo el número.`,
+    t:'pct', r:pctD,
+    p:`Divide ${parte} ÷ ${tot} y después pasa el decimal a porcentaje corriendo la coma dos lugares.`}
+  ];
+
+  /* ---- Nivel 4: auditoría a la IA (usa los números del propio estudiante) ---- */
+  const eA = eqs[0];
+  const decA = String(eA.d).replace('.',',');
+  const malA = String(eA.d*10).replace('.',',');
+  const casoA = {
+    enun:`Convierte ${decA} a porcentaje.`,
+    pasos:[`${decA} es un número decimal.`,
+           'Corro la coma un lugar hacia la derecha.',
+           `<b>Respuesta: ${malA} %</b>`],
+    correcta:'Movió la coma un solo lugar; para pasar de decimal a porcentaje debe moverla dos lugares.',
+    dist:['Se equivocó al eliminar el cero de la izquierda.','Debió dividir entre 100 en lugar de multiplicar.'],
+    res:{t:'pct', r:eA.p, l:'Escribe el porcentaje correcto (solo el número)'}
+  };
+  const malB = o2*(1-(d1+d2)/100);
+  const casoB = {
+    enun:`El precio de ${c3b} es ${peso(o2)}. Tiene ${d1} % de descuento y luego ${d2} % adicional. ¿Cuánto se paga?`,
+    pasos:[`Sumo los descuentos: ${d1} % + ${d2} % = ${d1+d2} %.`,
+           `El ${d1+d2} % de ${peso(o2)} es ${peso(o2*(d1+d2)/100)}.`,
+           `Resto: ${peso(o2)} − ${peso(o2*(d1+d2)/100)}.`,
+           `<b>Respuesta: ${peso(malB)}</b>`],
+    correcta:'Sumó los dos porcentajes; el segundo descuento se aplica sobre el precio ya rebajado, no sobre el original.',
+    dist:['Restó cuando debía sumar el valor del descuento.',`Calculó mal el ${d1+d2} % de ${peso(o2)}.`],
+    res:{t:'int', r:f2, l:'Escribe el precio final correcto (solo el número)'}
+  };
+  const casoC = {
+    enun:`De los ${tot} ${c3d.t}, ${parte} ${c3d.s}. ¿Qué porcentaje representa?`,
+    pasos:[`Divido la parte entre el total: ${parte} ÷ ${tot} = ${String(pctD/100).replace('.',',')}.`,
+           'Paso el decimal a porcentaje corriendo la coma dos lugares a la derecha.',
+           `<b>Respuesta: ${pctD} %</b>`],
+    correcta:'El procedimiento es correcto, no hay error.',
+    dist:[`Debió dividir ${tot} entre ${parte}.`,'Movió la coma en la dirección equivocada.'],
+    res:{t:'pct', r:pctD, l:'Escribe el porcentaje correcto (solo el número)'}
+  };
+
+  const n4 = [casoA, casoB, casoC].map((c,k)=>{
+    const extra = c.correcta.startsWith('El procedimiento')
+      ? 'Aplicó el porcentaje sobre el número equivocado.'
+      : 'El procedimiento es correcto, no hay error.';
+    let opts = [c.correcta, c.dist[0], extra];
+    /* barajar conservando cuál es la correcta */
+    const idx = [0,1,2];
+    for(let i=idx.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [idx[i],idx[j]]=[idx[j],idx[i]]; }
+    const mezcla = idx.map(i=>opts[i]);
+    return {who:`Solución generada por una IA · Caso ${'ABC'[k]}`,
+            enun:c.enun, pasos:c.pasos, opts:mezcla, ok:idx.indexOf(0), res:c.res};
+  });
+
+  return {n0,n1,n2,n3,n4};
+}
+
+/* ---------- Metadatos de niveles ---------- */
+const META = [
+ {t:'Leer el porcentaje',  s:'La cuadrícula de 100 cuadros', min:3, tot:3},
+ {t:'Las tres formas',     s:'Fracción, decimal y porcentaje', min:4, tot:5},
+ {t:'Porcentaje de una cantidad', s:'Cuentas con dinero real', min:4, tot:5},
+ {t:'El camino de regreso', s:'Precio original, descuentos seguidos e IVA', min:3, tot:4},
+ {t:'Auditoría a la IA',   s:'Revisa tres soluciones y encuentra los errores', min:3, tot:3}
+];
+
+/* ---------- Estado ---------- */
+let S = null;
+let ACT = null;
+const nuevoEstado = () => ({
+  nombre:'', grupo:'', lista:0, seed:0,
+  niveles:[0,1,2,3,4].map(()=>({ac:0,int:0,ok:false})),
+  resp:{}, ia:0, texto:'', abierto:0, enviado:false, ultimoEnvio:''
+});
+function guardar(){ localStorage.setItem(KEY, JSON.stringify(S)); }
+function cargar(){ try{ return JSON.parse(localStorage.getItem(KEY)); }catch(e){ return null; } }
+
+/* ---------- Validación de respuestas ---------- */
+function correcto(tipo, val, esperado){
+  if(val==null) return false;
+  const s = String(val).trim();
+  if(!s) return false;
+  if(tipo==='int'){
+    const d = s.replace(/[^\d]/g,'');
+    return d!=='' && parseInt(d,10)===esperado;
+  }
+  if(tipo==='dec' || tipo==='pct'){
+    let v = s.replace(/\s|%|\$/g,'').replace(',','.');
+    if((v.match(/\./g)||[]).length>1) return false;
+    const n = parseFloat(v);
+    return isFinite(n) && Math.abs(n-esperado) < 1e-9;
+  }
+  if(tipo==='frac'){
+    const m = s.replace(/\s/g,'').match(/^(\d+)\/(\d+)$/);
+    if(!m) return false;
+    const [ea,eb] = esperado.split('/').map(Number);
+    return Number(m[1])*eb === Number(m[2])*ea;
+  }
+  return false;
+}
+const peso = n => '$'+n.toLocaleString('es-CO');
+
+/* ---------- Registro ---------- */
+function actualizarTema(){
+  const l = parseInt($('#f-lista').value,10);
+  const g = $('#f-grupo').value;
+  $('#f-tema').value = (l>0 && g) ? `${g} · lista ${l} · clave ${semilla(g,l)}` : '—';
+}
+$('#f-grupo').addEventListener('change', actualizarTema);
+$('#f-lista').addEventListener('input', actualizarTema);
+
+$('#btn-entrar').addEventListener('click', ()=>{
+  const nombre = $('#f-nombre').value.trim();
+  const grupo  = $('#f-grupo').value;
+  const lista  = parseInt($('#f-lista').value,10);
+  if(nombre.length<5){ alert('Escribe tu nombre completo para continuar.'); return; }
+  if(!grupo){ alert('Selecciona tu grupo.'); return; }
+  if(!(lista>0 && lista<=60)){ alert('Escribe tu número de lista (entre 1 y 60).'); return; }
+  if(!S) S = nuevoEstado();
+  const nuevaSemilla = semilla(grupo, lista);
+  if(S.seed && S.seed!==nuevaSemilla && !confirm('Cambiaste tu grupo o tu número de lista. Eso genera ejercicios distintos y borra tu avance. ¿Continuar?')){ return; }
+  if(S.seed && S.seed!==nuevaSemilla){ S = nuevoEstado(); }
+  S.nombre=nombre; S.grupo=grupo; S.lista=lista; S.seed=nuevaSemilla;
+  guardar(); iniciar();
+});
+
+$('#btn-reiniciar').addEventListener('click', ()=>{
+  if(confirm('Esto borra todo tu avance en este dispositivo. ¿Continuar?')){
+    localStorage.removeItem(KEY); location.reload();
+  }
+});
+
+/* ---------- Arranque ---------- */
+function iniciar(){
+  $('#registro').classList.add('hidden');
+  $('#app').classList.remove('hidden');
+  ACT = generar(S.seed);
+  $('#pill-tema').textContent = 'Ejercicios · clave '+S.seed;
+  $('#pill-alum').textContent = S.nombre.split(' ')[0]+' · '+S.grupo;
+  render();
+  window.scrollTo(0,0);
+}
+
+/* ---------- Render principal ---------- */
+function render(){
+  const cont = $('#levels');
+  cont.innerHTML = '';
+  const data = ACT;
+
+  for(let i=0;i<5;i++){
+    const st = S.niveles[i];
+    const desbloq = (i===0) || S.niveles[i-1].ok;
+    const el = document.createElement('section');
+    el.className = 'level' + (st.ok?' done':'') + (!desbloq?' locked':'') + (S.abierto===i && desbloq?' open':'');
+
+    const estado = st.ok ? `Superado · ${st.ac} de ${META[i].tot}`
+                 : (!desbloq ? 'Se abre al superar el nivel anterior'
+                 : `Necesitas ${META[i].min} de ${META[i].tot} · intentos: ${st.int}`);
+
+    el.innerHTML = `
+      <button class="lvhead" data-lv="${i}">
+        <span class="lvnum">${st.ok?'✓':i+1}</span>
+        <span>
+          <span class="lvtitle">${META[i].t}</span>
+          <span class="lvsub">${META[i].s}</span>
+          <span class="lvsub" style="color:${st.ok?'var(--ok)':'var(--ink-2)'}">${estado}</span>
+        </span>
+      </button>
+      <div class="lvbody" id="body-${i}"></div>`;
+    cont.appendChild(el);
+
+    if(desbloq) el.querySelector('.lvhead').addEventListener('click', ()=>{
+      S.abierto = (S.abierto===i ? -1 : i); guardar(); render();
+      const t = document.querySelectorAll('.level')[i];
+      if(S.abierto===i) t.scrollIntoView({block:'start',behavior:'smooth'});
+    });
+
+    if(desbloq && S.abierto===i) pintarNivel(i, data, el.querySelector('.lvbody'));
+  }
+  pintarDots();
+  pintarCierre();
+}
+
+function pintarDots(){
+  $('#dots').innerHTML = S.niveles.map((n,i)=>
+    `<span class="dot ${n.ok?'on':(S.abierto===i?'now':'')}"></span>`).join('');
+}
+
+/* ---------- Render de cada nivel ---------- */
+function pintarNivel(i, data, box){
+  let html = `<details><summary>Ver un ejemplo resuelto antes de empezar</summary>${EJEMPLOS[i]}</details>`;
+
+  if(i===0){
+    data.n0.forEach((it,k)=>{
+      html += `<div class="item"><div class="qnum">Pregunta ${k+1}</div><p class="qtext">${it.texto}</p>`;
+      if(it.tipo==='pinta'){
+        html += `<div class="grid100" id="g-${k}"></div>
+                 <p class="counter">Cuadros sombreados: <span id="c-${k}">0</span></p>
+                 <p class="hint">Toca los cuadros para sombrear o borrar.</p>`;
+      } else {
+        html += `<div class="grid100" id="g-${k}"></div>
+                 <input type="text" inputmode="decimal" id="r-0-${k}" placeholder="Escribe el porcentaje">`;
+      }
+      html += `<div class="feedback" id="fb-0-${k}"></div><div id="mk-0-${k}"></div></div>`;
+    });
+  }
+
+  if(i===1){
+    data.n1.forEach((it,k)=>{
+      html += `<div class="item"><div class="qnum">Pregunta ${k+1}</div>
+        <p class="qtext">Te dan esta ${it.forma}: <b style="font-size:1.2em">${it.dado}</b>. Escribe las otras dos formas.</p>`;
+      it.c.forEach((c,j)=>{
+        const ph = c.t==='frac' ? 'Ejemplo: 3/4' : (c.t==='pct'?'Solo el número':'Ejemplo: 0,75');
+        html += `<label for="r-1-${k}-${j}">${c.l}</label>
+                 <input type="text" inputmode="decimal" id="r-1-${k}-${j}" placeholder="${ph}">`;
+      });
+      html += `<div class="feedback" id="fb-1-${k}"></div><div id="mk-1-${k}"></div></div>`;
+    });
+  }
+
+  if(i===2 || i===3){
+    const arr = i===2 ? data.n2 : data.n3;
+    arr.forEach((it,k)=>{
+      const ph = it.t==='pct' ? 'Solo el número, sin el signo %' : 'Solo el número, sin puntos ni $';
+      html += `<div class="item"><div class="qnum">Pregunta ${k+1}</div>
+        <p class="qtext">${it.q}</p>
+        <input type="text" inputmode="numeric" id="r-${i}-${k}" placeholder="${ph}">
+        <div class="feedback" id="fb-${i}-${k}"></div><div id="mk-${i}-${k}"></div></div>`;
+    });
+  }
+
+  if(i===4){
+    html += `<p class="hint" style="margin-bottom:.5rem">Puedes revisar los tres casos en el orden que prefieras. Uno de ellos está bien resuelto.</p>`;
+    data.n4.forEach((it,k)=>{
+      html += `<div class="item"><div class="qnum">Caso ${k+1}</div>
+        <p class="qtext"><b>Problema:</b> ${it.enun}</p>
+        <div class="sol"><div class="who">${it.who}</div>
+          ${it.pasos.map(p=>`<div class="step">${p}</div>`).join('')}
+        </div>
+        <label>¿Qué ocurre con esta solución?</label>`;
+      it.opts.forEach((o,j)=>{
+        html += `<label class="opt" for="o-${k}-${j}">
+          <input type="radio" name="au-${k}" id="o-${k}-${j}" value="${j}">
+          <span>${o}</span></label>`;
+      });
+      html += `<label for="r-4-${k}">${it.res.l}</label>
+        <input type="text" inputmode="decimal" id="r-4-${k}" placeholder="Escribe el resultado">
+        <div class="feedback" id="fb-4-${k}"></div><div id="mk-4-${k}"></div></div>`;
+    });
+    html += `<div class="item"><label for="txt-final">Escríbele un mensaje a esa IA explicándole, con tus palabras, en qué se equivocó y cómo debe corregirlo. Lo vas a leer en tu sustentación.</label>
+      <textarea id="txt-final" placeholder="Mínimo cuatro líneas."></textarea>
+      <p class="hint" id="cnt-txt">0 caracteres</p></div>`;
+  }
+
+  html += `<div class="ia">
+      <h4>¿Necesitas que te lo expliquen de otra forma?</h4>
+      <p>Este botón copia una pregunta lista para pegar en una inteligencia artificial. Está redactada para que te enseñe el procedimiento sin darte la respuesta de estos ejercicios.</p>
+      <button class="btn amber" id="btn-ia" style="margin-top:.6rem">Copiar la pregunta para la IA</button>
+    </div>
+    <button class="btn wide" id="btn-ver" style="margin-top:.6rem">Revisar mis respuestas</button>
+    <p class="hint">Puedes revisar tantas veces como necesites. Los intentos se registran, pero no bajan tu nota.</p>`;
+
+  box.innerHTML = html;
+
+  /* cuadrículas */
+  if(i===0){
+    data.n0.forEach((it,k)=>{
+      const g = box.querySelector('#g-'+k);
+      const key = 'g'+k;
+      if(it.tipo==='pinta'){
+        const sel = new Set(S.resp[key]||[]);
+        for(let c=0;c<100;c++){
+          const d = document.createElement('div');
+          d.className = 'cell'+(sel.has(c)?' on':'');
+          d.addEventListener('click', ()=>{
+            if(sel.has(c)){sel.delete(c); d.classList.remove('on');}
+            else {sel.add(c); d.classList.add('on');}
+            box.querySelector('#c-'+k).textContent = sel.size;
+            S.resp[key] = [...sel]; guardar();
+          });
+          g.appendChild(d);
+        }
+        box.querySelector('#c-'+k).textContent = sel.size;
+      } else {
+        for(let c=0;c<100;c++){
+          const d = document.createElement('div');
+          d.className = c < it.n ? 'cell fixed' : 'cell';
+          g.appendChild(d);
+        }
+      }
+    });
+  }
+
+  /* restaurar respuestas escritas */
+  box.querySelectorAll('input[type=text]').forEach(inp=>{
+    if(S.resp[inp.id]!==undefined) inp.value = S.resp[inp.id];
+    inp.addEventListener('input', ()=>{ S.resp[inp.id]=inp.value; guardar(); });
+  });
+  box.querySelectorAll('input[type=radio]').forEach(r=>{
+    if(S.resp[r.name]===r.value){ r.checked=true; r.closest('.opt').classList.add('sel'); }
+    r.addEventListener('change', ()=>{
+      S.resp[r.name]=r.value; guardar();
+      box.querySelectorAll(`input[name="${r.name}"]`).forEach(x=>x.closest('.opt').classList.toggle('sel',x.checked));
+    });
+  });
+  const txt = box.querySelector('#txt-final');
+  if(txt){
+    txt.value = S.texto||'';
+    const upd = ()=>{ box.querySelector('#cnt-txt').textContent = txt.value.trim().length+' caracteres'; };
+    upd();
+    txt.addEventListener('input', ()=>{ S.texto=txt.value; upd(); guardar(); });
+  }
+
+  box.querySelector('#btn-ia').addEventListener('click', ()=>{
+    navigator.clipboard.writeText(PROMPTS[i]).then(()=>{
+      S.ia++; guardar();
+      alert('Pregunta copiada. Pégala en la IA que uses y vuelve a esta página cuando la entiendas.');
+    }).catch(()=>{ prompt('Copia este texto:', PROMPTS[i]); });
+  });
+
+  box.querySelector('#btn-ver').addEventListener('click', ()=>verificar(i));
+}
+
+/* ---------- Verificación ---------- */
+function verificar(i){
+  const data = ACT;
+  const st = S.niveles[i];
+  st.int++;
+  let ac = 0;
+
+  const marcar = (k, bien, pista)=>{
+    const mk = document.querySelector(`#mk-${i}-${k}`);
+    const fb = document.querySelector(`#fb-${i}-${k}`);
+    mk.innerHTML = `<span class="mark ${bien?'ok':'no'}">${bien?'Correcto':'Revísalo'}</span>`;
+    if(bien){ fb.classList.remove('show'); }
+    else { fb.innerHTML = pista; fb.classList.add('show'); }
+  };
+
+  if(i===0){
+    data.n0.forEach((it,k)=>{
+      let bien;
+      if(it.tipo==='pinta'){
+        const n = (S.resp['g'+k]||[]).length;
+        bien = (n===it.meta);
+        marcar(k,bien, `Tienes ${n} cuadros sombreados. Recuerda que la cuadrícula completa son 100 cuadros y cada cuadro vale 1 %.`);
+      } else {
+        bien = correcto('pct', S.resp[`r-0-${k}`], it.n);
+        marcar(k,bien,'Cuenta las filas completas (cada fila son 10 cuadros) y súmale los cuadros sueltos.');
+      }
+      if(bien) ac++;
+    });
+  }
+  if(i===1){
+    data.n1.forEach((it,k)=>{
+      const bien = it.c.every((c,j)=>correcto(c.t, S.resp[`r-1-${k}-${j}`], c.r));
+      marcar(k,bien,it.p);
+      if(bien) ac++;
+    });
+  }
+  if(i===2||i===3){
+    const arr = i===2?data.n2:data.n3;
+    arr.forEach((it,k)=>{
+      const bien = correcto(it.t, S.resp[`r-${i}-${k}`], it.r);
+      marcar(k,bien,it.p);
+      if(bien) ac++;
+    });
+  }
+  if(i===4){
+    data.n4.forEach((it,k)=>{
+      const op = S.resp['au-'+k];
+      const bienOp = (op!==undefined && Number(op)===it.ok);
+      const bienRes = correcto(it.res.t, S.resp[`r-4-${k}`], it.res.r);
+      const bien = bienOp && bienRes;
+      let pista = '';
+      if(!bienOp) pista += 'Vuelve a leer el procedimiento paso por paso: la falla no está en el resultado final sino en uno de los pasos. ';
+      if(!bienRes) pista += 'Rehaz tú mismo la operación y escribe el resultado que obtuviste.';
+      marcar(k,bien,pista);
+      if(bien) ac++;
+    });
+  }
+
+  st.ac = ac;
+  const textoOk = (i!==4) || ((S.texto||'').trim().length>=120);
+  st.ok = (ac>=META[i].min) && textoOk;
+  guardar();
+
+  setTimeout(()=>{
+    if(st.ok){
+      if(i<4){ alert(`Nivel superado: ${ac} de ${META[i].tot}. Se abrió el siguiente nivel.`); S.abierto=i+1; enviar('nivel'); }
+      else { alert('Terminaste los cinco niveles. Abajo está tu informe y tu código de cierre.'); S.abierto=-1; enviar('final'); }
+      guardar(); render();
+      window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
+    } else {
+      let msg = `Vas ${ac} de ${META[i].tot}. Necesitas ${META[i].min} para pasar al siguiente nivel.`;
+      if(i===4 && !textoOk) msg += '\n\nTambién falta tu mensaje escrito a la IA (mínimo cuatro líneas).';
+      msg += '\n\nLee la pista roja de cada pregunta y vuelve a intentarlo.';
+      alert(msg);
+      actualizarEncabezado(i);
+    }
+  }, 60);
+}
+
+function actualizarEncabezado(i){
+  const lv = document.querySelectorAll('.level')[i];
+  if(!lv) return;
+  const subs = lv.querySelectorAll('.lvsub');
+  const st = S.niveles[i];
+  if(subs[1]) subs[1].textContent = `Necesitas ${META[i].min} de ${META[i].tot} · intentos: ${st.int}`;
+}
+
+/* ---------- Envío a la hoja de cálculo ---------- */
+function paquete(evento){
+  return {
+    evento,           // 'nivel' mientras avanza · 'final' al terminar
+    fecha:  new Date().toISOString(),
+    nombre: S.nombre,
+    grupo:  S.grupo,
+    lista:  S.lista,
+    clave:  S.seed,
+    aciertos: S.niveles.map(n=>n.ac),
+    intentos: S.niveles.map(n=>n.int),
+    superados: S.niveles.filter(n=>n.ok).length,
+    consultasIA: S.ia,
+    mensajeIA: (S.texto||'').trim(),
+    codigo: codigo()
+  };
+}
+function enviar(evento){
+  if(!ENDPOINT) return Promise.resolve(false);
+  return fetch(ENDPOINT, {
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify(paquete(evento))
+  }).then(()=>{
+    S.enviado = true;
+    S.ultimoEnvio = new Date().toLocaleString('es-CO');
+    guardar();
+    const m = document.querySelector('#estado-envio');
+    if(m) m.textContent = 'Resultado enviado al profesor el '+S.ultimoEnvio+'.';
+    return true;
+  }).catch(()=>{
+    const m = document.querySelector('#estado-envio');
+    if(m) m.textContent = 'No se pudo enviar. Revisa tu conexión y toca «Enviar de nuevo». Tu código sigue siendo válido.';
+    return false;
+  });
+}
+
+/* ---------- Informe y código ---------- */
+const ABC = 'BCDFGHJKLMNPQRSTVWXYZ';
+function codigo(){
+  const d = S.niveles.map(n=>n.ac).join('');
+  const tot = Math.min(S.niveles.reduce((a,n)=>a+n.int,0),99);
+  const suma = S.niveles.reduce((a,n)=>a+n.ac,0);
+  const gn = {'7.1':1,'7.2':2,'7.3':3}[S.grupo] || 9;
+  const chk = ABC[(suma + gn*7 + S.lista*3) % 21];
+  return `MG7-${gn}${String(S.lista).padStart(2,'0')}-${d}-${String(tot).padStart(2,'0')}-${chk}`;
+}
+function pintarCierre(){
+  const todos = S.niveles.every(n=>n.ok);
+  const card = $('#card-cierre');
+  if(!todos){ card.classList.add('hidden'); return; }
+  card.classList.remove('hidden');
+  const sup = S.niveles.filter(n=>n.ok).length;
+  const nota = (1 + 4*sup/5).toFixed(1);
+  $('#informe').innerHTML = `
+    <p class="big">${nota} <span style="font-size:1rem;color:var(--ink-2)">nota de la página (vale el 50 %)</span></p>
+    <table class="tbl">
+      <tr><th>Estudiante</th><td>${S.nombre} · ${S.grupo} · lista ${S.lista}</td></tr>
+      <tr><th>Conjunto de ejercicios</th><td>${S.grupo} · lista ${S.lista} · clave ${S.seed}</td></tr>
+      ${S.niveles.map((n,i)=>`<tr><th>Nivel ${i+1}: ${META[i].t}</th><td>${n.ac} de ${META[i].tot} · ${n.int} intento(s)</td></tr>`).join('')}
+      <tr><th>Consultas a la IA</th><td>${S.ia}</td></tr>
+    </table>`;
+  $('#codigo').textContent = codigo();
+  const m = $('#estado-envio');
+  if(m && S.ultimoEnvio) m.textContent = 'Resultado enviado al profesor el '+S.ultimoEnvio+'.';
+}
+$('#btn-enviar').addEventListener('click', ()=>{
+  if(!ENDPOINT){ alert('Esta copia de la página no tiene configurado el envío. Muestra tu código al profesor.'); return; }
+  document.querySelector('#estado-envio').textContent = 'Enviando…';
+  enviar('final');
+});
+$('#btn-copiar').addEventListener('click', ()=>{
+  const t = `RECUPERACIÓN ARITMÉTICA 7° — Fracción, decimal y porcentaje
+${S.nombre} · ${S.grupo} · lista ${S.lista}
+Conjunto: ${S.grupo} · lista ${S.lista} · clave ${S.seed}
+${S.niveles.map((n,i)=>`Nivel ${i+1} (${META[i].t}): ${n.ac}/${META[i].tot} en ${n.int} intento(s)`).join('\n')}
+Consultas a la IA: ${S.ia}
+Mensaje a la IA: ${S.texto}
+CÓDIGO: ${codigo()}`;
+  navigator.clipboard.writeText(t).then(()=>alert('Informe copiado.')).catch(()=>prompt('Copia este texto:',t));
+});
+
+/* ---------- Restaurar sesión ---------- */
+(function(){
+  const prev = cargar();
+  if(prev && prev.nombre){
+    S = prev;
+    $('#f-nombre').value = S.nombre; $('#f-grupo').value = S.grupo;
+    $('#f-lista').value = S.lista; actualizarTema();
+    iniciar();
+  }
+})();
 </script>
 </body>
 </html>
